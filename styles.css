@@ -1,15 +1,31 @@
 h1 {
-  color: darkblue
+  color: darkblue;
+  text-align: center; 
 }
 span {
   color: red
 }
 .componente {
   color: green;
-  font-size= 30px;
-}
-.abrir{
+  font-family: arial;
+  font-size: 25px;
+  font-weight: 900;
+  font-style: oblique;
+  text-align:start ;
   text-transform: uppercase;
-  text-decocartion: underline overline;
+  text-decoration: underline overline line-through;
+  line-height: 1.5
+ 
+}
+.rebranding{
   text-align: center;
+}
+.none{
+  color: green;
+  text-decoration: none
+}
+.compone{
+  text-decoration: underline;
+  letter-spacing: 1px
+  text-transform: uppercase
 }
