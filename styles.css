@@ -8,3 +8,8 @@ span {
   color: green;
   font-size= 30px;
 }
+.abrir{
+  text-transform: uppercase;
+  text-decocartion: underline overline;
+  text-align: center;
+}
