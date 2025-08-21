@@ -4,3 +4,7 @@ h1 {
 span {
   color: red
 }
+.componente {
+  color: green;
+  font-size= 30px;
+}
