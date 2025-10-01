@@ -1,6 +1,9 @@
 .box{
   diplay: grid;
   grid-template-rows: repeat(3, 300px);
+  maxwidth: 90%;
+  background-color: #aa0000;
+  padding: 32px;
 }
 .boxes{
   background-color: #00ffff;
