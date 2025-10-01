@@ -1,8 +1,8 @@
+.box{
+  diplay: grid;
+  grid-template-rows: repeat(3, 300px);
+}
 .boxes{
-  display: flex;
-  width: 300px;
-  height: 300px;
-  margin: 30px;
   background-color: #00ffff;
 }
 body{
