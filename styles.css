@@ -1,6 +1,10 @@
 .boxes{
+  display: flex;
   width: 300px;
   height: 300px;
   margin: 30px;
   background-color: #00ffff;
+}
+body{
+  background: #333;
 }
