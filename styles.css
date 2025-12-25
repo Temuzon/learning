@@ -1,179 +1,78 @@
 html {
-  width: 100%;
-  heigh: 100%;
   font-size: 16px;
 }
 
 body {
-  background-color: #333333;
-  color: #00ffff;
+  background-color: #000000;
   margin: 0;
   padding: 0;
-  width: 100%;
-  height: 100%;
   box-sizing: border-box;
 }
 
-h1 {
-  font-family: tahoma;
-}
-
-.bienvenido-a-statux {
-  font-family: tahoma;
-  text-align: center;
-  font-size: 40px;
-}
-
-.primer-parrafo {
-  font-family: arial;
-  font-size: 1.5rem;
-  word-spacing: 0.5rem;
-  text-align: justify;
-}
-
-.logo-1 {
-  width: 64px;
-  box-sizing: border-box;
-}
-
-.primera-barra-de-navegacion {
-  display: flex;
-  background-color: #000000;
-  box-sizing: border-box; 
-  flex-direction: column;
-  width: 15%;
-  height: 100%;
+.barra-de-navegacion {
+  width: 238px;
+  height: 100dvh;
+  background-color: #333333;
   position: fixed;
-  top: 0;
-  box-shadow: 0px 60px 100px 10px #ffffff;
-  border-top-right-radius: 40px;
 }
 
 .contenedor-de-logo {
   display: flex;
-  justify-content: space-around;
-  border-bottom: 7px solid #00ffff;
-  border-bottom-left-radius: 32px;
-  border-bottom-right-radius: 32px;
+  justify-content: center;
+  width: 100%;
+  background-color: #000000;
 }
 
 .contenedor-de-iconos {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
 }
 
-.imagen {
-  width: 30px;
-  box-sizing: border-box;
-  margin-left: 10%;
+.item {
+  display: flex;
+  width: 90%;
+  height: 48px;
+  border: 3px solid #000000;
+  border-radius: 12px;
+  align-items: center;
+  text-decoration: none;
+  color: #777777;
+  background-color: transparent;
+  font-family: tahoma;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  overflow: hidden; 
+  transition: 1s;
+}
+
+.item.active {
+  border: 3px solid #00ffff; 
+  color: #00ffff;
+  background-color: transparent;
+}
+
+.item:hover{
+  border: 3px solid #00ffff; 
+  color: #00ffff;
+  background-color: transparent;
+}
+
+.iconos-de-navegacion {
+  width: 32px;
+  height: 32px; 
+  margin-left: 10px;
+}
+
+.logo {
+  width: 50%;
 }
 
 .contenitux {
-  font-family: tahoma;
-  font-size: 1.3rem;
-  margin-left: 15%;
-  letter-spacing: 0.1rem;
-}
-
-.nav-link {
-  display: flex;
-  align-items: center;
-  width: 90%;
-  height: 50px;
-  border-radius: 10px;
-  box-sizing: border-box;
-  margin: auto;
-  margin-top: 15px;
-  transition: 0.5s;
-  border: 3px solid #777777;
-  text-decoration: none;
-  color: #777777;
-  font-weight: 700;
-}
-  
-.nav-link:hover {
-  animation-name: btns-de-los-nav-links;
-  animation-duration: 2s;
-  animation-iteration-count: infinite;
-  animation-fill-mode: backwards;
-  animation-direction: alternate;
-  height: 64px;
-}
-
-@keyframes btns-de-los-nav-links {
-  0% {
-    border: 3px solid #777777;
-    box-shadow: 0px 0px 0pxpx #777777;
-    text-shadow: 0 0 0px #777777;
-    color: #777777;
-  }
-  20%{
-    border: 3px solid #00ffff;
-    box-shadow: 0px 0px 30px #00ffff;
-    text-shadow: 0 0 10px #00ffff;
-    color: #00ffff;
-  }
-  37%{
-    border: 3px solid #777777;
-    box-shadow: 0px 0px 0pxpx #777777;
-    text-shadow: 0 0 0px #777777;
-    color: #777777;
-  }
-  51%{
-    border: 3px solid #00ffff;
-    box-shadow: 0px 0px 16px #00ffff;
-    text-shadow: 0 0 10px #00ffff;
-    color: #00ffff;
-  }
-  70%{
-    border: 3px solid #777777;
-    box-shadow: 0px 0px 0pxpx #777777;
-    text-shadow: 0 0 0px #777777;
-    color: #777777;
-  }
-  88%{
-    border: 3px solid #00ffff;
-    box-shadow: 0px 0px 16px #00ffff;
-    text-shadow: 0 0 10px #00ffff;
-    color: #00ffff;
-  }
-  95%{
-    border: 3px solid #777777;
-    box-shadow: 0px 0px 0pxpx #777777;
-    text-shadow: 0 0 0px #777777;
-    color: #777777;
-  }
-  100%{
-    border: 3px solid #00ffff;
-    box-shadow: 0px 0px 16px #00ffff;
-    text-shadow: 0 0 10px #00ffff;
-    color: #00ffff;
-  }
-}
-
-main {
-  width: 80%;
-  margin-left: 16%;
-  margin-top: 10px;
-  box-izing: border-box;
-  border-top: 2px solid #00ffff;
-  border-bottom: 2px solid #00ffff;
-  padding: 20px;
-  border-top-right-radius: 32px;
-  border-top-left-radius: 32px;
-  border-bottom-left-radius: 32px;
-  border-bottom-right-radius: 32px;
-}
-
-.caja-de-bienvenida {
-  display: flex;
-  width: 95%;
-  box-sizing: border-box;
-}
-
-.imagen-de-bienvenida {
-  width: 300px;
-  height: 300px;
-  margin-left: 64px;
-  
+  margin-left: 30px;
 }
