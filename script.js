@@ -1,5 +1,4 @@
-<script>
-  const items = document.querySelectorAll(".item");
+const items = document.querySelectorAll(".item");
 
   items.forEach(item => {
     item.addEventListener("click", () => {
@@ -12,4 +11,12 @@
 
     });
   });
-</script>
+
+const boton = document.querySelector(
+  ".boton-de-ensanche-de-barra-de-navegacion"
+);
+const barra = document.querySelector(".barra-de-navegacion");
+
+boton.addEventListener("click", () => {
+  barra.classList.toggle("expandida");
+});
