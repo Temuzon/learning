@@ -10,10 +10,15 @@ body {
 }
 
 .barra-de-navegacion {
-  width: 200px;
+  width: 80px;
   height: 100dvh;
   background-color: #333333;
   position: fixed;
+  transition: width 0.45s cubic-bezier(0.4,0,0.2,1);
+}
+
+.barra-de-navegacion.expandida {
+  width: 238px;
 }
 
 .contenedor-de-logo {
@@ -29,7 +34,7 @@ body {
   width: 100%;
   background-color: transparent;
   height:  100%;
-  padding-top: 20px;              
+  padding-top: 10px;              
   align-items: center;
   gap: 12px;
   overflow-y: auto;
@@ -87,5 +92,35 @@ body {
 }
 
 .contenitux {
-  margin-left: 23px;
+  opacity: 0;
+  white-space: nowrap;
+  transition: opacity 0.3s ease;
+  margin: 10px;
+}
+
+.barra-de-navegacion.expandida .contenitux {
+  opacity: 1;
+}
+
+.boton-de-ensanche-de-barra-de-navegacion {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  background-color: #333333;
+  border-radius: 50%;
+  border: 3px solid #33a3a3;
+}
+
+.boton-de-ensanche-de-barra-de-navegacion:hover {
+  border: 3px solid #00ffff;
+}
+
+.icono-de-boton-de-ensanche-de-barra-de-navegacion {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.45s cubic-bezier(0.4,0,0.2,1);
+}
+
+.barra-de-navegacion.expandida .icono-de-boton-de-ensanche-de-barra-de-navegacion {
+  transform: rotate(180deg);
 }
