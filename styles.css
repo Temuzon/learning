@@ -124,3 +124,8 @@ body {
 .barra-de-navegacion.expandida .icono-de-boton-de-ensanche-de-barra-de-navegacion {
   transform: rotate(180deg);
 }
+
+.contenedor-de-iconos-de-programa {
+  width: 100%;
+  background-color: #33a3a3;
+}
