@@ -129,8 +129,8 @@ body {
   display: flex;
   flex-direction: column;
   width: 100%;
-  background-color: transparent;
-  height:  80%;              
+  background-color: #00ffff;
+  height: 70%;              
   align-items: center;
   justify-content: end;
 }
