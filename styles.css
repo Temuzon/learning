@@ -125,3 +125,12 @@ body {
   transform: rotate(180deg);
 }
 
+.box-item-afiliatte {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: transparent;
+  height:  100%;              
+  align-items: center;
+  justify-content: end;
+}
