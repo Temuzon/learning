@@ -130,7 +130,8 @@ body {
   flex-direction: column;
   width: 100%;
   background-color: transparent;
-  height: 20%;              
+  height: 16%;              
   align-items: center;
   justify-content: center;
+  border-top: 3px solid #777777;
 }
