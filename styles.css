@@ -133,5 +133,5 @@ body {
   height: 100%;            
   align-items: center;
   border-top: 3px solid #777777;
-  gap: 12px;
+  padding-top: 12px;
 }
