@@ -12,7 +12,7 @@ body {
 .barra-de-navegacion {
   width: 80px;
   height: 100dvh;
-  background-color: #333333;
+  background-color: #000000;
   position: fixed;
   transition: width 0.45s cubic-bezier(0.4,0,0.2,1);
 }
@@ -33,12 +33,13 @@ body {
   display: flex;
   flex-direction: column;
   width: 100%;
-  background-color: transparent;
+  background-color: #333333;
   height:  100%;
   padding-top: 10px;              
   align-items: center;
   gap: 12px;
   overflow-y: auto;
+  border-top-right-radius: 16px;
 }
 
 .contenedor-de-iconos::-webkit-scrollbar {
