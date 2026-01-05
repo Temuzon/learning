@@ -108,6 +108,7 @@ body {
   white-space: nowrap;
   transition: opacity 0.3s ease;
   margin: 10px;
+  letter-spacing: 2px;
 }
 
 .barra-de-navegacion.expandida .contenitux {
