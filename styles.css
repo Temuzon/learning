@@ -138,3 +138,45 @@ body {
   border-top: 3px solid #777777;
   padding-top: 12px;
 }
+
+.section-home {
+  margin-left: 80px;
+  background-color: #333333;
+}
+
+.contenedor-de-imagen-de-fondo {
+  display: flex;
+  height: 700px;
+  background-color: #000000;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+.imagen-de-fondo {
+  width: 400px;
+  border-radius: 16px;
+}
+
+.welcome-box {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: #000000;
+  align-items: center;
+  color: #777777;
+}
+
+h1 {
+  font-size: 70px;
+  color: #333333;
+  letter-spacing: 16px;
+  font-weight: 500;
+}
+
+.bienvenido-a-nuestro-estilo {
+  color: #333333;
+  letter-spacing: 10px;
+  font-weight: 700;
+}
