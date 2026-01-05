@@ -1,3 +1,12 @@
+@font-face {
+    font-family: 'Ubuntu';
+    src: url('Ubuntu-Regular.woff2') format('woff2'),
+        url('Ubuntu-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
 html {
   font-size: 16px;
 }
@@ -7,6 +16,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Ubuntu', system-ui, -apple-system, sans-serif;
 }
 
 .barra-de-navegacion {
@@ -63,7 +73,6 @@ body {
   text-decoration: none;
   color: #777777;
   background-color: transparent;
-  font-family: tahoma;
   font-size: 20px;
   font-weight: 700;
   letter-spacing: 1px;
