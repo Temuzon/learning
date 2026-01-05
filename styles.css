@@ -192,10 +192,10 @@ h1 {
 
 .conteiner-below-welcome {
   padding: 36px;
-  margin-left: 80px;
   display: grid;
-  grid-template-columns: repeat(3, 330px;);
-  grid-template-rows: repeat(3, 400px)
+  grid-template-columns: repeat(3, 330px);
+  grid-template-rows: repeat(1, 400px);
+  justify-content: center;
 }
 
 .grid-item-below-welcome {
