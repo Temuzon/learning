@@ -16,6 +16,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Ubuntu', system-ui, -apple-system, sans-serif;
 }
 
 .barra-de-navegacion {
@@ -155,7 +156,7 @@ body {
 
 .contenedor-de-imagen-de-fondo {
   display: flex;
-  height: 700px;
+  height: 40%;
   background-color: #000000;
   flex-direction: column;
   align-items: center;
@@ -199,7 +200,32 @@ h1 {
 }
 
 .grid-item-below-welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background-color: #333;
   border-radius: 16px;
   margin: 10px;
+}
+
+.cabezera-de-los-grid-item-below-welcome {
+  display: flex;
+  justify-content: center;
+  width: 80%;
+  height: 20%;
+  margin-top: 8%;
+  border-radius: 30px;
+}
+
+.contenedor-de-titulo-y-parrafo {
+  width: 80%;
+  text-align: center;
+  color: #00ffff;
+  letter-spacing: 2px;
+}
+
+.titulo-grid {
+  font-size: 30px;
+  color:#00ffff;
+  letter-spacing: 2px;
 }
