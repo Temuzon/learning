@@ -188,7 +188,7 @@ footer {
 
 h1 {
   font-size: 70px;
-  color: #aaa;
+  color: #00ffff;
   letter-spacing: 16px;
   font-weight: 500;
 }
@@ -201,9 +201,7 @@ h1 {
 
 .conteiner-below-welcome {
   padding: 36px;
-  display: grid;
-  grid-template-columns: repeat(3, 330px);
-  grid-template-rows: repeat(1, 400px);
+  display: flex;
   justify-content: center;
 }
 
@@ -214,6 +212,8 @@ h1 {
   background-color: #333;
   border-radius: 16px;
   margin: 10px;
+  height: 400px;
+  width: 330px;
 }
 
 .cabezera-de-los-grid-item-below-welcome {
@@ -236,4 +236,57 @@ h1 {
   font-size: 30px;
   color:#00ffff;
   letter-spacing: 2px;
+}
+
+.box-below-welcome {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 30px;
+  width: 80%;
+  margin: auto;
+  margin-top: 140px;
+  border-radius: 36px;
+}
+
+.blw-wlme {
+  font-size: 32px;
+  color: #bbbbbb;
+}
+
+.blw-wlme:first-child {
+  font-size: 39px;
+}
+
+.box-below-welcome-2 {
+  display: flex;
+  padding: 30px;
+  color: #333333;
+  background: linear-gradient(90deg, #333333, #000000);
+  width: 90%;
+  margin: auto;
+  justify-content: space-between;
+  border-radius: 36px;
+}
+
+.big-box-1 {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  text-align: center;
+  width: 40%;
+}
+
+.big-box-2 {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  background: #000;
+  text-align: center;
+  width: 40%;
+}
+
+.no-improvisamos {
+  color: #00ffff;
+  font-size: 29px;
 }
