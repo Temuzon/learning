@@ -259,7 +259,6 @@ h1 {
   display: flex;
   padding: 30px;
   color: #333333;
-  background: linear-gradient(90deg, #333333, #000000);
   width: 90%;
   margin: auto;
   justify-content: space-between;
