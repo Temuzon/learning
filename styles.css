@@ -16,6 +16,7 @@ body {
   box-sizing: border-box;
   font-family: 'Ubuntu', system-ui, -apple-system, sans-serif;
   font-size: 20px;
+  user-select: none;
 }
 
 footer {
@@ -28,6 +29,8 @@ footer {
 }
 
 .barra-de-navegacion {
+  display: flex;
+  flex-direction: column;
   width: 80px;
   height: 100dvh;
   background-color: #000000;
@@ -182,6 +185,8 @@ footer {
 .welcome-box {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  text-align: center;
   width: 100%;
   background-color: #000000;
   align-items: center;
@@ -237,7 +242,6 @@ h1 {
   width: 80%;
   text-align: center;
   color: #00ffff;
-  letter-spacing: 2px;
   font-size: 24px;
   color:#00ffff;
 }
@@ -257,6 +261,7 @@ h1 {
 
 .box-below-welcome-2 {
   display: flex;
+  flex-wrap: wrap;
   padding: 30px;
   color: #333333;
   width: 90%;
@@ -266,26 +271,15 @@ h1 {
   margin-top: 200px;
 }
 
-.big-box-1 {
-  display: flex;
-  flex-direction: column;
-  padding: 24px;
-  text-align: center;
-  width: 40%;
-  color: #00ffff;
-  font-size: 29px;
-}
-
 .porcentaje-de-ahorro {
   display: flex;
-  border: 5px solid #000;
   padding: 30px;
   justify-content: center;
   border-radius: 360px;
   align-items: center;
   width: 40%;
   height: 70%;
-  background-color: #333333;
+  background: linear-gradient(160deg, #777777, #000000, #777777);
 }
 
 .barra-de-porcentaje {
@@ -298,6 +292,23 @@ h1 {
   background-color: #000;
   border-radius: 360px;
   margin: auto;
+}
+
+.contenedor-de-empaquetux {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.big-box-1 {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  text-align: center;
+  width: 40%;
+  color: #00ffff;
+  font-size: 29px;
+  justify-content: center;
 }
 
 .big-box-2 {
