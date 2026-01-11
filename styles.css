@@ -21,11 +21,38 @@ body {
 
 footer {
   display: flex;
+  flex-wrap: wrap;
   margin-left: 80px;
   padding: 30px;
   background-color: #333333;
   border-top-right-radius: 36px;
   border-top-left-radius: 36px;
+  justify-content: space-between;
+  align-items: center;
+  color: #000000;
+}
+
+.caja-del-footer {
+  display: flex;
+  width: 20%;
+  height: 350px;
+  padding: 10px;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  font-size: 24px;
+}
+
+.redes-sociales {
+  width: 90%;
+  border: 3px solid #00ffff;
+  padding: 10px;
+  text-decoration: none;
+  color: #00ffff;
+  border-radius: 16px;
+  overflow: hidden;
 }
 
 .barra-de-navegacion {
@@ -164,7 +191,6 @@ footer {
 
 .section-home {
   margin-left: 80px;
-  background-color: #000000;
 }
 
 .contenedor-de-imagen-de-fondo {
@@ -340,4 +366,22 @@ h1 {
   margin: 15px;
   color: #00ffff;
   width: 200px;
+}
+
+/* Politica y privacidad */
+
+.section-Politica-de-privacidad {
+  margin-left: 80px;
+}
+
+.Terminos-y-condiciones {
+  display: fex;
+  width: 90%;
+  color: #bbbbbb;
+  font-size: 29px;
+  justify-content: center;
+  text-align: center;
+  padding: 15px;
+  margin: auto;
+  margin-top: 200px;
 }
