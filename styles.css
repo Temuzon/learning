@@ -19,6 +19,8 @@ body {
   user-select: none;
 }
 
+/* Footer y sus contenidos */
+
 footer {
   display: flex;
   flex-wrap: wrap;
@@ -54,6 +56,18 @@ footer {
   border-radius: 16px;
   overflow: hidden;
 }
+
+.btn-a-info-web {
+  width: 90%;
+  border: 3px solid #00ffff;
+  padding: 10px;
+  text-decoration: none;
+  color: #00ffff;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* End Footer y sus contenidos */
 
 .barra-de-navegacion {
   display: flex;
@@ -124,13 +138,11 @@ footer {
 .item.active {
   border: 3px solid #00ffff; 
   color: #00ffff;
-  background-color: transparent;
 }
 
 .item:hover{
   border: 3px solid #00ffff; 
   color: #00ffff;
-  background-color: transparent;
 }
 
 .iconos-de-navegacion {
@@ -191,6 +203,7 @@ footer {
 
 .section-home {
   margin-left: 80px;
+  padding: 20px;
 }
 
 .contenedor-de-imagen-de-fondo {
@@ -368,20 +381,126 @@ h1 {
   width: 200px;
 }
 
-/* Politica y privacidad */
+/* Politica y privacidad, terminos y condiciones */
 
-.section-Politica-de-privacidad {
+.info-web {
+  display: flex;
+  flex-direction: column;
+  color: #bbbbbb;
+  text-align: center;
+  font-size: 24px;
   margin-left: 80px;
+  padding: 20px;
 }
 
-.Terminos-y-condiciones {
-  display: fex;
-  width: 90%;
-  color: #bbbbbb;
+/* Seccion de Ebootux */
+
+.section-ebootux {
+  margin-left: 80px;
+  padding: 20px;
+}
+
+.header-de-ebootux {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  border-bottom: 5px solid #333333;
+  padding: 20px;
+  color: #0ff;
   font-size: 29px;
+}
+
+.contenedor-de-todos-los-ebootux {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  padding: 16px;
+  margin: 16px;
+  margin-top: 130px;
+}
+
+.ebootux-cards {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background: #bbb;
+  width: 360px;
+  padding: 16px;
+  margin: 20px;
+  border-radius: 36px;
+  background: linear-gradient(150deg, #000000, #333, #000000);
+}
+
+.header-ebootux-cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
   justify-content: center;
   text-align: center;
-  padding: 15px;
-  margin: auto;
-  margin-top: 200px;
+  border-radius: 36px;
+  overflow: hidden;
+  font-size: 24px;
+  color: #0ff
+}
+
+.img-ebootux-cards {
+  border-radius: 36px;
+}
+
+.contenedor-de-btn-de-compra {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  width: 100%;
+}
+
+.img-de-carrito-de-compra {
+  width: 36px;
+}
+
+.img-de-vista-previa {
+  width: 36px;
+}
+
+.btn-de-compra-ebootux {
+  display: flex;
+  width: 130px;
+  text-align: center;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border: 3px solid #777;
+  text-decoration: none;
+  color: #777;
+  border-radius: 24px;
+  font-size: 32px;
+  transition: 0.55s;
+}
+
+.btn-de-compra-ebootux:hover {
+  border: 3px solid #0f0;
+  color: #0f0;
+}
+
+.btn-de-vista-previa {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border: 3px solid #777;
+  text-decoration: none;
+  border-radius: 16px;
+  font-size: 32px;
+}
+
+.footer-cards-ebootux {
+  display: flex;
+  width: 100%;
+  text-align: center;
+  color: #0ff;
+  font-size: 12px;
 }
