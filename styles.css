@@ -1252,3 +1252,160 @@ h1 {
   justify-content: flex-end;
   margin-top: 10px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ========================= */
+/* RESPONSIVE MOBILE */
+/* ========================= */
+
+@media (max-width: 900px) {
+
+  body {
+    font-size: 16px;
+  }
+
+  /* Barra de navegación → se vuelve horizontal abajo */
+  .barra-de-navegacion {
+    flex-direction: row;
+    width: 100%;
+    height: 64px;        /* ← ESTO */
+    min-height: 64px;
+    bottom: 0;
+    top: auto;
+    left: 0;
+    border-radius: 0;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+  }
+
+  .barra-de-navegacion.expandida {
+    width: 100%;
+  }
+
+  .contenedor-de-logo {
+    display: none;
+  }
+
+  .contenedor-de-iconos {
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+    padding: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    border-radius: 0;
+  }
+
+  .item {
+    width: auto;
+    height: 48px;
+    padding: 0 10px;
+    border: none;
+  }
+
+  .contenitux {
+    display: none;
+  }
+
+  .boton-de-ensanche-de-barra-de-navegacion {
+    display: none;
+  }
+
+  /* Empujar todo el contenido arriba porque la barra ahora está abajo */
+  main {
+    margin-bottom: 80px;
+  }
+
+  /* Secciones */
+  .section-home,
+  .section-ebootux,
+  .section-plantitux,
+  .section-getux,
+  .section-tracktux,
+  .section-mindtux,
+  .section-soundtux,
+  .section-movitux,
+  .section-marketux,
+  .section-empaquetux,
+  .info-web {
+    margin-left: 0;
+    padding: 16px;
+  }
+
+  /* Textos grandes */
+  h1 {
+    font-size: 42px;
+    letter-spacing: 6px;
+  }
+
+  .bienvenido-a-nuestro-estilo {
+    font-size: 16px;
+    letter-spacing: 4px;
+  }
+
+  .box-below-welcome {
+    width: 95%;
+    font-size: 20px;
+    margin-top: 60px;
+  }
+
+  .box-below-welcome-2 {
+    flex-direction: column;
+    align-items: center;
+    margin-top: 80px;
+  }
+
+  .big-box-1,
+  .big-box-2 {
+    width: 100%;
+  }
+
+  .boxitos {
+    width: 90%;
+    margin: 10px 0;
+  }
+
+  /* Cards */
+  .ebootux-cards,
+  .plantitux-cards,
+  .getux-cards,
+  .tracktux-cards,
+  .mindtux-cards,
+  .soundtux-cards,
+  .movitux-cards,
+  .marketux-cards,
+  .empaquetux-cards {
+    width: 90%;
+  }
+
+  /* Footer */
+  footer {
+    margin-left: 0;
+    padding: 20px;
+  }
+
+  .caja-del-footer {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+  }
+}
