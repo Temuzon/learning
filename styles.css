@@ -1167,6 +1167,7 @@ h1 {
   pointer-events: none;
   transition: opacity 0.35s ease;
   border-radius: 36px;
+  margin-top: 150px;
 }
 
 .preview-cards.active {
@@ -1231,6 +1232,7 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 36px;
 }
 
 .preview-multimedia {
@@ -1434,6 +1436,7 @@ h1 {
     margin: auto;
     width: 80%;
     height: 95%;
+    border-radius: 36px;
   }
 
   .preview-overlay {
