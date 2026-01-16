@@ -84,6 +84,7 @@ footer {
   position: fixed;
   transition: width 0.45s cubic-bezier(0.4,0,0.2,1);
   border-top-right-radius: 36px;
+  z-index: 100;
 }
 
 .barra-de-navegacion.expandida {
@@ -528,14 +529,6 @@ h1 {
   border: 3px solid #0ff;
 }
 
-.vista-previa-de-ebootux-cards {
-  display: flex;
-  width: 80%;
-  height: 700px;
-  background: #000000;
-  border-radius: 36px;
-  border: 5px solid #0ff;
-}
 
 /* Seccion de Plantitux */
 
@@ -656,14 +649,7 @@ h1 {
   color: #0ff
 }
 
-.vista-previa-de-getux-cards {
-  display: flex;
-  width: 80%;
-  height: 700px;
-  background: #000000;
-  border-radius: 36px;
-  border: 5px solid #0ff;
-}
+
 
 /* Seccion de Tracktux */
 
@@ -737,14 +723,6 @@ h1 {
   width: 36px;
 }
 
-.vista-previa-de-tracktux-cards {
-  display: flex;
-  width: 80%;
-  height: 700px;
-  background: #000000;
-  border-radius: 36px;
-  border: 5px solid #0ff;
-}
 
 /* Seccion de Mindtux */
 
@@ -818,14 +796,6 @@ h1 {
   width: 36px;
 }
 
-.vista-previa-de-mindtux-cards {
-  display: flex;
-  width: 80%;
-  height: 700px;
-  background: #000000;
-  border-radius: 36px;
-  border: 5px solid #0ff;
-}
 
 /* Seccion de Soundtux */
 
@@ -899,14 +869,6 @@ h1 {
   width: 36px;
 }
 
-.vista-previa-de-soundtux-cards {
-  display: flex;
-  width: 80%;
-  height: 700px;
-  background: #000000;
-  border-radius: 36px;
-  border: 5px solid #0ff;
-}
 
 /* Seccion de Movitux */
 
@@ -980,14 +942,7 @@ h1 {
   width: 36px;
 }
 
-.vista-previa-de-movitux-cards {
-  display: flex;
-  width: 80%;
-  height: 700px;
-  background: #000000;
-  border-radius: 36px;
-  border: 5px solid #0ff;
-}
+
 
 /* Seccion de Marketux */
 
@@ -1061,14 +1016,6 @@ h1 {
   width: 36px;
 }
 
-.vista-previa-de-marketux-cards {
-  display: flex;
-  width: 80%;
-  height: 700px;
-  background: #000000;
-  border-radius: 36px;
-  border: 5px solid #0ff;
-}
 
 /* Seccion de Empaquetux */
 
@@ -1142,20 +1089,32 @@ h1 {
   width: 36px;
 }
 
-.vista-previa-de-empaquetux-cards {
-  display: flex;
-  width: 80%;
-  height: 700px;
-  background: #000000;
-  border-radius: 36px;
-  border: 5px solid #0ff;
-}
 
 /* Seccion de Nodos */
 
 .seccion-de-nodos {
   margin-left: 80px;
   padding: 20px;
+}
+
+.header-de-nodos {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  border-bottom: 5px solid #333333;
+  padding: 20px;
+  color: #0ff;
+  font-size: 29px;
+}
+
+.contenedor-de-todos-los-tuxcards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  padding: 16px;
+  margin: 16px;
+  margin-top: 90px;
 }
 
 /* Secciones no disponibles */
@@ -1169,7 +1128,6 @@ h1 {
   padding: 20px;
   color: #bbb;
   font-size: 32px;
-  border: 6px solid #0ff;
   border-radius: 36px;
 }
 
@@ -1186,4 +1144,111 @@ h1 {
 
 .app-section.active-section {
   display: block;
+}
+
+
+/* Preview-cards */
+
+.preview-cards {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  margin-left: 80px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.preview-cards.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.preview-overlay {
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.box-preview {
+  width: 85%;
+  max-width: 900px;
+  background-color: #111;
+  border-radius: 26px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transform: translateY(30px) scale(0.96);
+  opacity: 0;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.preview-cards.active .box-preview {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.head-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 32px;
+  color: #0ff;
+}
+
+.preview-body {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.conteiner-preview {
+  width: 45%;
+  background-color: #000;
+  padding: 14px;
+  border-radius: 16px;
+}
+
+.contenedor-mutimedia-preview {
+  width: 45%;
+  background: linear-gradient(160deg, #000, #222);
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.preview-multimedia {
+  width: 200px;
+  opacity: 0.9;
+}
+
+.logout-btn {
+  background-color: transparent;
+  border: 3px solid #0ff;
+  border-radius: 10px;
+  padding: 7px;
+  cursor: pointer;
+}
+
+.preview-si {
+  color: #0ff;
+  font-weight: 600;
+  font-size: 22px;
+}
+
+.preview-no {
+  color: #0ff;
+  font-weight: 600;
+  font-size: 22px;
+}
+
+.box-preview-btn-buy {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
 }
