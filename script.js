@@ -136,3 +136,29 @@ document.querySelectorAll(".buscador-seccion").forEach(buscador => {
     emptyMsg.style.display = encontrados === 0 ? "block" : "none";
   });
 });
+
+
+// ============================
+// Codigo de cards
+// ============================
+
+<script>
+  document.addEventListener("click", function (e) {
+    if (e.target.classList.contains("btn-acceder-ebootux")) {
+      const card = e.target.closest(".ebootux-cards");
+      const input = card.querySelector(".input-codigo-ebootux");
+      const codigoCorrecto = card.dataset.code;
+      const codigoIngresado = input.value.trim();
+
+      if (codigoIngresado === codigoCorrecto) {
+        // Aquí activas la sección del ebootux
+        document.getElementById("ebootux-citas").classList.add("active");
+        alert("Acceso concedido 🔓");
+      } else {
+        alert("Código incorrecto ❌");
+        input.value = "";
+        input.focus();
+      }
+    }
+  });
+</script>
