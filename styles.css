@@ -424,6 +424,47 @@ h1 {
   padding: 20px;
 }
 
+/* Buscador */
+
+.buscador {
+  display: flex;
+  padding: 15px;
+}
+
+.buscador-seccion {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 16px;
+  border: 2px solid #777;
+  background: #000;
+  color: #0ff;
+  font-size: 18px;
+  outline: none;
+  transition: 0.3s ease;
+  font-weight: 600
+}
+
+.buscador-seccion::placeholder {
+  color: #bbb;
+}
+
+.buscador-seccion:focus {
+  border-color: #0ff;
+  box-shadow: 0 0 10px #0ff;
+}
+
+.mensaje-vacio {
+  text-align: center;
+  color: #bbb;
+  font-size: 20px;
+  margin-top: 40px;
+  font-style: italic;
+}
+
+.icono-buscador {
+  padding: 5px;
+}
+
 /* Seccion de Ebootux */
 
 .section-ebootux {
@@ -1266,231 +1307,10 @@ h1 {
   margin-top: 10px;
 }
 
-
-
-
-
-
-
-
-
-/* ========================= */
-/* RESPONSIVE MOBILE */
-/* ========================= */
-
-@media (max-width: 900px) {
-
-  body {
-    font-size: 16px;
-  }
-
-  /* Barra de navegación → se vuelve horizontal abajo */
-  .barra-de-navegacion {
-    flex-direction: row;
-    width: 100%;
-    height: 64px;        /* ← ESTO */
-    min-height: 56px;
-    bottom: 0;
-    top: auto;
-    left: 0;
-    border-radius: 0;
-    border-top-right-radius: 0;
-    border-top-left-radius: 0;
-  }
-
-  .barra-de-navegacion.expandida {
-    width: 100%;
-  }
-
-  .contenedor-de-logo {
-    display: none;
-  }
-
-  .contenedor-de-iconos {
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    height: 100%;
-    padding: 0;
-    overflow-x: auto;
-    overflow-y: hidden;
-    border-radius: 0;
-  }
-
-  .item {
-    width: auto;
-    height: 48px;
-    padding: 0 10px;
-    border: none;
-  }
-
-  .contenitux {
-    display: none;
-  }
-
-  .boton-de-ensanche-de-barra-de-navegacion {
-    display: none;
-  }
-
-  /* Empujar todo el contenido arriba porque la barra ahora está abajo */
-  main {
-    margin-bottom: 80px;
-  }
-
-  /* Secciones */
-  .section-home,
-  .section-ebootux,
-  .section-plantitux,
-  .section-getux,
-  .section-tracktux,
-  .section-mindtux,
-  .section-soundtux,
-  .section-movitux,
-  .section-marketux,
-  .section-empaquetux,
-  .info-web,  
-  .box-below-welcome,
-  .box-below-welcome-2 {
-    margin-left: 0;
-    padding: 16px;
-  }
-
-  /* Textos grandes */
-  h1 {
-    font-size: 42px;
-    letter-spacing: 6px;
-  }
-
-  .bienvenido-a-nuestro-estilo {
-    font-size: 16px;
-    letter-spacing: 4px;
-  }
-
-  .box-below-welcome {
-    width: 95%;
-    font-size: 20px;
-    margin-top: 60px;
-  }
-
-  .big-box-1,
-  .big-box-2 {
-    width: 100%;
-  }
-
-  .boxitos {
-    width: 90%;
-    margin: 10px 0;
-  }
-
-  /* Cards */
-  .ebootux-cards,
-  .plantitux-cards,
-  .getux-cards,
-  .tracktux-cards,
-  .mindtux-cards,
-  .soundtux-cards,
-  .movitux-cards,
-  .marketux-cards,
-  .empaquetux-cards {
-    width: 90%;
-  }
-
-  /* Footer */
-  footer {
-    margin-left: 0;
-    padding: 20px;
-  }
-
-  .caja-del-footer {
-    width: 100%;
-    height: auto;
-    margin-bottom: 20px;
-  }
-  
-  .box-item-afiliatte {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-left: 3px solid #777;
-    padding: 5px;
-  }
-  
-  .contenedor-de-iconos::-webkit-scrollbar:horizontal {
-  height: 0px;
-  }
-
-.contenedor-de-iconos::-webkit-scrollbar-thumb {
-  background: #00ffff;
-  border-radius: 10px;
-  }
-  
-  
-  
-  
-  .preview-cards {
-    padding: 10px;
-    margin: auto;
-    width: 80%;
-    height: 95%;
-    border-radius: 36px;
-  }
-
-  .preview-overlay {
-    align-items: flex-start;
-    padding-top: 10px;
-  }
-
-  .box-preview {
-    width: 100%;
-    max-width: 100%;
-    border-radius: 20px;
-    padding: 16px;
-  }
-
-  .preview-body {
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .conteiner-preview,
-  .contenedor-mutimedia-preview {
-    width: 100%;
-  }
-
-  .preview-multimedia {
-    width: 100%;
-    max-height: 220px;
-    object-fit: contain;
-  }
-
-  .preview-si,
-  .preview-no {
-    font-size: 16px;
-  }
-
-  .box-preview-btn-buy {
-    justify-content: center;
-  }
-
-  .btn-de-compra {
-    width: 100%;
-    justify-content: center;
-    font-size: 20px;
-    padding: 12px;
-  }
-
-  .logout-btn {
-    width: 34px;
-    height: 34px;
-  }
-
+.preview-description {
+  color: #bbb;
+  font-size: 18px;
+  line-height: 1.6;
+  margin-top: -10px;
+  margin-bottom: 10px;
 }
-  
-  
-
-
-  
-  
-
-
-
