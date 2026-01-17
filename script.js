@@ -142,8 +142,7 @@ document.querySelectorAll(".buscador-seccion").forEach(buscador => {
 // Codigo de cards
 // ============================
 
-<script>
-  document.addEventListener("click", function (e) {
+document.addEventListener("click", function (e) {
     if (e.target.classList.contains("btn-acceder-ebootux")) {
       const card = e.target.closest(".ebootux-cards");
       const input = card.querySelector(".input-codigo-ebootux");
@@ -161,4 +160,3 @@ document.querySelectorAll(".buscador-seccion").forEach(buscador => {
       }
     }
   });
-</script>
