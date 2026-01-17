@@ -59,6 +59,7 @@ const previewImage = previewModal.querySelector(".preview-multimedia");
 const previewYes = previewModal.querySelector(".preview-si");
 const previewNo = previewModal.querySelector(".preview-no");
 const previewPrice = previewModal.querySelector(".btn-de-compra");
+const previewDescription = previewModal.querySelector(".preview-description");
 const closeBtn = previewModal.querySelector(".logout-btn");
 
 document.querySelectorAll(".btn-de-vista-previa").forEach(btn => {
@@ -68,13 +69,16 @@ document.querySelectorAll(".btn-de-vista-previa").forEach(btn => {
     const title = btn.dataset.title;
     const price = btn.dataset.price;
     const image = btn.dataset.image;
+    const description = btn.dataset.description;
     const yesList = btn.dataset.yes.split(",");
     const noList = btn.dataset.no.split(",");
 
     previewTitle.textContent = title;
     previewImage.src = image;
+    previewDescription.textContent = description;
+
     previewPrice.innerHTML = `
-      <img src="https://statux.netlify.app/shopping_cart_24dp_777777.svg" class="img-de-carrito-de-compra"/>
+      <img src="shopping_cart_24dp_777777.svg" class="img-de-carrito-de-compra"/>
       $${price}
     `;
 
@@ -98,4 +102,37 @@ document.querySelectorAll(".btn-de-vista-previa").forEach(btn => {
 
 closeBtn.addEventListener("click", () => {
   previewModal.classList.remove("active");
+});
+
+// ============================
+// Buscador
+// ============================
+
+document.querySelectorAll(".buscador-seccion").forEach(buscador => {
+  const section = buscador.closest(".app-section");
+  const cards = section.querySelectorAll("article");
+
+  // Crear mensaje vacío si no existe
+  let emptyMsg = section.querySelector(".mensaje-vacio");
+  if (!emptyMsg) {
+    emptyMsg = document.createElement("p");
+    emptyMsg.className = "mensaje-vacio";
+    emptyMsg.textContent = "No hay productos con ese nombre.";
+    emptyMsg.style.display = "none";
+    section.appendChild(emptyMsg);
+  }
+
+  buscador.addEventListener("input", () => {
+    const texto = buscador.value.toLowerCase();
+    let encontrados = 0;
+
+    cards.forEach(card => {
+      const titulo = card.querySelector("h3")?.textContent.toLowerCase() || "";
+      const match = titulo.includes(texto);
+      card.style.display = match ? "flex" : "none";
+      if (match) encontrados++;
+    });
+
+    emptyMsg.style.display = encontrados === 0 ? "block" : "none";
+  });
 });
