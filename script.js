@@ -195,7 +195,7 @@ document.addEventListener("click", function (e) {
       cargarEbootuxDesdeCard(card);
       plantilla.classList.remove("hidden");
       entrarEnEbootux();
-      mostrarModal("Acceso concedido 🔓", "Bienvenido al contenido exclusivo.", true);
+      
     } else {
       mostrarModal("Código incorrecto ❌", "Verifica tu código e inténtalo de nuevo.");
       input.value = "";
