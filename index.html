@@ -29,7 +29,7 @@
         <a href="#Ebootux" class="item"><img src="Ebootux.svg" class="iconos-de-navegacion"/><span class="contenitux">Ebootux</span></a>
         <a href="#Plantitux" class="item"><img src="Plantitux.svg" class="iconos-de-navegacion"/><span class="contenitux">Plantitux</span></a>
         <a href="#Getux" class="item"><img src="Getux.svg" class="iconos-de-navegacion"/><span class="contenitux">Getux</span></a>
-        <a href="#Tracktux" class="item"><img src="Tracktux.svg" class="iconos-de-navegacion"/><span class="contenitux">Trackux</span></a>
+        <a href="#Tracktux" class="item"><img src="Tracktux.svg" class="iconos-de-navegacion"/><span class="contenitux">Tracktux</span></a>
         <a href="#Mindtux" class="item"><img src="Mindtux.svg" class="iconos-de-navegacion"/><span class="contenitux">Mindtux</span></a>
         <a href="#Soundtux" class="item"><img src="Soundtux.svg" class="iconos-de-navegacion"/><span class="contenitux">Soundtux</span></a>
         <a href="#Movitux" class="item"><img src="Movitux.svg" class="iconos-de-navegacion"/><span class="contenitux">Movitux</span></a>
@@ -197,7 +197,29 @@ Nada de improvisar por reflejo: primero se entiende, luego se avanza.
         
         <div class="contenedor-de-todos-los-ebootux">
           
-          <article class="ebootux-cards" data-code="STATUX-1234">
+          <article class="ebootux-cards" 
+            data-code="Statux-123"
+            data-ebootux-title="Etiqueta y Protocolo en una Cita"
+            data-ebootux-subtitle="Cómo conectar con respeto, seguridad y presencia"
+  
+            data-block1-title="Introducción"
+            data-block1-text1="Texto de introducción aquí..."
+            data-block1-text2="Más texto aquí..."
+            data-block1-video="video1.mp4"
+            data-block1-img=""
+
+            data-block2-title="Primer contacto"
+            data-block2-text1="Texto aquí..."
+            data-block2-text2="Texto aquí..."
+            data-block2-img="img1.jpg"
+            data-block2-video=""
+
+            data-block3-title="Cómo pedir la cita"
+            data-block3-text1="Texto aquí..."
+            data-block3-text2="Texto aquí..."
+            data-block3-text3="Texto aquí..."
+            data-block3-video="video2.mp4"
+            >
           <header class="header-ebootux-cards">
             <img src="Statux-logo(SVG).svg" class="img-ebootux-cards">
             <h3>Statux</h3>
@@ -686,6 +708,81 @@ Nada de improvisar por reflejo: primero se entiende, luego se avanza.
     </div>
   </div>
 </div>
+        <!-- Modal de los codigos cards -->
+        <div id="modal-ebootux" class="modal-ebootux hidden">
+          <div class="modal-ebootux-content">
+            <h3 id="modal-ebootux-title"></h3>
+            <p id="modal-ebootux-message"></p>
+            <button id="modal-ebootux-close" class="btn-modal-ebootux">Cerrar</button>
+          </div>
+        </div>
+
+        
+        
+                 <!-- PLANTILLA BASE EBOOTUX (SPA / SCROLL / REUTILIZABLE) -->
+<section class="ebootux-template hidden">
+
+  <button class="ebootux-exit-btn">
+    <img src="Logout.svg" alt="Salir">
+  </button>
+
+  <!-- HERO / PORTADA -->
+  <header class="ebootux-hero">
+    <h1 data-ebootux-h1></h1>
+    <p class="ebootux-subtitle" data-ebootux-subtitle></p>
+  </header>
+
+  <!-- CONTENIDO -->
+  <div class="ebootux-content">
+
+    <!-- BLOQUE 1 -->
+    <article class="ebootux-block">
+      <h2 data-block-title></h2>
+      <p data-block-text></p>
+      <p data-block-text></p>
+      <div class="ebootux-media" data-media-container hidden>
+        <img data-media-img src="" alt="">
+        <video data-media-video controls></video>
+      </div>
+    </article>
+
+    <!-- BLOQUE 2 -->
+    <article class="ebootux-block">
+      <h2 data-block-title></h2>
+      <p data-block-text></p>
+      <p data-block-text></p>
+      <div class="ebootux-media" data-media-container hidden>
+        <img data-media-img src="" alt="">
+        <video data-media-video controls></video>
+      </div>
+    </article>
+
+    <!-- BLOQUE 3 -->
+    <article class="ebootux-block">
+      <h2 data-block-title></h2>
+      <p data-block-text></p>
+      <p data-block-text></p>
+      <p data-block-text></p>
+      <div class="ebootux-media" data-media-container hidden>
+        <img data-media-img src="" alt="">
+        <video data-media-video controls></video>
+      </div>
+    </article>
+
+    <!-- BLOQUE FINAL -->
+    <article class="ebootux-block">
+      <h2 data-block-title></h2>
+      <p data-block-text></p>
+      <p data-block-text></p>
+    </article>
+
+  </div>
+</section>
+
+         
+         
+        
+        
       
          
       <!-- Seccion de politica de privacidad y Términos y Condiciones -->      
