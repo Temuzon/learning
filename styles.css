@@ -20,6 +20,11 @@ body {
   font-family: 'Ubuntu', system-ui, -apple-system, sans-serif;
   font-size: 20px;
   user-select: none;
+  visibility: hidden;
+}
+
+body.loaded {
+  visibility: visible;
 }
 
 /* Footer y sus contenidos */
@@ -34,7 +39,7 @@ footer {
   border-top-left-radius: 36px;
   justify-content: space-between;
   align-items: center;
-  color: #000000;
+  color: #bbb;
 }
 
 .caja-del-footer {
@@ -261,7 +266,7 @@ footer {
 
 h1 {
   font-size: 70px;
-  color: #00ffff;
+  color: #ffffff;
   letter-spacing: 16px;
   font-weight: 500;
 }
@@ -498,7 +503,7 @@ h1 {
   justify-content: space-between;
   align-items: center;
   background: #bbb;
-  widt9h: 360px;
+  width: 360px;
   padding: 16px;
   margin: 20px;
   border-radius: 36px;
@@ -1362,6 +1367,231 @@ h1 {
 }
 
 
+/* ============================ */
+/*        Ebootux Template          */
+/* ============================ */
+
+.ebootux-template {
+  --ebootux-black: #000;
+  --ebootux-dark: #111;
+  --ebootux-gray: #777;
+  --ebootux-cyan: #0ff;
+  --ebootux-white: #fff;
+
+  background: #000;
+  color: #fff;
+  width: 100%;
+  min-height: 100vh;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  font-family: system-ui, sans-serif;
+}
+
+.ebootux-hero {
+  max-width: 900px;
+  margin: 0 auto 60px;
+  padding: 40px;
+  border-radius: 32px;
+  background: linear-gradient(135deg, #000, #111, #222, #000);
+  border: 1px solid #222;
+}
+
+.ebootux-hero h1 {
+  font-size: 2.8rem;
+  margin-bottom: 20px;
+  color: var(--ebootux-cyan);
+}
+
+.ebootux-subtitle {
+  font-size: 1.2rem;
+  color: #aaa;
+}
+
+.ebootux-content {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.ebootux-block {
+  background: #0b0b0b;
+  padding: 32px;
+  border-radius: 28px;
+  border: 1px solid #222;
+}
+
+.ebootux-block h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: var(--ebootux-cyan);
+}
+
+.ebootux-block p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #ddd;
+  margin-bottom: 16px;
+}
+
+.ebootux-media {
+  width: 100%;
+  margin-top: 24px;
+}
+
+.ebootux-media img,
+.ebootux-media video {
+  width: 100%;
+  max-width: 100%;
+  border-radius: 20px;
+  background: #000;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .ebootux-hero {
+    padding: 28px;
+  }
+
+  .ebootux-hero h1 {
+    font-size: 2.2rem;
+  }
+
+  .ebootux-block {
+    padding: 24px;
+  }
+
+  .ebootux-block h2 {
+    font-size: 1.6rem;
+  }
+
+  .ebootux-block p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .ebootux-hero h1 {
+    font-size: 1.9rem;
+  }
+
+  .ebootux-subtitle {
+    font-size: 1rem;
+  }
+}
+
+
+.ebootux-template.hidden {
+  display: none;
+}
+
+.ebootux-template.active {
+  display: block;
+  animation: ebootuxEnter 0.6s ease;
+}
+
+@keyframes ebootuxEnter {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.ebootux-exit-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: 3px solid #0ff;
+  border-radius: 12px;
+  padding: 6px;
+  cursor: pointer;
+  z-index: 9999;
+}
+
+.ebootux-exit-btn img {
+  width: 32px;
+}
+
+
+
+
+/* CONTROL DE ACCESO POR CÓDIGO */
+.modal-ebootux {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modal-ebootux.hidden {
+  display: none;
+}
+
+.modal-ebootux-content {
+  background: linear-gradient(150deg, #000000, #1a1a1a, #000000);
+  border: 2px solid #0ff;
+  border-radius: 24px;
+  padding: 28px 24px;
+  max-width: 360px;
+  width: 90%;
+  text-align: center;
+  color: #0ff;
+  box-shadow: 0 0 25px #0ff;
+  animation: modalFadeIn 0.25s ease;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal-ebootux-content h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.modal-ebootux-content p {
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: #ccc;
+}
+
+.btn-modal-ebootux {
+  padding: 10px 18px;
+  border-radius: 16px;
+  border: 2px solid #777;
+  background: transparent;
+  color: #777;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.btn-modal-ebootux:hover {
+  color: #0ff;
+  border-color: #0ff;
+  box-shadow: 0 0 10px #0ff;
+}
+
+
 
 
 
@@ -1383,7 +1613,7 @@ h1 {
   .barra-de-navegacion {
     flex-direction: row;
     width: 100%;
-    height: 64px;        /* ← ESTO */
+    height: 64px;        
     min-height: 56px;
     bottom: 0;
     top: auto;
@@ -1528,6 +1758,7 @@ h1 {
     width: 80%;
     height: 95%;
     border-radius: 36px;
+    margin-left: 0;
   }
 
   .preview-overlay {
@@ -1582,5 +1813,4 @@ h1 {
 }
   
   
-
 
