@@ -16,9 +16,11 @@ items.forEach(item => {
 const boton = document.querySelector(".boton-de-ensanche-de-barra-de-navegacion");
 const barra = document.querySelector(".barra-de-navegacion");
 
-boton.addEventListener("click", () => {
-  barra.classList.toggle("expandida");
-});
+if (boton && barra) {
+  boton.addEventListener("click", () => {
+    barra.classList.toggle("expandida");
+  });
+}
 
 // ============================
 // NAVEGACIÓN ENTRE SECCIONES
@@ -42,8 +44,8 @@ function showSection(id) {
 navItems.forEach(item => {
   item.addEventListener("click", (e) => {
     e.preventDefault();
-    const targetId = item.getAttribute("href").replace("#", "");
-    showSection(targetId);
+    const targetId = item.getAttribute("href")?.replace("#", "");
+    if (targetId) showSection(targetId);
   });
 });
 
@@ -54,24 +56,26 @@ showSection("Home");
 // MODAL PREVIEW (ÚNICO SISTEMA)
 // ============================
 const previewModal = document.getElementById("preview-modal");
-const previewTitle = previewModal.querySelector(".head-box h2");
-const previewImage = previewModal.querySelector(".preview-multimedia");
-const previewYes = previewModal.querySelector(".preview-si");
-const previewNo = previewModal.querySelector(".preview-no");
-const previewPrice = previewModal.querySelector(".btn-de-compra");
-const previewDescription = previewModal.querySelector(".preview-description");
-const closeBtn = previewModal.querySelector(".logout-btn");
+const previewTitle = previewModal?.querySelector(".head-box h2");
+const previewImage = previewModal?.querySelector(".preview-multimedia");
+const previewYes = previewModal?.querySelector(".preview-si");
+const previewNo = previewModal?.querySelector(".preview-no");
+const previewPrice = previewModal?.querySelector(".btn-de-compra");
+const previewDescription = previewModal?.querySelector(".preview-description");
+const closeBtn = previewModal?.querySelector(".logout-btn");
 
 document.querySelectorAll(".btn-de-vista-previa").forEach(btn => {
   btn.addEventListener("click", e => {
     e.preventDefault();
 
-    const title = btn.dataset.title;
-    const price = btn.dataset.price;
-    const image = btn.dataset.image;
-    const description = btn.dataset.description;
-    const yesList = btn.dataset.yes.split(",");
-    const noList = btn.dataset.no.split(",");
+    if (!previewModal) return;
+
+    const title = btn.dataset.title || "";
+    const price = btn.dataset.price || "";
+    const image = btn.dataset.image || "";
+    const description = btn.dataset.description || "";
+    const yesList = (btn.dataset.yes || "").split(",");
+    const noList = (btn.dataset.no || "").split(",");
 
     previewTitle.textContent = title;
     previewImage.src = image;
@@ -84,35 +88,41 @@ document.querySelectorAll(".btn-de-vista-previa").forEach(btn => {
 
     previewYes.innerHTML = "";
     yesList.forEach(item => {
-      const li = document.createElement("li");
-      li.textContent = item.trim();
-      previewYes.appendChild(li);
+      if (item.trim()) {
+        const li = document.createElement("li");
+        li.textContent = item.trim();
+        previewYes.appendChild(li);
+      }
     });
 
     previewNo.innerHTML = "";
     noList.forEach(item => {
-      const li = document.createElement("li");
-      li.textContent = item.trim();
-      previewNo.appendChild(li);
+      if (item.trim()) {
+        const li = document.createElement("li");
+        li.textContent = item.trim();
+        previewNo.appendChild(li);
+      }
     });
 
     previewModal.classList.add("active");
   });
 });
 
-closeBtn.addEventListener("click", () => {
-  previewModal.classList.remove("active");
-});
+if (closeBtn) {
+  closeBtn.addEventListener("click", () => {
+    previewModal.classList.remove("active");
+  });
+}
 
 // ============================
 // Buscador
 // ============================
-
 document.querySelectorAll(".buscador-seccion").forEach(buscador => {
   const section = buscador.closest(".app-section");
+  if (!section) return;
+
   const cards = section.querySelectorAll("article");
 
-  // Crear mensaje vacío si no existe
   let emptyMsg = section.querySelector(".mensaje-vacio");
   if (!emptyMsg) {
     emptyMsg = document.createElement("p");
@@ -137,26 +147,178 @@ document.querySelectorAll(".buscador-seccion").forEach(buscador => {
   });
 });
 
+// ===============================
+// MODAL PERSONALIZADO
+// ===============================
+function mostrarModal(titulo, mensaje, autoCerrar = false) {
+  const modal = document.getElementById("modal-ebootux");
+  const modalTitle = document.getElementById("modal-ebootux-title");
+  const modalMessage = document.getElementById("modal-ebootux-message");
+  const modalClose = document.getElementById("modal-ebootux-close");
 
-// ============================
-// Codigo de cards
-// ============================
+  if (!modal || !modalTitle || !modalMessage || !modalClose) return;
 
+  modalTitle.textContent = titulo;
+  modalMessage.textContent = mensaje;
+
+  modal.classList.remove("hidden");
+
+  if (autoCerrar) {
+    modalClose.style.display = "none";
+    setTimeout(() => {
+      modal.classList.add("hidden");
+    }, 2600);
+  } else {
+    modalClose.style.display = "inline-block";
+    modalClose.onclick = () => {
+      modal.classList.add("hidden");
+    };
+  }
+}
+
+// ===============================
+// CONTROL DE ACCESO + MOSTRAR PLANTILLA
+// ===============================
 document.addEventListener("click", function (e) {
-    if (e.target.classList.contains("btn-acceder-ebootux")) {
-      const card = e.target.closest(".ebootux-cards");
-      const input = card.querySelector(".input-codigo-ebootux");
-      const codigoCorrecto = card.dataset.code;
-      const codigoIngresado = input.value.trim();
+  if (e.target.classList.contains("btn-acceder-ebootux")) {
+    const card = e.target.closest(".ebootux-cards");
+    if (!card) return;
 
-      if (codigoIngresado === codigoCorrecto) {
-        // Aquí activas la sección del ebootux
-        document.getElementById("ebootux-citas").classList.add("active");
-        alert("Acceso concedido 🔓");
+    const input = card.querySelector(".input-codigo-ebootux");
+    const plantilla = document.querySelector(".ebootux-template");
+    if (!input || !plantilla) return;
+
+    const codigoCorrecto = card.dataset.code; // 👈 ESTE ES EL BUENO
+    const codigoIngresado = input.value.trim();
+
+    if (codigoIngresado === codigoCorrecto) {
+      cargarEbootuxDesdeCard(card);
+      plantilla.classList.remove("hidden");
+      entrarEnEbootux();
+      mostrarModal("Acceso concedido 🔓", "Bienvenido al contenido exclusivo.", true);
+    } else {
+      mostrarModal("Código incorrecto ❌", "Verifica tu código e inténtalo de nuevo.");
+      input.value = "";
+      input.focus();
+    }
+  }
+});
+
+// ===============================
+// EVITAR FLASH DE CONTENIDO
+// ===============================
+window.addEventListener("load", () => {
+  document.body.classList.add("loaded");
+});
+
+// ===============================
+// CARGA DE DATOS AL EBOOTUX
+// ===============================
+function cargarEbootuxDesdeCard(card) {
+  const ebootux = document.querySelector(".ebootux-template");
+  if (!ebootux) return;
+
+  const h1 = ebootux.querySelector("[data-ebootux-h1]");
+  const subtitle = ebootux.querySelector("[data-ebootux-subtitle]");
+
+  if (h1) h1.textContent = card.dataset.ebootuxTitle || "";
+  if (subtitle) subtitle.textContent = card.dataset.ebootuxSubtitle || "";
+
+  const bloques = ebootux.querySelectorAll(".ebootux-block");
+
+  bloques.forEach((bloque, index) => {
+    const i = index + 1;
+
+    const title = card.dataset[`block${i}Title`];
+    const text1 = card.dataset[`block${i}Text1`];
+    const text2 = card.dataset[`block${i}Text2`];
+    const text3 = card.dataset[`block${i}Text3`];
+    const img = card.dataset[`block${i}Img`];
+    const video = card.dataset[`block${i}Video`];
+
+    const h2 = bloque.querySelector("[data-block-title]");
+    const pTags = bloque.querySelectorAll("[data-block-text]");
+    const mediaContainer = bloque.querySelector("[data-media-container]");
+    const imgTag = bloque.querySelector("[data-media-img]");
+    const videoTag = bloque.querySelector("[data-media-video]");
+
+    // TÍTULO
+    if (h2) {
+      if (title) {
+        h2.textContent = title;
+        h2.style.display = "block";
       } else {
-        alert("Código incorrecto ❌");
-        input.value = "";
-        input.focus();
+        h2.style.display = "none";
       }
     }
+
+    // TEXTOS
+    const textos = [text1, text2, text3];
+    pTags.forEach((p, idx) => {
+      if (textos[idx]) {
+        p.textContent = textos[idx];
+        p.style.display = "block";
+      } else {
+        p.style.display = "none";
+      }
+    });
+
+    // MEDIA
+    let hayMedia = false;
+
+    if (imgTag) {
+      if (img) {
+        imgTag.src = img;
+        imgTag.style.display = "block";
+        hayMedia = true;
+      } else {
+        imgTag.style.display = "none";
+      }
+    }
+
+    if (videoTag) {
+      if (video) {
+        videoTag.src = video;
+        videoTag.style.display = "block";
+        hayMedia = true;
+      } else {
+        videoTag.style.display = "none";
+      }
+    }
+
+    if (mediaContainer) {
+      mediaContainer.hidden = !hayMedia;
+    }
   });
+}
+
+// ===============================
+// ENTRAR AL EBOOTUX (OCULTA TODO LO DEMÁS)
+// ===============================
+function entrarEnEbootux() {
+  const ebootux = document.querySelector(".ebootux-template");
+  const appSections = document.querySelectorAll(".app-section");
+
+  appSections.forEach(section => section.classList.remove("active-section"));
+  if (ebootux) {
+    ebootux.classList.remove("hidden");
+    ebootux.classList.add("active");
+  }
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+// ===============================
+// SALIR DEL EBOOTUX
+// ===============================
+document.addEventListener("click", function (e) {
+  if (e.target.closest(".ebootux-exit-btn")) {
+    const ebootux = document.querySelector(".ebootux-template");
+    if (!ebootux) return;
+
+    ebootux.classList.add("hidden");
+    ebootux.classList.remove("active");
+
+    showSection("Home");
+  }
+});
