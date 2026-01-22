@@ -60,13 +60,22 @@ const previewTitle = previewModal?.querySelector(".head-box h2");
 const previewImage = previewModal?.querySelector(".preview-multimedia");
 const previewYes = previewModal?.querySelector(".preview-si");
 const previewNo = previewModal?.querySelector(".preview-no");
-const previewPrice = previewModal?.querySelector(".btn-de-compra");
+const previewBuyBtn = previewModal?.querySelector(".btn-de-compra");
 const previewDescription = previewModal?.querySelector(".preview-description");
 const closeBtn = previewModal?.querySelector(".logout-btn");
 
 document.querySelectorAll(".btn-de-vista-previa").forEach(btn => {
   btn.addEventListener("click", e => {
     e.preventDefault();
+    
+    if (closeBtn) {
+  closeBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    previewModal.classList.remove("active");
+  });
+}
+
+
 
     if (!previewModal) return;
 
@@ -76,15 +85,18 @@ document.querySelectorAll(".btn-de-vista-previa").forEach(btn => {
     const description = btn.dataset.description || "";
     const yesList = (btn.dataset.yes || "").split(",");
     const noList = (btn.dataset.no || "").split(",");
+    const link = btn.dataset.link || "#"; // 👈 NUEVO
 
     previewTitle.textContent = title;
     previewImage.src = image;
     previewDescription.textContent = description;
 
-    previewPrice.innerHTML = `
+    previewBuyBtn.innerHTML = `
       <img src="shopping_cart_24dp_777777.svg" class="img-de-carrito-de-compra"/>
       $${price}
     `;
+    previewBuyBtn.href = link; // 👈 CONECTA EL BOTÓN AL LINK
+    previewBuyBtn.target = "_blank"; // opcional
 
     previewYes.innerHTML = "";
     yesList.forEach(item => {
@@ -107,12 +119,6 @@ document.querySelectorAll(".btn-de-vista-previa").forEach(btn => {
     previewModal.classList.add("active");
   });
 });
-
-if (closeBtn) {
-  closeBtn.addEventListener("click", () => {
-    previewModal.classList.remove("active");
-  });
-}
 
 // ============================
 // Buscador
@@ -188,7 +194,7 @@ document.addEventListener("click", function (e) {
     const plantilla = document.querySelector(".ebootux-template");
     if (!input || !plantilla) return;
 
-    const codigoCorrecto = card.dataset.code; // 👈 ESTE ES EL BUENO
+    const codigoCorrecto = card.dataset.code; 
     const codigoIngresado = input.value.trim();
 
     if (codigoIngresado === codigoCorrecto) {
@@ -216,7 +222,10 @@ window.addEventListener("load", () => {
 // ===============================
 function cargarEbootuxDesdeCard(card) {
   const ebootux = document.querySelector(".ebootux-template");
-  if (!ebootux) return;
+  const content = document.getElementById("ebootux-content");
+  const template = document.getElementById("ebootux-block-template");
+
+  if (!ebootux || !content || !template) return;
 
   const h1 = ebootux.querySelector("[data-ebootux-h1]");
   const subtitle = ebootux.querySelector("[data-ebootux-subtitle]");
@@ -224,10 +233,21 @@ function cargarEbootuxDesdeCard(card) {
   if (h1) h1.textContent = card.dataset.ebootuxTitle || "";
   if (subtitle) subtitle.textContent = card.dataset.ebootuxSubtitle || "";
 
-  const bloques = ebootux.querySelectorAll(".ebootux-block");
+  // Limpia bloques anteriores
+  content.innerHTML = "";
 
-  bloques.forEach((bloque, index) => {
-    const i = index + 1;
+  // Detectar cuántos bloques hay realmente
+  const blockNumbers = Object.keys(card.dataset)
+    .map(key => {
+      const match = key.match(/^block(\d+)(Title|Text1|Text2|Text3|Img|Video)$/);
+      return match ? parseInt(match[1], 10) : null;
+    })
+    .filter(n => n !== null);
+
+  const totalBlocks = Math.max(...blockNumbers, 0);
+
+  for (let i = 1; i <= totalBlocks; i++) {
+    const clone = template.content.cloneNode(true);
 
     const title = card.dataset[`block${i}Title`];
     const text1 = card.dataset[`block${i}Text1`];
@@ -236,11 +256,11 @@ function cargarEbootuxDesdeCard(card) {
     const img = card.dataset[`block${i}Img`];
     const video = card.dataset[`block${i}Video`];
 
-    const h2 = bloque.querySelector("[data-block-title]");
-    const pTags = bloque.querySelectorAll("[data-block-text]");
-    const mediaContainer = bloque.querySelector("[data-media-container]");
-    const imgTag = bloque.querySelector("[data-media-img]");
-    const videoTag = bloque.querySelector("[data-media-video]");
+    const h2 = clone.querySelector("[data-block-title]");
+    const pTags = clone.querySelectorAll("[data-block-text]");
+    const mediaContainer = clone.querySelector("[data-media-container]");
+    const imgTag = clone.querySelector("[data-media-img]");
+    const videoTag = clone.querySelector("[data-media-video]");
 
     // TÍTULO
     if (h2) {
@@ -266,31 +286,30 @@ function cargarEbootuxDesdeCard(card) {
     // MEDIA
     let hayMedia = false;
 
-    if (imgTag) {
-      if (img) {
-        imgTag.src = img;
-        imgTag.style.display = "block";
-        hayMedia = true;
-      } else {
-        imgTag.style.display = "none";
-      }
+    if (imgTag && img) {
+      imgTag.src = img;
+      imgTag.style.display = "block";
+      hayMedia = true;
+    } else if (imgTag) {
+      imgTag.style.display = "none";
     }
 
-    if (videoTag) {
-      if (video) {
-        videoTag.src = video;
-        videoTag.style.display = "block";
-        hayMedia = true;
-      } else {
-        videoTag.style.display = "none";
-      }
+    if (videoTag && video) {
+      videoTag.src = video;
+      videoTag.style.display = "block";
+      hayMedia = true;
+    } else if (videoTag) {
+      videoTag.style.display = "none";
     }
 
     if (mediaContainer) {
       mediaContainer.hidden = !hayMedia;
     }
-  });
+
+    content.appendChild(clone);
+  }
 }
+
 
 // ===============================
 // ENTRAR AL EBOOTUX (OCULTA TODO LO DEMÁS)
