@@ -533,6 +533,7 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  text-align: center;
   width: 100%;
   gap: 10px;
   margin: 12px 0;
@@ -1332,7 +1333,7 @@ h1 {
 }
 
 .preview-multimedia {
-  height: 200px;
+  width: 300px;
   opacity: 0.9;
 }
 
