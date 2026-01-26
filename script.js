@@ -23,6 +23,23 @@ if (boton && barra) {
 }
 
 // ============================
+// 🔀 FUNCIÓN: ORDEN ALEATORIO POR SECCIÓN
+// ============================
+function mezclarCardsEnSeccion(seccion) {
+  const contenedores = seccion.querySelectorAll(
+    ".contenedor-de-todos-los-ebootux, .contenedor-de-todos-los-plantitux, .contenedor-de-todos-los-tracktux, .contenedor-de-todos-los-mindtux, .contenedor-de-todos-los-soundtux, .contenedor-de-todos-los-movitux, .contenedor-de-todos-los-marketux"
+  );
+
+  contenedores.forEach(container => {
+    const cards = Array.from(container.children);
+    if (cards.length > 1) {
+      cards.sort(() => Math.random() - 0.5);
+      cards.forEach(card => container.appendChild(card));
+    }
+  });
+}
+
+// ============================
 // NAVEGACIÓN ENTRE SECCIONES
 // ============================
 const sections = document.querySelectorAll(".app-section");
@@ -36,6 +53,7 @@ function showSection(id) {
   const target = document.getElementById(id);
   if (target) {
     target.classList.add("active-section");
+    mezclarCardsEnSeccion(target); // 👈 mezcla cada vez que entras
   }
 
   window.scrollTo({ top: 0, behavior: "smooth" });
@@ -64,19 +82,16 @@ const previewBuyBtn = previewModal?.querySelector(".btn-de-compra");
 const previewDescription = previewModal?.querySelector(".preview-description");
 const closeBtn = previewModal?.querySelector(".logout-btn");
 
-document.querySelectorAll(".btn-de-vista-previa").forEach(btn => {
-  btn.addEventListener("click", e => {
-    e.preventDefault();
-    
-    if (closeBtn) {
+if (closeBtn && previewModal) {
   closeBtn.addEventListener("click", (e) => {
     e.stopPropagation();
     previewModal.classList.remove("active");
   });
 }
 
-
-
+document.querySelectorAll(".btn-de-vista-previa").forEach(btn => {
+  btn.addEventListener("click", e => {
+    e.preventDefault();
     if (!previewModal) return;
 
     const title = btn.dataset.title || "";
@@ -85,61 +100,67 @@ document.querySelectorAll(".btn-de-vista-previa").forEach(btn => {
     const description = btn.dataset.description || "";
     const yesList = (btn.dataset.yes || "").split(",");
     const noList = (btn.dataset.no || "").split(",");
-    const link = btn.dataset.link || "#"; // 👈 NUEVO
+    const link = btn.dataset.link || "#";
 
-    previewTitle.textContent = title;
-    previewImage.src = image;
-    previewDescription.textContent = description;
+    if (previewTitle) previewTitle.textContent = title;
+    if (previewImage) previewImage.src = image;
+    if (previewDescription) previewDescription.textContent = description;
 
-    previewBuyBtn.innerHTML = `
-      <img src="shopping_cart_24dp_777777.svg" class="img-de-carrito-de-compra"/>
-      $${price}
-    `;
-    previewBuyBtn.href = link; // 👈 CONECTA EL BOTÓN AL LINK
-    previewBuyBtn.target = "_blank"; // opcional
+    if (previewBuyBtn) {
+      previewBuyBtn.innerHTML = `
+        <img src="shopping_cart_24dp_777777.svg" class="img-de-carrito-de-compra"/>
+        $${price}
+      `;
+      previewBuyBtn.href = link;
+      previewBuyBtn.target = "_blank";
+    }
 
-    previewYes.innerHTML = "";
-    yesList.forEach(item => {
-      if (item.trim()) {
-        const li = document.createElement("li");
-        li.textContent = item.trim();
-        previewYes.appendChild(li);
-      }
-    });
+    if (previewYes) {
+      previewYes.innerHTML = "";
+      yesList.forEach(item => {
+        if (item.trim()) {
+          const li = document.createElement("li");
+          li.textContent = item.trim();
+          previewYes.appendChild(li);
+        }
+      });
+    }
 
-    previewNo.innerHTML = "";
-    noList.forEach(item => {
-      if (item.trim()) {
-        const li = document.createElement("li");
-        li.textContent = item.trim();
-        previewNo.appendChild(li);
-      }
-    });
+    if (previewNo) {
+      previewNo.innerHTML = "";
+      noList.forEach(item => {
+        if (item.trim()) {
+          const li = document.createElement("li");
+          li.textContent = item.trim();
+          previewNo.appendChild(li);
+        }
+      });
+    }
 
     previewModal.classList.add("active");
   });
 });
 
 // ============================
-// Buscador
+// BUSCADOR POR SECCIÓN
 // ============================
 document.querySelectorAll(".buscador-seccion").forEach(buscador => {
   const section = buscador.closest(".app-section");
   if (!section) return;
 
-  const cards = section.querySelectorAll("article");
+  const cards = section.querySelectorAll(".ebootux-cards");
 
   let emptyMsg = section.querySelector(".mensaje-vacio");
   if (!emptyMsg) {
     emptyMsg = document.createElement("p");
     emptyMsg.className = "mensaje-vacio";
-    emptyMsg.textContent = "No hay productos con ese nombre.";
+    emptyMsg.textContent = "No hay coincidencias con ese nombre.";
     emptyMsg.style.display = "none";
     section.appendChild(emptyMsg);
   }
 
   buscador.addEventListener("input", () => {
-    const texto = buscador.value.toLowerCase();
+    const texto = buscador.value.toLowerCase().trim();
     let encontrados = 0;
 
     cards.forEach(card => {
@@ -194,14 +215,13 @@ document.addEventListener("click", function (e) {
     const plantilla = document.querySelector(".ebootux-template");
     if (!input || !plantilla) return;
 
-    const codigoCorrecto = card.dataset.code; 
+    const codigoCorrecto = card.dataset.code;
     const codigoIngresado = input.value.trim();
 
     if (codigoIngresado === codigoCorrecto) {
       cargarEbootuxDesdeCard(card);
       plantilla.classList.remove("hidden");
       entrarEnEbootux();
-      
     } else {
       mostrarModal("Código incorrecto ❌", "Verifica tu código e inténtalo de nuevo.");
       input.value = "";
@@ -233,13 +253,11 @@ function cargarEbootuxDesdeCard(card) {
   if (h1) h1.textContent = card.dataset.ebootuxTitle || "";
   if (subtitle) subtitle.textContent = card.dataset.ebootuxSubtitle || "";
 
-  // Limpia bloques anteriores
   content.innerHTML = "";
 
-  // Detectar cuántos bloques hay realmente
   const blockNumbers = Object.keys(card.dataset)
     .map(key => {
-      const match = key.match(/^block(\d+)(Title|Text1|Text2|Text3|Img|Video)$/);
+      const match = key.match(/^block(\d+)(Title|Text1|Text2|Text3|Text4|Text5|Img|Video)$/);
       return match ? parseInt(match[1], 10) : null;
     })
     .filter(n => n !== null);
@@ -253,6 +271,8 @@ function cargarEbootuxDesdeCard(card) {
     const text1 = card.dataset[`block${i}Text1`];
     const text2 = card.dataset[`block${i}Text2`];
     const text3 = card.dataset[`block${i}Text3`];
+    const text4 = card.dataset[`block${i}Text4`];
+    const text5 = card.dataset[`block${i}Text5`];
     const img = card.dataset[`block${i}Img`];
     const video = card.dataset[`block${i}Video`];
 
@@ -262,7 +282,6 @@ function cargarEbootuxDesdeCard(card) {
     const imgTag = clone.querySelector("[data-media-img]");
     const videoTag = clone.querySelector("[data-media-video]");
 
-    // TÍTULO
     if (h2) {
       if (title) {
         h2.textContent = title;
@@ -272,18 +291,16 @@ function cargarEbootuxDesdeCard(card) {
       }
     }
 
-    // TEXTOS
-    const textos = [text1, text2, text3];
+    const textos = [text1, text2, text3, text4, text5];
     pTags.forEach((p, idx) => {
       if (textos[idx]) {
-        p.textContent = textos[idx];
+        p.innerHTML = textos[idx].replace(/\n/g, "<br>");
         p.style.display = "block";
       } else {
         p.style.display = "none";
       }
     });
 
-    // MEDIA
     let hayMedia = false;
 
     if (imgTag && img) {
@@ -309,7 +326,6 @@ function cargarEbootuxDesdeCard(card) {
     content.appendChild(clone);
   }
 }
-
 
 // ===============================
 // ENTRAR AL EBOOTUX (OCULTA TODO LO DEMÁS)
@@ -341,3 +357,4 @@ document.addEventListener("click", function (e) {
     showSection("Home");
   }
 });
+
