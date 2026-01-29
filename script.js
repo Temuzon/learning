@@ -358,3 +358,114 @@ document.addEventListener("click", function (e) {
   }
 });
 
+
+// ===============================
+// PREVIEW MULTIMEDIA PLANTITUX / MOVITUX
+// ===============================
+const plantituxPreviewModal = document.getElementById("plantitux-preview-modal");
+const plantituxPreviewImg = document.getElementById("plantitux-preview-img");
+const plantituxPreviewVideo = document.getElementById("plantitux-preview-video");
+const plantituxPreviewTitle = document.getElementById("plantitux-preview-title");
+const plantituxPreviewBuy = document.getElementById("plantitux-preview-buy");
+const plantituxPreviewClose = document.getElementById("plantitux-preview-close");
+
+document.querySelectorAll(".btn-de-vista-previa-plantitux").forEach(btn => {
+  btn.addEventListener("click", e => {
+    e.preventDefault();
+    const card = btn.closest(".plantitux-cards");
+    if (!card) return;
+
+    const img = card.dataset.previewImg || "";
+    const video = card.dataset.previewVideo || "";
+    const title = card.dataset.title || "";
+    const price = card.dataset.price || "";
+    const link = card.dataset.link || "#";
+
+    plantituxPreviewTitle.textContent = title;
+
+    if (video) {
+      plantituxPreviewVideo.src = video;
+      plantituxPreviewVideo.classList.remove("hidden");
+      plantituxPreviewImg.classList.add("hidden");
+    } else if (img) {
+      plantituxPreviewImg.src = img;
+      plantituxPreviewImg.classList.remove("hidden");
+      plantituxPreviewVideo.classList.add("hidden");
+    }
+
+    plantituxPreviewBuy.innerHTML = `
+      <img src="shopping_cart_24dp_777777.svg" class="img-de-carrito-de-compra"/>
+      $${price}
+    `;
+    plantituxPreviewBuy.href = link;
+    plantituxPreviewBuy.target = "_blank";
+
+    plantituxPreviewModal.classList.add("active");
+  });
+});
+
+if (plantituxPreviewClose && plantituxPreviewModal) {
+  plantituxPreviewClose.addEventListener("click", () => {
+    plantituxPreviewModal.classList.remove("active");
+  });
+}
+
+// ===============================
+// CONTROL DE ACCESO + MOSTRAR PROMPT
+// ===============================
+document.addEventListener("click", function (e) {
+  if (e.target.classList.contains("btn-acceder-plantitux")) {
+    const card = e.target.closest(".plantitux-cards");
+    if (!card) return;
+
+    const input = card.querySelector(".input-codigo-plantitux");
+    if (!input) return;
+
+    const codigoCorrecto = card.dataset.code;
+    const codigoIngresado = input.value.trim();
+
+    if (codigoIngresado === codigoCorrecto) {
+      abrirPromptDesdeCard(card);
+    } else {
+      mostrarModal("Código incorrecto ❌", "Verifica tu código e inténtalo de nuevo.");
+      input.value = "";
+      input.focus();
+    }
+  }
+});
+
+// ===============================
+// ABRIR MODAL PROMPT
+// ===============================
+const promptModal = document.getElementById("prompt-modal");
+const promptTextarea = document.getElementById("prompt-textarea");
+const promptClose = document.getElementById("prompt-modal-close");
+const copyPromptBtn = document.getElementById("copy-prompt-btn");
+
+function abrirPromptDesdeCard(card) {
+  const prompt = card.dataset.prompt || "";
+  promptTextarea.value = prompt;
+  promptModal.classList.add("active");
+}
+
+if (promptClose) {
+  promptClose.addEventListener("click", () => {
+    promptModal.classList.remove("active");
+  });
+}
+
+if (copyPromptBtn) {
+  copyPromptBtn.addEventListener("click", () => {
+    promptTextarea.select();
+    promptTextarea.setSelectionRange(0, 99999);
+    document.execCommand("copy");
+
+    copyPromptBtn.innerHTML = "✔ Copiado";
+    setTimeout(() => {
+      copyPromptBtn.innerHTML = `
+        <img src="copy.svg" class="img-de-carrito-de-compra"/>Copiar
+      `;
+    }, 1800);
+  });
+}
+
