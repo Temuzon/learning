@@ -1818,6 +1818,21 @@ h1 {
     margin: 10px 0;
   }
 
+  .contenedro-de-todos-los-ebootux,
+  .contenedro-de-todos-los-plantitux,
+  .contenedro-de-todos-los-getux,
+  .contenedro-de-todos-los-tracktux, 
+  .contenedro-de-todos-los-mindtux,
+  .contenedro-de-todos-los-soundtux, 
+  .contenedro-de-todos-los-movitux,    
+  .contenedro-de-todos-los-marketux,
+  .contenedro-de-todos-los-empaquetatux {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 11px;
+    }
+    
   /* Cards */
   .ebootux-cards,
   .plantitux-cards,
