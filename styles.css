@@ -1818,15 +1818,15 @@ h1 {
     margin: 10px 0;
   }
 
-  .contenedro-de-todos-los-ebootux,
-  .contenedro-de-todos-los-plantitux,
-  .contenedro-de-todos-los-getux,
-  .contenedro-de-todos-los-tracktux, 
-  .contenedro-de-todos-los-mindtux,
-  .contenedro-de-todos-los-soundtux, 
-  .contenedro-de-todos-los-movitux,    
-  .contenedro-de-todos-los-marketux,
-  .contenedro-de-todos-los-empaquetatux {
+  .contenedor-de-todos-los-ebootux,
+  .contenedor-de-todos-los-plantitux,
+  .contenedor-de-todos-los-getux,
+  .contenedor-de-todos-los-tracktux, 
+  .contenedor-de-todos-los-mindtux,
+  .contenedor-de-todos-los-soundtux, 
+  .contenedor-de-todos-los-movitux,    
+  .contenedor-de-todos-los-marketux,
+  .contenedor-de-todos-los-empaquetatux {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
