@@ -53,7 +53,7 @@ function showSection(id) {
   const target = document.getElementById(id);
   if (target) {
     target.classList.add("active-section");
-    mezclarCardsEnSeccion(target); // 👈 mezcla cada vez que entras
+    mezclarCardsEnSeccion(target);
   }
 
   window.scrollTo({ top: 0, behavior: "smooth" });
@@ -71,7 +71,7 @@ navItems.forEach(item => {
 showSection("Home");
 
 // ============================
-// MODAL PREVIEW (ÚNICO SISTEMA)
+// MODAL PREVIEW (GETUX / EBOOTUX)
 // ============================
 const previewModal = document.getElementById("preview-modal");
 const previewTitle = previewModal?.querySelector(".head-box h2");
@@ -204,7 +204,7 @@ function mostrarModal(titulo, mensaje, autoCerrar = false) {
 }
 
 // ===============================
-// CONTROL DE ACCESO + MOSTRAR PLANTILLA
+// CONTROL DE ACCESO + MOSTRAR PLANTILLA (GETUX / EBOOTUX)
 // ===============================
 document.addEventListener("click", function (e) {
   if (e.target.classList.contains("btn-acceder-ebootux")) {
@@ -358,7 +358,6 @@ document.addEventListener("click", function (e) {
   }
 });
 
-
 // ===============================
 // PREVIEW MULTIMEDIA PLANTITUX / MOVITUX
 // ===============================
@@ -441,11 +440,14 @@ const promptModal = document.getElementById("prompt-modal");
 const promptTextarea = document.getElementById("prompt-textarea");
 const promptClose = document.getElementById("prompt-modal-close");
 const copyPromptBtn = document.getElementById("copy-prompt-btn");
+const copyFeedback = document.querySelector(".copy-feedback");
+const miniModal = document.querySelector(".mini-modal");
 
 function abrirPromptDesdeCard(card) {
   const prompt = card.dataset.prompt || "";
   promptTextarea.value = prompt;
   promptModal.classList.add("active");
+  if (miniModal) miniModal.style.height = miniModal.scrollHeight + "px";
 }
 
 if (promptClose) {
@@ -454,18 +456,24 @@ if (promptClose) {
   });
 }
 
+// ===============================
+// COPIAR PROMPT + ANIMACIÓN + HEIGHT SUAVE
+// ===============================
 if (copyPromptBtn) {
   copyPromptBtn.addEventListener("click", () => {
-    promptTextarea.select();
-    promptTextarea.setSelectionRange(0, 99999);
-    document.execCommand("copy");
+    const prompt = promptTextarea.value;
 
-    copyPromptBtn.innerHTML = "✔ Copiado";
-    setTimeout(() => {
-      copyPromptBtn.innerHTML = `
-        <img src="check_circle.svg" class="img-de-carrito-de-compra"/>Copiar
-      `;
-    }, 1800);
+    navigator.clipboard.writeText(prompt).then(() => {
+      copyPromptBtn.classList.add("copied");
+      if (copyFeedback) copyFeedback.classList.add("show");
+      if (miniModal) miniModal.style.height = miniModal.scrollHeight + "px";
+
+      setTimeout(() => {
+        copyPromptBtn.classList.remove("copied");
+        if (copyFeedback) copyFeedback.classList.remove("show");
+        if (miniModal) miniModal.style.height = miniModal.scrollHeight + "px";
+      }, 2000);
+    });
   });
 }
 
