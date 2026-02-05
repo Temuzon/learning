@@ -469,22 +469,124 @@ document.addEventListener("click", function (e) {
 const promptModal = document.getElementById("prompt-modal");
 const promptTextarea = document.getElementById("prompt-textarea");
 const promptClose = document.getElementById("prompt-modal-close");
+
+// elements related to copy button
 const copyPromptBtn = document.getElementById("copy-prompt-btn");
 const copyFeedback = document.querySelector(".copy-feedback");
 const miniModal = document.querySelector(".mini-modal");
 
+let _copyTimeoutId = null;
+
+// helper: create inline check SVG if needed (so we never show a broken image)
+function createInlineCheckIcon() {
+  const span = document.createElement("span");
+  span.className = "icon-check";
+  // simple check-circle SVG markup (keeps styling via CSS)
+  span.innerHTML = `
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="10" stroke="none" fill="#00ffdd"/>
+      <path d="M7 12.5L10 15.5L17 8.5" stroke="#012" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  `;
+  span.style.display = "none";
+  span.style.width = "24px";
+  span.style.height = "24px";
+  span.style.lineHeight = "0";
+  return span;
+}
+
+// reset copy button to initial state (copy icon visible)
+function resetCopyButtonState() {
+  if (!copyPromptBtn) return;
+
+  // remove class
+  copyPromptBtn.classList.remove("copied");
+
+  // show copy icon if exists
+  const iconCopy = copyPromptBtn.querySelector(".icon-copy");
+  if (iconCopy) iconCopy.style.display = "inline-block";
+
+  // hide any icon-check (img or inline)
+  const iconCheckImg = copyPromptBtn.querySelector("img.icon-check");
+  if (iconCheckImg) iconCheckImg.style.display = "none";
+
+  // also handle inline-created check
+  const inlineCheck = copyPromptBtn.querySelector(".icon-check:not(img)");
+  if (inlineCheck) inlineCheck.style.display = "none";
+
+  // restore button text (if you choose to change it elsewhere)
+  const btnText = copyPromptBtn.querySelector(".btn-text");
+  if (btnText) btnText.textContent = "Copiar";
+
+  // clear timeout if pending
+  if (_copyTimeoutId) {
+    clearTimeout(_copyTimeoutId);
+    _copyTimeoutId = null;
+  }
+}
+
+// open prompt from card and set contents; reset copy button state each time modal opens
 function abrirPromptDesdeCard(card) {
   const prompt = card.dataset.prompt || "";
   if (!promptModal || !promptTextarea) return;
   promptTextarea.value = prompt;
+
+  // ensure copy button icons exist and initial state
+  if (copyPromptBtn) {
+    // if copy icon missing, try to create a minimal fallback (text-only button will still work)
+    const iconCopy = copyPromptBtn.querySelector(".icon-copy");
+    if (!iconCopy) {
+      // create a simple inline copy SVG inside an <span> to avoid broken images
+      const span = document.createElement("span");
+      span.className = "icon-copy";
+      span.innerHTML = `
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <rect x="9" y="9" width="9" height="9" fill="#777" rx="1"/>
+          <rect x="6" y="6" width="9" height="9" fill="#222" rx="1" opacity="0.9"/>
+        </svg>
+      `;
+      span.style.display = "inline-block";
+      span.style.width = "24px";
+      span.style.height = "24px";
+      copyPromptBtn.insertBefore(span, copyPromptBtn.firstChild);
+    }
+
+    // prepare check icon: if there's no <img class="icon-check">, create inline one
+    const iconCheckImg = copyPromptBtn.querySelector("img.icon-check");
+    const inlineCheck = copyPromptBtn.querySelector(".icon-check:not(img)");
+    if (!iconCheckImg && !inlineCheck) {
+      const created = createInlineCheckIcon();
+      // append before the button text (if exists)
+      const btnText = copyPromptBtn.querySelector(".btn-text");
+      if (btnText) copyPromptBtn.insertBefore(created, btnText);
+      else copyPromptBtn.appendChild(created);
+    }
+
+    // finally reset visuals
+    resetCopyButtonState();
+  }
+
   promptModal.classList.add("active");
   if (miniModal) miniModal.style.height = miniModal.scrollHeight + "px";
 }
 
+// close prompt: reset copy state so on reopen it's fresh
 if (promptClose) {
   promptClose.addEventListener("click", () => {
     if (promptModal) promptModal.classList.remove("active");
+    // reset immediately when closed
+    resetCopyButtonState();
   });
+}
+
+// also reset when modal is removed by any other means (safety)
+if (promptModal) {
+  const observer = new MutationObserver(() => {
+    if (!promptModal.classList.contains("active")) {
+      resetCopyButtonState();
+    }
+  });
+  observer.observe(promptModal, { attributes: true, attributeFilter: ["class"] });
 }
 
 // ===============================
@@ -493,11 +595,46 @@ if (promptClose) {
 if (copyPromptBtn && promptTextarea) {
   copyPromptBtn.addEventListener("click", () => {
     const prompt = promptTextarea.value || "";
+
+    // copy to clipboard (with fallback)
+    const doCopiedUI = () => {
+      // hide copy icon (img or inline)
+      const iconCopy = copyPromptBtn.querySelector(".icon-copy");
+      if (iconCopy) iconCopy.style.display = "none";
+
+      // show check icon (img or inline)
+      const iconCheckImg = copyPromptBtn.querySelector("img.icon-check");
+      if (iconCheckImg) {
+        iconCheckImg.style.display = "inline-block";
+      } else {
+        const inlineCheck = copyPromptBtn.querySelector(".icon-check:not(img)");
+        if (inlineCheck) inlineCheck.style.display = "inline-block";
+      }
+
+      // visual state
+      copyPromptBtn.classList.add("copied");
+      const btnText = copyPromptBtn.querySelector(".btn-text");
+      if (btnText) btnText.textContent = "Copiado";
+
+      // ensure mini modal height adapts
+      if (miniModal) miniModal.style.height = miniModal.scrollHeight + "px";
+
+      // auto-revert after 2s (keeps behavior consistent)
+      if (_copyTimeoutId) clearTimeout(_copyTimeoutId);
+      _copyTimeoutId = setTimeout(() => {
+        resetCopyButtonState();
+      }, 2000);
+    };
+
     if (!navigator.clipboard) {
-      // fallback: seleccionar y copiar
-      promptTextarea.select();
+      // fallback: select and execCommand
       try {
-        document.execCommand('copy');
+        promptTextarea.select();
+        const ok = document.execCommand('copy');
+        if (ok) doCopiedUI();
+        else {
+          console.warn("Fallback copy failed");
+        }
       } catch (err) {
         console.warn('Copiado no soportado', err);
       }
@@ -505,17 +642,11 @@ if (copyPromptBtn && promptTextarea) {
     }
 
     navigator.clipboard.writeText(prompt).then(() => {
-      copyPromptBtn.classList.add("copied");
-      if (copyFeedback) copyFeedback.classList.add("show");
-      if (miniModal) miniModal.style.height = miniModal.scrollHeight + "px";
-
-      setTimeout(() => {
-        copyPromptBtn.classList.remove("copied");
-        if (copyFeedback) copyFeedback.classList.remove("show");
-        if (miniModal) miniModal.style.height = miniModal.scrollHeight + "px";
-      }, 2000);
+      doCopiedUI();
     }).catch(err => {
       console.warn("Error copiando al portapapeles:", err);
+      // still try UI feedback
+      doCopiedUI();
     });
   });
 }
