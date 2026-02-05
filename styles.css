@@ -878,6 +878,105 @@ h1 {
   box-shadow: 0 0 8px #0ff;
 }
 
+/* Icon swap + animación para el botón de copiar prompt */
+.box-preview-btn-buy {
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.copy-prompt-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 16px;
+  border: 3px solid #777;
+  background: transparent;
+  color: #777;
+  cursor: pointer;
+  font-size: 18px;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* ensure icons share the same sizing you use */
+.copy-prompt-btn .img-de-carrito-de-compra {
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+}
+
+/* primary (copy) icon visible by default */
+.copy-prompt-btn .icon-copy {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.2s ease, transform 0.25s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* check icon hidden by default and prepared for rotation */
+.copy-prompt-btn .icon-check {
+  opacity: 0;
+  transform: rotate(0deg) scale(0.8);
+  transition: opacity 0.15s ease, transform 0.6s cubic-bezier(0.4,0,0.2,1);
+  will-change: transform, opacity;
+  position: absolute; /* keep icons stacked */
+  left: 12px;         /* tweak to align with layout */
+}
+
+/* center the check icon vertically */
+.copy-prompt-btn .icon-check,
+.copy-prompt-btn .icon-copy {
+  top: 50%;
+  transform-origin: 50% 50%;
+  transform-box: fill-box;
+}
+
+/* text style */
+.copy-prompt-btn .btn-text {
+  display: inline-block;
+  pointer-events: none;
+}
+
+/* state when copied: swap icons + visual feedback */
+.copy-prompt-btn.copied {
+  color: #00ffdd;
+  border-color: #00ffdd;
+  box-shadow: 0 6px 18px rgba(0,255,221,0.12);
+}
+
+/* hide copy icon, show & animate check icon */
+.copy-prompt-btn.copied .icon-copy {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.copy-prompt-btn.copied .icon-check {
+  opacity: 1;
+  animation: rotateIn 0.6s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+
+/* keyframes for smooth 360° spin + subtle scale */
+@keyframes rotateIn {
+  0% {
+    transform: rotate(0deg) scale(0.8);
+    opacity: 0;
+  }
+  60% {
+    transform: rotate(300deg) scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Optional: change button text color while copied */
+.copy-prompt-btn.copied .btn-text {
+  color: #00ffdd;
+}
 
 /* Seccion de Getux */
 
