@@ -26,18 +26,13 @@ if (boton && barra) {
 // 🔀 FUNCIÓN: ORDEN ALEATORIO POR SECCIÓN
 // ============================
 function mezclarCardsEnSeccion(seccion) {
-  const contenedores = seccion.querySelectorAll(
-    ".contenedor-de-todos-los-ebootux, " +
-    ".contenedor-de-todos-los-plantitux, " +
-    ".contenedor-de-todos-los-tracktux, " +
-    ".contenedor-de-todos-los-mindtux, " +
-    ".contenedor-de-todos-los-soundtux, " +
-    ".contenedor-de-todos-los-movitux, " +
-    ".contenedor-de-todos-los-marketux"
-  );
+  if (!seccion) return;
+
+  // selección robusta: cualquier elemento cuya clase contenga "contenedor-de-todos-"
+  const contenedores = seccion.querySelectorAll('[class*="contenedor-de-todos-"]');
 
   contenedores.forEach(container => {
-    const cards = Array.from(container.children);
+    const cards = Array.from(container.children || []);
     if (cards.length > 1) {
       cards.sort(() => Math.random() - 0.5);
       cards.forEach(card => container.appendChild(card));
@@ -109,7 +104,7 @@ document.querySelectorAll(".btn-de-vista-previa").forEach(btn => {
     const link = btn.dataset.link || "#";
 
     if (previewTitle) previewTitle.textContent = title;
-    if (previewImage) previewImage.src = image;
+    if (previewImage && image) previewImage.src = image;
     if (previewDescription) previewDescription.textContent = description;
 
     if (previewBuyBtn) {
@@ -148,19 +143,46 @@ document.querySelectorAll(".btn-de-vista-previa").forEach(btn => {
 });
 
 // ============================
-// BUSCADOR POR SECCIÓN
+// BUSCADOR POR SECCIÓN (SÓLO EN SU SECCIÓN)
 // ============================
 document.querySelectorAll(".buscador-seccion").forEach(buscador => {
   const section = buscador.closest(".app-section");
   if (!section) return;
 
-  const cards = section.querySelectorAll(".ebootux-cards");
+  // Elegir el selector de cards según la sección (ajusta si cambias nombres)
+  let selector;
+  switch ((section.id || "").toLowerCase()) {
+    case "ebootux":
+    case "getux":         // Getux usa .ebootux-cards en tu HTML actual
+      selector = ".ebootux-cards";
+      break;
+    case "plantitux":
+      selector = ".plantitux-cards";
+      break;
+    case "tracktux":
+      selector = ".tracktux-cards";
+      break;
+    case "mindtux":
+      selector = ".mindtux-cards";
+      break;
+    case "soundtux":
+      selector = ".soundtux-cards";
+      break;
+    case "movitux":
+      selector = ".movitux-cards";
+      break;
+    default:
+      // fallback: cualquier card dentro de la sección
+      selector = ".ebootux-cards, .plantitux-cards, .tracktux-cards, .mindtux-cards, .soundtux-cards, .movitux-cards";
+  }
+
+  const cards = section.querySelectorAll(selector);
 
   let emptyMsg = section.querySelector(".mensaje-vacio");
   if (!emptyMsg) {
     emptyMsg = document.createElement("p");
     emptyMsg.className = "mensaje-vacio";
-    emptyMsg.textContent = "Nada por aquí… intenta otro nombre 👀";
+    emptyMsg.textContent = "No hay coincidencias con ese nombre.";
     emptyMsg.style.display = "none";
     section.appendChild(emptyMsg);
   }
@@ -221,7 +243,7 @@ document.addEventListener("click", function (e) {
     const plantilla = document.querySelector(".ebootux-template");
     if (!input || !plantilla) return;
 
-    const codigoCorrecto = card.dataset.code;
+    const codigoCorrecto = card.dataset.code || "";
     const codigoIngresado = input.value.trim();
 
     if (codigoIngresado === codigoCorrecto) {
@@ -251,7 +273,7 @@ function cargarEbootuxDesdeCard(card) {
   const content = document.getElementById("ebootux-content");
   const template = document.getElementById("ebootux-block-template");
 
-  if (!ebootux || !content || !template) return;
+  if (!ebootux || !content || !template || !card) return;
 
   const h1 = ebootux.querySelector("[data-ebootux-h1]");
   const subtitle = ebootux.querySelector("[data-ebootux-subtitle]");
@@ -268,7 +290,7 @@ function cargarEbootuxDesdeCard(card) {
     })
     .filter(n => n !== null);
 
-  const totalBlocks = Math.max(...blockNumbers, 0);
+  const totalBlocks = blockNumbers.length ? Math.max(...blockNumbers) : 0;
 
   for (let i = 1; i <= totalBlocks; i++) {
     const clone = template.content.cloneNode(true);
@@ -386,26 +408,28 @@ document.querySelectorAll(".btn-de-vista-previa-plantitux").forEach(btn => {
     const price = card.dataset.price || "";
     const link = card.dataset.link || "#";
 
-    plantituxPreviewTitle.textContent = title;
+    if (plantituxPreviewTitle) plantituxPreviewTitle.textContent = title;
 
-    if (video) {
+    if (video && plantituxPreviewVideo) {
       plantituxPreviewVideo.src = video;
       plantituxPreviewVideo.classList.remove("hidden");
-      plantituxPreviewImg.classList.add("hidden");
-    } else if (img) {
+      if (plantituxPreviewImg) plantituxPreviewImg.classList.add("hidden");
+    } else if (img && plantituxPreviewImg) {
       plantituxPreviewImg.src = img;
       plantituxPreviewImg.classList.remove("hidden");
-      plantituxPreviewVideo.classList.add("hidden");
+      if (plantituxPreviewVideo) plantituxPreviewVideo.classList.add("hidden");
     }
 
-    plantituxPreviewBuy.innerHTML = `
-      <img src="shopping_cart_24dp_777777.svg" class="img-de-carrito-de-compra"/>
-      $${price}
-    `;
-    plantituxPreviewBuy.href = link;
-    plantituxPreviewBuy.target = "_blank";
+    if (plantituxPreviewBuy) {
+      plantituxPreviewBuy.innerHTML = `
+        <img src="shopping_cart_24dp_777777.svg" class="img-de-carrito-de-compra"/>
+        $${price}
+      `;
+      plantituxPreviewBuy.href = link;
+      plantituxPreviewBuy.target = "_blank";
+    }
 
-    plantituxPreviewModal.classList.add("active");
+    if (plantituxPreviewModal) plantituxPreviewModal.classList.add("active");
   });
 });
 
@@ -426,7 +450,7 @@ document.addEventListener("click", function (e) {
     const input = card.querySelector(".input-codigo-plantitux");
     if (!input) return;
 
-    const codigoCorrecto = card.dataset.code;
+    const codigoCorrecto = card.dataset.code || "";
     const codigoIngresado = input.value.trim();
 
     if (codigoIngresado === codigoCorrecto) {
@@ -451,6 +475,7 @@ const miniModal = document.querySelector(".mini-modal");
 
 function abrirPromptDesdeCard(card) {
   const prompt = card.dataset.prompt || "";
+  if (!promptModal || !promptTextarea) return;
   promptTextarea.value = prompt;
   promptModal.classList.add("active");
   if (miniModal) miniModal.style.height = miniModal.scrollHeight + "px";
@@ -458,16 +483,26 @@ function abrirPromptDesdeCard(card) {
 
 if (promptClose) {
   promptClose.addEventListener("click", () => {
-    promptModal.classList.remove("active");
+    if (promptModal) promptModal.classList.remove("active");
   });
 }
 
 // ===============================
 // COPIAR PROMPT + ANIMACIÓN + HEIGHT SUAVE
 // ===============================
-if (copyPromptBtn) {
+if (copyPromptBtn && promptTextarea) {
   copyPromptBtn.addEventListener("click", () => {
-    const prompt = promptTextarea.value;
+    const prompt = promptTextarea.value || "";
+    if (!navigator.clipboard) {
+      // fallback: seleccionar y copiar
+      promptTextarea.select();
+      try {
+        document.execCommand('copy');
+      } catch (err) {
+        console.warn('Copiado no soportado', err);
+      }
+      return;
+    }
 
     navigator.clipboard.writeText(prompt).then(() => {
       copyPromptBtn.classList.add("copied");
@@ -479,7 +514,8 @@ if (copyPromptBtn) {
         if (copyFeedback) copyFeedback.classList.remove("show");
         if (miniModal) miniModal.style.height = miniModal.scrollHeight + "px";
       }, 2000);
+    }).catch(err => {
+      console.warn("Error copiando al portapapeles:", err);
     });
   });
 }
-
