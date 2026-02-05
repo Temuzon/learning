@@ -2314,22 +2314,25 @@ Nada de improvisar por reflejo: primero se entiende, luego se avanza.
     </div>
   </div>
 </div>
-        <!-- Modal de los movitux promts -->
+      
+<!-- Modal de los movitux promts -->
 <div class="preview-cards" id="prompt-modal">
   <div class="preview-overlay">
     <div class="box-preview">
       <div class="head-box">
         <h2>Prompt Premium</h2>
-        <button class="logout-btn" id="prompt-modal-close">
-          <img src="Logout.svg">
+        <button class="logout-btn" id="prompt-modal-close" aria-label="Cerrar prompt">
+          <img src="Logout.svg" alt="Cerrar">
         </button>
       </div>
 
       <textarea id="prompt-textarea" class="prompt-textarea" readonly></textarea>
 
       <div class="box-preview-btn-buy">
-        <button id="copy-prompt-btn" class="btn-de-compra">
-          <img src="content_copy.svg" class="img-de-carrito-de-compra"/>Copiar
+        <button id="copy-prompt-btn" class="btn-de-compra" aria-live="polite" aria-label="Copiar prompt">
+          <img src="content_copy.svg" class="img-de-carrito-de-compra icon-copy" alt="Copiar">
+          <img src="check_circle.svg" class="img-de-carrito-de-compra icon-check" alt="Copiado">
+          <span class="btn-text">Copiar</span>
         </button>
       </div>
     </div>
