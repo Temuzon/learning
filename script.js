@@ -463,7 +463,7 @@ if (copyPromptBtn) {
     copyPromptBtn.innerHTML = "✔ Copiado";
     setTimeout(() => {
       copyPromptBtn.innerHTML = `
-        <img src="copy.svg" class="img-de-carrito-de-compra"/>Copiar
+        <img src="check_circle.svg" class="img-de-carrito-de-compra"/>Copiar
       `;
     }, 1800);
   });
