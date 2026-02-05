@@ -27,7 +27,13 @@ if (boton && barra) {
 // ============================
 function mezclarCardsEnSeccion(seccion) {
   const contenedores = seccion.querySelectorAll(
-    ".contenedor-de-todos-los-ebootux, .contenedor-de-todos-los-plantitux, .contenedor-de-todos-los-tracktux, .contenedor-de-todos-los-mindtux, .contenedor-de-todos-los-soundtux, .contenedor-de-todos-los-movitux, .contenedor-de-todos-los-marketux"
+    ".contenedor-de-todos-los-ebootux, " +
+    ".contenedor-de-todos-los-plantitux, " +
+    ".contenedor-de-todos-los-tracktux, " +
+    ".contenedor-de-todos-los-mindtux, " +
+    ".contenedor-de-todos-los-soundtux, " +
+    ".contenedor-de-todos-los-movitux, " +
+    ".contenedor-de-todos-los-marketux"
   );
 
   contenedores.forEach(container => {
@@ -154,7 +160,7 @@ document.querySelectorAll(".buscador-seccion").forEach(buscador => {
   if (!emptyMsg) {
     emptyMsg = document.createElement("p");
     emptyMsg.className = "mensaje-vacio";
-    emptyMsg.textContent = "No hay coincidencias con ese nombre.";
+    emptyMsg.textContent = "Nada por aquí… intenta otro nombre 👀";
     emptyMsg.style.display = "none";
     section.appendChild(emptyMsg);
   }
