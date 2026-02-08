@@ -23,6 +23,20 @@ if (boton && barra) {
 }
 
 // ============================
+// Estado: bloqueo de navegación cuando un ebootux/getux está abierto
+// ============================
+let navigationLocked = false; // true cuando un ebootux/getux está activo
+
+function showNavigationLockedModal() {
+  // mensaje indicado por el usuario
+  mostrarModal(
+    "Navegación desactivada",
+    "La navegación está desactivada mientras este contenido esté abierto. Sal para continuar.",
+    true // autoCerrar: true para que no quede fijo
+  );
+}
+
+// ============================
 // 🔀 FUNCIÓN: ORDEN ALEATORIO POR SECCIÓN
 // ============================
 function mezclarCardsEnSeccion(seccion) {
@@ -46,7 +60,22 @@ function mezclarCardsEnSeccion(seccion) {
 const sections = document.querySelectorAll(".app-section");
 const navItems = document.querySelectorAll(".item");
 
+function updateNavActiveForSection(id) {
+  navItems.forEach(item => {
+    const href = item.getAttribute("href") || "";
+    const targetId = href.replace("#", "");
+    if (targetId === id) {
+      item.classList.add("active");
+    } else {
+      item.classList.remove("active");
+    }
+  });
+}
+
 function showSection(id) {
+  // si la navegación está bloqueada, prevenir cambios desde llamadas externas
+  // (siempre que no sea para forzar Home al salir del ebootux - ese caso gestionamos explícitamente)
+  // Nota: las llamadas internas legítimas (como forzar Home) deben pasar por showSection("Home") desde el exit handler.
   sections.forEach(section => {
     section.classList.remove("active-section");
   });
@@ -57,14 +86,26 @@ function showSection(id) {
     mezclarCardsEnSeccion(target);
   }
 
+  // actualizar estado visual de los items de navegación
+  updateNavActiveForSection(id);
+
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
+// Interceptar clicks sobre navItems y mostrar mensaje si navegación bloqueada
 navItems.forEach(item => {
   item.addEventListener("click", (e) => {
     e.preventDefault();
     const targetId = item.getAttribute("href")?.replace("#", "");
-    if (targetId) showSection(targetId);
+    if (!targetId) return;
+
+    if (navigationLocked) {
+      // Si el usuario intenta navegar mientras un ebootux/getux está abierto:
+      showNavigationLockedModal();
+      return;
+    }
+
+    showSection(targetId);
   });
 });
 
@@ -211,7 +252,11 @@ function mostrarModal(titulo, mensaje, autoCerrar = false) {
   const modalMessage = document.getElementById("modal-ebootux-message");
   const modalClose = document.getElementById("modal-ebootux-close");
 
-  if (!modal || !modalTitle || !modalMessage || !modalClose) return;
+  if (!modal || !modalTitle || !modalMessage || !modalClose) {
+    // fallback leve: si el modal no existe, usamos alert como último recurso
+    try { alert(`${titulo}\n\n${mensaje}`); } catch (e) {}
+    return;
+  }
 
   modalTitle.textContent = titulo;
   modalMessage.textContent = mensaje;
@@ -362,11 +407,17 @@ function entrarEnEbootux() {
   const ebootux = document.querySelector(".ebootux-template");
   const appSections = document.querySelectorAll(".app-section");
 
+  // ocultar secciones de app y quitar active en nav
   appSections.forEach(section => section.classList.remove("active-section"));
+  navItems.forEach(item => item.classList.remove("active"));
+
   if (ebootux) {
     ebootux.classList.remove("hidden");
     ebootux.classList.add("active");
   }
+
+  // bloquear navegación
+  navigationLocked = true;
 
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
@@ -382,6 +433,10 @@ document.addEventListener("click", function (e) {
     ebootux.classList.add("hidden");
     ebootux.classList.remove("active");
 
+    // desbloquear navegación
+    navigationLocked = false;
+
+    // al salir, mostrar Home y activar su borde en la navegación
     showSection("Home");
   }
 });
