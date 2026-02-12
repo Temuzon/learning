@@ -3,6 +3,143 @@
 // ============================
 const items = document.querySelectorAll(".item");
 
+// ============================
+// CONTENIDO DINÁMICO DESDE JSON
+// ============================
+const JSON_SOURCE_FILE = "infraproductos.json";
+
+function toDataAttributes(obj = {}, prefix = "") {
+  const entries = Object.entries(obj);
+  return entries
+    .map(([key, value]) => {
+      const attrName = `${prefix}${key}`
+        .replace(/([A-Z])/g, "-$1")
+        .toLowerCase();
+      const attrValue = String(value ?? "").replace(/"/g, "&quot;");
+      return `data-${attrName}="${attrValue}"`;
+    })
+    .join(" ");
+}
+
+function renderEbootuxLikeCards(container, products = []) {
+  if (!container) return;
+
+  container.innerHTML = products
+    .map(product => {
+      const blocks = product?.content?.blocks || [];
+      const blockDataset = {};
+
+      blocks.forEach((block, idx) => {
+        const blockNumber = idx + 1;
+        blockDataset[`block${blockNumber}Title`] = block.title || "";
+        blockDataset[`block${blockNumber}Text1`] = block.text1 || "";
+        blockDataset[`block${blockNumber}Text2`] = block.text2 || "";
+        blockDataset[`block${blockNumber}Text3`] = block.text3 || "";
+        blockDataset[`block${blockNumber}Text4`] = block.text4 || "";
+        blockDataset[`block${blockNumber}Text5`] = block.text5 || "";
+        blockDataset[`block${blockNumber}Img`] = block.img || "";
+        blockDataset[`block${blockNumber}Video`] = block.video || "";
+      });
+
+      const dataset = {
+        ebootuxTitle: product?.content?.title || "",
+        ebootuxSubtitle: product?.content?.subtitle || "",
+        code: product?.code || "",
+        ...blockDataset
+      };
+
+      const preview = product.preview || {};
+
+      return `
+        <article class="ebootux-cards" ${toDataAttributes(dataset)}>
+          <header class="header-ebootux-cards">
+            <img src="${product.cover || ""}" alt="${product.cardTitle || "Cover"}">
+          </header>
+
+          <div class="contenedor-de-codigo">
+            <h3>${product.cardTitle || "Sin título"}</h3>
+            <img src="candado.svg" alt="Candado">
+            <input type="text" class="input-codigo-ebootux" placeholder="Ingresa el código...">
+            <button class="btn-acceder-ebootux">Entrar</button>
+          </div>
+
+          <div class="contenedor-de-btn-de-compra">
+            <a href="#" class="btn-de-vista-previa"
+              data-title="${preview.title || ""}"
+              data-price="${preview.price || ""}"
+              data-image="${preview.image || ""}"
+              data-description="${preview.description || ""}"
+              data-yes="${(preview.yes || []).join(",")}"
+              data-no="${(preview.no || []).join(",")}"
+              data-link="${preview.link || ""}">
+              <img src="visibility_24dp_777777_FILL0_wght400_GRAD0_opsz24.svg" class="img-de-vista-previa" alt="Vista previa">
+            </a>
+            <a href="${product.buyLink || "#"}" class="btn-de-compra" target="_blank">
+              <img src="shopping_cart_24dp_777777.svg" class="img-de-carrito-de-compra" alt="Compra"/>${product.buyPriceLabel || ""}
+            </a>
+          </div>
+        </article>
+      `;
+    })
+    .join("");
+}
+
+function renderPlantituxCards(container, products = []) {
+  if (!container) return;
+
+  container.innerHTML = products
+    .map(product => `
+      <article class="plantitux-cards"
+        data-title="${product.title || ""}"
+        data-preview-img="${product.previewImg || ""}"
+        data-preview-video="${product.previewVideo || ""}"
+        data-prompt="${(product.prompt || "").replace(/"/g, "&quot;")}"
+        data-code="${product.code || ""}"
+        data-price="${product.price || ""}"
+        data-link="${product.link || ""}">
+
+        <header class="header-plantitux-cards">
+          <img src="${product.cover || ""}" alt="Plantitux cover">
+        </header>
+
+        <div class="contenedor-de-codigo">
+          <h3>Acceso</h3>
+          <img src="candado.svg" alt="Candado">
+          <input type="text" class="input-codigo-plantitux" placeholder="Ingresa tu código...">
+          <button class="btn-acceder-plantitux">Entrar</button>
+        </div>
+
+        <div class="contenedor-de-btn-de-compra">
+          <a href="#" class="btn-de-vista-previa-plantitux">
+            <img src="visibility_24dp_777777_FILL0_wght400_GRAD0_opsz24.svg" class="img-de-vista-previa" alt="Vista previa">
+          </a>
+
+          <a href="${product.link || "#"}" class="btn-de-compra" target="_blank">
+            <img src="shopping_cart_24dp_777777.svg" class="img-de-carrito-de-compra" alt="Compra"/>${product.price || ""}
+          </a>
+        </div>
+      </article>
+    `)
+    .join("");
+}
+
+async function cargarInfraproductosDesdeJSON() {
+  try {
+    const response = await fetch(JSON_SOURCE_FILE);
+    if (!response.ok) throw new Error("No se pudo cargar el JSON");
+    const data = await response.json();
+
+    renderEbootuxLikeCards(document.getElementById("cards-ebootux"), data.ebootux || []);
+    renderEbootuxLikeCards(document.getElementById("cards-getux"), data.getux || []);
+    renderPlantituxCards(document.getElementById("cards-plantitux"), data.plantitux || []);
+    renderEbootuxLikeCards(document.getElementById("cards-movitux"), data.movitux || []);
+  } catch (error) {
+    console.warn("Statux JSON loader:", error);
+  }
+}
+
+cargarInfraproductosDesdeJSON();
+
 items.forEach(item => {
   item.addEventListener("click", () => {
     items.forEach(i => i.classList.remove("active"));
@@ -131,8 +268,10 @@ if (closeBtn && previewModal) {
   });
 }
 
-document.querySelectorAll(".btn-de-vista-previa").forEach(btn => {
-  btn.addEventListener("click", e => {
+document.addEventListener("click", e => {
+  const btn = e.target.closest(".btn-de-vista-previa");
+  if (!btn) return;
+
     e.preventDefault();
     if (!previewModal) return;
 
@@ -178,9 +317,7 @@ document.querySelectorAll(".btn-de-vista-previa").forEach(btn => {
         }
       });
     }
-
     previewModal.classList.add("active");
-  });
 });
 
 // ============================
@@ -217,8 +354,6 @@ document.querySelectorAll(".buscador-seccion").forEach(buscador => {
       selector = ".ebootux-cards, .plantitux-cards, .tracktux-cards, .mindtux-cards, .soundtux-cards, .movitux-cards";
   }
 
-  const cards = section.querySelectorAll(selector);
-
   let emptyMsg = section.querySelector(".mensaje-vacio");
   if (!emptyMsg) {
     emptyMsg = document.createElement("p");
@@ -229,6 +364,7 @@ document.querySelectorAll(".buscador-seccion").forEach(buscador => {
   }
 
   buscador.addEventListener("input", () => {
+    const cards = section.querySelectorAll(selector);
     const texto = buscador.value.toLowerCase().trim();
     let encontrados = 0;
 
@@ -451,8 +587,10 @@ const plantituxPreviewTitle = document.getElementById("plantitux-preview-title")
 const plantituxPreviewBuy = document.getElementById("plantitux-preview-buy");
 const plantituxPreviewClose = document.getElementById("plantitux-preview-close");
 
-document.querySelectorAll(".btn-de-vista-previa-plantitux").forEach(btn => {
-  btn.addEventListener("click", e => {
+document.addEventListener("click", e => {
+  const btn = e.target.closest(".btn-de-vista-previa-plantitux");
+  if (!btn) return;
+
     e.preventDefault();
     const card = btn.closest(".plantitux-cards");
     if (!card) return;
@@ -483,9 +621,7 @@ document.querySelectorAll(".btn-de-vista-previa-plantitux").forEach(btn => {
       plantituxPreviewBuy.href = link;
       plantituxPreviewBuy.target = "_blank";
     }
-
     if (plantituxPreviewModal) plantituxPreviewModal.classList.add("active");
-  });
 });
 
 if (plantituxPreviewClose && plantituxPreviewModal) {
