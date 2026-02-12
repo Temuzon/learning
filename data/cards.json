@@ -91,7 +91,8 @@
       "image": "portadas/core----img.jpeg",
       "description": "",
       "link": "#",
-      "previewVideo": ""
+      "previewVideo": "",
+      "copyText": "#"
     },
     {
       "id": "getux-manual-de-acciones-para-provocar-un-glow-up",
@@ -357,21 +358,6 @@
           "video": ""
         }
       ]
-    },
-    {
-      "id": "movitux-producto",
-      "type": "movitux",
-      "section": "movitux",
-      "title": "Statux",
-      "subtitle": "",
-      "code": "STATUX-1234",
-      "price": "4.99",
-      "image": "Statux-logo(SVG).svg",
-      "description": "Statux es una plataforma para pensar mejor, decidir con criterio y organizar ideas sin caos.",
-      "yes": "✔ Videos explicativos,✔ Imágenes,✔ Acceso inmediato",
-      "no": "❌ Archivo descargable",
-      "link": "#",
-      "blocks": []
     }
   ]
 }
