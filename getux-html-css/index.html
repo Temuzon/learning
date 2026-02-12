@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Getux HTML & CSS · Acceso</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="page page-center">
+      <section class="card auth-card">
+        <h1>Getux HTML &amp; CSS</h1>
+        <p class="muted">Acceso privado. Ingresa tu código Getux para continuar.</p>
+
+        <label for="codigo" class="label">Código Getux</label>
+        <input id="codigo" class="input" type="password" placeholder="Ej: GETUX-XXXX" autocomplete="off" />
+
+        <button id="btn-entrar" class="btn">Entrar</button>
+        <p id="auth-msg" class="message" aria-live="polite"></p>
+      </section>
+    </main>
+
+    <script src="auth.js"></script>
+  </body>
+</html>
