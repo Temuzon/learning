@@ -143,13 +143,14 @@ function buildEbootuxLikeCard(product) {
   `;
 }
 
-function buildPlantituxCard(product) {
+function buildAssetCard(product) {
   return `
-    <article class="plantitux-cards"
+    <article class="plantitux-cards ${((product.type||"").toLowerCase()==="movitux") ? "movitux-cards" : ""}"
       data-title="${escAttr(product.title || "")}" 
       data-preview-img="${escAttr(product.image || "")}" 
       data-preview-video="${escAttr(product.previewVideo || "")}" 
       data-prompt="${escAttr(product.prompt || "")}" 
+      data-copy-text="${escAttr(product.copyText || product.prompt || product.link || "")}" 
       data-code="${escAttr(product.code || "")}" 
       data-price="${escAttr(product.price || "")}" 
       data-link="${escAttr(product.link || "")}">
@@ -159,7 +160,7 @@ function buildPlantituxCard(product) {
       </header>
 
       <div class="contenedor-de-codigo">
-        <h3>${escAttr(product.title || "Acceso")}</h3>
+        <h3>${escAttr(product.title || (((product.type||"").toLowerCase()==="movitux") ? "Movitux" : "Acceso"))}</h3>
         <img src="candado.svg" alt="candado">
         <input type="text" class="input-codigo-plantitux" placeholder="Ingresa tu código...">
         <button class="btn-acceder-plantitux">Entrar</button>
@@ -196,7 +197,7 @@ function renderProducts(products) {
 
     container.innerHTML = list.map(product => {
       const type = (product.type || "").toLowerCase();
-      if (type === "plantitux") return buildPlantituxCard(product);
+      if (type === "plantitux" || type === "movitux") return buildAssetCard(product);
       return buildEbootuxLikeCard(product);
     }).join("\n");
   });
@@ -336,8 +337,10 @@ $all(".buscador-seccion").forEach(buscador => {
   switch ((section.id || "").toLowerCase()) {
     case "ebootux":
     case "getux":
-    case "movitux":
       selector = ".ebootux-cards";
+      break;
+    case "movitux":
+      selector = ".movitux-cards";
       break;
     case "plantitux":
       selector = ".plantitux-cards";
@@ -423,7 +426,7 @@ document.addEventListener("click", function (e) {
   }
 
   if (e.target.classList.contains("btn-acceder-plantitux")) {
-    const card = e.target.closest(".plantitux-cards");
+    const card = e.target.closest(".plantitux-cards, .movitux-cards");
     if (!card) return;
 
     const input = card.querySelector(".input-codigo-plantitux");
@@ -598,10 +601,16 @@ function resetCopyButtonState() {
 }
 
 function abrirPromptDesdeCard(card) {
-  const prompt = card.dataset.prompt || "";
+  const prompt = card.dataset.copyText || card.dataset.prompt || card.dataset.link || "";
   if (!promptModal || !promptTextarea) return;
 
   promptTextarea.value = prompt;
+
+  const modalTitle = promptModal.querySelector(".head-box h2");
+  if (modalTitle) {
+    const isMovitux = card.classList.contains("movitux-cards");
+    modalTitle.textContent = isMovitux ? "Asset / Prompt" : "Link de Plantilla";
+  }
   if (promptOpenGumroad) {
     promptOpenGumroad.href = card.dataset.link || "#";
     promptOpenGumroad.target = "_blank";
