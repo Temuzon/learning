@@ -1,0 +1,363 @@
+{
+  "products": [
+    {
+      "id": "ebootux-el-verdadero-glow-up-masculino",
+      "type": "ebootux",
+      "section": "ebootux",
+      "title": "EL VERDADERO GLOW UP MASCULINO",
+      "subtitle": "La reconstrucción chévere del man que ya eres (pero en modo premium).",
+      "code": "",
+      "price": "Gratis",
+      "image": "portadas/ebootux-glowupmasculino.jpeg",
+      "description": "Este Ebóotux es solo el empujón inicial, la chispa. No es el camino completo, pero sí el primer paso consciente.",
+      "yes": "✔ Acceso inmediato",
+      "no": "❌ Archivo descargable,❌ Videos,❌ imagenes",
+      "link": "#",
+      "blocks": [
+        {
+          "title": "NO ES UN CAMBIO, ES UNA ACTUALIZACIÓN DE SISTEMA",
+          "text1": "No es cambiar para gustarle a otros. Es mejorar para respetarte tú mismo. Aquí no vas a “encajar”. \n            Vas a construir tu propio molde. Y este Ebootux no es otro rollo motivacional de “sé tú mismo”. Aquí vamos a hackearte y reinstalarte. 😎",
+          "text2": "",
+          "img": "",
+          "video": ""
+        },
+        {
+          "title": "Glow up mental es cirugía mayor:",
+          "text1": "Matar la necesidad de aprobación. Enterrar la excusa del es que yo soy así. Aceptar que tú eres el problema y la solución. Un hombre con la cabeza en orden: No debate, decide. \n            No se queja, actúa. No espera oportunidades, las fabrica. La terapia del hombre moderno no está en un consultorio. Está en dejar de consumir basura y empezar a producir valor.",
+          "text2": "",
+          "img": "",
+          "video": ""
+        },
+        {
+          "title": "",
+          "text1": "No, no necesitas ser musculatura pura. Necesitas ser funcional, con energía y que tu espalda no te duela a los 25. \n            Glow up físico no es vanidad, es respeto: Respeto por tu energía (para dejar de arrastrarte en las mañanas). Respeto por tu salud (para no depender del café intravenoso). Respeto por cómo te mueves en el mundo (postura > filtros).",
+          "text2": "",
+          "img": "",
+          "video": ""
+        },
+        {
+          "title": "El secreto no es la marca. Es la confianza con la que llevas lo que sea.",
+          "text1": "Glow up visual significa: Ropa limpia, sobria, bien ajustada. Colores que no gritan. \n            Estilo que no suplica validación. No te vistes para ser visto. Te vistes para ser inevitablemente notado.",
+          "text2": "Un hombre que se ve bien: No llama la atención. Impone respeto silencioso.",
+          "img": "",
+          "video": ""
+        },
+        {
+          "title": "COMPORTAMIENTO: ACTÚA COMO LA VERSIÓN QUE ADMIRARÍAS",
+          "text1": "La verdadera elegancia no es saber qué tenedor usar. Es tratar bien a la mesera, cumplir tu palabra aunque nadie se entere, y no hacerte el interesante. \n            Deja de: Llegar tarde (es de pobres mentales). Hablar de tus proyectos antes de hacerlos. Reaccionar a todo como si fuera personal.",
+          "text2": "Empieza a: Ser la persona más confiable que conoces. Hablar menos, escuchar más. Dejar que tus acciones griten por ti.",
+          "img": "",
+          "video": ""
+        },
+        {
+          "title": "DISCIPLINA",
+          "text1": "Tu sistema no necesita ser perfecto. Necesita ser a prueba de tus peores días. Rutinas que sobrevivan a tu pereza. \n            Decisiones que ignores tu estado de ánimo. Consistencia que se vuelva adictiva. Porque el hombre que depende de cómo se siente, está condenado. El hombre que depende de su sistema, es libre.",
+          "text2": "",
+          "img": "",
+          "video": ""
+        },
+        {
+          "title": "Esto solo es el comienzo",
+          "text1": "No estás leyendo esto para inspirarte. Estás leyendo esto para ejecutarlo. Glow up masculino no es teoría. Es práctica diaria. \n            Es incomodidad voluntaria. Es progreso silencioso. Si esta versión Ebootux te dio claridad, la versión Getux te dará estructura: retos diarios, misiones semanales, acciones concretas y medibles. \n            Porque un hombre no cambia cuando entiende. Cambia cuando actúa.",
+          "text2": "",
+          "img": "",
+          "video": ""
+        }
+      ]
+    },
+    {
+      "id": "ebootux-testosterona",
+      "type": "ebootux",
+      "section": "ebootux",
+      "title": "Testosterona",
+      "subtitle": "",
+      "code": "12345",
+      "price": "8.99",
+      "image": "portadas/82387-69734.jpeg",
+      "description": "Este Getux no está aquí para convertirte en alguien que no eres. Está aquí para ayudarte a dejar de sabotearte y empezar a jugar en tu mejor nivel.",
+      "yes": "✔ Acceso inmediato,✔ Archivo descargable,✔ Imagenes",
+      "no": "❌ Videos",
+      "link": "#",
+      "blocks": []
+    },
+    {
+      "id": "plantitux-plantitux-dark-landing",
+      "type": "plantitux",
+      "section": "plantitux",
+      "title": "Plantitux Dark Landing",
+      "prompt": "Crea una landing page oscura, minimalista y elegante para un producto digital premium llamado Statux. Usa tipografía sans-serif, alto contraste, animaciones sutiles y jerarquía visual clara.",
+      "code": "STATUX-1234",
+      "price": "4.99",
+      "image": "portadas/core----img.jpeg",
+      "description": "",
+      "link": "#",
+      "previewVideo": "",
+      "copyText": "#"
+    },
+    {
+      "id": "getux-manual-de-acciones-para-provocar-un-glow-up",
+      "type": "getux",
+      "section": "getux",
+      "title": "Manual de acciones para provocar un glow up",
+      "subtitle": "Este Getux no está aquí para convertirte en alguien que no eres. Está aquí para ayudarte a dejar de sabotearte y empezar a jugar en tu mejor nivel.",
+      "code": "12345",
+      "price": "1.99",
+      "image": "portadas/82387-69734.jpeg",
+      "description": "Este Getux no está aquí para convertirte en alguien que no eres. Está aquí para ayudarte a dejar de sabotearte y empezar a jugar en tu mejor nivel.",
+      "yes": "✔ Acceso inmediato",
+      "no": "❌ Archivo descargable,❌ Videos,❌ imagenes",
+      "link": "#",
+      "blocks": [
+        {
+          "title": "NO TE VAMOS A CAMBIAR, TE VAMOS A DESBLOQUEAR",
+          "text1": "Antes de cambiar tu cuerpo, tu ropa o tu rutina, hay que actualizar tu cabeza.\n            Porque un cerebro desordenado en un cuerpo bonito sigue siendo un desastre… solo que bien vestido.",
+          "text2": "",
+          "img": "",
+          "video": ""
+        },
+        {
+          "title": "Glow up mental es cirugía mayor:",
+          "text1": "Matar la necesidad de aprobación. Enterrar la excusa del es que yo soy así. Aceptar que tú eres el problema y la solución. Un hombre con la cabeza en orden: No debate, decide. \n            No se queja, actúa. No espera oportunidades, las fabrica. La terapia del hombre moderno no está en un consultorio. Está en dejar de consumir basura y empezar a producir valor.",
+          "text2": "Eliminar patrones mentales que te mantienen pequeño y reemplazarlos por decisiones que te expanden.",
+          "img": "",
+          "video": ""
+        },
+        {
+          "title": "DIETA MENTAL",
+          "text1": "Durante 7 días, elimina:",
+          "text2": "Contenido que te hace sentir inferior.\n            Comparaciones constantes.\n            Personas que solo se quejan (incluyéndote a veces, sí).\n            Y reemplázalo por:\n            Lectura.\n            Contenido que te enseñe algo.\n            Silencio.\n            BENEFICIOS:\n            Menos ansiedad.\n            Más claridad.\n            Más enfoque.\n            Menos “ruido mental”.\n            Empiezas a pensar mejor sin esfuerzo… porque estás consumiendo mejor.",
+          "img": "",
+          "video": ""
+        },
+        {
+          "title": "NO MÁS EXCUSAS CON TRAJE BONITO",
+          "text1": "Cada vez que digas “yo soy así”, detente y pregúntate:\n            ¿Eso me construye o me limita?\n            Acción:\n            Escribe 3 excusas que usas mucho.\n            Al lado, escribe una acción mínima que contradiga cada una.\n            BENEFICIOS:\n            Recuperas poder personal.\n            Dejas de vivir en modo víctima elegante.\n            Empiezas a verte como alguien que puede evolucionar. ``No soy bueno socializando`` no es personalidad… es falta de práctica con autoestima en descuento. 😌",
+          "text2": "",
+          "img": "",
+          "video": ""
+        },
+        {
+          "title": "DISCIPLINA: CONSTRUIRTE SIN DEPENDER DE CÓMO TE SIENTES",
+          "text1": "La disciplina no es rigidez.\n            Es libertad estructurada.\n            Es elegirte incluso cuando no tienes ganas (pero sin convertirte en un robot triste).\n            🎯 OBJETIVO:\n            Crear sistemas que funcionen incluso en tus peores días.",
+          "text2": "Empieza a: Ser la persona más confiable que conoces. Hablar menos, escuchar más. Dejar que tus acciones griten por ti.",
+          "img": "",
+          "video": ""
+        },
+        {
+          "title": "RUTINA ANTIFRÁGIL",
+          "text1": "Diseña una rutina mínima diaria:\n            5–10 min de movimiento.\n            5 min de lectura o reflexión.\n            1 acción concreta que te acerque a tu mejor versión.\n            No más.\n            Sí, solo eso.\n            BENEFICIOS:\n            Empiezas a confiar en ti.\n            Construyes constancia.\n            Tu autoestima sube porque cumples contigo.\n            Dejas de depender de motivación… porque tienes sistema.",
+          "text2": "",
+          "img": "",
+          "video": ""
+        },
+        {
+          "title": "ELIMINA DECISIONES TONTAS",
+          "text1": "Durante una semana:\n            Usa ropa ya combinada.\n            Ten horarios fijos para comer.\n            Planifica tu día la noche anterior.\n            BENEFICIOS:\n            Menos fatiga mental.\n            Más energía.\n            Mejor enfoque.\n            Tu cerebro te lo agradece… aunque no te lo diga con flores.",
+          "text2": "",
+          "img": "",
+          "video": ""
+        },
+        {
+          "title": "FÍSICO: NO ES VANIDAD, ES ENERGÍA Y RESPETO",
+          "text1": "No necesitas ser musculatura de portada.\n            Necesitas:\n            Funcionar bien.\n            Tener energía.\n            No sentirte viejo antes de tiempo.\n            Glow up físico = respeto por tu cuerpo como herramienta, no como adorno.\n            🏃 RETO 5 — “CUERPO FUNCIONAL”\n            Durante 21 días:\n            3 días: fuerza básica.\n            2 días: caminar mínimo 30 min.\n            1 día: movilidad o estiramientos.\n            1 día: descanso real (sin culpa).\n            BENEFICIOS:\n            Más energía.\n            Mejor postura.\n            Más seguridad corporal.\n            Tu presencia cambia sin que digas una palabra.\n            🛌 RETO 6 — “SUEÑO DE HOMBRE PREMIUM”\n            Durante 7 días:\n            Dormir antes de las 11.\n            Sin pantallas 45 min antes.\n            Dormir mínimo 7 horas.\n            BENEFICIOS:\n            Mejor humor.\n            Mejor piel.\n            Mejor enfoque.\n            Mejor toma de decisiones.\n            Literalmente te ves mejor sin hacer nada extra.",
+          "text2": "",
+          "img": "",
+          "video": ""
+        },
+        {
+          "title": "HIGIENE Y CUIDADO PERSONAL",
+          "text1": "Esto no es estética superficial.\n            Esto es dignidad personal en versión visible.\n            🚿 RETO 7 — “RESET DE HIGIENE”\n            Durante 14 días:\n            Ducharte diario (sí, aunque no salgas).\n            Cuidado de piel básico.\n            Uñas limpias.\n            Barba o afeitado ordenado.\n            Ropa limpia, planchada.\n            BENEFICIOS:\n            Te respetas más.\n            Te perciben mejor.\n            Tu autoconcepto sube.\n            Te sientes listo para lo que sea.\n            🧴 RETO 8 — “FRAGANCIA CON IDENTIDAD”\n            Encuentra una fragancia que te represente.\n            Úsala solo en momentos importantes.\n            BENEFICIOS:\n            Anclas identidad.\n            Generas recuerdo.\n            Aumentas tu presencia sin decir una palabra.\n            Te sientes más tú.",
+          "text2": "👕 RETO 9 — “ARMARIO INTELIGENTE”\n            Haz limpieza:\n            Quédate solo con ropa que te quede bien y te guste.\n            Elimina lo que te hace ver descuidado, infantil o inseguro.\n            Luego:\n            Compra piezas básicas de buena calidad.\n            BENEFICIOS:\n            Te vistes más rápido.\n            Te ves mejor sin esfuerzo.\n            Tu imagen se vuelve consistente.\n            Te respetan más (aunque no sepan por qué).",
+          "img": "",
+          "video": ""
+        },
+        {
+          "title": "Estilo personal",
+          "text1": "\n            Define:\n            3 palabras que describan cómo quieres verte.\n            Ejemplo: limpio, sólido, minimalista.\n            Usa esas palabras como filtro antes de comprar ropa.\n            BENEFICIOS:\n            Coherencia visual.\n            Menos compras impulsivas.\n            Tu imagen empieza a comunicar quién eres sin explicaciones.",
+          "text2": "",
+          "img": "",
+          "video": ""
+        },
+        {
+          "title": "COMPORTAMIENTO: PRESENCIA, RESPETO Y ELEGANCIA REAL",
+          "text1": "Esto es donde ocurre el glow up invisible…\n            pero más poderoso.\n            🤝 RETO 11 — “RESPETO SILENCIOSO”\n            Durante 14 días:\n            Llega puntual.\n            Cumple tu palabra.\n            Trata bien a quien no puede darte nada a cambio.\n            BENEFICIOS:\n            Te vuelves confiable.\n            Generas respeto real.\n            Tu reputación crece.\n            Tu autoestima se fortalece sin gritar.\n            🗣️ RETO 12 — “COMUNICACIÓN MAGNÉTICA”\n            Durante una semana:\n            Habla menos.\n            Escucha más.\n            Haz preguntas genuinas.\n            Sonríe más (sí, aunque seas serio).\n            BENEFICIOS:\n            Mejor conexión social.\n            Más carisma.\n            Más oportunidades.\n            Menos conflictos innecesarios.\n            No eres misterioso por callarte…\n            Eres misterioso cuando hablas poco y dices cosas que importan. 😌",
+          "text2": "",
+          "img": "",
+          "video": ""
+        },
+        {
+          "title": "SOCIAL: EXPANSIÓN SIN ACTUAR",
+          "text1": "No necesitas ser extrovertido.\n            Necesitas ser presente.\n            👋 RETO 13 — “SALUDOS PREMIUM”\n            Durante 7 días:\n            Saluda a desconocidos.\n            Especialmente en la mañana.\n            Mira a los ojos.\n            Sonríe.\n            Sé breve, pero real.\n            BENEFICIOS:\n            Aumenta tu seguridad.\n            Reduce ansiedad social.\n            Te vuelves más abierto.\n            Te conectas con el mundo sin presión.\n            🧩 RETO 14 — “CÍRCULO INTELIGENTE”\n            Haz una lista de:\n            Personas que te elevan.\n            Personas que te drenan.\n            Personas neutras.\n            Reduce tiempo con las que te drenan.\n            Aumenta tiempo con las que te elevan.\n            BENEFICIOS:\n            Mejor estado mental.\n            Más motivación natural.\n            Mejores hábitos.\n            Tu entorno empieza a trabajar a tu favor.",
+          "text2": "",
+          "img": "",
+          "video": ""
+        },
+        {
+          "title": "PSICOLOGÍA DEL GLOW UP: EFECTOS INTERNOS (AQUÍ ESTÁ LA MAGIA REAL)",
+          "text1": "Glow up no solo cambia cómo te ves.\n            Cambia cómo te sientes, cómo piensas y cómo actúas.\n            EFECTOS POSITIVOS:\n            Aumenta tu autoestima real (no inflada).\n            Reduce ansiedad.\n            Mejora tu capacidad de decisión.\n            Te vuelves más atractivo emocionalmente.\n            Tu energía social mejora.\n            Tu lenguaje corporal cambia.\n            Tu relación contigo se fortalece.\n            Y aquí el dato importante:\n            La mayoría de las personas no fallan por falta de talento.\n            Fallan por falta de identidad clara.\n            Este Getux no te da solo hábitos.\n            Te da una nueva narrativa interna.",
+          "text2": "",
+          "img": "",
+          "video": ""
+        },
+        {
+          "title": "DETALLES QUE MARCAN DIFERENCIA (LEVEL PRO)",
+          "text1": "Aquí entran los pequeños grandes upgrades:\n            Postura.\n            Contacto visual.\n            Respiración.\n            Voz firme pero calmada.\n            Lenguaje corporal abierto.\n            Espacios ordenados.\n            Puntualidad.\n            Cuidado del entorno.\n            Forma de caminar.\n            Forma de sentarte.\n            Forma de escuchar.\n            🧠 RETO 15 — “DETALLES PREMIUM”\n            Durante 7 días:\n            Camina más erguido.\n            Mira a los ojos al hablar.\n            Respira profundo antes de responder.\n            Habla más lento.\n            Sonríe ligeramente.\n            BENEFICIOS:\n            Tu presencia se transforma.\n            Te perciben más seguro.\n            Te sientes más sólido.\n            Tu energía cambia sin cambiar tu personalidad.",
+          "text2": "No estás haciendo esto para gustarle a otros.\n            Lo estás haciendo para respetarte más.\n            🧭 RETO 16 — “IDENTIDAD CONSCIENTE”\n            Escribe:\n            Quién eras hace un año.\n            Quién eres hoy.\n            Quién quieres ser en un año.\n            Luego escribe:\n            “Hoy actúo como la versión que quiero ser.”\n            Y repítelo antes de tomar decisiones.\n            BENEFICIOS:\n            Más coherencia.\n            Menos sabotaje.\n            Más dirección.\n            Tu vida empieza a alinearse contigo.",
+          "img": "",
+          "video": ""
+        }
+      ]
+    },
+    {
+      "id": "getux-calistenia",
+      "type": "getux",
+      "section": "getux",
+      "title": "CALISTENIA",
+      "subtitle": "El arte de construir un cuerpo usando solo tu peso.",
+      "code": "12345",
+      "price": "8.99",
+      "image": "portadas/487-3476.jpeg",
+      "description": "Este Getux no está aquí para convertirte en alguien que no eres. Está aquí para ayudarte a dejar de sabotearte y empezar a jugar en tu mejor nivel.",
+      "yes": "✔ Acceso inmediato,✔ Archivo descargable,✔ Imagenes",
+      "no": "❌ Videos",
+      "link": "#",
+      "blocks": [
+        {
+          "title": "¿Qué es la calistenia?",
+          "text1": "La calistenia no solo es ``entrenar sin pesas``. La calistenia es: El sistema de entrenamiento donde tu cuerpo es la carga, la máquina y el proyecto.",
+          "text2": "No se trata solo de moverte.\n            Se trata de controlar tu cuerpo en el espacio, desarrollar fuerza real, coordinación, estabilidad y estética funcional.\n            Aquí no hay máquinas que te guíen. Aquí te guías tú.",
+          "img": "",
+          "video": ""
+        },
+        {
+          "title": "Por qué la calistenia funciona (aunque no tenga máquinas).",
+          "text1": "Porque trabaja sistemas, no músculos aislados.\n            \n            Cuando haces una flexión, no entrenas “pecho”:\n            Entrenas estabilidad.\n            Entrenas core.\n            Entrenas coordinación.\n            Entrenas fuerza relativa (fuerza vs tu peso).\n\n            Y eso se traduce en:\n            ✔ Mejor postura\n            ✔ Más control corporal\n            ✔ Menos lesiones\n            ✔ Un físico estético y funcional\n\n            🎯 Beneficio:\n            No te vuelves grande. Te vuelves capaz.",
+          "text2": "Principios fundamentales\n            Si no entiendes estos, entrenas al azar.\n\n            🧠 1. Tensión\n\n            No muevas el cuerpo. Controla el cuerpo.\n            Cada repetición debe sentirse firme, estable, intencional.\n\n            🧠 2. Progresión\n\n            No pasas de flexiones a planche.\n            Pasas por versiones intermedias.\n            Progresar es escalar, no saltar.\n\n            🧠 3. Volumen\n\n            No se trata de “hacer mucho”.\n            Se trata de hacer suficiente con buena forma.\n\n            🧠 4. Consistencia\n\n            No entrenas cuando estás motivado.\n            Entrenas porque eres alguien que entrena.\n\n            🎯 Beneficio:\n            Dejas de improvisar. Empiezas a construir.\n                              \n            - ¿Para quién es este sistema?\n                               \n            Para:\n            Gente sin gimnasio.\n            Gente con poco tiempo.\n            Gente que quiere verse bien y moverse bien.\n            Gente que quiere fuerza real, no solo volumen visual.\n\n            No es para:\n            Quien busca atajos.\n            Quien quiere resultados sin disciplina.\n            Quien se rinde cuando no hay likes.\n\n            🎯 Beneficio:\n            Si estás aquí, es porque estás listo para tomarte en serio.\n\n            - Seguridad básica (para no romperte)\n\n            Entrenar fuerte sin técnica es orgullo, no disciplina.\n\n            Reglas de oro:\n            ✔ Calienta siempre.\n            ✔ Mantén alineación.\n            ✔ No entrenes con dolor articular.\n            ✔ Respeta el descanso.\n            ✔ Prioriza forma sobre repeticiones.\n\n            🎯 Beneficio:\n            Progresas sin retroceder por lesión.\n\n            Mentalidad inicial\n\n            Esto no es un reto de 30 días.\n            Esto es un proyecto corporal.\n\n            No te estás “poniendo en forma”.\n            Te estás rediseñando.\n\n            La pregunta no es:\n            “¿Tengo ganas de entrenar hoy?”\n\n            La pregunta es:\n            “¿Qué versión de mí estoy construyendo hoy?”\n\n            🎯 Beneficio:\n            Pasas de buscar motivación a operar por identidad.",
+          "img": "",
+          "video": ""
+        },
+        {
+          "title": "FUNDAMENTOS DEL CUERPO \n            (por sistemas musculares).",
+          "text1": "¿Qué vas entrenar aquí?\n            Todo lo que empuja. Literal. Empujar el mundo. Empujarte a ti mismo. Empujar tus límites.\n\n            Músculos principales:\n\n            Pecho (pectorales)\n            Hombros (deltoides)\n            Tríceps\n\n            Ejercicios base:\n            Push-ups\n            Pike push-ups\n            Dips\n            Planche lean (progresión)\n\n            Errores comunes:\n            Hundir la cadera\n            Abrir demasiado los codos\n            Hacer repeticiones rápidas sin control\n\n            Cuándo entrenarlo:\n            2–3 veces por semana, dejando al menos 48h entre sesiones.",
+          "text2": "",
+          "img": "portadas/p-h-t----img.jpeg",
+          "video": ""
+        },
+        {
+          "title": "",
+          "text1": "ESPALDA Y BÍCEPS (Tirón)\n            \n            Ejercicios tipo:\n            Dominadas\n            Remo invertido\n            Curl con banda\n            Hollow hang\n\n            ¿Qué estás entrenando aquí?\n            Todo lo que tira. Lo que te sostiene. Lo que te hace ancho, fuerte y funcional.\n\n            Músculos principales:\n            Dorsales\n            Trapecios\n            Bíceps\n            Antebrazos\n            Ejercicios base:\n            Pull-ups\n            Chin-ups\n            Rows\n            Scapula pull-ups\n                               \n            Errores comunes:\n\n            No bajar completamente\n            Balancearse\n            No activar la espalda (solo brazos)\n\n            Cuándo entrenarlo:\n            2–3 veces por semana, alternando con días de empuje.",
+          "text2": "",
+          "img": "portadas/e-b----img.jpeg",
+          "video": ""
+        },
+        {
+          "title": "",
+          "text1": "CORE (Centro de control)\n            \n            Ejercicios como:\n            Plancha\n            Hollow body\n            Russian twists\n            Elevaciones de piernas\n            Texto del bloque:\n\n            ¿Qué estás entrenando aquí?\n            Tu centro. Tu control. Tu estabilidad. Tu poder invisible.\n\n            Músculos principales:\n            Abdominales\n            Oblicuos\n            Lumbar\n            Transverso abdominal\n                               \n            Ejercicios base:\n            Plank\n            Hollow hold\n            Leg raises\n            Dead bug\n                               \n            Errores comunes:\n            Arquear la espalda\n            Usar impulso\n            No respirar correctamente\n\n            Cuándo entrenarlo:\n            Puedes trabajarlo 3–5 veces por semana, incluso como finisher.",
+          "text2": "",
+          "img": "portadas/core----img.jpeg",
+          "video": ""
+        },
+        {
+          "title": "",
+          "text1": "PIERNAS Y GLÚTEOS (Base del sistema)\n\n            Ejercicios tipo:\n            Sentadillas\n            Zancadas\n            Puentes de glúteo\n            Step-ups\n\n            ¿Qué estás entrenando aquí?\n            Tu base. Tu motor. Tu capacidad de moverte en la vida real, no solo en el espejo.\n\n            Músculos principales:\n            Cuádriceps\n            Glúteos\n            Isquiotibiales\n            Pantorrillas\n\n            Ejercicios base:\n            Squats\n            Lunges\n            Glute bridge\n            Pistol squat (progresión)\n\n            Errores comunes:\n            Rodillas hacia adentro\n            Espalda encorvada\n            Bajar poco\n\n            Cuándo entrenarlo:\n            2 veces por semana mínimo. Sin piernas, no hay imperio.",
+          "text2": "",
+          "img": "portadas/piernas----img.jpeg",
+          "video": ""
+        },
+        {
+          "title": "",
+          "text1": "CUERPO COMPLETO / FUNCIONAL\n\n            Ejercicios como:\n            Burpees\n            Mountain climbers\n            Bear crawl\n            Jump squats\n\n            ¿Qué estás entrenando aquí?\n            Todo. Coordinación, resistencia, potencia, respiración y carácter.\n\n            Músculos principales:\n            Todo el sistema.\n\n            Ejercicios base:\n            Burpees\n            Bear crawl\n            Jump lunges\n            Plank to push-up\n\n            Errores comunes:\n            Sacrificar técnica por velocidad\n            No controlar la respiración\n\n            Cuándo entrenarlo:\n            1–2 veces por semana o como circuito final.",
+          "text2": "",
+          "img": "portadas/85784----img.jpeg",
+          "video": ""
+        },
+        {
+          "title": "RUTINAS",
+          "text1": "🔹 1. Qué es una rutina (de verdad) Una rutina no es una lista de ejercicios.\n\n            Una rutina es:\n            Una secuencia estratégica de estímulos diseñada para provocar adaptación.\n\n            O sea: cambio real.\n\n            Si no hay intención, no hay progreso.\n            Si no hay progresión, no hay sistema.\n            Si no hay sistema, solo hay sudor… y eso no basta.\n\n\n            🔹 2. Componentes de una rutina bien hecha\n\n            Toda rutina sólida tiene:\n\n            1️⃣ Calentamiento – prepara el sistema nervioso y las articulaciones.\n            2️⃣ Bloque principal – donde se construye la fuerza.\n            3️⃣ Accesorios – refuerzan puntos débiles.\n            4️⃣ Finisher (opcional) – eleva capacidad cardiovascular.\n            5️⃣ Enfriamiento – recupera, alinea, resetea.\n\n            🎯 Beneficio:\n            Entrenas completo, no solo intenso.\n\n            🔹 3. Tipos de rutinas según objetivo\n\n            💪 Fuerza\n            Reps bajas.\n            Descansos largos.\n            Progresiones difíciles.\n            Control total.\n\n            🔥 Hipertrofia (estética)\n            Reps medias.\n            Descanso medio.\n            Volumen inteligente.\n\n            ⚡ Resistencia\n            Reps altas.\n            Descansos cortos.\n            Ritmo constante.\n\n            🧬 Híbrida\n            Mezcla de todo.\n\n            Ideal para calistenia realista.\n\n            🔹 4. Rutinas base (listas para usar)\n            🟢 RUTINA FULL BODY — 3x por semana\n\n            Bloque principal:\n            Flexiones — 3x12\n            Dominadas — 3x8\n            Sentadillas — 3x15\n            Plancha — 3x30s\n\n            Accesorios:\n            Fondos en banco — 2x10\n            Hollow hold — 2x20s\n\n            🎯 Ideal para: principiantes e intermedios.\n\n            🔵 RUTINA EMPUJE / TIRÓN / PIERNAS — 3 a 5 días\n\n            Día 1 – Empuje:\n            Flexiones\n            Pike push-ups\n            Fondos\n            Plancha lateral\n\n            Día 2 – Tirón:\n            Dominadas\n            Remo invertido\n            Curl isométrico con toalla\n            Hollow body\n\n            Día 3 – Piernas:\n            Sentadillas\n            Zancadas\n            Puente de glúteo\n            Wall sit\n\n            🎯 Ideal para: progresión estructurada.\n\n            🔴 RUTINA HIIT / METABÓLICA — 2 a 4 días\n\n            Formato:\n            ⏱ 30s trabajo / 30s descanso — 4 rondas\n            Burpees\n            Mountain climbers\n            Jump squats\n            Push-ups\n\n            🎯 Ideal para: quema de grasa + cardio.\n\n            🔹 5. Cómo progresar sin estancarte\n\n            Progresión = evolución.\n\n            Puedes progresar:\n            ✔ Aumentando reps\n            ✔ Aumentando series\n            ✔ Reduciendo descanso\n            ✔ Haciendo versiones más difíciles\n            ✔ Mejorando control y tempo\n\n            🎯 Beneficio:\n            No te estancas. Te afilas.\n\n            🔹 6. Frecuencia ideal\n\n            Principiante: 3 días/semana\n            Intermedio: 4–5 días\n            Avanzado: 5–6 días (con deloads)\n\n            Entrenar más ≠ entrenar mejor.\n            Entrenar mejor = entrenar mejor.\n\n            🔹 7. Errores comunes\n\n            ❌ Copiar rutinas sin entenderlas\n            ❌ Entrenar siempre lo que te gusta\n            ❌ No entrenar piernas\n            ❌ No descansar\n            ❌ No progresar\n\n            🎯 Beneficio:\n            Evitas el ciclo infinito de “empiezo de nuevo”.",
+          "text2": "",
+          "img": "",
+          "video": ""
+        },
+        {
+          "title": "CÓMO CREAR TU PROPIA RUTINA",
+          "text1": "No copies rutinas. Diseña la tuya.\n            Porque tu cuerpo no es genérico. Tu vida tampoco.\n\n            🔹 PASO 1 — Define tu objetivo\n\n            Escoge uno principal:\n            💪 Fuerza\n            🔥 Estética\n            ⚡ Resistencia\n            🧬 Híbrido\n\n            🎯 Regla:\n            Si todo es prioridad, nada lo es.\n\n            🔹 PASO 2 — Elige tu frecuencia semanal\n\n            3 días → Full body\n            4–5 días → Empuje/Tirón/Piernas\n            6 días → Divisiones avanzadas\n\n            🎯 Regla:\n            La mejor rutina es la que puedes sostener, no la más intensa.\n\n            🔹 PASO 3 — Selecciona tus movimientos base\n\n            Por cada sesión:\n            1 movimiento de empuje\n            1 de tirón\n            1 de piernas\n            1 de core\n\n            Ejemplo:\n            Flexiones\n            Dominadas\n            Sentadillas\n            Plancha\n\n            🎯 Regla:\n            Domina lo básico antes de querer lo espectacular.\n\n            🔹 PASO 4 — Ajusta volumen e intensidad\n\n            Empieza con:\n            3–4 ejercicios\n            2–4 series\n            6–15 reps según nivel\n\n            🎯 Regla:\n            Mejor poco bien hecho que mucho mal hecho.\n\n            🔹 PASO 5 — Aplica progresión\n\n            Cada semana mejora una sola cosa:\n            ✔ Más reps\n            ✔ Más control\n            ✔ Menos descanso\n            ✔ Versión más difícil\n\n            🎯 Regla:\n            Si no progresas, solo te mueves.\n\n            🔹 PASO 6 — Programa el descanso\n\n            Mismo grupo muscular → descansa 48h\n            Duerme 7–9h\n            1 semana ligera cada 6–8 semanas\n\n            🎯 Regla:\n            El músculo no crece entrenando. Crece recuperándose.\n\n            🔹 PASO 7 — Evalúa y ajusta\n\n            Cada 2–4 semanas pregúntate:\n            ¿Estoy progresando?\n            ¿Me siento mejor o peor?\n            ¿Estoy cumpliendo?\n\n            🎯 Regla:\n            No seas leal a tu rutina. Sé leal a tu progreso.\n\n            🧩 Conclusión de esta sección\n\n            Ahora no dependes de:\n            ❌ Apps\n            ❌ Influencers\n            ❌ Rutinas copiadas\n\n            Ahora tú diseñas tu sistema.",
+          "text2": "",
+          "img": "",
+          "video": ""
+        },
+        {
+          "title": "DESCANSO Y RECUPERACIÓN",
+          "text1": "🔹 1. La verdad incómoda\n\n            No creces cuando entrenas.\n            Creces cuando descansas.\n\n            El entrenamiento es el estímulo.\n            La recuperación es la adaptación.\n\n            Sin descanso:\n            No hay progreso.\n            No hay fuerza.\n            No hay estética.\n            Solo hay fatiga… y frustración.\n\n            🎯 Beneficio:\n            Empiezas a construir músculo, no solo a destruirlo.\n\n            🔹 2. Tipos de descanso\n\n            🛌 1. Descanso pasivo\n            Dormir. Nada más.\n            El rey. El CEO. El MVP.\n\n            🚶 2. Descanso activo\n            Caminatas, movilidad, estiramientos suaves.\n            No es entrenar. Es mantener el sistema vivo.\n\n            🧠 3. Descanso mental\n            Bajar el estrés.\n            Porque cortisol alto = progreso bajo.\n\n            🎯 Beneficio:\n            Recuperas cuerpo, mente y sistema nervioso.\n\n            🔹 3. Sueño: la herramienta más poderosa\n\n            Regla de oro:\n            7–9 horas. Oscuridad. Consistencia.\n\n            Durante el sueño:\n            ✔ Se libera hormona de crecimiento\n            ✔ Se reparan tejidos\n            ✔ Se consolida memoria motora\n            ✔ Se resetea el sistema nervioso\n\n            Dormir poco = entrenar en modo sabotaje.\n\n            🎯 Beneficio:\n            Rindes mejor sin entrenar más.\n\n            🔹 4. Señales de que NO estás recuperando\n\n            Si sientes:\n            ❌ Fatiga constante\n            ❌ Bajón de rendimiento\n            ❌ Dolor persistente\n            ❌ Falta de motivación\n            ❌ Sueño ligero o interrumpido\n\n            No necesitas más disciplina.\n            Necesitas más recuperación.\n\n            🎯 Beneficio:\n            Evitas lesiones y estancamiento.\n\n            🔹 5. Cuánto descansar entre sesiones\n\n            Mismo grupo muscular → 48 horas mínimo.\n\n            Full body → 24–48 horas.\n\n            Entreno intenso → descansa más, no menos.\n\n            Regla brutal:\n\n            Más volumen = más descanso.\n\n            🎯 Beneficio:\n            Entrenas duro sin romperte.\n\n            🔹 6. Técnicas de recuperación\n\n            No son obligatorias, pero ayudan:\n\n            ✔ Estiramientos post-entreno\n            ✔ Movilidad diaria\n            ✔ Respiración profunda\n            ✔ Duchas frías/calientes\n            ✔ Masajes / foam roller\n\n            🎯 Beneficio:\n            Aceleras recuperación sin complicarte.\n\n            🔹 7. Deload: el descanso inteligente\n\n            Cada 6–8 semanas:\n            Reduce volumen al 50%\n            Mantén técnica\n            Baja intensidad\n\n            No es retroceder.\n            Es prepararte para avanzar más fuerte.\n\n            🎯 Beneficio:\n            Evitas burnout físico y mental.",
+          "text2": "Entrenar es fácil.\n            Descansar bien es disciplina avanzada.\n\n            El cuerpo no responde al castigo.\n            Responde a la inteligencia.",
+          "img": "",
+          "video": ""
+        },
+        {
+          "title": "NUTRICIÓN Y ALIMENTACIÓN",
+          "text1": "🔹 1. La verdad que duele (pero libera)\n\n            Puedes entrenar perfecto…\n            pero si comes mal, tu cuerpo no tiene con qué construirse.\n\n            La comida no es un premio.\n            Es combustible y material de construcción.\n\n            🎯 Beneficio:\n            Empiezas a ver resultados reales, no solo cansancio.\n\n            🔹 2. Las 3 bases innegociables\n            🥩 Proteína — construir músculo\n\n            Ayuda a reparar y crecer.\n\n            Meta general: 1.6 – 2.2 g por kg de peso corporal.\n\n            Fuentes:\n            ✔ Huevos\n            ✔ Pollo\n            ✔ Pescado\n            ✔ Carne\n            ✔ Yogur griego\n            ✔ Legumbres\n\n            🎯 Beneficio:\n            Recuperación más rápida, músculos más firmes.\n\n            🍚 Carbohidratos — energía\n\n            No son el enemigo.\n\n            Son gasolina.\n\n            Fuentes:\n            ✔ Arroz\n            ✔ Avena\n            ✔ Papas\n            ✔ Pan integral\n            ✔ Frutas\n\n            🎯 Beneficio:\n            Entrenas con fuerza, no en modo zombie.\n\n            🥑 Grasas — hormonas y salud\n\n            Necesarias para testosterona, cerebro y articulaciones.\n\n            Fuentes:\n            ✔ Aguacate\n            ✔ Frutos secos\n            ✔ Aceite de oliva\n            ✔ Huevos\n\n            🎯 Beneficio:\n            Mejor sistema hormonal y articulaciones más felices.\n\n            🔹 3. Hidratación: el hack silencioso\n\n            Músculo = 70% agua.\n\n            Sin agua:\n            ❌ Baja rendimiento\n            ❌ Baja recuperación\n            ❌ Sube fatiga\n\n            Regla simple:\n\n            Agua clara = cuerpo claro.\n\n            🎯 Beneficio:\n            Mejor bombeo, menos calambres, más energía.\n\n            🔹 4. Cuándo comer (timing simple)\n\n            No necesitas obsesionarte, pero:\n\n            ✔ Antes de entrenar → algo ligero con carbs\n            ✔ Después de entrenar → proteína + carbs\n            ✔ Durante el día → comidas balanceadas\n\n            🎯 Beneficio:\n            Recuperas más rápido y rindes mejor sin complicarte.\n\n            🔹 5. Comer según tu objetivo\n            🔥 Si quieres bajar grasa:\n\n            Ligeramente menos calorías.\n            Alta proteína.\n            Mantén fuerza.\n\n            💪 Si quieres ganar músculo:\n            Ligeramente más calorías.\n            Mucha proteína.\n            Entrena fuerte.\n\n            🎯 Beneficio:\n            Tu cuerpo deja de ir en círculos y empieza a ir en dirección.\n\n            🔹 6. Suplementos (la verdad sin humo)\n\n            No son magia.\n            Son herramientas, no cimientos.\n\n            Útiles:\n            ✔ Proteína en polvo\n            ✔ Creatina\n            ✔ Multivitamínico\n\n            No necesitas 20 frascos.\n            Necesitas constancia.\n\n            🎯 Beneficio:\n            Optimizas, no dependes.\n\n            🔹 7. Comer bien sin vivir esclavo\n\n            Regla 80/20:\n            80% comida real.\n            20% flexible.\n\n            No se trata de perfección.\n            Se trata de consistencia.\n\n            🎯 Beneficio:\n            Sostienes el progreso sin quemarte.\n            \n            Entrenar te da estímulo.\n            Dormir te da recuperación.\n            Comer bien te da materia prima.\n\n            Sin comida adecuada:\n            👉 No hay músculo.\n            👉 No hay fuerza.\n            👉 No hay estética.",
+          "text2": "",
+          "img": "",
+          "video": ""
+        },
+        {
+          "title": "MENTALIDAD Y DISCIPLINA",
+          "text1": "🔹 1. La verdad incómoda\n\n            No fallas por falta de fuerza.\n            Fallas por falta de constancia.\n\n            No es motivación.\n            Es sistema.\n\n            🎯 Beneficio:\n            Dejas de depender del ánimo y empiezas a depender de tu estructura.\n\n            🔹 2. Identidad antes que resultados\n\n            No digas:\n            “Voy a entrenar.”\n\n            Di:\n            “Soy alguien que entrena.”\n\n            La identidad crea hábitos.\n            Los hábitos crean resultados.\n\n            🎯 Beneficio:\n            Actúas como la persona que quieres ser, no como la que eras.\n\n            🔹 3. Disciplina ≠ castigo\n\n            Disciplina no es dureza sin sentido.\n            Es cuidarte aunque no tengas ganas.\n\n            No se trata de sufrir.\n            Se trata de no traicionarte.\n\n            🎯 Beneficio:\n            Construyes respeto propio, no solo músculos.\n\n            🔹 4. Cómo mantenerte constante (sistema real)\n\n            ✔ Entrena a la misma hora.\n            ✔ Ten tu ropa lista la noche anterior.\n            ✔ Diseña rutinas cortas pero consistentes.\n            ✔ Marca tus entrenamientos en un tracker.\n\n            Regla de oro:\n            Lo que se mide, se mantiene.\n\n            🎯 Beneficio:\n            Haces progreso automático, no emocional.\n\n            🔹 5. Qué hacer cuando no tienes ganas\n\n            No negocies contigo.\n            Solo haz la primera serie.\n\n            Si después de eso sigues sin energía, paras.\n            Pero el 90% de las veces… sigues.\n\n            🎯 Beneficio:\n            Vences la pereza sin guerra mental.\n\n            🔹 6. Manejo de recaídas (porque pasarán)\n\n            Fallaste un día.\n            No fallaste el sistema.\n\n            No te castigues.\n            Retoma.\n\n            El progreso no se pierde por un error.\n            Se pierde por abandonar.\n\n            🎯 Beneficio:\n            Te vuelves resiliente, no frágil.\n\n            🔹 7. Visualización y enfoque\n\n            Visualiza:\n            Tu cuerpo futuro.\n            Tu postura.\n            Tu energía.\n            Tu presencia.\n\n            No como fantasía.\n            Como destino en construcción.\n\n            🎯 Beneficio:\n            Entrenas con propósito, no por inercia.",
+          "text2": "",
+          "img": "",
+          "video": ""
+        },
+        {
+          "title": "🖤 FIRMA INTERNA\n\n            Esto no lo firmas con tinta.\n            Lo firmas con acciones.\n\n            Cada repetición.\n            Cada elección.\n            Cada día que no abandonas.",
+          "text1": "",
+          "text2": "",
+          "img": "",
+          "video": ""
+        }
+      ]
+    },
+    {
+      "id": "getux-testosterona-en-aumento",
+      "type": "getux",
+      "section": "getux",
+      "title": "Testosterona en aumento",
+      "subtitle": "Construye un cuerpo que la produce naturalmente.",
+      "code": "12345",
+      "price": "2.99",
+      "image": "portadas/82387-69734.jpeg",
+      "description": "Este Getux no está aquí para convertirte en alguien que no eres. Está aquí para ayudarte a dejar de sabotearte y empezar a jugar en tu mejor nivel.",
+      "yes": "✔ Acceso inmediato",
+      "no": "❌ Videos,❌ Imagenes,❌ Archivo descargable",
+      "link": "#",
+      "blocks": [
+        {
+          "title": "",
+          "text1": "RESET HORMONAL 🧠🔥\n\n            Objetivo del módulo:\n            Eliminar sabotajes invisibles y crear el entorno interno ideal para que tu cuerpo vuelva a producir testosterona de forma natural.\n\n            Antes de construir músculo, energía y enfoque…\n            primero limpiamos el sistema.\n\n            🧪 FASE 1 — Auditoría Personal (Día 0)\n\n            Misión: responde esto con brutal honestidad:\n            😴 ¿Duermes menos de 7h?\n            🍟 ¿Consumes ultra procesados más de 3x por semana?\n            🍺 ¿Alcohol frecuente?\n            📱 ¿Pantallas hasta justo antes de dormir?\n            🧠 ¿Estrés constante sin descarga física?\n            🛋 ¿Sedentarismo?\n\n            👉 Si respondes “sí” a 2 o más → estás en déficit hormonal.\n            No es culpa. Es contexto. Y lo vamos a corregir.\n\n            🚫 FASE 2 — Eliminación Estratégica (Días 1–7)\n\n            No se negocia. Esto es reset, no “intento”.\n\n            ❌ Elimina:\n            Alcohol (ni social, ni “solo uno”)\n            Azúcar añadida\n            Ultra procesados\n            Pornografía excesiva\n            Dormir menos de 7h\n\n            🔒 Regla:\n            Lo que sabotea tu sistema hormonal sale del sistema.\n            😴 FASE 3 — Protocolo de Sueño Alfa\n            Objetivo: convertir tu sueño en un multiplicador hormonal.\n\n            Sistema:\n            🕘 Hora fija para dormir y despertar.\n            📵 Cero pantallas 60 min antes de dormir.\n            🌙 Habitación oscura, fresca y silenciosa.\n            😴 Objetivo: 7–9h reales de sueño profundo.\n\n            Por qué importa:\n            La mayor liberación de testosterona ocurre mientras duermes.\n            Dormir mal = sabotaje hormonal silencioso.\n\n            🌞 FASE 4 — Exposición Solar y Ritmo Circadiano\n\n            Misión diaria:\n            ☀️ 10–20 min de sol directo en la mañana.\n            🚶‍♂️ Movimiento ligero al despertar.\n\n            Beneficio:\n            Regula melatonina → mejora sueño.\n            Aumenta vitamina D → mejora testosterona.\n\n            🧠 FASE 5 — Desinflamación del Sistema\n\n            Objetivo: bajar inflamación crónica = liberar recursos hormonales.\n\n            Acciones:\n            🥦 Más alimentos reales.\n            💧 Hidratación constante.\n            🚶‍♂️ Caminar 10–20 min diarios.\n            🧘‍♂️ 5–10 min de respiración lenta.\n            👉 Si en 7 días no mejora al menos 2 puntos, algo no se está ejecutando.",
+          "text2": "🏁 RESULTADO ESPERADO (7–14 días)\n\n            Más energía basal\n\n            Sueño más profundo\n\n            Menos niebla mental\n\n            Libido más estable\n\n            Sensación de “sistema reiniciado”",
+          "img": "",
+          "video": ""
+        },
+        {
+          "title": "NUTRICIÓN TESTO-OPTIMIZADA 🥩🔥",
+          "text1": "Proveer al cuerpo los materiales biológicos exactos para producir testosterona de forma natural, constante y sostenible.\n\n            No comes para verte bien.\n            Comes para funcionar mejor.\n\n            🧬 PRINCIPIO CENTRAL\n\n            La testosterona se fabrica con grasa, proteína y micronutrientes.\n            Sin eso, no hay producción. Punto.\n\n            🥩 FASE 1 — Proteína como infraestructura\n\n            Objetivo: asegurar suministro continuo de aminoácidos.\n\n            Regla:\n            🍗 Proteína en cada comida.\n            Meta: ~1.6–2.2 g por kg de peso corporal.\n\n            Fuentes base:\n            Carne roja (2–3x/semana)\n            Pollo\n            Pescado\n            Huevos\n            Yogur griego / queso real\n\n            Beneficio:\n            Mejor masa muscular → mayor sensibilidad hormonal → más efecto por testosterona.\n\n            🧈 FASE 2 — Grasas: el ladrillo hormonal\n\n            Objetivo: permitir la síntesis de testosterona.\n\n            Regla:\n            No dietas bajas en grasa.\n            Incluye grasas en 2–3 comidas diarias.\n            Fuentes clave:\n            Huevos enteros 🥚\n            Aguacate 🥑\n            Aceite de oliva 🫒\n            Frutos secos\n            Mantequilla real (moderada)\n\n            Verdad incómoda:\n            Sin grasa, tu cuerpo no puede fabricar testosterona. No es opinión. Es bioquímica.\n\n            🧂 FASE 3 — Micronutrientes críticos\n\n            Objetivo: optimizar las enzimas hormonales.\n\n            Top 5 esenciales:\n            🧲 Zinc → producción directa de testosterona.\n            💤 Magnesio → mejora sueño y testosterona libre.\n            ☀️ Vitamina D → correlaciona con niveles más altos.\n            🥩 Hierro → transporte de oxígeno y energía.\n            🧠 Vitaminas B → metabolismo hormonal.\n\n            Fuentes:\n\n            Mariscos, carne roja, semillas de calabaza, espinaca, huevos, sol.\n\n            🍚 FASE 4 — Carbohidratos: no enemigos, sino reguladores\n\n            Objetivo: mantener cortisol bajo y rendimiento alto.\n\n            Regla:\n            Carbohidratos complejos, no azúcares.\n            Ajustar cantidad según actividad física.\n\n            Fuentes limpias:\n            Arroz\n            Papas\n            Avena\n            Plátano\n            Yuca\n\n            Beneficio:\n            Menos estrés metabólico → más testosterona disponible.\n\n            🚫 FASE 5 — Eliminación Estratégica (Hormonal Edition)\n\n            Evitar:\n            Azúcar añadida\n            Grasas trans\n            Ultra procesados\n            Aceites vegetales industriales en exceso\n            Alcohol\n\n            Lo que inflama, baja testosterona.\n            Lo que estabiliza, la eleva.\n\n            🍽️ SISTEMA DE COMIDAS (Plantilla Base)\n\n            Desayuno:\n            Huevos + grasa + carbohidrato limpio\n\n            Almuerzo:\n            Proteína fuerte + vegetales + carbohidrato\n\n            Cena:\n            Proteína + grasas + vegetales (carbohidrato opcional)\n\n            Snacks (si aplica):\n            Yogur griego, nueces, fruta, queso real",
+          "text2": "🏁 RESULTADO ESPERADO (3–6 semanas)\n\n            Incremento de fuerza\n\n            Mejor composición corporal\n\n            Más energía diaria\n\n            Mayor confianza interna\n\n            Respuesta hormonal optimizada",
+          "img": "",
+          "video": ""
+        },
+        {
+          "title": "ENTRENAMIENTO ALFA 🏋️‍♂️🔥",
+          "text1": "Activar producción natural de testosterona y aumentar la sensibilidad a andrógenos mediante entrenamiento inteligente, no agotamiento sin propósito.\n\n            No entrenas para sudar.\n            Entrenas para señalizar poder biológico.\n\n            🧠 PRINCIPIO CENTRAL\n\n            Pesado + breve + progresivo = señal hormonal máxima.\n            Largo + ligero + frecuente = desgaste hormonal.\n\n            🏋️ FASE 1 — Ejercicios Base (Columna Vertebral del Sistema)\n\n            Movimientos obligatorios:\n            Sentadilla\n            Peso muerto\n            Press de banca\n            Press militar\n            Dominadas / Remo\n\n            Por qué:\n            Involucran más masa muscular → mayor respuesta hormonal sistémica.\n\n            ⏱️ FASE 2 — Estructura de Sesión Alfa\n\n            Duración ideal: 45–70 minutos\n            Frecuencia: 3–5 días/semana\n\n            Formato base:\n            3–5 ejercicios\n            3–5 series por ejercicio\n            3–6 repeticiones (fuerza)\n            Descanso: 2–4 minutos\n\n            Regla:\n            Si no puedes aumentar peso o repeticiones con el tiempo, no estás entrenando: estás manteniendo.\n\n            📈 FASE 3 — Progresión (La clave hormonal)\n\n            Sistema:\n            Cada semana: +1–2 repeticiones o +2–5% de peso.\n            Lleva registro. Sin registro no hay progreso. Sin progreso no hay señal.\n            🧨 FASE 4 — Estímulo de Alta Intensidad (1–2x/semana)\n\n            Opciones:\n            Sprints\n            Circuitos cortos explosivos\n            Saltos / arranques / kettlebell swings\n            Duración: 10–15 min\n\n            Beneficio:\n            Picos hormonales sin sobreentrenar.\n\n            🚫 FASE 5 — Errores que destruyen testosterona\n\n            Evitar:\n            Cardio largo diario\n            Entrenar sin descanso\n            Entrenar siempre al fallo\n            Copiar rutinas de culturismo avanzado sin base\n\n            Más no es mejor.\n            Mejor es mejor.\n\n            📅 PLANTILLA SEMANAL (Ejemplo)\n\n            Día 1: Pierna + core\n            Día 2: Torso empuje\n            Día 3: Descanso activo\n            Día 4: Torso tirón\n            Día 5: Full body / potencia\n            Día 6–7: Descanso",
+          "text2": "",
+          "img": "",
+          "video": ""
+        },
+        {
+          "title": "MENTALIDAD Y DOMINIO INTERNO 🧠🔥",
+          "text1": "Ejercicio clave:\n\n            Define:\n\n            1 meta física\n\n            1 meta mental\n\n            1 meta material\n\n            Por qué importa:\n            El cerebro necesita norte. Sin norte → dopamina caótica → sistema hormonal inestable.\n                               \n            Control Dopaminérgico\n\n            Objetivo: evitar picos artificiales que destruyen motivación real.\n\n            Reducir:\n            Scrolling infinito\n            Pornografía excesiva\n            Azúcar frecuente\n            Estímulos constantes\n\n            Aumentar:\n            Esfuerzo físico\n            Logros pequeños diarios\n            Rutinas con sentido\n\n            La testosterona ama la fricción significativa, no la gratificación instantánea.\n                               \n            Autodominio (El músculo invisible)\n\n            Prácticas:\n            Duchas frías\n            Ayuno intermitente ocasional\n            Terminar lo que empiezas\n            Decir “no” sin culpa\n\n            Beneficio:\n            Aumenta autocontrol → mejora señal hormonal → refuerza identidad.\n                               \n            Objetivo: bajar cortisol sin apagar drive.\n\n            Sistema diario (5–10 min):\n            Respiración lenta (4–6 ciclos por minuto)\n            Caminata sin estímulos\n            Escritura breve: “¿Qué sí controlo hoy?”\n\n            Regla:\n            El estrés no gestionado roba testosterona.\n            El estrés canalizado la potencia.",
+          "text2": "",
+          "img": "",
+          "video": ""
+        }
+      ]
+    }
+  ]
+}
