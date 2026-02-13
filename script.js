@@ -1,7 +1,22 @@
 // ============================
-// BORDES ACTIVOS DE ITEMS
+// UTILIDADES
 // ============================
-const items = document.querySelectorAll(".item");
+function $(sel, ctx = document) { return ctx.querySelector(sel); }
+function $all(sel, ctx = document) { return Array.from(ctx.querySelectorAll(sel)); }
+function escAttr(v) {
+  if (v === undefined || v === null) return "";
+  return String(v).replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+const CARDS_JSON_URL = "data/cards.json";
+
+// ============================
+// UI NAVEGACIÓN
+// ============================
+const items = $all(".item");
+const navItems = $all(".item");
+const sections = $all(".app-section");
+let navigationLocked = false;
 
 items.forEach(item => {
   item.addEventListener("click", () => {
@@ -10,41 +25,23 @@ items.forEach(item => {
   });
 });
 
-// ============================
-// BARRA DE NAVEGACIÓN FLEXIBLE
-// ============================
-const boton = document.querySelector(".boton-de-ensanche-de-barra-de-navegacion");
-const barra = document.querySelector(".barra-de-navegacion");
-
+const boton = $(".boton-de-ensanche-de-barra-de-navegacion");
+const barra = $(".barra-de-navegacion");
 if (boton && barra) {
-  boton.addEventListener("click", () => {
-    barra.classList.toggle("expandida");
-  });
+  boton.addEventListener("click", () => barra.classList.toggle("expandida"));
 }
 
-// ============================
-// Estado: bloqueo de navegación cuando un ebootux/getux está abierto
-// ============================
-let navigationLocked = false; // true cuando un ebootux/getux está activo
-
 function showNavigationLockedModal() {
-  // mensaje indicado por el usuario
   mostrarModal(
     "Navegación desactivada",
     "La navegación está desactivada mientras este contenido esté abierto. Sal para continuar.",
-    true // autoCerrar: true para que no quede fijo
+    true
   );
 }
 
-// ============================
-// 🔀 FUNCIÓN: ORDEN ALEATORIO POR SECCIÓN
-// ============================
 function mezclarCardsEnSeccion(seccion) {
   if (!seccion) return;
-
-  // selección robusta: cualquier elemento cuya clase contenga "contenedor-de-todos-"
   const contenedores = seccion.querySelectorAll('[class*="contenedor-de-todos-"]');
-
   contenedores.forEach(container => {
     const cards = Array.from(container.children || []);
     if (cards.length > 1) {
@@ -54,45 +51,26 @@ function mezclarCardsEnSeccion(seccion) {
   });
 }
 
-// ============================
-// NAVEGACIÓN ENTRE SECCIONES
-// ============================
-const sections = document.querySelectorAll(".app-section");
-const navItems = document.querySelectorAll(".item");
-
 function updateNavActiveForSection(id) {
   navItems.forEach(item => {
     const href = item.getAttribute("href") || "";
     const targetId = href.replace("#", "");
-    if (targetId === id) {
-      item.classList.add("active");
-    } else {
-      item.classList.remove("active");
-    }
+    if (targetId === id) item.classList.add("active");
+    else item.classList.remove("active");
   });
 }
 
 function showSection(id) {
-  // si la navegación está bloqueada, prevenir cambios desde llamadas externas
-  // (siempre que no sea para forzar Home al salir del ebootux - ese caso gestionamos explícitamente)
-  // Nota: las llamadas internas legítimas (como forzar Home) deben pasar por showSection("Home") desde el exit handler.
-  sections.forEach(section => {
-    section.classList.remove("active-section");
-  });
-
+  sections.forEach(section => section.classList.remove("active-section"));
   const target = document.getElementById(id);
   if (target) {
     target.classList.add("active-section");
     mezclarCardsEnSeccion(target);
   }
-
-  // actualizar estado visual de los items de navegación
   updateNavActiveForSection(id);
-
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-// Interceptar clicks sobre navItems y mostrar mensaje si navegación bloqueada
 navItems.forEach(item => {
   item.addEventListener("click", (e) => {
     e.preventDefault();
@@ -100,7 +78,6 @@ navItems.forEach(item => {
     if (!targetId) return;
 
     if (navigationLocked) {
-      // Si el usuario intenta navegar mientras un ebootux/getux está abierto:
       showNavigationLockedModal();
       return;
     }
@@ -109,115 +86,268 @@ navItems.forEach(item => {
   });
 });
 
-// sección inicial
 showSection("Home");
 
 // ============================
-// MODAL PREVIEW (GETUX / EBOOTUX)
+// RENDER DINÁMICO DESDE JSON
 // ============================
-const previewModal = document.getElementById("preview-modal");
+function buildEbootuxLikeCard(product) {
+  const blocks = Array.isArray(product.blocks) ? product.blocks : [];
+  const blockData = blocks.map((b, i) => {
+    const n = i + 1;
+    return `
+      data-block${n}-title="${escAttr(b.title || "")}" 
+      data-block${n}-text1="${escAttr(b.text1 || "")}" 
+      data-block${n}-text2="${escAttr(b.text2 || "")}" 
+      data-block${n}-text3="${escAttr(b.text3 || "")}" 
+      data-block${n}-text4="${escAttr(b.text4 || "")}" 
+      data-block${n}-text5="${escAttr(b.text5 || "")}" 
+      data-block${n}-img="${escAttr(b.img || "")}" 
+      data-block${n}-video="${escAttr(b.video || "")}"`;
+  }).join(" ");
+
+  return `
+    <article class="ebootux-cards"
+      data-ebootux-title="${escAttr(product.title || "")}" 
+      data-ebootux-subtitle="${escAttr(product.subtitle || "")}" 
+      data-code="${escAttr(product.code || "")}" 
+      data-course-url="${escAttr(product.courseUrl || "")}"
+      data-second-code="${escAttr(product.secondCode || "")}"
+      ${blockData}>
+
+      <header class="header-ebootux-cards">
+        <img src="${escAttr(product.image || "Statux-logo(SVG).svg")}" alt="${escAttr(product.title || "Producto")}">
+      </header>
+
+      <div class="contenedor-de-codigo">
+        <h3>${escAttr(product.title || "Producto")}</h3>
+        <img src="candado.svg" alt="candado">
+        <input type="text" class="input-codigo-ebootux" placeholder="Ingresa el código...">
+        <button class="btn-acceder-ebootux">Entrar</button>
+      </div>
+
+      <div class="contenedor-de-btn-de-compra">
+        <a href="#" class="btn-de-vista-previa"
+          data-title="${escAttr(product.title || "")}" 
+          data-price="${escAttr(product.price || "")}" 
+          data-image="${escAttr(product.image || "")}" 
+          data-description="${escAttr(product.description || "")}" 
+          data-yes="${escAttr(product.yes || "")}" 
+          data-no="${escAttr(product.no || "")}" 
+          data-link="${escAttr(product.link || "")}">
+          <img src="visibility_24dp_777777_FILL0_wght400_GRAD0_opsz24.svg" class="img-de-vista-previa" alt="vista previa">
+        </a>
+        <a href="${escAttr(product.link || "#")}" class="btn-de-compra" target="_blank">
+          <img src="shopping_cart_24dp_777777.svg" class="img-de-carrito-de-compra" alt="comprar">${escAttr(product.price || "—")}
+        </a>
+      </div>
+    </article>
+  `;
+}
+
+function buildAssetCard(product) {
+  return `
+    <article class="plantitux-cards ${((product.type||"").toLowerCase()==="movitux") ? "movitux-cards" : ""}"
+      data-title="${escAttr(product.title || "")}" 
+      data-preview-img="${escAttr(product.image || "")}" 
+      data-preview-video="${escAttr(product.previewVideo || "")}" 
+      data-prompt="${escAttr(product.prompt || "")}" 
+      data-copy-text="${escAttr(product.copyText || product.prompt || product.link || "")}" 
+      data-code="${escAttr(product.code || "")}" 
+      data-price="${escAttr(product.price || "")}" 
+      data-link="${escAttr(product.link || "")}">
+
+      <header class="header-plantitux-cards">
+        <img src="${escAttr(product.image || "Statux-logo(SVG).svg")}" alt="${escAttr(product.title || "Plantitux")}">
+      </header>
+
+      <div class="contenedor-de-codigo">
+        <h3>${escAttr(product.title || (((product.type||"").toLowerCase()==="movitux") ? "Movitux" : "Acceso"))}</h3>
+        <img src="candado.svg" alt="candado">
+        <input type="text" class="input-codigo-plantitux" placeholder="Ingresa tu código...">
+        <button class="btn-acceder-plantitux">Entrar</button>
+      </div>
+
+      <div class="contenedor-de-btn-de-compra">
+        <a href="#" class="btn-de-vista-previa-plantitux">
+          <img src="visibility_24dp_777777_FILL0_wght400_GRAD0_opsz24.svg" class="img-de-vista-previa" alt="vista previa">
+        </a>
+        <a href="${escAttr(product.link || "#")}" class="btn-de-compra" target="_blank">
+          <img src="shopping_cart_24dp_777777.svg" class="img-de-carrito-de-compra" alt="comprar">${escAttr(product.price || "—")}
+        </a>
+      </div>
+    </article>
+  `;
+}
+
+function sectionContainer(section) {
+  return $(`.contenedor-de-todos-los-${section}`) || $(`[data-json-section="${section}"]`);
+}
+
+function renderProducts(products) {
+  const bySection = products.reduce((acc, p) => {
+    const sec = (p.section || "").toLowerCase();
+    if (!sec) return acc;
+    if (!acc[sec]) acc[sec] = [];
+    acc[sec].push(p);
+    return acc;
+  }, {});
+
+  Object.entries(bySection).forEach(([section, list]) => {
+    const container = sectionContainer(section);
+    if (!container) return;
+
+    container.innerHTML = list.map(product => {
+      const type = (product.type || "").toLowerCase();
+      if (type === "plantitux" || type === "movitux") return buildAssetCard(product);
+      return buildEbootuxLikeCard(product);
+    }).join("\n");
+  });
+}
+
+async function fetchAndRenderCards() {
+  try {
+    const res = await fetch(CARDS_JSON_URL, { cache: "no-store" });
+    if (!res.ok) throw new Error("no-data");
+    const json = await res.json();
+    if (!Array.isArray(json.products)) throw new Error("invalid-json");
+    renderProducts(json.products);
+  } catch (err) {
+    console.info("cards.json no disponible; se usan cards estáticas si existen.", err);
+  }
+}
+
+// ============================
+// MODAL PREVIEW GENÉRICO
+// ============================
+const previewModal = $("#preview-modal");
 const previewTitle = previewModal?.querySelector(".head-box h2");
 const previewImage = previewModal?.querySelector(".preview-multimedia");
 const previewYes = previewModal?.querySelector(".preview-si");
 const previewNo = previewModal?.querySelector(".preview-no");
 const previewBuyBtn = previewModal?.querySelector(".btn-de-compra");
 const previewDescription = previewModal?.querySelector(".preview-description");
-const closeBtn = previewModal?.querySelector(".logout-btn");
 
-if (closeBtn && previewModal) {
-  closeBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    previewModal.classList.remove("active");
-  });
+if (previewModal) {
+  const closeBtn = previewModal.querySelector(".logout-btn");
+  if (closeBtn) closeBtn.addEventListener("click", () => previewModal.classList.remove("active"));
 }
 
-document.querySelectorAll(".btn-de-vista-previa").forEach(btn => {
-  btn.addEventListener("click", e => {
-    e.preventDefault();
-    if (!previewModal) return;
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest(".btn-de-vista-previa");
+  if (!btn) return;
+  e.preventDefault();
+  if (!previewModal) return;
 
-    const title = btn.dataset.title || "";
-    const price = btn.dataset.price || "";
-    const image = btn.dataset.image || "";
-    const description = btn.dataset.description || "";
-    const yesList = (btn.dataset.yes || "").split(",");
-    const noList = (btn.dataset.no || "").split(",");
-    const link = btn.dataset.link || "#";
+  const title = btn.dataset.title || "";
+  const price = btn.dataset.price || "";
+  const image = btn.dataset.image || "";
+  const description = btn.dataset.description || "";
+  const yesList = (btn.dataset.yes || "").split(",");
+  const noList = (btn.dataset.no || "").split(",");
+  const link = btn.dataset.link || "#";
 
-    if (previewTitle) previewTitle.textContent = title;
-    if (previewImage && image) previewImage.src = image;
-    if (previewDescription) previewDescription.textContent = description;
+  if (previewTitle) previewTitle.textContent = title;
+  if (previewImage) previewImage.src = image;
+  if (previewDescription) previewDescription.textContent = description;
 
-    if (previewBuyBtn) {
-      previewBuyBtn.innerHTML = `
-        <img src="shopping_cart_24dp_777777.svg" class="img-de-carrito-de-compra"/>
-        $${price}
-      `;
-      previewBuyBtn.href = link;
-      previewBuyBtn.target = "_blank";
-    }
+  if (previewBuyBtn) {
+    previewBuyBtn.innerHTML = `<img src="shopping_cart_24dp_777777.svg" class="img-de-carrito-de-compra"/>$${price}`;
+    previewBuyBtn.href = link;
+    previewBuyBtn.target = "_blank";
+  }
 
-    if (previewYes) {
-      previewYes.innerHTML = "";
-      yesList.forEach(item => {
-        if (item.trim()) {
-          const li = document.createElement("li");
-          li.textContent = item.trim();
-          previewYes.appendChild(li);
-        }
-      });
-    }
+  if (previewYes) {
+    previewYes.innerHTML = "";
+    yesList.forEach(item => {
+      if (!item.trim()) return;
+      const li = document.createElement("li");
+      li.textContent = item.trim();
+      previewYes.appendChild(li);
+    });
+  }
 
-    if (previewNo) {
-      previewNo.innerHTML = "";
-      noList.forEach(item => {
-        if (item.trim()) {
-          const li = document.createElement("li");
-          li.textContent = item.trim();
-          previewNo.appendChild(li);
-        }
-      });
-    }
+  if (previewNo) {
+    previewNo.innerHTML = "";
+    noList.forEach(item => {
+      if (!item.trim()) return;
+      const li = document.createElement("li");
+      li.textContent = item.trim();
+      previewNo.appendChild(li);
+    });
+  }
 
-    previewModal.classList.add("active");
-  });
+  previewModal.classList.add("active");
 });
 
 // ============================
-// BUSCADOR POR SECCIÓN (SÓLO EN SU SECCIÓN)
+// PREVIEW PLANTITUX
 // ============================
-document.querySelectorAll(".buscador-seccion").forEach(buscador => {
+const plantituxPreviewModal = $("#plantitux-preview-modal");
+const plantituxPreviewImg = $("#plantitux-preview-img");
+const plantituxPreviewVideo = $("#plantitux-preview-video");
+const plantituxPreviewTitle = $("#plantitux-preview-title");
+const plantituxPreviewBuy = $("#plantitux-preview-buy");
+const plantituxPreviewClose = $("#plantitux-preview-close");
+if (plantituxPreviewClose && plantituxPreviewModal) {
+  plantituxPreviewClose.addEventListener("click", () => plantituxPreviewModal.classList.remove("active"));
+}
+
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest(".btn-de-vista-previa-plantitux");
+  if (!btn) return;
+  e.preventDefault();
+
+  const card = btn.closest(".plantitux-cards");
+  if (!card || !plantituxPreviewModal) return;
+
+  const img = card.dataset.previewImg || "";
+  const video = card.dataset.previewVideo || "";
+  const title = card.dataset.title || "";
+  const price = card.dataset.price || "";
+  const link = card.dataset.link || "#";
+
+  if (plantituxPreviewTitle) plantituxPreviewTitle.textContent = title;
+
+  if (video && plantituxPreviewVideo) {
+    plantituxPreviewVideo.src = video;
+    plantituxPreviewVideo.classList.remove("hidden");
+    if (plantituxPreviewImg) plantituxPreviewImg.classList.add("hidden");
+  } else if (plantituxPreviewImg) {
+    plantituxPreviewImg.src = img;
+    plantituxPreviewImg.classList.remove("hidden");
+    if (plantituxPreviewVideo) plantituxPreviewVideo.classList.add("hidden");
+  }
+
+  if (plantituxPreviewBuy) {
+    plantituxPreviewBuy.innerHTML = `<img src="shopping_cart_24dp_777777.svg" class="img-de-carrito-de-compra"/>$${price}`;
+    plantituxPreviewBuy.href = link;
+    plantituxPreviewBuy.target = "_blank";
+  }
+
+  plantituxPreviewModal.classList.add("active");
+});
+
+// ============================
+// BUSCADOR POR SECCIÓN
+// ============================
+$all(".buscador-seccion").forEach(buscador => {
   const section = buscador.closest(".app-section");
   if (!section) return;
 
-  // Elegir el selector de cards según la sección (ajusta si cambias nombres)
-  let selector;
+  let selector = ".ebootux-cards, .plantitux-cards, .tracktux-cards, .mindtux-cards, .soundtux-cards, .movitux-cards";
   switch ((section.id || "").toLowerCase()) {
     case "ebootux":
-    case "getux":         // Getux usa .ebootux-cards en tu HTML actual
+    case "getux":
       selector = ".ebootux-cards";
-      break;
-    case "plantitux":
-      selector = ".plantitux-cards";
-      break;
-    case "tracktux":
-      selector = ".tracktux-cards";
-      break;
-    case "mindtux":
-      selector = ".mindtux-cards";
-      break;
-    case "soundtux":
-      selector = ".soundtux-cards";
       break;
     case "movitux":
       selector = ".movitux-cards";
       break;
-    default:
-      // fallback: cualquier card dentro de la sección
-      selector = ".ebootux-cards, .plantitux-cards, .tracktux-cards, .mindtux-cards, .soundtux-cards, .movitux-cards";
+    case "plantitux":
+      selector = ".plantitux-cards";
+      break;
   }
-
-  const cards = section.querySelectorAll(selector);
 
   let emptyMsg = section.querySelector(".mensaje-vacio");
   if (!emptyMsg) {
@@ -229,6 +359,7 @@ document.querySelectorAll(".buscador-seccion").forEach(buscador => {
   }
 
   buscador.addEventListener("input", () => {
+    const cards = section.querySelectorAll(selector);
     const texto = buscador.value.toLowerCase().trim();
     let encontrados = 0;
 
@@ -244,7 +375,7 @@ document.querySelectorAll(".buscador-seccion").forEach(buscador => {
 });
 
 // ===============================
-// MODAL PERSONALIZADO
+// MODAL MENSAJES
 // ===============================
 function mostrarModal(titulo, mensaje, autoCerrar = false) {
   const modal = document.getElementById("modal-ebootux");
@@ -253,31 +384,25 @@ function mostrarModal(titulo, mensaje, autoCerrar = false) {
   const modalClose = document.getElementById("modal-ebootux-close");
 
   if (!modal || !modalTitle || !modalMessage || !modalClose) {
-    // fallback leve: si el modal no existe, usamos alert como último recurso
-    try { alert(`${titulo}\n\n${mensaje}`); } catch (e) {}
+    try { alert(`${titulo}\n\n${mensaje}`); } catch (_) {}
     return;
   }
 
   modalTitle.textContent = titulo;
   modalMessage.textContent = mensaje;
-
   modal.classList.remove("hidden");
 
   if (autoCerrar) {
     modalClose.style.display = "none";
-    setTimeout(() => {
-      modal.classList.add("hidden");
-    }, 2600);
+    setTimeout(() => modal.classList.add("hidden"), 2600);
   } else {
     modalClose.style.display = "inline-block";
-    modalClose.onclick = () => {
-      modal.classList.add("hidden");
-    };
+    modalClose.onclick = () => modal.classList.add("hidden");
   }
 }
 
 // ===============================
-// CONTROL DE ACCESO + MOSTRAR PLANTILLA (GETUX / EBOOTUX)
+// ACCESO + EBOOTUX
 // ===============================
 document.addEventListener("click", function (e) {
   if (e.target.classList.contains("btn-acceder-ebootux")) {
@@ -292,6 +417,22 @@ document.addEventListener("click", function (e) {
     const codigoIngresado = input.value.trim();
 
     if (codigoIngresado === codigoCorrecto) {
+      const courseUrl = card.dataset.courseUrl || "";
+      const secondCode = card.dataset.secondCode || "";
+
+      // Flujo especial: Getux con doble código y redirección a curso externo.
+      if (courseUrl) {
+        const secondInput = window.prompt("Ingresa tu segundo código para entrar al curso:") || "";
+        if (secondCode && secondInput.trim() !== secondCode) {
+          mostrarModal("Segundo código incorrecto ❌", "El segundo código no coincide. Verifica e inténtalo de nuevo.");
+          return;
+        }
+        // Autorizamos el curso Getux protegido (segunda validación cumplida).
+        sessionStorage.setItem("getux_access", "granted");
+        window.location.href = courseUrl;
+        return;
+      }
+
       cargarEbootuxDesdeCard(card);
       plantilla.classList.remove("hidden");
       entrarEnEbootux();
@@ -301,18 +442,41 @@ document.addEventListener("click", function (e) {
       input.focus();
     }
   }
+
+  if (e.target.classList.contains("btn-acceder-plantitux")) {
+    const card = e.target.closest(".plantitux-cards, .movitux-cards");
+    if (!card) return;
+
+    const input = card.querySelector(".input-codigo-plantitux");
+    if (!input) return;
+
+    const codigoCorrecto = card.dataset.code || "";
+    const codigoIngresado = input.value.trim();
+
+    if (codigoIngresado === codigoCorrecto) {
+      abrirPromptDesdeCard(card);
+    } else {
+      mostrarModal("Código incorrecto ❌", "Verifica tu código e inténtalo de nuevo.");
+      input.value = "";
+      input.focus();
+    }
+  }
+
+  if (e.target.closest(".ebootux-exit-btn")) {
+    const ebootux = document.querySelector(".ebootux-template");
+    if (!ebootux) return;
+
+    ebootux.classList.add("hidden");
+    ebootux.classList.remove("active");
+    navigationLocked = false;
+    showSection("Home");
+  }
 });
 
-// ===============================
-// EVITAR FLASH DE CONTENIDO
-// ===============================
 window.addEventListener("load", () => {
   document.body.classList.add("loaded");
 });
 
-// ===============================
-// CARGA DE DATOS AL EBOOTUX
-// ===============================
 function cargarEbootuxDesdeCard(card) {
   const ebootux = document.querySelector(".ebootux-template");
   const content = document.getElementById("ebootux-content");
@@ -339,7 +503,6 @@ function cargarEbootuxDesdeCard(card) {
 
   for (let i = 1; i <= totalBlocks; i++) {
     const clone = template.content.cloneNode(true);
-
     const title = card.dataset[`block${i}Title`];
     const text1 = card.dataset[`block${i}Text1`];
     const text2 = card.dataset[`block${i}Text2`];
@@ -356,12 +519,8 @@ function cargarEbootuxDesdeCard(card) {
     const videoTag = clone.querySelector("[data-media-video]");
 
     if (h2) {
-      if (title) {
-        h2.textContent = title;
-        h2.style.display = "block";
-      } else {
-        h2.style.display = "none";
-      }
+      if (title) { h2.textContent = title; h2.style.display = "block"; }
+      else { h2.style.display = "none"; }
     }
 
     const textos = [text1, text2, text3, text4, text5];
@@ -392,22 +551,15 @@ function cargarEbootuxDesdeCard(card) {
       videoTag.style.display = "none";
     }
 
-    if (mediaContainer) {
-      mediaContainer.hidden = !hayMedia;
-    }
-
+    if (mediaContainer) mediaContainer.hidden = !hayMedia;
     content.appendChild(clone);
   }
 }
 
-// ===============================
-// ENTRAR AL EBOOTUX (OCULTA TODO LO DEMÁS)
-// ===============================
 function entrarEnEbootux() {
   const ebootux = document.querySelector(".ebootux-template");
   const appSections = document.querySelectorAll(".app-section");
 
-  // ocultar secciones de app y quitar active en nav
   appSections.forEach(section => section.classList.remove("active-section"));
   navItems.forEach(item => item.classList.remove("active"));
 
@@ -416,127 +568,24 @@ function entrarEnEbootux() {
     ebootux.classList.add("active");
   }
 
-  // bloquear navegación
   navigationLocked = true;
-
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
 // ===============================
-// SALIR DEL EBOOTUX
-// ===============================
-document.addEventListener("click", function (e) {
-  if (e.target.closest(".ebootux-exit-btn")) {
-    const ebootux = document.querySelector(".ebootux-template");
-    if (!ebootux) return;
-
-    ebootux.classList.add("hidden");
-    ebootux.classList.remove("active");
-
-    // desbloquear navegación
-    navigationLocked = false;
-
-    // al salir, mostrar Home y activar su borde en la navegación
-    showSection("Home");
-  }
-});
-
-// ===============================
-// PREVIEW MULTIMEDIA PLANTITUX / MOVITUX
-// ===============================
-const plantituxPreviewModal = document.getElementById("plantitux-preview-modal");
-const plantituxPreviewImg = document.getElementById("plantitux-preview-img");
-const plantituxPreviewVideo = document.getElementById("plantitux-preview-video");
-const plantituxPreviewTitle = document.getElementById("plantitux-preview-title");
-const plantituxPreviewBuy = document.getElementById("plantitux-preview-buy");
-const plantituxPreviewClose = document.getElementById("plantitux-preview-close");
-
-document.querySelectorAll(".btn-de-vista-previa-plantitux").forEach(btn => {
-  btn.addEventListener("click", e => {
-    e.preventDefault();
-    const card = btn.closest(".plantitux-cards");
-    if (!card) return;
-
-    const img = card.dataset.previewImg || "";
-    const video = card.dataset.previewVideo || "";
-    const title = card.dataset.title || "";
-    const price = card.dataset.price || "";
-    const link = card.dataset.link || "#";
-
-    if (plantituxPreviewTitle) plantituxPreviewTitle.textContent = title;
-
-    if (video && plantituxPreviewVideo) {
-      plantituxPreviewVideo.src = video;
-      plantituxPreviewVideo.classList.remove("hidden");
-      if (plantituxPreviewImg) plantituxPreviewImg.classList.add("hidden");
-    } else if (img && plantituxPreviewImg) {
-      plantituxPreviewImg.src = img;
-      plantituxPreviewImg.classList.remove("hidden");
-      if (plantituxPreviewVideo) plantituxPreviewVideo.classList.add("hidden");
-    }
-
-    if (plantituxPreviewBuy) {
-      plantituxPreviewBuy.innerHTML = `
-        <img src="shopping_cart_24dp_777777.svg" class="img-de-carrito-de-compra"/>
-        $${price}
-      `;
-      plantituxPreviewBuy.href = link;
-      plantituxPreviewBuy.target = "_blank";
-    }
-
-    if (plantituxPreviewModal) plantituxPreviewModal.classList.add("active");
-  });
-});
-
-if (plantituxPreviewClose && plantituxPreviewModal) {
-  plantituxPreviewClose.addEventListener("click", () => {
-    plantituxPreviewModal.classList.remove("active");
-  });
-}
-
-// ===============================
-// CONTROL DE ACCESO + MOSTRAR PROMPT
-// ===============================
-document.addEventListener("click", function (e) {
-  if (e.target.classList.contains("btn-acceder-plantitux")) {
-    const card = e.target.closest(".plantitux-cards");
-    if (!card) return;
-
-    const input = card.querySelector(".input-codigo-plantitux");
-    if (!input) return;
-
-    const codigoCorrecto = card.dataset.code || "";
-    const codigoIngresado = input.value.trim();
-
-    if (codigoIngresado === codigoCorrecto) {
-      abrirPromptDesdeCard(card);
-    } else {
-      mostrarModal("Código incorrecto ❌", "Verifica tu código e inténtalo de nuevo.");
-      input.value = "";
-      input.focus();
-    }
-  }
-});
-
-// ===============================
-// ABRIR MODAL PROMPT
+// PROMPT PLANTITUX
 // ===============================
 const promptModal = document.getElementById("prompt-modal");
 const promptTextarea = document.getElementById("prompt-textarea");
 const promptClose = document.getElementById("prompt-modal-close");
-
-// elements related to copy button
 const copyPromptBtn = document.getElementById("copy-prompt-btn");
-const copyFeedback = document.querySelector(".copy-feedback");
 const miniModal = document.querySelector(".mini-modal");
-
+const promptOpenGumroad = document.getElementById("prompt-open-gumroad");
 let _copyTimeoutId = null;
 
-// helper: create inline check SVG if needed (so we never show a broken image)
 function createInlineCheckIcon() {
   const span = document.createElement("span");
   span.className = "icon-check";
-  // simple check-circle SVG markup (keeps styling via CSS)
   span.innerHTML = `
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
       <circle cx="12" cy="12" r="10" stroke="none" fill="#00ffdd"/>
@@ -544,80 +593,70 @@ function createInlineCheckIcon() {
     </svg>
   `;
   span.style.display = "none";
-  span.style.width = "24px";
-  span.style.height = "24px";
-  span.style.lineHeight = "0";
   return span;
 }
 
-// reset copy button to initial state (copy icon visible)
 function resetCopyButtonState() {
   if (!copyPromptBtn) return;
-
-  // remove class
   copyPromptBtn.classList.remove("copied");
 
-  // show copy icon if exists
   const iconCopy = copyPromptBtn.querySelector(".icon-copy");
   if (iconCopy) iconCopy.style.display = "inline-block";
 
-  // hide any icon-check (img or inline)
   const iconCheckImg = copyPromptBtn.querySelector("img.icon-check");
   if (iconCheckImg) iconCheckImg.style.display = "none";
 
-  // also handle inline-created check
   const inlineCheck = copyPromptBtn.querySelector(".icon-check:not(img)");
   if (inlineCheck) inlineCheck.style.display = "none";
 
-  // restore button text (if you choose to change it elsewhere)
   const btnText = copyPromptBtn.querySelector(".btn-text");
   if (btnText) btnText.textContent = "Copiar";
 
-  // clear timeout if pending
   if (_copyTimeoutId) {
     clearTimeout(_copyTimeoutId);
     _copyTimeoutId = null;
   }
 }
 
-// open prompt from card and set contents; reset copy button state each time modal opens
 function abrirPromptDesdeCard(card) {
-  const prompt = card.dataset.prompt || "";
+  const prompt = card.dataset.copyText || card.dataset.prompt || card.dataset.link || "";
   if (!promptModal || !promptTextarea) return;
+
   promptTextarea.value = prompt;
 
-  // ensure copy button icons exist and initial state
+  const modalTitle = promptModal.querySelector(".head-box h2");
+  if (modalTitle) {
+    const isMovitux = card.classList.contains("movitux-cards");
+    modalTitle.textContent = isMovitux ? "Asset / Prompt" : "Link de Plantilla";
+  }
+  if (promptOpenGumroad) {
+    promptOpenGumroad.href = card.dataset.link || "#";
+    promptOpenGumroad.target = "_blank";
+  }
+
   if (copyPromptBtn) {
-    // if copy icon missing, try to create a minimal fallback (text-only button will still work)
-    const iconCopy = copyPromptBtn.querySelector(".icon-copy");
+    let iconCopy = copyPromptBtn.querySelector(".icon-copy");
     if (!iconCopy) {
-      // create a simple inline copy SVG inside an <span> to avoid broken images
-      const span = document.createElement("span");
-      span.className = "icon-copy";
-      span.innerHTML = `
+      iconCopy = document.createElement("span");
+      iconCopy.className = "icon-copy";
+      iconCopy.innerHTML = `
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
           <rect x="9" y="9" width="9" height="9" fill="#777" rx="1"/>
           <rect x="6" y="6" width="9" height="9" fill="#222" rx="1" opacity="0.9"/>
         </svg>
       `;
-      span.style.display = "inline-block";
-      span.style.width = "24px";
-      span.style.height = "24px";
-      copyPromptBtn.insertBefore(span, copyPromptBtn.firstChild);
+      copyPromptBtn.insertBefore(iconCopy, copyPromptBtn.firstChild);
     }
 
-    // prepare check icon: if there's no <img class="icon-check">, create inline one
     const iconCheckImg = copyPromptBtn.querySelector("img.icon-check");
     const inlineCheck = copyPromptBtn.querySelector(".icon-check:not(img)");
     if (!iconCheckImg && !inlineCheck) {
       const created = createInlineCheckIcon();
-      // append before the button text (if exists)
       const btnText = copyPromptBtn.querySelector(".btn-text");
       if (btnText) copyPromptBtn.insertBefore(created, btnText);
       else copyPromptBtn.appendChild(created);
     }
 
-    // finally reset visuals
     resetCopyButtonState();
   }
 
@@ -625,89 +664,53 @@ function abrirPromptDesdeCard(card) {
   if (miniModal) miniModal.style.height = miniModal.scrollHeight + "px";
 }
 
-// close prompt: reset copy state so on reopen it's fresh
 if (promptClose) {
   promptClose.addEventListener("click", () => {
     if (promptModal) promptModal.classList.remove("active");
-    // reset immediately when closed
     resetCopyButtonState();
   });
 }
 
-// also reset when modal is removed by any other means (safety)
-if (promptModal) {
-  const observer = new MutationObserver(() => {
-    if (!promptModal.classList.contains("active")) {
-      resetCopyButtonState();
-    }
-  });
-  observer.observe(promptModal, { attributes: true, attributeFilter: ["class"] });
-}
-
-// ===============================
-// COPIAR PROMPT + ANIMACIÓN + HEIGHT SUAVE
-// ===============================
 if (copyPromptBtn && promptTextarea) {
   copyPromptBtn.addEventListener("click", () => {
     const prompt = promptTextarea.value || "";
 
-    // copy to clipboard (with fallback)
     const doCopiedUI = () => {
-      // hide copy icon (img or inline)
       const iconCopy = copyPromptBtn.querySelector(".icon-copy");
       if (iconCopy) iconCopy.style.display = "none";
 
-      // show check icon (img or inline)
       const iconCheckImg = copyPromptBtn.querySelector("img.icon-check");
-      if (iconCheckImg) {
-        iconCheckImg.style.display = "inline-block";
-      } else {
+      if (iconCheckImg) iconCheckImg.style.display = "inline-block";
+      else {
         const inlineCheck = copyPromptBtn.querySelector(".icon-check:not(img)");
         if (inlineCheck) inlineCheck.style.display = "inline-block";
       }
 
-      // visual state
       copyPromptBtn.classList.add("copied");
       const btnText = copyPromptBtn.querySelector(".btn-text");
       if (btnText) btnText.textContent = "Copiado";
-
-      // ensure mini modal height adapts
-      if (miniModal) miniModal.style.height = miniModal.scrollHeight + "px";
-
-      // auto-revert after 2s (keeps behavior consistent)
       if (_copyTimeoutId) clearTimeout(_copyTimeoutId);
-      _copyTimeoutId = setTimeout(() => {
-        resetCopyButtonState();
-      }, 2000);
+      _copyTimeoutId = setTimeout(() => resetCopyButtonState(), 2000);
     };
 
     if (!navigator.clipboard) {
-      // fallback: select and execCommand
       try {
         promptTextarea.select();
-        const ok = document.execCommand('copy');
+        const ok = document.execCommand("copy");
         if (ok) doCopiedUI();
-        else {
-          console.warn("Fallback copy failed");
-        }
       } catch (err) {
-        console.warn('Copiado no soportado', err);
+        console.warn("Copiado no soportado", err);
       }
       return;
     }
 
-    navigator.clipboard.writeText(prompt).then(() => {
-      doCopiedUI();
-    }).catch(err => {
-      console.warn("Error copiando al portapapeles:", err);
-      // still try UI feedback
-      doCopiedUI();
-    });
+    navigator.clipboard.writeText(prompt)
+      .then(() => doCopiedUI())
+      .catch(err => {
+        console.warn("Error copiando:", err);
+        doCopiedUI();
+      });
   });
 }
-// ===============================
-// Inicialización
-fetchAndRenderCards().finally(() => {
-  attachPreviewListeners();
-  attachPlantituxPreviewListeners();
-});
+
+fetchAndRenderCards();
