@@ -111,6 +111,8 @@ function buildEbootuxLikeCard(product) {
       data-ebootux-title="${escAttr(product.title || "")}" 
       data-ebootux-subtitle="${escAttr(product.subtitle || "")}" 
       data-code="${escAttr(product.code || "")}" 
+      data-course-url="${escAttr(product.courseUrl || "")}"
+      data-second-code="${escAttr(product.secondCode || "")}"
       ${blockData}>
 
       <header class="header-ebootux-cards">
@@ -415,6 +417,22 @@ document.addEventListener("click", function (e) {
     const codigoIngresado = input.value.trim();
 
     if (codigoIngresado === codigoCorrecto) {
+      const courseUrl = card.dataset.courseUrl || "";
+      const secondCode = card.dataset.secondCode || "";
+
+      // Flujo especial: Getux con doble código y redirección a curso externo.
+      if (courseUrl) {
+        const secondInput = window.prompt("Ingresa tu segundo código para entrar al curso:") || "";
+        if (secondCode && secondInput.trim() !== secondCode) {
+          mostrarModal("Segundo código incorrecto ❌", "El segundo código no coincide. Verifica e inténtalo de nuevo.");
+          return;
+        }
+        // Autorizamos el curso Getux protegido (segunda validación cumplida).
+        sessionStorage.setItem("getux_access", "granted");
+        window.location.href = courseUrl;
+        return;
+      }
+
       cargarEbootuxDesdeCard(card);
       plantilla.classList.remove("hidden");
       entrarEnEbootux();
