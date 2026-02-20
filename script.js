@@ -209,15 +209,23 @@ function renderProducts(products) {
 }
 
 async function fetchAndRenderCards() {
-  try {
-    const res = await fetch(CARDS_JSON_URL, { cache: "no-store" });
-    if (!res.ok) throw new Error("no-data");
-    const json = await res.json();
-    if (!Array.isArray(json.products)) throw new Error("invalid-json");
-    renderProducts(json.products);
-  } catch (err) {
-    console.info("cards.json no disponible; se usan cards estáticas si existen.", err);
+  const candidates = [CARDS_JSON_URL, `/${CARDS_JSON_URL}`];
+  let lastError = null;
+
+  for (const url of candidates) {
+    try {
+      const res = await fetch(url, { cache: "no-store" });
+      if (!res.ok) throw new Error(`no-data:${res.status}`);
+      const json = await res.json();
+      if (!Array.isArray(json.products)) throw new Error("invalid-json");
+      renderProducts(json.products);
+      return;
+    } catch (err) {
+      lastError = err;
+    }
   }
+
+  console.info("cards.json no disponible; se usan cards estáticas si existen.", lastError);
 }
 
 // ============================
@@ -719,5 +727,32 @@ if (copyPromptBtn && promptTextarea) {
       });
   });
 }
+
+
+// Permite usar Enter en inputs de código del sitio oficial.
+document.addEventListener("keydown", (e) => {
+  if (e.key !== "Enter") return;
+
+  const ebootuxInput = e.target.closest(".input-codigo-ebootux");
+  if (ebootuxInput) {
+    const card = ebootuxInput.closest(".ebootux-cards");
+    const btn = card?.querySelector(".btn-acceder-ebootux");
+    if (btn) {
+      e.preventDefault();
+      btn.click();
+    }
+    return;
+  }
+
+  const assetInput = e.target.closest(".input-codigo-plantitux");
+  if (assetInput) {
+    const card = assetInput.closest(".plantitux-cards, .movitux-cards");
+    const btn = card?.querySelector(".btn-acceder-plantitux");
+    if (btn) {
+      e.preventDefault();
+      btn.click();
+    }
+  }
+});
 
 fetchAndRenderCards();
