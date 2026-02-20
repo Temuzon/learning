@@ -208,6 +208,27 @@ function renderProducts(products) {
   });
 }
 
+
+function normalizarProductsDesdeJSON(json) {
+  if (Array.isArray(json?.products)) {
+    return json.products.map(p => {
+      const type = String((p.type || p.section || "")).toLowerCase();
+      const section = String((p.section || p.type || "")).toLowerCase();
+      return { ...p, type, section };
+    });
+  }
+
+  // Compatibilidad con formato por categorías: { ebootux:[], getux:[], plantitux:[], movitux:[] }
+  const categorias = ["ebootux", "getux", "plantitux", "movitux"];
+  const out = [];
+  categorias.forEach(cat => {
+    const arr = json?.[cat];
+    if (!Array.isArray(arr)) return;
+    arr.forEach(item => out.push({ ...item, type: String(item.type || cat).toLowerCase(), section: String(item.section || cat).toLowerCase() }));
+  });
+  return out;
+}
+
 async function fetchAndRenderCards() {
   const candidates = [CARDS_JSON_URL, `/${CARDS_JSON_URL}`];
   let lastError = null;
@@ -217,8 +238,9 @@ async function fetchAndRenderCards() {
       const res = await fetch(url, { cache: "no-store" });
       if (!res.ok) throw new Error(`no-data:${res.status}`);
       const json = await res.json();
-      if (!Array.isArray(json.products)) throw new Error("invalid-json");
-      renderProducts(json.products);
+      const products = normalizarProductsDesdeJSON(json);
+      if (!Array.isArray(products) || products.length === 0) throw new Error("invalid-json");
+      renderProducts(products);
       return;
     } catch (err) {
       lastError = err;
