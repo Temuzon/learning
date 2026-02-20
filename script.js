@@ -629,7 +629,7 @@ function resetCopyButtonState() {
 }
 
 function abrirPromptDesdeCard(card) {
-  const prompt = card.dataset.prompt || "";
+  const prompt = card.dataset.copyText || card.dataset.prompt || card.dataset.link || "";
   if (!promptModal || !promptTextarea) return;
 
   promptTextarea.value = prompt;
