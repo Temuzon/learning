@@ -109,7 +109,7 @@
       "copyText": "Replace the woman in the image with the person from the reference photo. Keep the exact facial identity. Do not change gender, ethnicity or facial proportions. Adapt the face to the illustration style while preserving recognizability. Match pose, perspective and lighting of the original artwork. Remove any text or logos. Convert into clean promotional video game artwork illustration, bold outlines, smooth shading, cinematic lighting, vibrant colors, not photorealistic. The result must look like official promotional art, not a real photo."
     },
     {
-      "id": "",
+      "id": "classic girl",
       "type": "movitux",
       "section": "movitux",
       "title": "classic girl",
@@ -117,7 +117,7 @@
       "code": "",
       "price": "Gratis",
       "image": "portadas/gta-san-promt.jpeg",
-      "description": "123456789",
+      "description": "",
       "link": "",
       "previewVideo": "",
       "copyText": "Replace the woman with the person from the reference photo. Maintain recognizable facial structure and features. Keep body pose and composition intact. Remove all titles, labels and logos. Illustrated poster style, bold contour lines, smooth gradient shading, clean skin tones, stylized but realistic proportions, official video game artwork aesthetic."
