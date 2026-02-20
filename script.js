@@ -287,7 +287,20 @@ async function fetchAndRenderCards() {
     try {
       const res = await fetch(url, { cache: "no-store" });
       if (!res.ok) throw new Error(`no-data:${res.status}`);
-      const json = await res.json();
+
+      const raw = await res.text();
+      let json;
+      try {
+        json = JSON.parse(raw);
+      } catch (parseError) {
+        console.error("cards.json inválido:", parseError);
+        mostrarModal(
+          "Error en cards.json",
+          "Hay un error de sintaxis en data/cards.json. Revisa comas, comillas y puntos extra (por ejemplo: previewVideo con un punto extra al final)."
+        );
+        throw parseError;
+      }
+
       const products = normalizarProductsDesdeJSON(json);
       if (!Array.isArray(products) || products.length === 0) throw new Error("invalid-json");
       renderProducts(products);
