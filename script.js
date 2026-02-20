@@ -124,8 +124,7 @@ function buildEbootuxLikeCard(product) {
         <h3>${escAttr(product.title || "Producto")}</h3>
         <img src="candado.svg" alt="candado">
         ${hasCode ? `<input type="password" class="input-codigo-ebootux" placeholder="Ingresa el código...">` : ""}
-        ${hasCode ? `<label class="toggle-code-wrap"><input type="checkbox" class="toggle-code-visibility" data-target=".input-codigo-ebootux"> Mostrar código</label>` : ""}
-        <button class="btn-acceder-ebootux">Entrar</button>
+                <button class="btn-acceder-ebootux">Entrar</button>
       </div>
 
       <div class="contenedor-de-btn-de-compra">
@@ -169,8 +168,7 @@ function buildAssetCard(product) {
         <h3>${escAttr(product.title || (isMovitux ? "Movitux" : "Plantitux"))}</h3>
         <img src="candado.svg" alt="candado">
         ${hasCode ? `<input type="password" class="input-codigo-plantitux" placeholder="Ingresa tu código...">` : ""}
-        ${hasCode ? `<label class="toggle-code-wrap"><input type="checkbox" class="toggle-code-visibility" data-target=".input-codigo-plantitux"> Mostrar código</label>` : ""}
-        <button class="btn-acceder-plantitux">Entrar</button>
+                <button class="btn-acceder-plantitux">Entrar</button>
       </div>
 
       <div class="contenedor-de-btn-de-compra">
@@ -463,14 +461,6 @@ document.addEventListener("click", function (e) {
     }
   }
 
-  const toggle = e.target.closest(".toggle-code-visibility");
-  if (toggle) {
-    const card = toggle.closest(".ebootux-cards, .plantitux-cards, .movitux-cards");
-    if (!card) return;
-    const targetSelector = toggle.getAttribute("data-target") || "";
-    const input = card.querySelector(targetSelector);
-    if (input) input.type = toggle.checked ? "text" : "password";
-  }
 
   if (e.target.closest(".ebootux-exit-btn")) {
     const ebootux = document.querySelector(".ebootux-template");
@@ -619,8 +609,6 @@ function resetCopyButtonState() {
   const inlineCheck = copyPromptBtn.querySelector(".icon-check:not(img)");
   if (inlineCheck) inlineCheck.style.display = "none";
 
-  const btnText = copyPromptBtn.querySelector(".btn-text");
-  if (btnText) btnText.textContent = "Copiar";
 
   if (_copyTimeoutId) {
     clearTimeout(_copyTimeoutId);
@@ -664,9 +652,7 @@ function abrirPromptDesdeCard(card) {
     const inlineCheck = copyPromptBtn.querySelector(".icon-check:not(img)");
     if (!iconCheckImg && !inlineCheck) {
       const created = createInlineCheckIcon();
-      const btnText = copyPromptBtn.querySelector(".btn-text");
-      if (btnText) copyPromptBtn.insertBefore(created, btnText);
-      else copyPromptBtn.appendChild(created);
+      copyPromptBtn.appendChild(created);
     }
 
     resetCopyButtonState();
@@ -699,8 +685,6 @@ if (copyPromptBtn && promptTextarea) {
       }
 
       copyPromptBtn.classList.add("copied");
-      const btnText = copyPromptBtn.querySelector(".btn-text");
-      if (btnText) btnText.textContent = "Copiado";
       if (_copyTimeoutId) clearTimeout(_copyTimeoutId);
       _copyTimeoutId = setTimeout(() => resetCopyButtonState(), 2000);
     };
