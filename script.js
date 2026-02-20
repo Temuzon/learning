@@ -94,6 +94,7 @@ showSection("Home");
 function buildEbootuxLikeCard(product) {
   const blocks = Array.isArray(product.blocks) ? product.blocks : [];
   const hasCode = Boolean((product.code || "").trim());
+  const buyLink = (product.link || "").trim();
 
   const blockData = blocks.map((b, i) => {
     const n = i + 1;
@@ -124,7 +125,7 @@ function buildEbootuxLikeCard(product) {
         <h3>${escAttr(product.title || "Producto")}</h3>
         <img src="candado.svg" alt="candado">
         ${hasCode ? `<input type="password" class="input-codigo-ebootux" placeholder="Ingresa el código...">` : ""}
-                <button class="btn-acceder-ebootux">Entrar</button>
+        <button class="btn-acceder-ebootux" type="button">Entrar</button>
       </div>
 
       <div class="contenedor-de-btn-de-compra">
@@ -138,7 +139,7 @@ function buildEbootuxLikeCard(product) {
           data-link="${escAttr(product.link || "")}">
           <img src="visibility_24dp_777777_FILL0_wght400_GRAD0_opsz24.svg" class="img-de-vista-previa" alt="vista previa">
         </a>
-        <button class="btn-de-compra btn-acceder-ebootux" type="button">
+        <button class="btn-de-compra btn-comprar" type="button" data-link="${escAttr(buyLink)}">
           <img src="shopping_cart_24dp_777777.svg" class="img-de-carrito-de-compra" alt="comprar">${escAttr(product.price || "—")}
         </button>
       </div>
@@ -150,6 +151,7 @@ function buildAssetCard(product) {
   const kind = (product.type || "").toLowerCase();
   const isMovitux = kind === "movitux";
   const hasCode = Boolean((product.code || "").trim());
+  const buyLink = (product.link || "").trim();
 
   return `
     <article class="plantitux-cards ${isMovitux ? "movitux-cards" : ""}"
@@ -158,7 +160,8 @@ function buildAssetCard(product) {
       data-preview-video="${escAttr(product.previewVideo || "")}" 
       data-prompt="${escAttr(product.prompt || "")}" 
       data-code="${escAttr(product.code || "")}" 
-      data-price="${escAttr(product.price || "")}">
+      data-price="${escAttr(product.price || "")}"
+      data-link="${escAttr(buyLink)}">
 
       <header class="header-plantitux-cards">
         <img src="${escAttr(product.image || "Statux-logo(SVG).svg")}" alt="${escAttr(product.title || "Plantitux")}">
@@ -168,14 +171,14 @@ function buildAssetCard(product) {
         <h3>${escAttr(product.title || (isMovitux ? "Movitux" : "Plantitux"))}</h3>
         <img src="candado.svg" alt="candado">
         ${hasCode ? `<input type="password" class="input-codigo-plantitux" placeholder="Ingresa tu código...">` : ""}
-                <button class="btn-acceder-plantitux">Entrar</button>
+        <button class="btn-acceder-plantitux" type="button">Entrar</button>
       </div>
 
       <div class="contenedor-de-btn-de-compra">
         <a href="#" class="btn-de-vista-previa-plantitux">
           <img src="visibility_24dp_777777_FILL0_wght400_GRAD0_opsz24.svg" class="img-de-vista-previa" alt="vista previa">
         </a>
-        <button class="btn-de-compra btn-acceder-plantitux" type="button">
+        <button class="btn-de-compra btn-comprar" type="button" data-link="${escAttr(buyLink)}">
           <img src="shopping_cart_24dp_777777.svg" class="img-de-carrito-de-compra" alt="comprar">${escAttr(product.price || "—")}
         </button>
       </div>
@@ -188,6 +191,12 @@ function sectionContainer(section) {
 }
 
 function renderProducts(products) {
+  const knownSections = ["ebootux", "getux", "plantitux", "movitux"];
+  knownSections.forEach((section) => {
+    const container = sectionContainer(section);
+    if (container) container.innerHTML = "";
+  });
+
   const bySection = products.reduce((acc, p) => {
     const sec = (p.section || "").toLowerCase();
     if (!sec) return acc;
@@ -210,23 +219,64 @@ function renderProducts(products) {
 
 
 function normalizarProductsDesdeJSON(json) {
+  const normalizeProduct = (p, fallbackCategory = "") => {
+    if (!p || typeof p !== "object") return null;
+    const normalizedType = String((p.type || p.section || fallbackCategory || "")).toLowerCase();
+    const normalizedSection = String((p.section || p.type || fallbackCategory || "")).toLowerCase();
+    if (!normalizedType || !normalizedSection) return null;
+    return { ...p, type: normalizedType, section: normalizedSection };
+  };
+
+  const out = [];
+
+  // Formato 1: array directo
+  if (Array.isArray(json)) {
+    json.forEach((p) => {
+      const n = normalizeProduct(p);
+      if (n) out.push(n);
+    });
+    return out;
+  }
+
+  // Formato 2: { products: [...] }
   if (Array.isArray(json?.products)) {
-    return json.products.map(p => {
-      const type = String((p.type || p.section || "")).toLowerCase();
-      const section = String((p.section || p.type || "")).toLowerCase();
-      return { ...p, type, section };
+    json.products.forEach((p) => {
+      const n = normalizeProduct(p);
+      if (n) out.push(n);
+    });
+    return out;
+  }
+
+  // Formato 3: { products: { categoria: [...] } }
+  if (json?.products && typeof json.products === "object") {
+    Object.entries(json.products).forEach(([category, arr]) => {
+      if (!Array.isArray(arr)) return;
+      arr.forEach((item) => {
+        const n = normalizeProduct(item, category);
+        if (n) out.push(n);
+      });
+    });
+    if (out.length) return out;
+  }
+
+  // Formato 4: { categoria: [...] }
+  if (json && typeof json === "object") {
+    Object.entries(json).forEach(([category, arr]) => {
+      if (!Array.isArray(arr)) return;
+      arr.forEach((item) => {
+        const n = normalizeProduct(item, category);
+        if (n) out.push(n);
+      });
     });
   }
 
-  // Compatibilidad con formato por categorías: { ebootux:[], getux:[], plantitux:[], movitux:[] }
-  const categorias = ["ebootux", "getux", "plantitux", "movitux"];
-  const out = [];
-  categorias.forEach(cat => {
-    const arr = json?.[cat];
-    if (!Array.isArray(arr)) return;
-    arr.forEach(item => out.push({ ...item, type: String(item.type || cat).toLowerCase(), section: String(item.section || cat).toLowerCase() }));
-  });
   return out;
+}
+
+function isFreeProduct(price) {
+  const raw = String(price || "").trim().toLowerCase();
+  if (!raw) return false;
+  return raw.includes("gratis") || raw === "0" || raw === "0.00" || raw === "$0" || raw === "$0.00";
 }
 
 async function fetchAndRenderCards() {
@@ -445,6 +495,19 @@ ${mensaje}`); } catch (_) {}
   setTimeout(() => document.addEventListener("pointerdown", onAnyClick, true), 0);
 }
 
+function openPurchaseLink(link) {
+  const normalizedLink = String(link || "").trim();
+  if (!normalizedLink || normalizedLink === "#") {
+    mostrarModal(
+      "Sin link de compra",
+      "Este card todavía no tiene link configurado. Puedes poner tu enlace de Gumroad en el campo 'link' del JSON."
+    );
+    return;
+  }
+
+  window.open(normalizedLink, "_blank", "noopener,noreferrer");
+}
+
 // ===============================
 // ACCESO + EBOOTUX
 // ===============================
@@ -460,7 +523,8 @@ document.addEventListener("click", function (e) {
 
     const codigoCorrecto = (card.dataset.code || "").trim();
     const codigoIngresado = (input?.value || "").trim();
-    const codigoValido = !codigoCorrecto || codigoIngresado === codigoCorrecto;
+    const accesoLibre = !codigoCorrecto || isFreeProduct(card.dataset.price);
+    const codigoValido = accesoLibre || codigoIngresado === codigoCorrecto;
 
     if (codigoValido) {
       const courseUrl = card.dataset.courseUrl || "";
@@ -489,7 +553,8 @@ document.addEventListener("click", function (e) {
     const input = card.querySelector(".input-codigo-plantitux");
     const codigoCorrecto = (card.dataset.code || "").trim();
     const codigoIngresado = (input?.value || "").trim();
-    const codigoValido = !codigoCorrecto || codigoIngresado === codigoCorrecto;
+    const accesoLibre = !codigoCorrecto || isFreeProduct(card.dataset.price);
+    const codigoValido = accesoLibre || codigoIngresado === codigoCorrecto;
 
     if (codigoValido) {
       abrirPromptDesdeCard(card);
@@ -500,6 +565,14 @@ document.addEventListener("click", function (e) {
         input.focus();
       }
     }
+  }
+
+  const buyBtn = e.target.closest(".btn-comprar");
+  if (buyBtn) {
+    const card = buyBtn.closest(".ebootux-cards, .plantitux-cards, .movitux-cards");
+    const link = (buyBtn.dataset.link || card?.dataset.link || "").trim();
+    openPurchaseLink(link);
+    return;
   }
 
 
