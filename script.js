@@ -384,10 +384,11 @@ function mostrarModal(titulo, mensaje, autoCerrar = false) {
   const modal = document.getElementById("modal-ebootux");
   const modalTitle = document.getElementById("modal-ebootux-title");
   const modalMessage = document.getElementById("modal-ebootux-message");
-  const modalClose = document.getElementById("modal-ebootux-close");
 
-  if (!modal || !modalTitle || !modalMessage || !modalClose) {
-    try { alert(`${titulo}\n\n${mensaje}`); } catch (_) {}
+  if (!modal || !modalTitle || !modalMessage) {
+    try { alert(`${titulo}
+
+${mensaje}`); } catch (_) {}
     return;
   }
 
@@ -395,13 +396,23 @@ function mostrarModal(titulo, mensaje, autoCerrar = false) {
   modalMessage.textContent = mensaje;
   modal.classList.remove("hidden");
 
-  if (autoCerrar) {
-    modalClose.style.display = "none";
-    setTimeout(() => modal.classList.add("hidden"), 2600);
-  } else {
-    modalClose.style.display = "inline-block";
-    modalClose.onclick = () => modal.classList.add("hidden");
-  }
+  const closeNow = () => {
+    modal.classList.add("hidden");
+    document.removeEventListener("pointerdown", onAnyClick, true);
+  };
+
+  const onAnyClick = (ev) => {
+    if (!modal.classList.contains("hidden")) closeNow();
+  };
+
+  // Cierra por timeout (mínimo 5s) y también al tocar cualquier lugar.
+  const timeoutMs = autoCerrar ? 2600 : 5000;
+  setTimeout(() => {
+    if (!modal.classList.contains("hidden")) closeNow();
+  }, timeoutMs);
+
+  // Listener global en captura para cerrar instantáneamente al click/tap.
+  setTimeout(() => document.addEventListener("pointerdown", onAnyClick, true), 0);
 }
 
 // ===============================

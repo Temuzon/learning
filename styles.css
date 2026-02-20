@@ -2064,14 +2064,13 @@ h1 {
   background: linear-gradient(120deg, #333333, #000000, #333333);
   border-radius: 20px;
   overflow: hidden;
-  transform: translateY(-250px) scale(0.4);
+  transform: translateY(-120px) scale(0.4);
   opacity: 0;
   animation: aparecer-barra 1.4s cubic-bezier(.22,1,.36,1) forwards;
 }
 
 #modal-ebootux-title,
-#modal-ebootux-message,
-#modal-ebootux-close {
+#modal-ebootux-message {
   opacity: 0;
   transform: translateY(10px) scale(0.8);
   animation: aparecer-items 0.5s ease forwards;
@@ -2082,13 +2081,10 @@ h1 {
   animation-delay: 1.05s;
 }
 
-#modal-ebootux-close {
-  animation-delay: 1.2s;
-}
 
 @keyframes aparecer-barra {
   0% {
-    transform: translateY(-250px) scale(0.4);
+    transform: translateY(-120px) scale(0.4);
     border-radius: 999px;
     opacity: 0;
   }
@@ -2109,4 +2105,47 @@ h1 {
     opacity: 1;
     transform: translateY(0) scale(1);
   }
+}
+
+
+/* Icon-only actions in prompt modal */
+.box-preview-actions .btn-de-compra {
+  width: auto !important;
+  min-width: 48px;
+  justify-content: center;
+  gap: 0;
+  padding: 10px;
+}
+
+.copy-prompt-btn .img-de-carrito-de-compra {
+  margin: 0;
+}
+
+/* keep animated check perfectly centered */
+.copy-prompt-btn {
+  align-items: center;
+  justify-content: center;
+}
+
+.copy-prompt-btn .icon-check,
+.copy-prompt-btn .icon-copy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+/* Notification modal drop distance */
+.modal-ebootux {
+  align-items: flex-start;
+  padding-top: 13px;
+}
+
+.modal-ebootux-content {
+  transform: translateY(-120px) scale(0.4);
+}
+
+#modal-ebootux-title,
+#modal-ebootux-message {
+  display: block;
 }
