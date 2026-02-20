@@ -64,6 +64,7 @@ footer {
   border-radius: 16px;
   transition: 1s;
   overflow: hidden;
+  min-width: 64px;
 }
 
 .redes-sociales:hover {
@@ -934,11 +935,6 @@ h1 {
 }
 
 /* text style */
-.copy-prompt-btn .btn-text {
-  display: inline-block;
-  pointer-events: none;
-}
-
 /* state when copied: swap icons + visual feedback */
 .copy-prompt-btn.copied {
   color: #00ffdd;
@@ -971,11 +967,6 @@ h1 {
     transform: rotate(360deg) scale(1);
     opacity: 1;
   }
-}
-
-/* Optional: change button text color while copied */
-.copy-prompt-btn.copied .btn-text {
-  color: #00ffdd;
 }
 
 /* Seccion de Getux */
@@ -2041,3 +2032,119 @@ h1 {
   
   
  
+
+
+
+.box-preview-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+
+/* Fix overlay: cubrir toda la pantalla en previews */
+.preview-cards {
+  margin-left: 0 !important;
+  margin-top: 0 !important;
+  border-radius: 0 !important;
+}
+
+.preview-overlay {
+  width: 100%;
+  height: 100vh;
+}
+
+/* Modal de notificación estilo animado Statux */
+.modal-ebootux-content {
+  width: min(480px, 92vw);
+  height: 90px;
+  padding: 15px 20px;
+  border: 3px solid #0ff;
+  background: linear-gradient(120deg, #333333, #000000, #333333);
+  border-radius: 20px;
+  overflow: hidden;
+  transform: translateY(-120px) scale(0.4);
+  opacity: 0;
+  animation: aparecer-barra 1.4s cubic-bezier(.22,1,.36,1) forwards;
+}
+
+#modal-ebootux-title,
+#modal-ebootux-message {
+  opacity: 0;
+  transform: translateY(10px) scale(0.8);
+  animation: aparecer-items 0.5s ease forwards;
+  animation-delay: 0.9s;
+}
+
+#modal-ebootux-message {
+  animation-delay: 1.05s;
+}
+
+
+@keyframes aparecer-barra {
+  0% {
+    transform: translateY(-120px) scale(0.4);
+    border-radius: 999px;
+    opacity: 0;
+  }
+  60% {
+    transform: translateY(0) scale(0.4);
+    border-radius: 999px;
+    opacity: 1;
+  }
+  90%, 100% {
+    transform: translateY(0) scale(1);
+    border-radius: 20px;
+    opacity: 1;
+  }
+}
+
+@keyframes aparecer-items {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+/* Icon-only actions in prompt modal */
+.box-preview-actions .btn-de-compra {
+  width: auto !important;
+  min-width: 48px;
+  justify-content: center;
+  gap: 0;
+  padding: 10px;
+}
+
+.copy-prompt-btn .img-de-carrito-de-compra {
+  margin: 0;
+}
+
+/* keep animated check perfectly centered */
+.copy-prompt-btn {
+  align-items: center;
+  justify-content: center;
+}
+
+.copy-prompt-btn .icon-check,
+.copy-prompt-btn .icon-copy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+/* Notification modal drop distance */
+.modal-ebootux {
+  align-items: flex-start;
+  padding-top: 13px;
+}
+
+.modal-ebootux-content {
+  transform: translateY(-120px) scale(0.4);
+}
+
+#modal-ebootux-title,
+#modal-ebootux-message {
+  display: block;
+}
