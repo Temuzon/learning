@@ -81,18 +81,18 @@
       "blocks": []
     },
     {
-      "id": "plantitux-plantitux-dark-landing",
-      "type": "plantitux",
-      "section": "plantitux",
-      "title": "Plantitux Dark Landing",
-      "prompt": "Crea una landing page oscura, minimalista y elegante para un producto digital premium llamado Statux. Usa tipografía sans-serif, alto contraste, animaciones sutiles y jerarquía visual clara.",
-      "code": "STATUX-1234",
-      "price": "4.99",
-      "image": "portadas/core----img.jpeg",
+      "id": "movitux-promt-gta",
+      "type": "movitux",
+      "section": "movitux",
+      "title": "wallpaper-gta-pareja",
+      "prompt": "Replace both characters in the image with the two people from the reference photo. Map each person to a different character while preserving their respective identities and genders. Keep recognizable facial structure, eyes, nose, mouth and natural expression for each person. Do not merge faces or average them. Each character must clearly correspond to one person. Adapt both faces to the illustrated promotional artwork style while keeping likeness. Maintain original poses, body positions, camera angle and composition. Remove all text and logos. Cinematic illustrated video game promotional art style, bold outlines, smooth gradients, vibrant sunset lighting, polished artwork finish, not photorealistic.",
+      "code": "12345",
+      "price": "1.99",
+      "image": "portadas/1200_900.jpeg",
       "description": "",
-      "link": "#",
+      "link": "chatgpt.com",
       "previewVideo": "",
-      "copyText": "#"
+      "copyText": "Replace both characters in the image with the two people from the reference photo. Map each person to a different character while preserving their respective identities and genders. Keep recognizable facial structure, eyes, nose, mouth and natural expression for each person. Do not merge faces or average them. Each character must clearly correspond to one person. Adapt both faces to the illustrated promotional artwork style while keeping likeness. Maintain original poses, body positions, camera angle and composition. Remove all text and logos. Cinematic illustrated video game promotional art style, bold outlines, smooth gradients, vibrant sunset lighting, polished artwork finish, not photorealistic."
     },
     {
       "id": "getux-calistenia",
