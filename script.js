@@ -93,6 +93,8 @@ showSection("Home");
 // ============================
 function buildEbootuxLikeCard(product) {
   const blocks = Array.isArray(product.blocks) ? product.blocks : [];
+  const hasCode = Boolean((product.code || "").trim());
+
   const blockData = blocks.map((b, i) => {
     const n = i + 1;
     return `
@@ -121,7 +123,8 @@ function buildEbootuxLikeCard(product) {
       <div class="contenedor-de-codigo">
         <h3>${escAttr(product.title || "Producto")}</h3>
         <img src="candado.svg" alt="candado">
-        <input type="text" class="input-codigo-ebootux" placeholder="Ingresa el código...">
+        ${hasCode ? `<input type="password" class="input-codigo-ebootux" placeholder="Ingresa el código...">` : ""}
+        ${hasCode ? `<label class="toggle-code-wrap"><input type="checkbox" class="toggle-code-visibility" data-target=".input-codigo-ebootux"> Mostrar código</label>` : ""}
         <button class="btn-acceder-ebootux">Entrar</button>
       </div>
 
@@ -136,34 +139,37 @@ function buildEbootuxLikeCard(product) {
           data-link="${escAttr(product.link || "")}">
           <img src="visibility_24dp_777777_FILL0_wght400_GRAD0_opsz24.svg" class="img-de-vista-previa" alt="vista previa">
         </a>
-        <a href="${escAttr(product.link || "#")}" class="btn-de-compra" target="_blank">
+        <button class="btn-de-compra btn-acceder-ebootux" type="button">
           <img src="shopping_cart_24dp_777777.svg" class="img-de-carrito-de-compra" alt="comprar">${escAttr(product.price || "—")}
-        </a>
+        </button>
       </div>
     </article>
   `;
 }
 
 function buildAssetCard(product) {
+  const kind = (product.type || "").toLowerCase();
+  const isMovitux = kind === "movitux";
+  const hasCode = Boolean((product.code || "").trim());
+
   return `
-    <article class="plantitux-cards ${((product.type||"").toLowerCase()==="movitux") ? "movitux-cards" : ""}"
+    <article class="plantitux-cards ${isMovitux ? "movitux-cards" : ""}"
       data-title="${escAttr(product.title || "")}" 
       data-preview-img="${escAttr(product.image || "")}" 
       data-preview-video="${escAttr(product.previewVideo || "")}" 
       data-prompt="${escAttr(product.prompt || "")}" 
-      data-copy-text="${escAttr(product.copyText || product.prompt || product.link || "")}" 
       data-code="${escAttr(product.code || "")}" 
-      data-price="${escAttr(product.price || "")}" 
-      data-link="${escAttr(product.link || "")}">
+      data-price="${escAttr(product.price || "")}">
 
       <header class="header-plantitux-cards">
         <img src="${escAttr(product.image || "Statux-logo(SVG).svg")}" alt="${escAttr(product.title || "Plantitux")}">
       </header>
 
       <div class="contenedor-de-codigo">
-        <h3>${escAttr(product.title || (((product.type||"").toLowerCase()==="movitux") ? "Movitux" : "Acceso"))}</h3>
+        <h3>${escAttr(product.title || (isMovitux ? "Movitux" : "Plantitux"))}</h3>
         <img src="candado.svg" alt="candado">
-        <input type="text" class="input-codigo-plantitux" placeholder="Ingresa tu código...">
+        ${hasCode ? `<input type="password" class="input-codigo-plantitux" placeholder="Ingresa tu código...">` : ""}
+        ${hasCode ? `<label class="toggle-code-wrap"><input type="checkbox" class="toggle-code-visibility" data-target=".input-codigo-plantitux"> Mostrar código</label>` : ""}
         <button class="btn-acceder-plantitux">Entrar</button>
       </div>
 
@@ -171,9 +177,9 @@ function buildAssetCard(product) {
         <a href="#" class="btn-de-vista-previa-plantitux">
           <img src="visibility_24dp_777777_FILL0_wght400_GRAD0_opsz24.svg" class="img-de-vista-previa" alt="vista previa">
         </a>
-        <a href="${escAttr(product.link || "#")}" class="btn-de-compra" target="_blank">
+        <button class="btn-de-compra btn-acceder-plantitux" type="button">
           <img src="shopping_cart_24dp_777777.svg" class="img-de-carrito-de-compra" alt="comprar">${escAttr(product.price || "—")}
-        </a>
+        </button>
       </div>
     </article>
   `;
@@ -404,20 +410,21 @@ function mostrarModal(titulo, mensaje, autoCerrar = false) {
 // ACCESO + EBOOTUX
 // ===============================
 document.addEventListener("click", function (e) {
-  if (e.target.classList.contains("btn-acceder-ebootux")) {
-    const card = e.target.closest(".ebootux-cards");
+  const ebootuxAccessBtn = e.target.closest(".btn-acceder-ebootux");
+  if (ebootuxAccessBtn) {
+    const card = ebootuxAccessBtn.closest(".ebootux-cards");
     if (!card) return;
 
     const input = card.querySelector(".input-codigo-ebootux");
     const plantilla = document.querySelector(".ebootux-template");
-    if (!input || !plantilla) return;
+    if (!plantilla) return;
 
-    const codigoCorrecto = card.dataset.code || "";
-    const codigoIngresado = input.value.trim();
+    const codigoCorrecto = (card.dataset.code || "").trim();
+    const codigoIngresado = (input?.value || "").trim();
+    const codigoValido = !codigoCorrecto || codigoIngresado === codigoCorrecto;
 
-    if (codigoIngresado === codigoCorrecto) {
+    if (codigoValido) {
       const courseUrl = card.dataset.courseUrl || "";
-      // Flujo Getux externo: validar primer código aquí y enviar al acceso del curso.
       if (courseUrl) {
         window.location.href = courseUrl;
         return;
@@ -428,28 +435,41 @@ document.addEventListener("click", function (e) {
       entrarEnEbootux();
     } else {
       mostrarModal("Código incorrecto ❌", "Verifica tu código e inténtalo de nuevo.");
-      input.value = "";
-      input.focus();
+      if (input) {
+        input.value = "";
+        input.focus();
+      }
     }
   }
 
-  if (e.target.classList.contains("btn-acceder-plantitux")) {
-    const card = e.target.closest(".plantitux-cards, .movitux-cards");
+  const assetAccessBtn = e.target.closest(".btn-acceder-plantitux");
+  if (assetAccessBtn) {
+    const card = assetAccessBtn.closest(".plantitux-cards, .movitux-cards");
     if (!card) return;
 
     const input = card.querySelector(".input-codigo-plantitux");
-    if (!input) return;
+    const codigoCorrecto = (card.dataset.code || "").trim();
+    const codigoIngresado = (input?.value || "").trim();
+    const codigoValido = !codigoCorrecto || codigoIngresado === codigoCorrecto;
 
-    const codigoCorrecto = card.dataset.code || "";
-    const codigoIngresado = input.value.trim();
-
-    if (codigoIngresado === codigoCorrecto) {
+    if (codigoValido) {
       abrirPromptDesdeCard(card);
     } else {
       mostrarModal("Código incorrecto ❌", "Verifica tu código e inténtalo de nuevo.");
-      input.value = "";
-      input.focus();
+      if (input) {
+        input.value = "";
+        input.focus();
+      }
     }
+  }
+
+  const toggle = e.target.closest(".toggle-code-visibility");
+  if (toggle) {
+    const card = toggle.closest(".ebootux-cards, .plantitux-cards, .movitux-cards");
+    if (!card) return;
+    const targetSelector = toggle.getAttribute("data-target") || "";
+    const input = card.querySelector(targetSelector);
+    if (input) input.type = toggle.checked ? "text" : "password";
   }
 
   if (e.target.closest(".ebootux-exit-btn")) {
@@ -570,7 +590,7 @@ const promptTextarea = document.getElementById("prompt-textarea");
 const promptClose = document.getElementById("prompt-modal-close");
 const copyPromptBtn = document.getElementById("copy-prompt-btn");
 const miniModal = document.querySelector(".mini-modal");
-const promptOpenGumroad = document.getElementById("prompt-open-gumroad");
+const downloadReferenceBtn = document.getElementById("download-reference-btn");
 let _copyTimeoutId = null;
 
 function createInlineCheckIcon() {
@@ -617,11 +637,13 @@ function abrirPromptDesdeCard(card) {
   const modalTitle = promptModal.querySelector(".head-box h2");
   if (modalTitle) {
     const isMovitux = card.classList.contains("movitux-cards");
-    modalTitle.textContent = isMovitux ? "Asset / Prompt" : "Link de Plantilla";
+    modalTitle.textContent = isMovitux ? "Prompt Movitux" : "Prompt Plantitux";
   }
-  if (promptOpenGumroad) {
-    promptOpenGumroad.href = card.dataset.link || "#";
-    promptOpenGumroad.target = "_blank";
+  if (downloadReferenceBtn) {
+    const imageUrl = card.dataset.previewImg || "";
+    downloadReferenceBtn.href = imageUrl || "#";
+    const fileName = (card.dataset.title || "referencia").toLowerCase().replace(/[^a-z0-9]+/g, "-") + ".jpg";
+    downloadReferenceBtn.setAttribute("download", fileName);
   }
 
   if (copyPromptBtn) {

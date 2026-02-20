@@ -443,7 +443,7 @@ h1 {
   border: 2px solid #777;
   background: #000;
   color: #0ff;
-  font-size: 18px;
+  font-size: 14px;
   outline: none;
   transition: 0.3s ease;
   font-weight: 400;
@@ -547,7 +547,7 @@ h1 {
   border: 2px solid #777;
   background: #000;
   color: #0ff;
-  font-size: 18px;
+  font-size: 14px;
   outline: none;
 }
 
@@ -566,7 +566,7 @@ h1 {
   border: 3px solid #777;
   background: transparent;
   color: #777;
-  font-size: 18px;
+  font-size: 14px;
   cursor: pointer;
   transition: 0.55s;
 }
@@ -712,7 +712,7 @@ h1 {
   border: 2px solid #777;
   background: #000;
   color: #0ff;
-  font-size: 18px;
+  font-size: 14px;
   outline: none;
 }
 
@@ -731,7 +731,7 @@ h1 {
   border: 3px solid #777;
   background: transparent;
   color: #777;
-  font-size: 18px;
+  font-size: 14px;
   cursor: pointer;
   transition: 0.55s;
 }
@@ -895,9 +895,10 @@ h1 {
   background: transparent;
   color: #777;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 14px;
   position: relative;
   overflow: hidden;
+  min-width: 140px;
   transition: color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
@@ -937,6 +938,8 @@ h1 {
 .copy-prompt-btn .btn-text {
   display: inline-block;
   pointer-events: none;
+  font-size: 13px;
+  white-space: nowrap;
 }
 
 /* state when copied: swap icons + visual feedback */
@@ -1569,7 +1572,7 @@ h1 {
 
 .preview-description {
   color: #bbb;
-  font-size: 18px;
+  font-size: 14px;
   line-height: 1.6;
   margin-top: -10px;
   margin-bottom: 10px;
@@ -2041,3 +2044,24 @@ h1 {
   
   
  
+
+
+.toggle-code-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  color: #bbbbbb;
+  font-size: 13px;
+}
+
+.toggle-code-wrap input[type="checkbox"] {
+  accent-color: #00ffff;
+}
+
+.box-preview-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
