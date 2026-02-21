@@ -6,7 +6,7 @@
       "title": "EL VERDADERO GLOW UP MASCULINO",
       "subtitle": "La reconstrucción chévere del man que ya eres (pero en modo premium).",
       "code": "",
-      "price": "Gratis",
+      "price": "",
       "image": "portadas/ebootux-glowupmasculino.jpeg",
       "description": "Este Ebóotux es solo el empujón inicial, la chispa. No es el camino completo, pero sí el primer paso consciente.",
       "yes": "✔ Acceso inmediato",
@@ -223,7 +223,7 @@
       "title": "Manual de acciones para provocar un glow up",
       "subtitle": "Este Getux no está aquí para convertirte en alguien que no eres. Está aquí para ayudarte a dejar de sabotearte y empezar a jugar en tu mejor nivel.",
       "code": "12345",
-      "price": "1.99",
+      "price": "",
       "image": "portadas/82387-69734.jpeg",
       "description": "Este Getux no está aquí para convertirte en alguien que no eres. Está aquí para ayudarte a dejar de sabotearte y empezar a jugar en tu mejor nivel.",
       "yes": "✔ Acceso inmediato",
@@ -336,7 +336,7 @@
       "title": "Testosterona en aumento",
       "subtitle": "Construye un cuerpo que la produce naturalmente.",
       "code": "12345",
-      "price": "2.99",
+      "price": "",
       "image": "portadas/testoteroneporta.jpeg",
       "description": "Este Getux no está aquí para convertirte en alguien que no eres. Está aquí para ayudarte a dejar de sabotearte y empezar a jugar en tu mejor nivel.",
       "yes": "✔ Acceso inmediato",
@@ -382,7 +382,7 @@
       "price": "",
       "image": "portadas/gta-san-promt.jpeg",
       "previewVideo": "",
-      "link": "https://chatgpt.com/"
+      "link": ""
     },
     {
       "type": "movitux",
