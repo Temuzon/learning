@@ -542,7 +542,7 @@ function openPurchaseLink(link) {
   if (!normalizedLink || normalizedLink === "#") {
     mostrarModal(
       "Card no disponible",
-      "Card no disponible"
+      "Estamos trabajando en ello"
     );
     return;
   }
@@ -781,7 +781,7 @@ function resetCopyButtonState() {
 }
 
 function abrirPromptDesdeCard(card) {
-  const prompt = card.dataset.prompt || "";
+  const prompt = card.dataset.copyText || card.dataset.prompt || card.dataset.link || "";
   if (!promptModal || !promptTextarea) return;
 
   promptTextarea.value = prompt;
