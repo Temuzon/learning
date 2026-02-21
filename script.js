@@ -280,7 +280,8 @@ function isFreeProduct(price) {
 }
 
 async function fetchAndRenderCards() {
-  const candidates = [CARDS_JSON_URL, `/${CARDS_JSON_URL}`];
+  const cacheBuster = `v=${Date.now()}`;
+  const candidates = [`${CARDS_JSON_URL}?${cacheBuster}`, `/${CARDS_JSON_URL}?${cacheBuster}`, CARDS_JSON_URL, `/${CARDS_JSON_URL}`];
   let lastError = null;
 
   for (const url of candidates) {
@@ -512,8 +513,7 @@ function openPurchaseLink(link) {
   const normalizedLink = String(link || "").trim();
   if (!normalizedLink || normalizedLink === "#") {
     mostrarModal(
-      "Sin link de compra",
-      "Este card todavía no tiene link configurado. Puedes poner tu enlace de Gumroad en el campo 'link' del JSON."
+      "Card no disponible"
     );
     return;
   }
