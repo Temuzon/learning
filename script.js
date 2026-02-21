@@ -296,12 +296,12 @@ function isFreeProduct(price) {
 function getLockIconByCode(code) {
   return String(code || "").trim()
     ? "candado.svg"
-    : "lock_open_right_24dp_00FFFF_FILL0_wght400_GRAD0_opsz24.svg";
+    : "iconos/lock_open_right_24dp_00FFFF_FILL0_wght400_GRAD0_opsz24.svg";
 }
 
 function formatPriceText(price) {
   const raw = String(price || "").trim();
-  if (!raw) return "";
+  if (!raw) return "Gratis";
   return raw;
 }
 
@@ -614,8 +614,8 @@ document.addEventListener("click", function (e) {
     const card = buyBtn.closest(".ebootux-cards, .plantitux-cards, .movitux-cards");
     if (!card) return;
 
-    const priceText = formatPriceText(buyBtn.dataset.price || card.dataset.price || "");
-    if (!priceText) {
+    const rawPrice = String(buyBtn.dataset.price || card.dataset.price || "").trim();
+    if (!rawPrice) {
       const enterBtn = card.querySelector(".btn-acceder-ebootux, .btn-acceder-plantitux");
       if (enterBtn) {
         enterBtn.click();
