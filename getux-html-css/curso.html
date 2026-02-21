@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Getux HTML & CSS · Curso</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="page">
+      <header class="card topbar">
+        <div>
+          <h1>Getux HTML &amp; CSS</h1>
+          <p class="muted">Arquitectura visual limpia, componentes sólidos y práctica real.</p>
+        </div>
+        <button id="btn-salir" class="btn btn-soft">Salir</button>
+      </header>
+
+      <section class="grid-two">
+        <article class="card">
+          <h2>Video explicativo</h2>
+          <div class="video-wrap">
+            <iframe
+              src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+              title="Video del curso"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </article>
+
+        <article class="card">
+          <h2>Guía rápida</h2>
+          <p>
+            En este Getux aprenderás a estructurar páginas modernas con HTML semántico,
+            diseñar interfaces limpias con CSS y activar interactividad útil con JavaScript puro.
+          </p>
+          <p>
+            Regla del curso: menos ruido, más sistema. Cada bloque que construyas debe tener
+            propósito visual y funcional.
+          </p>
+        </article>
+      </section>
+
+      <section class="card">
+        <h2>Referencias visuales</h2>
+        <div class="image-grid">
+          <img src="../portadas/core----img.jpeg" alt="Referencia visual 1" />
+          <img src="../portadas/487-3476.jpeg" alt="Referencia visual 2" />
+          <img src="../portadas/82387-69734.jpeg" alt="Referencia visual 3" />
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="playground-head">
+          <h2>Playground avanzado</h2>
+          <button id="btn-reset" class="btn btn-danger">Reset Proyecto</button>
+        </div>
+
+        <div class="tabs" role="tablist" aria-label="Editores">
+          <button class="tab active" data-tab="html" role="tab">HTML</button>
+          <button class="tab" data-tab="css" role="tab">CSS</button>
+          <button class="tab" data-tab="js" role="tab">JS</button>
+        </div>
+
+        <div class="editor-wrap">
+          <textarea id="editor-html" class="editor" spellcheck="false"></textarea>
+          <textarea id="editor-css" class="editor hidden" spellcheck="false"></textarea>
+          <textarea id="editor-js" class="editor hidden" spellcheck="false"></textarea>
+        </div>
+
+        <h3>Live Preview</h3>
+        <iframe id="preview" class="preview"></iframe>
+
+        <h3>Consola</h3>
+        <pre id="console" class="console"></pre>
+      </section>
+    </main>
+
+    <script src="auth.js"></script>
+    <script src="playground.js"></script>
+  </body>
+</html>
