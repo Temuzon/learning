@@ -542,7 +542,7 @@ function openPurchaseLink(link) {
   if (!normalizedLink || normalizedLink === "#") {
     mostrarModal(
       "Card no disponible",
-      "Card no disponible"
+      "Estamos trabajando en ello"
     );
     return;
   }
