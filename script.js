@@ -151,7 +151,7 @@ function buildEbootuxLikeCard(product) {
           data-link="${escAttr(product.link || "")}">
           <img src="visibility_24dp_777777_FILL0_wght400_GRAD0_opsz24.svg" class="img-de-vista-previa" alt="vista previa">
         </a>
-        <button class="btn-de-compra btn-comprar" type="button" data-link="${escAttr(buyLink)}">
+        <button class="btn-de-compra btn-comprar" type="button" data-link="${escAttr(buyLink)}" data-price="${escAttr(product.price || "")}">
           <img src="shopping_cart_24dp_777777.svg" class="img-de-carrito-de-compra" alt="comprar">${priceText ? escAttr(priceText) : ""}
         </button>
       </div>
@@ -192,7 +192,7 @@ function buildAssetCard(product) {
         <a href="#" class="btn-de-vista-previa-plantitux">
           <img src="visibility_24dp_777777_FILL0_wght400_GRAD0_opsz24.svg" class="img-de-vista-previa" alt="vista previa">
         </a>
-        <button class="btn-de-compra btn-comprar" type="button" data-link="${escAttr(buyLink)}">
+        <button class="btn-de-compra btn-comprar" type="button" data-link="${escAttr(buyLink)}" data-price="${escAttr(product.price || "")}">
           <img src="shopping_cart_24dp_777777.svg" class="img-de-carrito-de-compra" alt="comprar">${priceText ? escAttr(priceText) : ""}
         </button>
       </div>
@@ -542,7 +542,7 @@ function openPurchaseLink(link) {
   if (!normalizedLink || normalizedLink === "#") {
     mostrarModal(
       "Card no disponible",
-      "Estamos trabajando en ello"
+      "Card no disponible"
     );
     return;
   }
@@ -612,7 +612,18 @@ document.addEventListener("click", function (e) {
   const buyBtn = e.target.closest(".btn-comprar");
   if (buyBtn) {
     const card = buyBtn.closest(".ebootux-cards, .plantitux-cards, .movitux-cards");
-    const link = (buyBtn.dataset.link || card?.dataset.link || "").trim();
+    if (!card) return;
+
+    const priceText = formatPriceText(buyBtn.dataset.price || card.dataset.price || "");
+    if (!priceText) {
+      const enterBtn = card.querySelector(".btn-acceder-ebootux, .btn-acceder-plantitux");
+      if (enterBtn) {
+        enterBtn.click();
+        return;
+      }
+    }
+
+    const link = (buyBtn.dataset.link || card.dataset.link || "").trim();
     openPurchaseLink(link);
     return;
   }
