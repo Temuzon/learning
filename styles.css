@@ -896,9 +896,10 @@ h1 {
   background: transparent;
   color: #777;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 14px;
   position: relative;
   overflow: hidden;
+  min-width: 140px;
   transition: color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
@@ -1560,7 +1561,7 @@ h1 {
 
 .preview-description {
   color: #bbb;
-  font-size: 18px;
+  font-size: 14px;
   line-height: 1.6;
   margin-top: -10px;
   margin-bottom: 10px;
