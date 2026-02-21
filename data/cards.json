@@ -379,7 +379,7 @@
       "title": "Classic girl",
       "prompt": "Replace the woman with the person from the reference photo. Maintain recognizable facial structure and features. Keep body pose and composition intact. Remove all titles, labels and logos. Illustrated poster style, bold contour lines, smooth gradient shading, clean skin tones, stylized but realistic proportions, official video game artwork aesthetic.",
       "code": "001",
-      "price": "0.00",
+      "price": "",
       "image": "portadas/gta-san-promt.jpeg",
       "previewVideo": "",
       "link": "https://chatgpt.com/"

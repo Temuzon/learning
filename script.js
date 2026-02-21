@@ -29,7 +29,17 @@ const boton = $(".boton-de-ensanche-de-barra-de-navegacion");
 const barra = $(".barra-de-navegacion");
 if (boton && barra) {
   boton.addEventListener("click", () => barra.classList.toggle("expandida"));
+
+  document.addEventListener("pointerdown", (e) => {
+    if (!barra.classList.contains("expandida")) return;
+    const clickedInsideBar = barra.contains(e.target);
+    const clickedToggle = boton.contains(e.target);
+    if (!clickedInsideBar && !clickedToggle) {
+      barra.classList.remove("expandida");
+    }
+  });
 }
+
 
 function showNavigationLockedModal() {
   mostrarModal(
@@ -94,7 +104,9 @@ showSection("Home");
 function buildEbootuxLikeCard(product) {
   const blocks = Array.isArray(product.blocks) ? product.blocks : [];
   const hasCode = Boolean((product.code || "").trim());
+  const lockIcon = getLockIconByCode(product.code);
   const buyLink = (product.link || "").trim();
+  const priceText = formatPriceText(product.price);
 
   const blockData = blocks.map((b, i) => {
     const n = i + 1;
@@ -123,7 +135,7 @@ function buildEbootuxLikeCard(product) {
 
       <div class="contenedor-de-codigo">
         <h3>${escAttr(product.title || "Producto")}</h3>
-        <img src="candado.svg" alt="candado">
+        <img src="${escAttr(lockIcon)}" alt="estado de acceso">
         ${hasCode ? `<input type="password" class="input-codigo-ebootux" placeholder="Ingresa el código...">` : ""}
         <button class="btn-acceder-ebootux" type="button">Entrar</button>
       </div>
@@ -140,7 +152,7 @@ function buildEbootuxLikeCard(product) {
           <img src="visibility_24dp_777777_FILL0_wght400_GRAD0_opsz24.svg" class="img-de-vista-previa" alt="vista previa">
         </a>
         <button class="btn-de-compra btn-comprar" type="button" data-link="${escAttr(buyLink)}">
-          <img src="shopping_cart_24dp_777777.svg" class="img-de-carrito-de-compra" alt="comprar">${escAttr(product.price || "—")}
+          <img src="shopping_cart_24dp_777777.svg" class="img-de-carrito-de-compra" alt="comprar">${priceText ? escAttr(priceText) : ""}
         </button>
       </div>
     </article>
@@ -151,7 +163,9 @@ function buildAssetCard(product) {
   const kind = (product.type || "").toLowerCase();
   const isMovitux = kind === "movitux";
   const hasCode = Boolean((product.code || "").trim());
+  const lockIcon = getLockIconByCode(product.code);
   const buyLink = (product.link || "").trim();
+  const priceText = formatPriceText(product.price);
 
   return `
     <article class="plantitux-cards ${isMovitux ? "movitux-cards" : ""}"
@@ -169,7 +183,7 @@ function buildAssetCard(product) {
 
       <div class="contenedor-de-codigo">
         <h3>${escAttr(product.title || (isMovitux ? "Movitux" : "Plantitux"))}</h3>
-        <img src="candado.svg" alt="candado">
+        <img src="${escAttr(lockIcon)}" alt="estado de acceso">
         ${hasCode ? `<input type="password" class="input-codigo-plantitux" placeholder="Ingresa tu código...">` : ""}
         <button class="btn-acceder-plantitux" type="button">Entrar</button>
       </div>
@@ -179,7 +193,7 @@ function buildAssetCard(product) {
           <img src="visibility_24dp_777777_FILL0_wght400_GRAD0_opsz24.svg" class="img-de-vista-previa" alt="vista previa">
         </a>
         <button class="btn-de-compra btn-comprar" type="button" data-link="${escAttr(buyLink)}">
-          <img src="shopping_cart_24dp_777777.svg" class="img-de-carrito-de-compra" alt="comprar">${escAttr(product.price || "—")}
+          <img src="shopping_cart_24dp_777777.svg" class="img-de-carrito-de-compra" alt="comprar">${priceText ? escAttr(priceText) : ""}
         </button>
       </div>
     </article>
@@ -279,6 +293,18 @@ function isFreeProduct(price) {
   return raw.includes("gratis") || raw === "0" || raw === "0.00" || raw === "$0" || raw === "$0.00";
 }
 
+function getLockIconByCode(code) {
+  return String(code || "").trim()
+    ? "candado.svg"
+    : "lock_open_right_24dp_00FFFF_FILL0_wght400_GRAD0_opsz24.svg";
+}
+
+function formatPriceText(price) {
+  const raw = String(price || "").trim();
+  if (!raw) return "";
+  return raw;
+}
+
 async function fetchAndRenderCards() {
   const cacheBuster = `v=${Date.now()}`;
   const candidates = [`${CARDS_JSON_URL}?${cacheBuster}`, `/${CARDS_JSON_URL}?${cacheBuster}`, CARDS_JSON_URL, `/${CARDS_JSON_URL}`];
@@ -349,7 +375,8 @@ document.addEventListener("click", (e) => {
   if (previewDescription) previewDescription.textContent = description;
 
   if (previewBuyBtn) {
-    previewBuyBtn.innerHTML = `<img src="shopping_cart_24dp_777777.svg" class="img-de-carrito-de-compra"/>$${price}`;
+    const priceText = formatPriceText(price);
+    previewBuyBtn.innerHTML = `<img src="shopping_cart_24dp_777777.svg" class="img-de-carrito-de-compra"/>${priceText ? `$${escAttr(priceText)}` : ""}`;
     previewBuyBtn.href = link;
     previewBuyBtn.target = "_blank";
   }
@@ -417,7 +444,8 @@ document.addEventListener("click", (e) => {
   }
 
   if (plantituxPreviewBuy) {
-    plantituxPreviewBuy.innerHTML = `<img src="shopping_cart_24dp_777777.svg" class="img-de-carrito-de-compra"/>$${price}`;
+    const priceText = formatPriceText(price);
+    plantituxPreviewBuy.innerHTML = `<img src="shopping_cart_24dp_777777.svg" class="img-de-carrito-de-compra"/>${priceText ? `$${escAttr(priceText)}` : ""}`;
     plantituxPreviewBuy.href = link;
     plantituxPreviewBuy.target = "_blank";
   }
@@ -513,7 +541,8 @@ function openPurchaseLink(link) {
   const normalizedLink = String(link || "").trim();
   if (!normalizedLink || normalizedLink === "#") {
     mostrarModal(
-      "Card no disponible"
+      "Card no disponible",
+      "Estamos trabajando en ello"
     );
     return;
   }
@@ -596,6 +625,7 @@ document.addEventListener("click", function (e) {
     ebootux.classList.add("hidden");
     ebootux.classList.remove("active");
     navigationLocked = false;
+    toggleFooterVisibility(true);
     showSection("Home");
   }
 });
@@ -683,6 +713,12 @@ function cargarEbootuxDesdeCard(card) {
   }
 }
 
+function toggleFooterVisibility(show) {
+  const footer = document.querySelector("footer");
+  if (!footer) return;
+  footer.style.display = show ? "" : "none";
+}
+
 function entrarEnEbootux() {
   const ebootux = document.querySelector(".ebootux-template");
   const appSections = document.querySelectorAll(".app-section");
@@ -696,6 +732,7 @@ function entrarEnEbootux() {
   }
 
   navigationLocked = true;
+  toggleFooterVisibility(false);
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
