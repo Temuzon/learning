@@ -378,7 +378,6 @@ document.addEventListener("click", (e) => {
     const priceText = formatPriceText(price);
     previewBuyBtn.innerHTML = `<img src="shopping_cart_24dp_777777.svg" class="img-de-carrito-de-compra"/>${priceText ? `$${escAttr(priceText)}` : ""}`;
     previewBuyBtn.href = link;
-    previewBuyBtn.target = "_self";
   }
 
   if (previewYes) {
@@ -447,11 +446,24 @@ document.addEventListener("click", (e) => {
     const priceText = formatPriceText(price);
     plantituxPreviewBuy.innerHTML = `<img src="shopping_cart_24dp_777777.svg" class="img-de-carrito-de-compra"/>${priceText ? `$${escAttr(priceText)}` : ""}`;
     plantituxPreviewBuy.href = link;
-    plantituxPreviewBuy.target = "_self";
   }
 
   plantituxPreviewModal.classList.add("active");
 });
+
+if (previewBuyBtn) {
+  previewBuyBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    openPurchaseLink(previewBuyBtn.getAttribute("href") || "");
+  });
+}
+
+if (plantituxPreviewBuy) {
+  plantituxPreviewBuy.addEventListener("click", (e) => {
+    e.preventDefault();
+    openPurchaseLink(plantituxPreviewBuy.getAttribute("href") || "");
+  });
+}
 
 // ============================
 // BUSCADOR POR SECCIÓN
@@ -544,6 +556,12 @@ function openPurchaseLink(link) {
       "Card no disponible",
       "Estamos trabajando en ello 😁"
     );
+    return;
+  }
+
+  const isGumroadLink = /(^https?:\/\/)?([\w-]+\.)?gumroad\.com\/l\//i.test(normalizedLink);
+  if (isGumroadLink && typeof window.GumroadOverlay?.open === "function") {
+    window.GumroadOverlay.open(normalizedLink);
     return;
   }
 
