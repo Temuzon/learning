@@ -378,7 +378,7 @@ document.addEventListener("click", (e) => {
     const priceText = formatPriceText(price);
     previewBuyBtn.innerHTML = `<img src="shopping_cart_24dp_777777.svg" class="img-de-carrito-de-compra"/>${priceText ? `$${escAttr(priceText)}` : ""}`;
     previewBuyBtn.href = link;
-    previewBuyBtn.target = "_blank";
+    previewBuyBtn.target = "_self";
   }
 
   if (previewYes) {
@@ -447,7 +447,7 @@ document.addEventListener("click", (e) => {
     const priceText = formatPriceText(price);
     plantituxPreviewBuy.innerHTML = `<img src="shopping_cart_24dp_777777.svg" class="img-de-carrito-de-compra"/>${priceText ? `$${escAttr(priceText)}` : ""}`;
     plantituxPreviewBuy.href = link;
-    plantituxPreviewBuy.target = "_blank";
+    plantituxPreviewBuy.target = "_self";
   }
 
   plantituxPreviewModal.classList.add("active");
@@ -542,12 +542,12 @@ function openPurchaseLink(link) {
   if (!normalizedLink || normalizedLink === "#") {
     mostrarModal(
       "Card no disponible",
-      "Estamos trabajando en ello"
+      "Estamos trabajando en ello 😁"
     );
     return;
   }
 
-  window.open(normalizedLink, "_blank", "noopener,noreferrer");
+  window.location.assign(normalizedLink);
 }
 
 // ===============================
