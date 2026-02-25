@@ -405,20 +405,6 @@ document.addEventListener("click", (e) => {
   previewModal.classList.add("active");
 });
 
-if (previewBuyBtn) {
-  previewBuyBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    openPurchaseLink(previewBuyBtn.getAttribute("href") || "");
-  });
-}
-
-if (plantituxPreviewBuy) {
-  plantituxPreviewBuy.addEventListener("click", (e) => {
-    e.preventDefault();
-    openPurchaseLink(plantituxPreviewBuy.getAttribute("href") || "");
-  });
-}
-
 // ============================
 // PREVIEW PLANTITUX
 // ============================
@@ -569,7 +555,7 @@ function openPurchaseLink(link) {
   if (!normalizedLink || normalizedLink === "#") {
     mostrarModal(
       "Card no disponible",
-      "Card no disponible"
+      "Estamos trabajando en ello 😁"
     );
     return;
   }
@@ -679,9 +665,16 @@ document.addEventListener("click", function (e) {
   }
 });
 
-window.addEventListener("load", () => {
+function markBodyLoaded() {
   document.body.classList.add("loaded");
-});
+}
+
+if (document.readyState !== "loading") {
+  markBodyLoaded();
+} else {
+  document.addEventListener("DOMContentLoaded", markBodyLoaded, { once: true });
+}
+window.addEventListener("load", markBodyLoaded, { once: true });
 
 function cargarEbootuxDesdeCard(card) {
   const ebootux = document.querySelector(".ebootux-template");
