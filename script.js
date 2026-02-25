@@ -98,6 +98,27 @@ navItems.forEach(item => {
 
 showSection("Home");
 
+const GUMROAD_SCRIPT_SRC = "https://gumroad.com/js/gumroad.js";
+
+function ensureGumroadScriptLoaded() {
+  if (window.Gumroad) return;
+
+  const existing = document.querySelector(`script[src^="${GUMROAD_SCRIPT_SRC}"]`);
+  if (existing) return;
+
+  const script = document.createElement("script");
+  script.src = GUMROAD_SCRIPT_SRC;
+  script.async = true;
+  document.head.appendChild(script);
+}
+
+function reinitializeGumroadButtons() {
+  ensureGumroadScriptLoaded();
+  if (window.Gumroad?.reload) {
+    window.Gumroad.reload();
+  }
+}
+
 // ============================
 // RENDER DINÁMICO DESDE JSON
 // ============================
@@ -106,6 +127,7 @@ function buildEbootuxLikeCard(product) {
   const hasCode = Boolean((product.code || "").trim());
   const lockIcon = getLockIconByCode(product.code);
   const buyLink = (product.link || "").trim();
+  const isGumroad = isGumroadLink(buyLink);
   const priceText = formatPriceText(product.price);
 
   const blockData = blocks.map((b, i) => {
@@ -151,9 +173,9 @@ function buildEbootuxLikeCard(product) {
           data-link="${escAttr(product.link || "")}">
           <img src="visibility_24dp_777777_FILL0_wght400_GRAD0_opsz24.svg" class="img-de-vista-previa" alt="vista previa">
         </a>
-        <button class="btn-de-compra btn-comprar" type="button" data-link="${escAttr(buyLink)}" data-price="${escAttr(product.price || "")}">
+        <a href="${escAttr(buyLink || "#")}" class="btn-de-compra btn-comprar ${isGumroad ? "gumroad-button" : ""}" data-link="${escAttr(buyLink)}" data-price="${escAttr(product.price || "")}">
           <img src="shopping_cart_24dp_777777.svg" class="img-de-carrito-de-compra" alt="comprar">${priceText ? escAttr(priceText) : ""}
-        </button>
+        </a>
       </div>
     </article>
   `;
@@ -165,6 +187,7 @@ function buildAssetCard(product) {
   const hasCode = Boolean((product.code || "").trim());
   const lockIcon = getLockIconByCode(product.code);
   const buyLink = (product.link || "").trim();
+  const isGumroad = isGumroadLink(buyLink);
   const priceText = formatPriceText(product.price);
 
   return `
@@ -192,9 +215,9 @@ function buildAssetCard(product) {
         <a href="#" class="btn-de-vista-previa-plantitux">
           <img src="visibility_24dp_777777_FILL0_wght400_GRAD0_opsz24.svg" class="img-de-vista-previa" alt="vista previa">
         </a>
-        <button class="btn-de-compra btn-comprar" type="button" data-link="${escAttr(buyLink)}" data-price="${escAttr(product.price || "")}">
+        <a href="${escAttr(buyLink || "#")}" class="btn-de-compra btn-comprar ${isGumroad ? "gumroad-button" : ""}" data-link="${escAttr(buyLink)}" data-price="${escAttr(product.price || "")}">
           <img src="shopping_cart_24dp_777777.svg" class="img-de-carrito-de-compra" alt="comprar">${priceText ? escAttr(priceText) : ""}
-        </button>
+        </a>
       </div>
     </article>
   `;
@@ -229,6 +252,8 @@ function renderProducts(products) {
       return buildEbootuxLikeCard(product);
     }).join("\n");
   });
+
+  reinitializeGumroadButtons();
 }
 
 
@@ -635,6 +660,8 @@ document.addEventListener("click", function (e) {
 
   const buyBtn = e.target.closest(".btn-comprar");
   if (buyBtn) {
+    e.preventDefault();
+
     const card = buyBtn.closest(".ebootux-cards, .plantitux-cards, .movitux-cards");
     if (!card) return;
 
