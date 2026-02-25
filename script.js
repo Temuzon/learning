@@ -378,6 +378,8 @@ document.addEventListener("click", (e) => {
     const priceText = formatPriceText(price);
     previewBuyBtn.innerHTML = `<img src="shopping_cart_24dp_777777.svg" class="img-de-carrito-de-compra"/>${priceText ? `$${escAttr(priceText)}` : ""}`;
     previewBuyBtn.href = link;
+    previewBuyBtn.target = "_self";
+    setGumroadClassIfNeeded(previewBuyBtn, link);
   }
 
   if (previewYes) {
@@ -402,6 +404,20 @@ document.addEventListener("click", (e) => {
 
   previewModal.classList.add("active");
 });
+
+if (previewBuyBtn) {
+  previewBuyBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    openPurchaseLink(previewBuyBtn.getAttribute("href") || "");
+  });
+}
+
+if (plantituxPreviewBuy) {
+  plantituxPreviewBuy.addEventListener("click", (e) => {
+    e.preventDefault();
+    openPurchaseLink(plantituxPreviewBuy.getAttribute("href") || "");
+  });
+}
 
 // ============================
 // PREVIEW PLANTITUX
@@ -446,24 +462,12 @@ document.addEventListener("click", (e) => {
     const priceText = formatPriceText(price);
     plantituxPreviewBuy.innerHTML = `<img src="shopping_cart_24dp_777777.svg" class="img-de-carrito-de-compra"/>${priceText ? `$${escAttr(priceText)}` : ""}`;
     plantituxPreviewBuy.href = link;
+    plantituxPreviewBuy.target = "_self";
+    setGumroadClassIfNeeded(plantituxPreviewBuy, link);
   }
 
   plantituxPreviewModal.classList.add("active");
 });
-
-if (previewBuyBtn) {
-  previewBuyBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    openPurchaseLink(previewBuyBtn.getAttribute("href") || "");
-  });
-}
-
-if (plantituxPreviewBuy) {
-  plantituxPreviewBuy.addEventListener("click", (e) => {
-    e.preventDefault();
-    openPurchaseLink(plantituxPreviewBuy.getAttribute("href") || "");
-  });
-}
 
 // ============================
 // BUSCADOR POR SECCIÓN
@@ -549,19 +553,35 @@ ${mensaje}`); } catch (_) {}
   setTimeout(() => document.addEventListener("pointerdown", onAnyClick, true), 0);
 }
 
+function isGumroadLink(link) {
+  const value = String(link || "").toLowerCase();
+  return value.includes("gumroad.com") || value.includes("gum.co");
+}
+
+function setGumroadClassIfNeeded(anchor, link) {
+  if (!anchor) return;
+  if (isGumroadLink(link)) anchor.classList.add("gumroad-button");
+  else anchor.classList.remove("gumroad-button");
+}
+
 function openPurchaseLink(link) {
   const normalizedLink = String(link || "").trim();
   if (!normalizedLink || normalizedLink === "#") {
     mostrarModal(
       "Card no disponible",
-      "Estamos trabajando en ello 😁"
+      "Card no disponible"
     );
     return;
   }
 
-  const isGumroadLink = /(^https?:\/\/)?([\w-]+\.)?gumroad\.com\/l\//i.test(normalizedLink);
-  if (isGumroadLink && typeof window.GumroadOverlay?.open === "function") {
-    window.GumroadOverlay.open(normalizedLink);
+  if (isGumroadLink(normalizedLink) && window.GumroadOverlay) {
+    const temp = document.createElement("a");
+    temp.href = normalizedLink;
+    temp.className = "gumroad-button";
+    temp.style.display = "none";
+    document.body.appendChild(temp);
+    temp.click();
+    temp.remove();
     return;
   }
 
