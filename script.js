@@ -547,6 +547,12 @@ function openPurchaseLink(link) {
     return;
   }
 
+  const isGumroadLink = /(^https?:\/\/)?([\w-]+\.)?gumroad\.com\/l\//i.test(normalizedLink);
+  if (isGumroadLink && typeof window.GumroadOverlay?.open === "function") {
+    window.GumroadOverlay.open(normalizedLink);
+    return;
+  }
+
   window.location.assign(normalizedLink);
 }
 
