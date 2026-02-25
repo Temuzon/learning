@@ -81,43 +81,44 @@ function showSection(id) {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-navItems.forEach(item => {
-  item.addEventListener("click", (e) => {
-    e.preventDefault();
-    const targetId = item.getAttribute("href")?.replace("#", "");
-    if (!targetId) return;
-
+function navigateInternalLink(anchor, absoluteUrl) {
+  const href = (anchor.getAttribute("href") || "").trim();
+  if (href.startsWith("#") && href.length > 1) {
+    const targetId = href.slice(1);
     if (navigationLocked) {
       showNavigationLockedModal();
       return;
     }
 
     showSection(targetId);
-  });
+    return;
+  }
+
+  window.location.assign(absoluteUrl.href);
+}
+
+document.addEventListener("click", (e) => {
+  const anchor = e.target.closest("a");
+  if (!anchor) return;
+
+  const href = (anchor.getAttribute("href") || "").trim();
+  if (!href || href === "#" || href.startsWith("javascript:")) return;
+  if (href.includes("gumroad.com/l/")) return;
+
+  let url;
+  try {
+    url = new URL(anchor.href, window.location.href);
+  } catch (_) {
+    return;
+  }
+
+  if (url.origin !== window.location.origin) return;
+
+  e.preventDefault();
+  navigateInternalLink(anchor, url);
 });
 
 showSection("Home");
-
-const GUMROAD_SCRIPT_SRC = "https://gumroad.com/js/gumroad.js";
-
-function ensureGumroadScriptLoaded() {
-  if (window.Gumroad) return;
-
-  const existing = document.querySelector(`script[src^="${GUMROAD_SCRIPT_SRC}"]`);
-  if (existing) return;
-
-  const script = document.createElement("script");
-  script.src = GUMROAD_SCRIPT_SRC;
-  script.async = true;
-  document.head.appendChild(script);
-}
-
-function reinitializeGumroadButtons() {
-  ensureGumroadScriptLoaded();
-  if (window.Gumroad?.reload) {
-    window.Gumroad.reload();
-  }
-}
 
 // ============================
 // RENDER DINÁMICO DESDE JSON
@@ -127,7 +128,6 @@ function buildEbootuxLikeCard(product) {
   const hasCode = Boolean((product.code || "").trim());
   const lockIcon = getLockIconByCode(product.code);
   const buyLink = (product.link || "").trim();
-  const isGumroad = isGumroadLink(buyLink);
   const priceText = formatPriceText(product.price);
 
   const blockData = blocks.map((b, i) => {
@@ -173,7 +173,7 @@ function buildEbootuxLikeCard(product) {
           data-link="${escAttr(product.link || "")}">
           <img src="visibility_24dp_777777_FILL0_wght400_GRAD0_opsz24.svg" class="img-de-vista-previa" alt="vista previa">
         </a>
-        <a href="${escAttr(buyLink || "#")}" class="btn-de-compra btn-comprar ${isGumroad ? "gumroad-button" : ""}" data-link="${escAttr(buyLink)}" data-price="${escAttr(product.price || "")}">
+        <a href="${escAttr(buyLink || "#")}" class="btn-de-compra btn-comprar" data-link="${escAttr(buyLink)}" data-price="${escAttr(product.price || "")}">
           <img src="shopping_cart_24dp_777777.svg" class="img-de-carrito-de-compra" alt="comprar">${priceText ? escAttr(priceText) : ""}
         </a>
       </div>
@@ -187,7 +187,6 @@ function buildAssetCard(product) {
   const hasCode = Boolean((product.code || "").trim());
   const lockIcon = getLockIconByCode(product.code);
   const buyLink = (product.link || "").trim();
-  const isGumroad = isGumroadLink(buyLink);
   const priceText = formatPriceText(product.price);
 
   return `
@@ -215,7 +214,7 @@ function buildAssetCard(product) {
         <a href="#" class="btn-de-vista-previa-plantitux">
           <img src="visibility_24dp_777777_FILL0_wght400_GRAD0_opsz24.svg" class="img-de-vista-previa" alt="vista previa">
         </a>
-        <a href="${escAttr(buyLink || "#")}" class="btn-de-compra btn-comprar ${isGumroad ? "gumroad-button" : ""}" data-link="${escAttr(buyLink)}" data-price="${escAttr(product.price || "")}">
+        <a href="${escAttr(buyLink || "#")}" class="btn-de-compra btn-comprar" data-link="${escAttr(buyLink)}" data-price="${escAttr(product.price || "")}">
           <img src="shopping_cart_24dp_777777.svg" class="img-de-carrito-de-compra" alt="comprar">${priceText ? escAttr(priceText) : ""}
         </a>
       </div>
@@ -253,7 +252,6 @@ function renderProducts(products) {
     }).join("\n");
   });
 
-  reinitializeGumroadButtons();
 }
 
 
@@ -404,7 +402,6 @@ document.addEventListener("click", (e) => {
     previewBuyBtn.innerHTML = `<img src="shopping_cart_24dp_777777.svg" class="img-de-carrito-de-compra"/>${priceText ? `$${escAttr(priceText)}` : ""}`;
     previewBuyBtn.href = link;
     previewBuyBtn.target = "_self";
-    setGumroadClassIfNeeded(previewBuyBtn, link);
   }
 
   if (previewYes) {
@@ -474,7 +471,6 @@ document.addEventListener("click", (e) => {
     plantituxPreviewBuy.innerHTML = `<img src="shopping_cart_24dp_777777.svg" class="img-de-carrito-de-compra"/>${priceText ? `$${escAttr(priceText)}` : ""}`;
     plantituxPreviewBuy.href = link;
     plantituxPreviewBuy.target = "_self";
-    setGumroadClassIfNeeded(plantituxPreviewBuy, link);
   }
 
   plantituxPreviewModal.classList.add("active");
@@ -564,16 +560,6 @@ ${mensaje}`); } catch (_) {}
   setTimeout(() => document.addEventListener("pointerdown", onAnyClick, true), 0);
 }
 
-function isGumroadLink(link) {
-  const value = String(link || "").toLowerCase();
-  return value.includes("gumroad.com") || value.includes("gum.co");
-}
-
-function setGumroadClassIfNeeded(anchor, link) {
-  if (!anchor) return;
-  if (isGumroadLink(link)) anchor.classList.add("gumroad-button");
-  else anchor.classList.remove("gumroad-button");
-}
 
 function openPurchaseLink(link) {
   const normalizedLink = String(link || "").trim();
@@ -582,17 +568,6 @@ function openPurchaseLink(link) {
       "Card no disponible",
       "Estamos trabajando en ello 😁"
     );
-    return;
-  }
-
-  if (isGumroadLink(normalizedLink)) {
-    const anchor = document.createElement("a");
-    anchor.href = normalizedLink;
-    anchor.className = "gumroad-button";
-    anchor.style.display = "none";
-    document.body.appendChild(anchor);
-    anchor.click();
-    anchor.remove();
     return;
   }
 
@@ -660,10 +635,13 @@ document.addEventListener("click", function (e) {
 
   const buyBtn = e.target.closest(".btn-comprar");
   if (buyBtn) {
-    e.preventDefault();
-
     const card = buyBtn.closest(".ebootux-cards, .plantitux-cards, .movitux-cards");
     if (!card) return;
+
+    const link = (buyBtn.dataset.link || card.dataset.link || "").trim();
+    if (link.includes("gumroad.com/l/")) return;
+
+    e.preventDefault();
 
     const rawPrice = String(buyBtn.dataset.price || card.dataset.price || "").trim();
     if (!rawPrice) {
@@ -674,7 +652,6 @@ document.addEventListener("click", function (e) {
       }
     }
 
-    const link = (buyBtn.dataset.link || card.dataset.link || "").trim();
     openPurchaseLink(link);
     return;
   }
