@@ -405,6 +405,20 @@ document.addEventListener("click", (e) => {
   previewModal.classList.add("active");
 });
 
+if (previewBuyBtn) {
+  previewBuyBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    openPurchaseLink(previewBuyBtn.getAttribute("href") || "");
+  });
+}
+
+if (plantituxPreviewBuy) {
+  plantituxPreviewBuy.addEventListener("click", (e) => {
+    e.preventDefault();
+    openPurchaseLink(plantituxPreviewBuy.getAttribute("href") || "");
+  });
+}
+
 // ============================
 // PREVIEW PLANTITUX
 // ============================
@@ -816,7 +830,7 @@ function resetCopyButtonState() {
 }
 
 function abrirPromptDesdeCard(card) {
-  const prompt = card.dataset.prompt || "";
+  const prompt = card.dataset.copyText || card.dataset.prompt || card.dataset.link || "";
   if (!promptModal || !promptTextarea) return;
 
   promptTextarea.value = prompt;
