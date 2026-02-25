@@ -560,14 +560,14 @@ function openPurchaseLink(link) {
     return;
   }
 
-  if (isGumroadLink(normalizedLink) && window.GumroadOverlay) {
-    const temp = document.createElement("a");
-    temp.href = normalizedLink;
-    temp.className = "gumroad-button";
-    temp.style.display = "none";
-    document.body.appendChild(temp);
-    temp.click();
-    temp.remove();
+  if (isGumroadLink(normalizedLink)) {
+    const anchor = document.createElement("a");
+    anchor.href = normalizedLink;
+    anchor.className = "gumroad-button";
+    anchor.style.display = "none";
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
     return;
   }
 
