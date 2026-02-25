@@ -20,7 +20,7 @@ body {
   font-family: 'Ubuntu', system-ui, -apple-system, sans-serif;
   font-size: 20px;
   user-select: none;
-  visibility: visible;
+  visibility: hidden;
 }
 
 body.loaded {
