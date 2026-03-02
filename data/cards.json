@@ -427,8 +427,8 @@
       "code": "12345",
       "price": "4.99",
       "image": "portadas/img(87hgtt4e--9).jpeg",
-      "description": "Este Getux no está aquí para convertirte en alguien que no eres. Está aquí para ayudarte a dejar de sabotearte y empezar a jugar en tu mejor nivel.",
-      "yes": "✔ Acceso inmediato,✔ Archivo descargable,✔ Imagenes",
+      "description": "Vas a entender por qué hay tipos que entran a una sala y la temperatura cambia.",
+      "yes": "✔ Acceso inmediato,✔ Imagenes",
       "no": "❌ Videos",
       "link": "#",
       "blocks": [
@@ -436,7 +436,8 @@
           "title": "Tú ya sabes quién eres. \n Haz ellos también, aunque no digas ni una palabra.",
           "text1": "🧠 ¿DE QUÉ VA ESTO REALMENTE? \n \n De todo lo que pasa antes de que hables.\n Tu postura cuando estás parado solo en un rincón. \n Cómo sostenés la mirada sin incomodar. \n El espacio que ocupás sin molestar. \n El silencio que dejás antes de responder.\n La energía que traés sin disfrazar.\n Eso es tu presentación.\n No tu nombre. No tu cargo. No tu outfit. \n Y eso es lo que la gente procesa antes de decidir si valés algo o no.",  
           "text2": "",
-          "img": ""
+          "img": "",
+          "video": ""
       }
       ]
     }
