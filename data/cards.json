@@ -405,5 +405,32 @@
       "previewVideo": "",
       "link": "https://statux.gumroad.com/l/vcfbvy"
     }
-  ]
+    {
+      "type": "ebootux",
+      "section": "ebootux",
+      "title": "Tomate un breack y entrena tu brain",
+      "subtitle": "",
+      "code": "12345",
+      "price": "3.99",
+      "image": "portadas/e-b----img.jpeg",
+      "description": "Este Getux no está aquí para convertirte en alguien que no eres. Está aquí para ayudarte a dejar de sabotearte y empezar a jugar en tu mejor nivel.",
+      "yes": "✔ Acceso inmediato,✔ Archivo descargable,✔ Imagenes",
+      "no": "❌ Videos",
+      "link": "#",
+      "blocks": []
+    },
+    {
+      "type": "ebootux",
+      "section": "ebootux",
+      "title": "Precencia en tu sombra",
+      "subtitle": "",
+      "code": "12345",
+      "price": "4.99",
+      "image": "portadas/p-h-t----img.jpeg",
+      "description": "Este Getux no está aquí para convertirte en alguien que no eres. Está aquí para ayudarte a dejar de sabotearte y empezar a jugar en tu mejor nivel.",
+      "yes": "✔ Acceso inmediato,✔ Archivo descargable,✔ Imagenes",
+      "no": "❌ Videos",
+      "link": "#",
+      "blocks": []
+    },
 }
