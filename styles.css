@@ -62,7 +62,7 @@ footer {
   text-decoration: none;
   color: #bbb;
   border-radius: 16px;
-  transition: 1s;
+  transition: .43s;
   overflow: hidden;
   min-width: 64px;
 }
