@@ -332,6 +332,24 @@ async function fetchAndRenderCards() {
   const cacheBuster = `v=${Date.now()}`;
   const candidates = [`${CARDS_JSON_URL}?${cacheBuster}`, `/${CARDS_JSON_URL}?${cacheBuster}`, CARDS_JSON_URL, `/${CARDS_JSON_URL}`];
   let lastError = null;
+  const knownSections = ["ebootux", "getux", "plantitux", "movitux"];
+  const showLoaders = () => {
+    knownSections.forEach((section) => {
+      const container = sectionContainer(section);
+      if (!container) return;
+      container.classList.add("json-loading");
+      container.innerHTML = '<div class="loader"></div>';
+    });
+  };
+  const hideLoaders = () => {
+    knownSections.forEach((section) => {
+      const container = sectionContainer(section);
+      if (!container) return;
+      container.classList.remove("json-loading");
+    });
+  };
+
+  showLoaders();
 
   for (const url of candidates) {
     try {
@@ -354,12 +372,14 @@ async function fetchAndRenderCards() {
       const products = normalizarProductsDesdeJSON(json);
       if (!Array.isArray(products) || products.length === 0) throw new Error("invalid-json");
       renderProducts(products);
+      hideLoaders();
       return;
     } catch (err) {
       lastError = err;
     }
   }
 
+  hideLoaders();
   console.info("cards.json no disponible; se usan cards estáticas si existen.", lastError);
 }
 
