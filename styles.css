@@ -21,6 +21,8 @@ body {
   font-size: 20px;
   user-select: none;
   visibility: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
 }
 
 body.loaded {
