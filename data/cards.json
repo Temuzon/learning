@@ -140,8 +140,8 @@
       ]
     },
     {
-      "type": "getux",
-      "section": "getux",
+      "type": "ebootux",
+      "section": "ebootux",
       "title": "Psicología Oscura",
       "subtitle": "",
       "code": "",
@@ -183,8 +183,8 @@
       ]
     },
     {
-      "type": "getux",
-      "section": "getux",
+      "type": "ebootux",
+      "section": "ebootux",
       "title": "Dominar la ansiedad social",
       "subtitle": "",
       "code": "",
