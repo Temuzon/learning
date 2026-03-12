@@ -13,7 +13,7 @@
     {
       "type": "getux",
       "section": "getux",
-      "title": "CALISTENIA",
+      "title": "Calistenia",
       "subtitle": "El arte de construir un cuerpo usando solo tu peso.",
       "code": "7CLD-LU45RFDYQXX",
       "price": "11.99",
@@ -126,7 +126,7 @@
       "price": "89.99",
       "image": "portadas/portada-de-htmlycss.jpeg",
       "description": "Curso interactivo con contenido web premium. Primero validas código de compra, luego código interno del curso.",
-      "yes": "✔ Acceso al curso,✔ Playground,✔ Sistema por códigos",
+      "yes": "✔ Acceso al curso,✔ Playground,✔ Sistema",
       "no": "❌ Descarga directa",
       "link": "#",
       "blocks": [
@@ -185,10 +185,10 @@
     {
       "type": "ebootux",
       "section": "ebootux",
-      "title": "Dominio de Conversaciones",
-      "subtitle": "",
-      "code": "",
-      "price": "",
+      "title": "Domina tu mente",
+      "subtitle": "El cerebro piensa. La mente decide qué pensamientos gobiernan tu vida.",
+      "code": "1245780",
+      "price": "2.99",
       "image": "portadas/testoteroneporta.jpeg",
       "description": "Este Getux no está aquí para convertirte en alguien que no eres. Está aquí para ayudarte a dejar de sabotearte y empezar a jugar en tu mejor nivel.",
       "yes": "✔ Acceso inmediato",
@@ -196,39 +196,35 @@
       "link": "#",
       "blocks": [
         {
-          "title": "",
-          "text1": "",
-          "text2": "",
-          "img": "",
-          "video": ""
+          "title": "LA MENTE NO ES QUIEN MANDA",
+          "text1": "Tu cerebro no fue diseñado para que tengas éxito; fue diseñado para que sobrevivas. Es una máquina de 200,000 años de antigüedad que prioriza el ahorro de energía y la seguridad del grupo. \n\nPor eso sientes resistencia cuando intentas algo grande. Por eso procrastinas. No es debilidad, es biología básica. Tu mente prefiere una miseria conocida a una victoria incierta. Entender esto es el primer paso para dejar de ser una víctima de tus propios impulsos y convertirte en el operador del sistema.",
+          "text2": "GOLPE DE REALIDAD: Tu mente es un servidor configurado por defecto para la mediocridad. Si no intervienes el código, el entorno lo hará por ti. Aquí empieza la re-programación de tu software interno.",
+          "img": "", "video": ""
         },
         {
-          "title": "",
-          "text1": "",
-          "text2": "",
-          "img": "",
-          "video": ""
+          "title": "EL PILOTO AUTOMÁTICO: EL 95%",
+          "text1": "El 95% de tus decisiones no son tuyas; son del subconsciente. Tu mente es un computador y el subconsciente es el sistema operativo que corre en segundo plano. \n\nCondicionamientos, traumas y repeticiones han creado rutas sinápticas que hoy dictan cómo reaccionas ante el miedo, el dinero o el estatus. Si tu autoimagen está programada para 'no molestar', por más que intentes entrar a una sala con poder, tu software te saboteará.",
+          "text2": "EL ALGORITMO INTERNO:\n⚫ **Creencias:** El código fuente.\n⚫ **Patrones:** Las funciones que se repiten.\n⚫ **Emociones:** El sistema de alertas.\n\nPara cambiar el resultado, no cambies la acción. Cambia el sistema que la genera.",
+          "img": "", "video": ""
         },
         {
-          "title": "",
-          "text1": "",
-          "text2": "",
-          "img": "",
-          "video": ""
+          "title": "REPROGRAMACIÓN: INYECCIÓN DE CÓDIGO",
+          "text1": "La reprogramación no es magia, es neuroplasticidad dirigida. Si el pensamiento repetido crea la creencia, entonces la exposición controlada crea la nueva identidad. \n\nEl ciclo es simple: **Pensamiento → Emoción → Acción → Resultado**. La mayoría intenta forzar la 'Acción' con fuerza de voluntad. El operador de Statux inyecta un nuevo 'Pensamiento' y deja que la cascada química haga el resto.",
+          "text2": "PROTOCOLOS DE RE-CÓDIGO:\n⚫ **Ensayo Mental:** Visualización táctica. Tu cerebro no distingue entre un recuerdo real y una visualización intensa.\n⚫ **Diálogo Interno:** Deja de hablarte como un subordinado. Cambia la narrativa de 'tengo que' por 'he decidido'.\n⚫ **Exposición Progresiva:** Obliga a tu mente a procesar el miedo en dosis pequeñas hasta que el sistema lo marque como 'Seguro'.",
+          "img": "", "video": ""
         },
         {
-          "title": "",
-          "text1": "",
-          "text2": "",
-          "img": "",
-          "video": ""
+          "title": "LA DISCIPLINA NO ES VOLUNTAD, ES DISEÑO",
+          "text1": "La fuerza de voluntad es una batería que se agota; el diseño de sistemas es infinito. Quienes dependen de la motivación para actuar son amateurs. Los profesionales de alto estatus dependen de la fricción baja.\n\nDisciplina significa que has diseñado tu entorno de tal manera que hacer lo correcto sea la opción más fácil para tu cerebro. Menos decisiones, más rituales.",
+          "text2": "LA FÓRMULA DE LA EJECUCIÓN:\n$$Disciplina = Sistema - Fricción$$\n\nSi quieres leer, pon el libro sobre tu almohada. Si quieres ejecutar, elimina las distracciones de tu escritorio. No luches contra tu pereza, haz que sea demasiado difícil ser perezoso.",
+          "img": "", "video": ""
         }
       ]
     },
     {
-      "type": "ebootux",
-      "section": "ebootux",
-      "title": "Tómate un break y entrena tu brain",
+      "type": "getux",
+      "section": "getux",
+      "title": "Activa tu cerebro",
       "subtitle": "",
       "code": "",
       "price": "",
@@ -291,39 +287,10 @@
       "price": "",
       "image": "portadas/testoteroneporta.jpeg",
       "description": "Este Getux no está aquí para convertirte en alguien que no eres. Está aquí para ayudarte a dejar de sabotearte y empezar a jugar en tu mejor nivel.",
-      "yes": "✔ Acceso inmediato",
+      "yes": "✔ Acceso inmediato,✔ Sistema",
       "no": "❌ Videos,❌ Imagenes,❌ Archivo descargable",
       "link": "#",
-      "blocks": [
-        {
-          "title": "",
-          "text1": "",
-          "text2": "",
-          "img": "",
-          "video": ""
-        },
-        {
-          "title": "",
-          "text1": "",
-          "text2": "",
-          "img": "",
-          "video": ""
-        },
-        {
-          "title": "",
-          "text1": "",
-          "text2": "",
-          "img": "",
-          "video": ""
-        },
-        {
-          "title": "",
-          "text1": "",
-          "text2": "",
-          "img": "",
-          "video": ""
-        }
-      ]
+      "blocks": []
     },
     {
       "type": "movitux",
@@ -358,9 +325,9 @@
       "link": "https://statux.gumroad.com/l/vcfbvy"
     },
     {
-      "type": "getux",
-      "section": "getux",
-      "title": "Tomate un breack y entrena tu brain",
+      "type": "ebootux",
+      "section": "ebootux",
+      "title": "Dominio de Conversaciones",
       "subtitle": "",
       "code": "12345",
       "price": "6.99",
@@ -379,52 +346,46 @@
       "code": "1U2B2IB3I_JWB+N==UNSI!@&",
       "price": "7.99",
       "image": "portadas/img(87hgtt4e--9).jpeg",
-      "description": "",
+      "description": "Aquí descubrirás cómo se forman las primeras impresiones, qué atajos mentales usa el cerebro para juzgar a las personas y qué micro-comportamientos pueden debilitar tu presencia sin que te des cuenta. También aprenderás cómo el lenguaje corporal, los pequeños detalles de comportamiento influyen en la forma en que otros te perciben.",
       "yes": "✔ Acceso inmediato",
       "no": "❌ Videos,❌ imagenes,❌ Archivo descargable",
       "link": "https://statux.gumroad.com/l/jcpkei",
       "blocks": [
         {
-          "title": "Antes de hablar, ya estás siendo leído.",
-          "text1": "Cuando conoces a alguien, su cerebro no analiza lentamente quién eres.\nHace algo mucho más rápido: clasifica. En cuestión de segundos decide si pareces confiable, competente o irrelevante. Esta decisión ocurre antes de que hayas terminado la primera frase.\n\nUna vez creada esa impresión inicial, todo lo que hagas después pasa por ese filtro. Tus palabras ya no se evalúan solas: se interpretan según la historia que la mente del otro empezó a construir.\n\n¿Sabías que…?\nInvestigaciones en psicología social muestran que las personas pueden formar juicios sobre confianza o competencia en menos de dos segundos al ver a alguien por primera vez. A este fenómeno se le conoce como thin-slicing: el cerebro toma pequeñas señales y crea conclusiones rápidas.",
-          "text2": "Este Ebóotux no trata de volverte alguien distinto.\nTrata de hacer visible lo que ya estás proyectando sin saberlo.\n\nPorque la presencia no se construye hablando más.\nSe construye entendiendo las señales invisibles que tu cuerpo, tu ritmo y tu energía envían antes de que digas una sola palabra.\n\nAquí no vamos a estudiar teoría social por curiosidad.\nVamos a entender el sistema.\nY cuando entiendes el sistema… puedes jugar diferente.",
-          "img": "",
-          "video": ""
+          "title": "1. ANTES DE HABLAR, YA ESTÁS SIENDO LEÍDO",
+          "text1": "Tu cerebro no analiza; clasifica. En menos de dos segundos, el entorno decide si eres una autoridad, una amenaza o alguien irrelevante. Esta decisión ocurre en el subconsciente, mucho antes de que abras la boca.\n\nEste fenómeno se llama *thin-slicing*: el cerebro toma una muestra mínima de tu energía y construye una historia completa sobre quién eres. Si no controlas esa muestra, el algoritmo social escribirá la historia por ti.",
+          "text2": "Este Ebóotux es el manual para hacer visible lo que proyectas sin saberlo. No vamos a estudiar teoría por curiosidad; vamos a entender el sistema para que dejes de ser un civil y te conviertas en un operador de tu propia presencia.",
+          "img": "", "video": ""
         },
         {
-          "title": "EL SISTEMA DE PERCEPCIÓN SOCIAL",
-          "text1": "Tu cerebro es un detector de patrones, no un juez de la verdad.\n\nEl 'thin-slicing' (rebanado fino) es el mecanismo por el cual el entorno decide quién eres en menos de 2 segundos. No es personal, es biológico. \n\n- No te ven como eres: te ven como el filtro de ellos permite.\n- El 65% del éxito profesional hoy depende de tu EQ (Inteligencia Emocional), no de tu título.\n- Las palabras solo confirman lo que tu cuerpo ya gritó al entrar.\n\nEJEMPLO PRÁCTICO:\nDos personas entran a una sala. Una camina midiendo el terreno, con hombros caídos. La otra entra como si el edificio fuera suyo. El observador ya eligió a un líder y a un seguidor antes de que digan 'Buenos días'.",
-          "text2": "Hackeando el juicio ajeno:\n\n😇 1. El Efecto Halo (Tu escudo de invisibilidad)\nSi proyectas una sola característica positiva fuerte (ej. vestir impecable o una postura de poder), el cerebro del otro asumirá automáticamente que también eres inteligente, confiable y capaz.\n👉 Úsalo a tu favor: Elige un rasgo 'estrella' y explótalo. Si dominas tu apariencia, te perdonarán errores en el discurso.\n\n🧠 2. Sesgo de Confirmación (La trampa mental)\nUna vez que alguien decide que eres 'inseguro', su mente buscará activamente cada pequeño fallo para decir: 'Lo sabía'. Ignorarán tus aciertos y magnificarán tus dudas.\n⚠️ Peligro: La mente prefiere tener razón a conocer la verdad. Si empiezas perdiendo, recuperar terreno cuesta el triple.\n\n🏫 3. La Profecía Autocumplida\nSi el entorno te etiqueta como 'el experto', te tratarán como tal. Esa presión positiva hará que te comportes como un experto. Lo que ellos creen de ti, termina moldeando quién eres.\n\n🪑 4. El Dominio del Espacio\n¿Te sientas ocupando tu lugar o pidiendo permiso? La persona que se expande proyecta estatus; la que se encoge, proyecta sumisión. El cerebro asocia espacio con poder.\n\n⏱️ 5. El Silencio de Control\nResponder al instante te hace ver reactivo (ansioso por agradar). Dejar 2 segundos de espacio antes de hablar te hace ver reflexivo y en control de la situación.\n\n🔥 6. Intensidad vs. Liderazgo\nNo confundas gritar con mandar. La autoridad real suele ser calmada. El que necesita ruido para ser escuchado suele estar ocultando una inseguridad.\n\n🪞 7. El Efecto Espejo (Contagio Energético)\nLa presencia no se ve, se siente. Si entras con una energía estable y pesada (en el buen sentido), la sala se calmará. Si entras errático, el ambiente se tensará.\n\nCONCLUSIÓN:\nLa percepción es la realidad del observador. Si no diseñas tu imagen, el sesgo de los demás la diseñará por ti.",          
-          "img": "",
-          "video": ""
+          "title": "2. EL ALGORITMO DE PERCEPCIÓN SOCIAL",
+          "text1": "El cerebro es un detector de patrones. No busca la verdad, busca coherencia. Si tu entrada es débil, tus palabras —por brillantes que sean— serán filtradas como 'ruido'.\n\n- **Efecto Halo:** Una sola señal de poder al inicio blindará el resto de tu interacción.\n- **Sesgo de Confirmación:** Si entras perdiendo, la mente del otro buscará pruebas para hundirte. Si entras ganando, ignorará tus fallos.\n- **Dominio del Espacio:** El estatus se mide en metros cuadrados. Quien se expande, manda; quien se encoge, obedece.",
+          "text2": "REGLA DE ORO: La percepción es la única realidad que importa en el primer encuentro. Si no diseñas tu imagen, el algoritmo de los demás la diseñará por ti.",
+          "img": "", "video": ""
         },
         {
-          "title": "Micro-comportamientos de sabotaje",
-          "text1": "La mayoría de las personas cree que la presencia se pierde por errores grandes.\nDecir algo incorrecto. Equivocarse en público. Hacer el ridículo.\n\nPero en realidad, lo que debilita tu imagen casi nunca es algo grande.\nSon pequeños comportamientos automáticos que ocurren en segundos.\n\nUna risa nerviosa después de una frase importante.\nMirar el celular cuando la conversación se vuelve incómoda.\nJustificar demasiado lo que dijiste.\nMover las manos sin parar mientras hablas.\n\nCada uno de esos gestos parece insignificante.\nPero el cerebro de los demás los interpreta como señales.",
-          "text2": "Y aquí viene lo interesante:\nLa mayoría de estos comportamientos no son decisiones conscientes.\nSon respuestas automáticas del cerebro cuando percibe presión social.\n\nEn otras palabras: tu cerebro intenta protegerte… pero a veces lo hace enviando señales que debilitan tu presencia.\n\nEn este bloque vamos a identificar esos micro-comportamientos.\nLes pondremos nombre.\nEntenderás por qué aparecen.\nY aprenderás a reemplazarlos por señales que proyecten calma, control y claridad.\n\nNo se trata de actuar.\nSe trata de entrenar tu sistema para que tus señales trabajen a tu favor.",
-          "img": "",
-          "video": ""
+          "title": "3. PROTOCOLOS DE ENTRADA: LOS PRIMEROS 5 METROS",
+          "text1": "La reunión empieza 5 metros antes del pomo de la puerta. Es la 'Zona de Escaneo'. Entrar no es transportarse, es invadir. \n\n- **El Reset Pre-Entrada:** Hombros atrás, exhala y visualiza que el espacio ya te pertenece. La prisa es para los subordinados.\n- **La Cadencia de Poder:** Camina como si el aire fuera denso. Un ritmo deliberado comunica que tú dictas el tiempo de la sala.",
+          "text2": "CHECKLIST DE INVASIÓN:\n⚫ **Barrido Visual:** Escanea la sala horizontalmente. Tú evalúas el lugar, no al revés.\n⚫ **Mano Derecha Libre:** Carga todo con la izquierda. Tu mano de impacto debe estar lista, seca y disponible.\n⚫ **Ángulo de Abordaje:** No choques de frente; entra con un ángulo ligero para proyectar seguridad sin agresividad innecesaria.",
+          "img": "", "video": ""
         },
         {
-          "title": "EL PROTOCOLO DE EXTRACCIÓN: DE REACCIONAR A RESPONDER",
-          "text1": "Saber que tienes 'ruido' es el diagnóstico; eliminarlo es la cirugía. \n\nEn la jerarquía biológica, el movimiento innecesario es sinónimo de subordinación. Observa a los depredadores en la naturaleza o a los líderes de alto estatus en una negociación: son estáticos. La quietud no es ausencia de acción, es presencia concentrada. Cuando te mueves por nerviosismo, tu cerebro le está gritando al entorno que no te sientes seguro en tu propia piel. \n\nPara limpiar a tu 'Otro Yo' de estas interferencias, no necesitas más voluntad, necesitas un sistema de contención. El ruido se alimenta de la velocidad. Por eso, el arma más letal para recuperar tu autoridad es el manejo del vacío. \n\nAquí es donde aplicas la **Regla de Oro de los 2 Segundos**: \n\n1. Antes de abrir la boca: Pausa. Deja que el aire de la sala se asiente. \n2. Al terminar tu idea: Sostén. No rompas la tensión con una risa o bajando la mirada; regálale al otro dos segundos de contacto visual puro. \n3. Ante el ataque o la pregunta: Silencio. No te apresures a defenderte. Ese espacio de dos segundos es lo que transforma una reacción defensiva en una respuesta de poder. Este vacío absorbe el ruido ajeno y obliga al entorno a ajustarse a tu ritmo, no al revés.",
-          "text2": "TU PLAN DE ENTRENAMIENTO: LA SEMANA DE LA QUIETUD \n\nLa transformación de tu presencia no es un evento, es una purga. Si intentas borrar los 12 saboteadores de golpe, tu sistema colapsará bajo el peso del auto-juicio. Para hackear tu comportamiento, operaremos como un francotirador, no como una ametralladora. \n\n🎯 IDENTIFICA TU 'FUGA MAESTRA' \nTodos tenemos un pecado capital de lenguaje corporal. Puede que sean las muletillas que ensucian tu discurso o ese refugio digital que buscas cuando la tensión sube. Esta semana, ignora el resto. Enfócate exclusivamente en tu mayor debilidad. Esa es tu 'Fuga Maestra'. Si logras sellar esa grieta, las demás empezarán a cerrarse por inercia. \n\n🧠 ACTIVA LA CONSCIENCIA SITUACIONAL \nEl sabotaje vive en el inconsciente. Para matarlo, hay que traerlo a la luz. Cada vez que sientas el impulso de juguetear con tus manos o de soltar una sonrisa de defensa, no luches contra ello. Simplemente etiquétalo. Di mentalmente: 'Ruido detectado'. En el momento en que nombras el comportamiento, le quitas el control automático sobre tu cuerpo. Pasas de ser el esclavo del impulso a ser el observador del sistema. \n\n🦾 LA SUSTITUCIÓN POR PESO FÍSICO \nNo puedes simplemente 'dejar de moverte'; tienes que darle a tu cuerpo una orden alternativa. Si tus manos quieren sabotearte, dales una base sólida: júntalas suavemente o siente el peso de tus palmas sobre tus muslos. Si sientes que la velocidad de tu voz aumenta, presiona tus pies contra el suelo. Usa el peso de la gravedad para anclar tu presencia. \n\nRECUERDA: La maestría no consiste en eliminar los nervios —eso es imposible— sino en lograr que nadie, bajo ninguna circunstancia, pueda oler tu inquietud. \n\nHas terminado de limpiar el ruido. El sistema está calibrado. Ahora, es momento de aprender a invadir el espacio. Prepárate para entrar en la sala.",
-          "img": "",
-          "video": ""
+          "title": "4. MICRO-COMPORTAMIENTOS DE SABOTAJE",
+          "text1": "La presencia no se destruye con errores grandes, se desangra por fugas pequeñas. Estos son gestos automáticos de alivio de tensión que el cerebro del otro interpreta como debilidad.\n\n- **El Pacificador:** Reírte después de decir algo serio (buscas permiso).\n- **Refugio Digital:** Sacar el móvil por incomodidad social (falta de temple).\n- **Explicación Infinita:** Justificar tus opiniones (miedo al juicio).",
+          "text2": "Estos gestos son 'Ruido'. Cada vez que cometes uno, tu autoridad cae un 10%. En este bloque aprenderás a identificarlos antes de que ocurran.",
+          "img": "", "video": ""
         },
         {
-          "title": "PROTOCOLOS DE ENTRADA: LOS PRIMEROS 5 METROS",
-          "text1": "La batalla por el estatus se gana antes de decir 'hola'. \n\nExiste un espacio crítico que llamamos 'La Zona de Escaneo'. Son los segundos que transcurren desde que pones un pie en la habitación hasta que llegas a tu destino. En ese trayecto, el cerebro de todos los presentes está ejecutando un algoritmo de supervivencia: ¿Quién es? ¿Es una amenaza? ¿Es un líder? ¿O es alguien que puedo ignorar? \n\nEntrar en una sala no es un acto de transporte; es una declaración de intenciones. La mayoría de las personas entran 'pidiendo permiso' con la mirada, ajustándose la ropa o acelerando el paso para acabar pronto con la exposición social. \n\nEl Ebóotux no pide permiso. El Ebóotux invade el espacio con una calma que obliga al resto a levantar la vista. Para dominar la entrada, necesitas configurar tu 'Modo de Vuelo' antes de tocar el pomo de la puerta.",
-          "text2": "EL CHECKLIST DE INVASIÓN (Fase de Aterrizaje):\n\n🚪 1. El 'Reset' Pre-Entrada\nNunca entres con la inercia de la calle o de la reunión anterior. Detente un segundo antes de entrar. Hombros atrás, exhala largo y visualiza que el espacio que vas a pisar ya te pertenece. Si entras con prisa, entras con bajo estatus.\n\n🚶‍♂️ 2. La Cadencia de Poder (El Paso)\nNi corras ni te arrastres. El ritmo ideal es un paso deliberado, ligeramente más lento que el promedio. Imagina que el aire es denso y tienes que atravesarlo con el pecho. Esto comunica que tú dictas el tiempo, no el reloj de los demás.\n\n👁️ 3. El Barrido Visual (Scan Total)\nNo entres mirando al suelo ni buscando desesperadamente a tu interlocutor. Al entrar, haz un barrido horizontal lento de la sala. Esto le dice a tu amígdala que el entorno es seguro y le dice a los demás que tú eres el que está evaluando el lugar, no al revés.\n\n🤝 4. El Ángulo de Abordaje\nCuando te dirijas a alguien, no lo hagas 'de frente' como si fueras a chocar. Mantén una trayectoria ligeramente angulada y solo encara frontalmente cuando estés a la distancia de saludo. Esto reduce la agresividad percibida y te hace ver más seguro y menos ansioso.\n\n🎒 5. Gestión de Carga (Manos Libres)\nSi llevas maletín, café o abrigo, pásalo todo a la mano izquierda antes de entrar. Tu mano derecha debe estar siempre libre, seca y lista. No hay nada que destruya más tu autoridad que estar peleándote con tus pertenencias mientras intentas saludar.\n\nEL MANTRA DEL EBÓOTUX:\nNo entres para ver quién está ahí. Entra para que vean quién ha llegado. Tu entrada es el tráiler de la película que vas a proyectar después. Asegúrate de que quieran comprar el ticket.",
-          "img": "",
-          "video": ""
+          "title": "5. PROTOCOLO DE EXTRACCIÓN (LIMPIEZA DE RUIDO)",
+          "text1": "Saber que fallas es el diagnóstico; corregirlo es la cirugía. La quietud es el lenguaje del estatus alto. \n\n**La Regla de los 2 Segundos:**\n1. Pausa antes de hablar.\n2. Sostén el contacto visual al terminar.\n3. Silencio total ante una pregunta difícil.",
+          "text2": "ENTRENAMIENTO: Elige tu 'Fuga Maestra' y etiquétala mentalmente como 'Ruido Detectado'. Sustituye el movimiento nervioso por 'Peso Físico': siente tus pies en el suelo y tus palmas en la mesa. La maestría es que nadie huela tu inquietud.",
+          "img": "", "video": ""
         },
         {
-          "title": "PROTOCOLOS PRÁCTICOS: EL MUNDO REAL",
-          "text1": "La teoría sin ejecución es solo entretenimiento. \n\nPara que tu 'Otro Yo' tome el control, necesitas protocolos de respuesta automática. En situaciones de alta presión, tu cerebro racional se apaga y tus instintos toman el mando. Si no has entrenado tus protocolos, volverás a los micro-sabotajes de siempre.\n\nA continuación, aplicaremos todo el sistema Ebóotux en tres escenarios donde la mayoría fracasa, pero donde tú vas a dominar. No se trata de actuar, se trata de ejecutar el código correcto en el momento preciso.",
-          "text2": "MANUAL DE OPERACIONES:\n\n🚀 ESCENARIO A: La Entrada en Frío (Networking o Eventos)\nNo busques a alguien conocido. Entra, camina hacia el centro de la sala (zona de máxima exposición) y quédate ahí 5 segundos simplemente observando. \n👉 Objetivo: Habituar a tu amígdala a la mirada ajena. Quien soporta la incomodidad de estar solo y quieto en el centro de una sala, proyecta el estatus más alto del lugar.\n\n💼 ESCENARIO B: La Reunión de 'Tablero' (Poder en la Mesa)\nSi alguien intenta interrumpirte o invadir tu marco, no hables más fuerte. Simplemente deja de hablar, mantén el contacto visual y haz una pausa de 2 segundos mientras te inclinas ligeramente hacia atrás. \n👉 Resultado: Tu silencio se vuelve 'pesado'. Obligas al otro a notar que ha roto el flujo y le devuelves la presión social sin decir una palabra.\n\n🔥 ESCENARIO C: El Conflicto Inesperado (La Prueba de Temple)\nCuando alguien te critique o te lance un dardo social, aplica el 'Protocolo de Extracción'. Escucha, deja pasar 3 segundos de silencio total mirando a la persona con calma, y luego responde con una pregunta corta: '¿Qué te lleva a decir eso?'.\n👉 Efecto: Al no reaccionar instantáneamente, demuestras que tu valor propio no depende de su opinión. Has ganado el marco.\n\nEL CIERRE DEL SISTEMA:\nPresentar a tu 'Otro Yo' no es un disfraz que te pones; es el resultado de eliminar las capas de inseguridad que te sobran. La presencia es lo que queda cuando dejas de pedir permiso para existir.\n\nFin del Protocolo. Sal ahí fuera y toma lo que es tuyo.",
-          "img": "",
-          "video": ""
+          "title": "6. PROTOCOLOS PRÁCTICOS: EL MUNDO REAL",
+          "text1": "Simulación final. Aquí es donde el software se pone a prueba bajo fuego.\n\n- **Escenario A (Networking):** Quédate solo en el centro de la sala 5 segundos sin hacer nada. Domina la incomodidad.\n- **Escenario B (Reuniones):** Si te interrumpen, guarda silencio y sostén la mirada 2 segundos. Recupera el marco sin gritar.",
+          "text2": "Presentar a tu 'Otro Yo' no es un disfraz; es eliminar lo que te sobra. La presencia empieza cuando dejas de pedir permiso para existir. Sal ahí fuera y toma lo que es tuyo.",
+          "img": "", "video": ""
         }
       ]
     }
