@@ -19,8 +19,8 @@
       "price": "11.99",
       "image": "portadas/487-3476.jpeg",
       "description": "Este Getux no está aquí para convertirte en alguien que no eres. Está aquí para ayudarte a dejar de sabotearte y empezar a jugar en tu mejor nivel.",
-      "yes": "✔ Acceso inmediato,✔ Archivo descargable,✔ Imagenes",
-      "no": "❌ Videos",
+      "yes": "✔ Acceso inmediato,✔ Imagenes",
+      "no": "❌ Videos,❌ archivo descargable",
       "link": "https://statux.gumroad.com/l/whwejd",
       "blocks": [
         {
@@ -187,8 +187,8 @@
       "section": "ebootux",
       "title": "Domina tu mente",
       "subtitle": "El cerebro piensa. La mente decide qué pensamientos gobiernan tu vida.",
-      "code": "1245780",
-      "price": "2.99",
+      "code": "",
+      "price": "",
       "image": "portadas/testoteroneporta.jpeg",
       "description": "Este Getux no está aquí para convertirte en alguien que no eres. Está aquí para ayudarte a dejar de sabotearte y empezar a jugar en tu mejor nivel.",
       "yes": "✔ Acceso inmediato",
