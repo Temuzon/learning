@@ -990,10 +990,6 @@ window.addEventListener("beforeinstallprompt", (event) => {
 const installButton = document.querySelector(".dwl-statux");
 if (installButton) {
   installButton.addEventListener("click", async () => {
-    installButton.classList.remove("pop");
-    void installButton.offsetWidth;
-    installButton.classList.add("pop");
-
     if (!deferredInstallPrompt) return;
 
     deferredInstallPrompt.prompt();
