@@ -7,7 +7,7 @@
   "theme_color": "#000000",
   "icons": [
     {
-      "src": "/Statux-Logo.png",
+      "src": "/Statux-App-Icon.png",
       "sizes": "192x192",
       "type": "image/png"
     },
