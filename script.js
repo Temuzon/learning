@@ -976,7 +976,7 @@ let deferredInstallPrompt = null;
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("/sw.js").catch((error) => {
+    navigator.serviceWorker.register("/pwa/sw.js").catch((error) => {
       console.warn("No se pudo registrar el Service Worker:", error);
     });
   });
@@ -990,14 +990,7 @@ window.addEventListener("beforeinstallprompt", (event) => {
 const installButton = document.querySelector(".dwl-statux");
 if (installButton) {
   installButton.addEventListener("click", async () => {
-    installButton.classList.remove("pop");
-    void installButton.offsetWidth;
-    installButton.classList.add("pop");
-
-    if (!deferredInstallPrompt) {
-      console.info("Instalación no disponible todavía en este navegador/contexto.");
-      return;
-    }
+    if (!deferredInstallPrompt) return;
 
     deferredInstallPrompt.prompt();
     await deferredInstallPrompt.userChoice;

@@ -1,8 +1,8 @@
 {
   "products": [
     {
-      "type": "plantitux",
-      "section": "plantitux",
+      "type": "",
+      "section": "",
       "title": "Plantitux Dark Landing",
       "prompt": "Crea una landing page oscura, minimalista y elegante para un producto digital premium llamado Statux. Usa tipografía sans-serif, alto contraste, animaciones sutiles y jerarquía visual clara.",
       "code": "STATUX-1234",
@@ -132,13 +132,13 @@
       "blocks": []
     },
     {
-      "type": "ebootux",
-      "section": "ebootux",
+      "type": "",
+      "section": "",
       "title": "Psicología Oscura",
       "subtitle": "",
       "code": "",
       "price": "",
-      "image": "portadas/testoteroneporta.jpeg",
+      "image": "",
       "description": "Este Getux no está aquí para convertirte en alguien que no eres. Está aquí para ayudarte a dejar de sabotearte y empezar a jugar en tu mejor nivel.",
       "yes": "✔ Acceso inmediato",
       "no": "❌ Videos,❌ Imagenes,❌ Archivo descargable",
@@ -307,8 +307,8 @@
       ]
     },
     {
-      "type": "getux",
-      "section": "getux",
+      "type": "",
+      "section": "",
       "title": "Expande tu voacbulario",
       "subtitle": "",
       "code": "",
