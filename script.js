@@ -967,3 +967,61 @@ document.addEventListener("keydown", (e) => {
 });
 
 fetchAndRenderCards();
+
+
+// ============================
+// PWA
+// ============================
+let deferredInstallPrompt = null;
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/sw.js").catch((error) => {
+      console.warn("No se pudo registrar el Service Worker:", error);
+    });
+  });
+}
+
+window.addEventListener("beforeinstallprompt", (event) => {
+  event.preventDefault();
+  deferredInstallPrompt = event;
+});
+
+const installButton = document.querySelector(".dwl-statux");
+if (installButton) {
+  installButton.addEventListener("click", async () => {
+    installButton.classList.remove("pop");
+    void installButton.offsetWidth;
+    installButton.classList.add("pop");
+
+    if (!deferredInstallPrompt) {
+      console.info("Instalación no disponible todavía en este navegador/contexto.");
+      return;
+    }
+
+    deferredInstallPrompt.prompt();
+    await deferredInstallPrompt.userChoice;
+    deferredInstallPrompt = null;
+  });
+}
+
+window.addEventListener("appinstalled", () => {
+  deferredInstallPrompt = null;
+});
+
+async function downloadModule(moduleId) {
+  const modulesCache = await caches.open("statux-modules");
+  const response = await fetch("/pwa/modules.json", { cache: "no-store" });
+
+  if (!response.ok) throw new Error("No se pudo cargar modules.json");
+
+  const data = await response.json();
+  const module = (data.modules || []).find((item) => item.id === moduleId);
+
+  if (!module) throw new Error(`Módulo no encontrado: ${moduleId}`);
+
+  await modulesCache.addAll(module.files || []);
+  return module.files || [];
+}
+
+window.downloadModule = downloadModule;

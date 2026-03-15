@@ -1,0 +1,12 @@
+{
+  "modules": [
+    {
+      "id": "example-module",
+      "files": [
+        "/example/example.html",
+        "/example/example.css",
+        "/example/example.js"
+      ]
+    }
+  ]
+}
