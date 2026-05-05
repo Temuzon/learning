@@ -2,49 +2,29 @@
   const SELECTOR_BLOQUEADO = "[data-bloqueado]";
   const PREVIEW_ICON = "visibility_24dp_777777_FILL0_wght400_GRAD0_opsz24.svg";
 
-  // --- Detectar si estamos en modo preview ---
   const isEmbeddedIframe = (() => {
-    try {
-      return window.self !== window.top;
-    } catch {
-      return true;
-    }
+    try { return window.self !== window.top; } catch { return true; }
   })();
 
   const isPreview = (() => {
-    try {
-      const params = new URLSearchParams(window.location.search);
-      return params.has("stx_return"); // tu sistema actual ya usa esto 👀
-    } catch {
-      return false;
-    }
+    try { return new URLSearchParams(window.location.search).has("stx_return"); } catch { return false; }
   })();
 
-  // Activar bloqueo cuando el Systux se renderiza dentro de iframe o en modo preview
-  if (!isEmbeddedIframe && !isPreview) return;
+  if (isEmbeddedIframe || isPreview) {
+    document.addEventListener("click", (e) => {
+      const el = e.target.closest(SELECTOR_BLOQUEADO);
+      if (!el) return;
+      e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation();
+      triggerBloqueoUX(el);
+    }, true);
 
-  // --- Interceptar clicks ---
-  document.addEventListener("click", (e) => {
-    const el = e.target.closest(SELECTOR_BLOQUEADO);
-    if (!el || !bloqueoActivo) return;
-
-    e.preventDefault();
-    e.stopPropagation();
-    e.stopImmediatePropagation();
-
-    triggerBloqueoUX(el);
-  }, true);
-
-  // --- Interceptar formularios ---
-  document.addEventListener("submit", (e) => {
-    const el = e.target.closest(SELECTOR_BLOQUEADO);
-    if (!el || !bloqueoActivo) return;
-
-    e.preventDefault();
-    e.stopPropagation();
-    e.stopImmediatePropagation();
-    triggerBloqueoUX(el);
-  }, true);
+    document.addEventListener("submit", (e) => {
+      const el = e.target.closest(SELECTOR_BLOQUEADO);
+      if (!el) return;
+      e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation();
+      triggerBloqueoUX(el);
+    }, true);
+  }
 
   function triggerBloqueoUX(elemento) {
     mostrarModalBloqueo();
@@ -57,7 +37,7 @@
     if (!modal) {
       modal = document.createElement("div");
       modal.id = "stx-modal-bloqueo";
-      modal.innerHTML = `<div class="stx-overlay"><div class="stx-modal"><p class="stx-title">Acceso restringido</p><p class="stx-sub">Desbloquea el sistema completo</p><button class="stx-btn">Entendido</button></div></div>`;
+      modal.innerHTML = `<div class="stx-overlay"><div class="stx-modal"><p class="stx-title">Acceso restringido</p><p class="stx-sub">Desbloquea el Systux completo</p><button class="stx-btn">Entendido</button></div></div>`;
       document.body.appendChild(modal);
       modal.querySelector(".stx-overlay")?.addEventListener("click", (e) => { if (e.target.classList.contains("stx-overlay")) modal.remove(); });
       modal.querySelector(".stx-btn")?.addEventListener("click", () => modal.remove());
@@ -105,7 +85,10 @@
     frameModal.classList.add("active");
   });
 
-  console.log("🔒 Bloqueo activo en iframe/preview");
+  const closeFrame = () => {
+    frameModal.classList.remove("active");
+    frame.src = "";
+  };
 
   frameClose.addEventListener("click", closeFrame);
   frameModal.addEventListener("click", (e) => { if (e.target === frameModal) closeFrame(); });
