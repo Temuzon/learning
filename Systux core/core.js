@@ -1,6 +1,6 @@
 (function () {
   const SELECTOR_BLOQUEADO = "[data-bloqueado]";
-  const PREVIEW_ICON = "visibility_24dp_777777_FILL0_wght400_GRAD0_opsz24.svg";
+  const PREVIEW_ICON = "/visibility_24dp_777777_FILL0_wght400_GRAD0_opsz24.svg";
 
   const isEmbeddedIframe = (() => {
     try { return window.self !== window.top; } catch { return true; }
@@ -67,12 +67,13 @@
   if (!frameModal || !frame || !frameClose) return;
 
   document.addEventListener("click", (e) => {
-    const previewBtn = e.target.closest(".btn-de-vista-previa");
+    const previewBtn = e.target.closest(".btn-de-vista-previa, .btn-de-vista-previa-plantitux");
     if (!previewBtn) return;
     const card = previewBtn.closest(".ebootux-cards, .getux-cards");
     const url = String(card?.dataset.courseUrl || "").trim();
     previewUrl = url;
-    previewModal.classList.toggle("has-course-preview", Boolean(url));
+    const previewBox = previewModal.querySelector(".box-preview");
+    if (previewBox) previewBox.classList.toggle("has-course-preview", Boolean(url));
   });
 
   triggerBtn.addEventListener("click", () => {
