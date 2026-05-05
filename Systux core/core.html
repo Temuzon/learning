@@ -19,5 +19,13 @@
     <link rel="manifest" href="/pwa/manifest.json">
   </head>
   <body>
-<script src="Systux core/core.js" defer></script>
+    <div class="stx-preview-frame-modal" id="stx-preview-frame-modal" aria-hidden="true">
+      <div class="stx-preview-frame-viewer" role="dialog" aria-modal="true" aria-label="Vista previa de Systux">
+        <button type="button" class="stx-preview-frame-close" id="stx-preview-frame-close" aria-label="Cerrar vista previa">✕</button>
+        <iframe class="stx-preview-frame-iframe" id="stx-preview-frame-iframe" src="" title="Vista previa del Systux" loading="lazy"></iframe>
+      </div>
+    </div>
+
+    <script src="Systux core/core.js" defer></script>
   </body>
+</html>
