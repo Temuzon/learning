@@ -7,6 +7,17 @@
     font-display: swap;
 }
 
+/* ROOT */
+:root {
+  --dark: #000000;
+  --dark1: #111111;
+  --dark2: #222222;
+  --gray7: #777777;
+  --gray3: #333333;
+  --white: #ffffff;
+  --whiteb: #bbbbbb;
+}
+
 html, body {
   overflow-x: hidden;
   max-width: 100%;
