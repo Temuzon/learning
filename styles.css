@@ -2169,8 +2169,8 @@ footer.stx-footer-ready {
     top: auto;
     left: 0;
     border-radius: 0;
-    border-top-right-radius: 0;
-    border-top-left-radius: 0;
+    border-top-right-radius: 7px;
+    border-top-left-radius: 7px;
   }
 
   .barra-de-navegacion.expandida {
@@ -2332,7 +2332,7 @@ footer.stx-footer-ready {
   
   
   .preview-cards {
-    padding: 8px;
+    padding: 0;
     margin: 0;
     width: 100dvw;
     height: 100dvh;
