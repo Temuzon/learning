@@ -255,6 +255,9 @@
         <button class="logout-btn"><img src="Logout.svg"></button>
       </div>
       <p class="preview-description">Statux es una plataforma para pensar mejor, decidir con criterio y organizar ideas sin caos.</p>
+      <button class="btn-open-systux hidden" type="button" aria-label="Explorar curso Systux">
+        <img src="visibility_24dp_777777_FILL0_wght400_GRAD0_opsz24.svg" alt="vista previa"/>
+      </button>
 
       <div class="preview-body">
         <div class="conteiner-preview">
@@ -338,8 +341,21 @@
     </div>
   </div>
 </div>
-        
-        
+
+<div id="systux-frame-modal" class="systux-frame-modal hidden" aria-hidden="true">
+  <div class="systux-frame-overlay">
+    <div class="systux-frame-box">
+      <div class="systux-frame-head">
+        <h3>Explorar curso</h3>
+        <button id="systux-frame-close" class="logout-btn" type="button" aria-label="Cerrar vista del curso">
+          <img src="Logout.svg" alt="Cerrar">
+        </button>
+      </div>
+      <iframe id="systux-frame" title="Vista previa del curso" loading="lazy" referrerpolicy="no-referrer"></iframe>
+    </div>
+  </div>
+</div>
+
         <!-- Modal de los codigos cards -->
         <div id="modal-ebootux" class="modal-ebootux hidden">
           <div class="modal-ebootux-content">
