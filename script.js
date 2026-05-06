@@ -567,6 +567,43 @@ const previewBuyBtn = previewModal?.querySelector(".btn-de-compra");
 const previewDescription = previewModal?.querySelector(".preview-description");
 const previewBuyWrap = previewBuyBtn?.closest(".box-preview-btn-buy");
 let previewSourceCard = null;
+const previewOpenSystuxBtn = previewModal?.querySelector(".btn-open-systux");
+const systuxFrameModal = document.getElementById("systux-frame-modal");
+const systuxFrame = document.getElementById("systux-frame");
+const systuxFrameClose = document.getElementById("systux-frame-close");
+let previewCourseUrl = "";
+
+function cerrarSystuxFrame() {
+  if (!systuxFrameModal) return;
+  systuxFrameModal.classList.add("hidden");
+  systuxFrameModal.setAttribute("aria-hidden", "true");
+  if (systuxFrame) systuxFrame.src = "about:blank";
+}
+
+function activarBloqueosEnIframe(iframeEl) {
+  let doc;
+  try {
+    doc = iframeEl.contentDocument || iframeEl.contentWindow?.document;
+  } catch (_) {
+    return;
+  }
+  if (!doc || doc.__stxBloqueoActivo) return;
+
+  const bloqueoHandler = (ev) => {
+    const blocked = ev.target?.closest?.('[data-bloqueado="premiun"]');
+    if (!blocked) return;
+    ev.preventDefault();
+    ev.stopPropagation();
+    ev.stopImmediatePropagation?.();
+    mostrarModal("Acceso bloqueado", "Desbloquea el Systux completo");
+  };
+
+  doc.addEventListener("click", bloqueoHandler, true);
+  doc.addEventListener("pointerdown", bloqueoHandler, true);
+  doc.addEventListener("submit", bloqueoHandler, true);
+  doc.__stxBloqueoActivo = true;
+}
+
 
 if (previewModal) {
   const closeBtn = previewModal.querySelector(".logout-btn");
@@ -590,6 +627,7 @@ document.addEventListener("click", (e) => {
   const noList = (btn.dataset.no || "").split(",");
   const link = btn.dataset.link || "#";
   previewSourceCard = btn.closest(".ebootux-cards");
+  previewCourseUrl = (previewSourceCard?.dataset.courseUrl || "").trim();
   currentCardSlug = slugify(title);
 
   if (previewTitle) {
@@ -638,6 +676,10 @@ document.addEventListener("click", (e) => {
     });
   }
 
+  if (previewOpenSystuxBtn) {
+    previewOpenSystuxBtn.classList.toggle("hidden", !previewCourseUrl);
+  }
+
   previewModal.classList.add("active");
   setUrlState({ modal: "preview", card: currentCardSlug, replace: false });
 });
@@ -655,6 +697,31 @@ if (previewBuyBtn) {
     const enterBtn = card.querySelector(".btn-acceder-ebootux");
     if (enterBtn) enterBtn.click();
   });
+}
+
+if (previewOpenSystuxBtn) {
+  previewOpenSystuxBtn.addEventListener("click", () => {
+    if (!previewCourseUrl || !systuxFrameModal || !systuxFrame) return;
+    systuxFrame.src = previewCourseUrl;
+    systuxFrameModal.classList.remove("hidden");
+    systuxFrameModal.setAttribute("aria-hidden", "false");
+  });
+}
+
+if (systuxFrameClose) {
+  systuxFrameClose.addEventListener("click", cerrarSystuxFrame);
+}
+
+if (systuxFrameModal) {
+  systuxFrameModal.addEventListener("click", (ev) => {
+    if (ev.target === systuxFrameModal) {
+      cerrarSystuxFrame();
+    }
+  });
+}
+
+if (systuxFrame) {
+  systuxFrame.addEventListener("load", () => activarBloqueosEnIframe(systuxFrame));
 }
 
 // ============================
