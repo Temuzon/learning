@@ -9,8 +9,8 @@
   {
     "id": 2,
     "title": "Conocimiento aplicable",
-    "desc": "Aprendizaje práctico para tomar decisiones limpias y ejecutar con criterio.",
-    "icon": "Conocimiento.svg",
+    "desc": "Hemos actualizado la tarjeta de 'Calistenia 2.0'.  ¡Accede gratis!",
+    "icon": "check_small.svg",
     "bg": "card.jpg"
   },
   {
@@ -28,7 +28,7 @@
   },
   {
     "id": 5,
-    "title": "",
+    "title": "Pensar no hace ruido",
     "icon": "Getux.svg",
     "bg": "fondo.de.la.web.jpeg"
   }
