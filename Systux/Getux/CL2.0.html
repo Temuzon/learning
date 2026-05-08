@@ -860,7 +860,7 @@ input[type=range]::-webkit-slider-thumb{ -webkit-appearance:none; width:18px; he
                     <div class="card-head"><div class="icon-wrap"><i data-lucide="calendar"></i></div></div>
                     <div class="card-footer"><h3>Tu Rutina</h3><p>Plan semanal</p></div>
                 </div>
-                <div class="menu-card" onclick="navigate('routines')" data-bloqueado="premiun">
+                <div class="menu-card" data-bloqueado="premiun" onclick="navigate('routines')">
                     <div class="card-head"><div class="icon-wrap"><i data-lucide="dumbbell"></i></div></div>
                     <div class="card-footer"><h3>Entrenar</h3><p>Generador inteligente</p></div>
                 </div>
@@ -1041,7 +1041,7 @@ input[type=range]::-webkit-slider-thumb{ -webkit-appearance:none; width:18px; he
                 <label><input type="radio" name="comidas" value="5"><span>5</span></label>
             </div>
         </div>
-        <button class="nutri-btn" id="calcBtn" onclick="calcularProteina()">Calcular</button>
+        <button class="nutri-btn" data-bloqueado="premiun" id="calcBtn" onclick="calcularProteina()">Calcular</button>
         <div class="nutri-loading" id="nutriLoading">
             <div class="nutri-spinner"></div>
             <span id="nutriLoadingMsg">Iniciando Python en el navegador...</span>
@@ -1257,8 +1257,8 @@ input[type=range]::-webkit-slider-thumb{ -webkit-appearance:none; width:18px; he
 <nav id="bottomNav" class="bottom-nav">
     <div class="nav-item active" id="btn-nav-dashboard" onclick="navigate('dashboard')"><i data-lucide="home"></i></div>
     <div class="nav-item" id="btn-nav-saved" onclick="navigate('saved-routine')"><i data-lucide="calendar"></i></div>
-    <div class="nav-item" id="btn-nav-timer" onclick="navigate('timer')" data-bloqueado="premiun"><i data-lucide="timer"></i></div>
-    <div class="nav-item" id="btn-nav-routines" onclick="navigate('routines')" data-bloqueado="premiun"><i data-lucide="dumbbell"></i></div>
+    <div class="nav-item" id="btn-nav-timer" data-bloqueado="premiun" onclick="navigate('timer')"><i data-lucide="timer"></i></div>
+    <div class="nav-item" data-bloqueado="premiun" id="btn-nav-routines" onclick="navigate('routines')"><i data-lucide="dumbbell"></i></div>
     <div class="nav-item" id="btn-nav-anatomy" onclick="navigate('anatomy')"><i data-lucide="user-round"></i></div>
     <a class="nav-item" href="https://statux.netlify.app/" style="display:flex;align-items:center;justify-content:center" data-bloqueado="premiun">🖤</a>
 </nav>
