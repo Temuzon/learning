@@ -3538,7 +3538,7 @@ body.focus-mode footer {
 .close-login {
   position: absolute;
   top: 20px;
-  laft: 20px;
+  left: 0;
   background: transparent;
   border: none;
   color: var(--gray7);
