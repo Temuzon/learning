@@ -3673,9 +3673,9 @@ body.focus-mode footer {
   background: rgba(0,0,0,.75);
 }
 
-.systux-frame-overlay { width: 100%; height: 100%; padding: 20px; }
+.systux-frame-overlay { width: 100%; height: 100%; padding: 15px 0; }
 .systux-frame-box {
-  width: min(1100px, 91%);
+  width: min(1100px, 95%);
   height: min(90dvh, 100%);
   margin: 0 auto;
   border: 3px solid var(--gray3);
