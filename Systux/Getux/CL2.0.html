@@ -860,7 +860,7 @@ input[type=range]::-webkit-slider-thumb{ -webkit-appearance:none; width:18px; he
                     <div class="card-head"><div class="icon-wrap"><i data-lucide="calendar"></i></div></div>
                     <div class="card-footer"><h3>Tu Rutina</h3><p>Plan semanal</p></div>
                 </div>
-                <div class="menu-card" data-bloqueado="premiun" onclick="navigate('routines')">
+                <div class="menu-card" onclick="navigate('routines')">
                     <div class="card-head"><div class="icon-wrap"><i data-lucide="dumbbell"></i></div></div>
                     <div class="card-footer"><h3>Entrenar</h3><p>Generador inteligente</p></div>
                 </div>
@@ -1257,12 +1257,13 @@ input[type=range]::-webkit-slider-thumb{ -webkit-appearance:none; width:18px; he
 <nav id="bottomNav" class="bottom-nav">
     <div class="nav-item active" id="btn-nav-dashboard" onclick="navigate('dashboard')"><i data-lucide="home"></i></div>
     <div class="nav-item" id="btn-nav-saved" onclick="navigate('saved-routine')"><i data-lucide="calendar"></i></div>
-    <div class="nav-item" id="btn-nav-timer" data-bloqueado="premiun" onclick="navigate('timer')"><i data-lucide="timer"></i></div>
-    <div class="nav-item" data-bloqueado="premiun" id="btn-nav-routines" onclick="navigate('routines')"><i data-lucide="dumbbell"></i></div>
+    <div class="nav-item" id="btn-nav-timer" onclick="navigate('timer')"><i data-lucide="timer"></i></div>
+    <div class="nav-item" id="btn-nav-routines" onclick="navigate('routines')"><i data-lucide="dumbbell"></i></div>
     <div class="nav-item" id="btn-nav-anatomy" onclick="navigate('anatomy')"><i data-lucide="user-round"></i></div>
     <a class="nav-item" href="https://statux.netlify.app/" style="display:flex;align-items:center;justify-content:center" data-bloqueado="premiun">🖤</a>
 </nav>
 
+<script src="../../Systux core/core.js" defer></script>
 <script>
 /* ═══════════════════════════════════════
    STATUX v2.1 — SCRIPT
@@ -2366,6 +2367,6 @@ window.onload=()=>{
 
 <!-- Pyodide -->
 <script src="https://cdn.jsdelivr.net/pyodide/v0.25.1/full/pyodide.js"></script>
-<script src="../../Systux core/core.js" defer></script>
+
 </body>
 </html>
