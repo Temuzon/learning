@@ -26,7 +26,7 @@ html, body {
 
 body {
   --statux-font: 20px;
-  background-color: #000000;
+  background-color: var(--dark);
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -71,7 +71,7 @@ body.loaded {
 .loader-status-text {
   margin: 8px 0 10px;
   text-align: center;
-  color: #bbb;
+  color: var(--whiteb);
   font-size: 1rem;
 }
 
@@ -80,11 +80,11 @@ body.loaded {
   justify-content: space-around;
   align-items: center;
   width: 140px;
-  background-color: #000000;
-  border: 1px solid #fff;
+  background-color: var(--dark);
+  border: 1px solid var(--white);
   border-radius: 20px;
   font-size: 1.1rem;
-  color: #bbb;
+  color: var(--whiteb);
   padding: 5px;
   margin: 0 auto;
   cursor: pointer;
@@ -112,7 +112,7 @@ body.loaded {
 
 .statux-path {
   fill: none;
-  stroke: #fff;
+  stroke: var(--white);
   stroke-width: 6;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -149,7 +149,7 @@ footer {
   flex-wrap: wrap;
   margin-left: 80px;
   padding: 30px;
-  background-color: #333333;
+  background-color: var(--gray3);
   border-top-right-radius: 36px;
   border-top-left-radius: 36px;
   justify-content: space-between;
@@ -181,10 +181,10 @@ footer.stx-footer-ready {
 
 .redes-sociales {
   width: 90%;
-  border: 3px solid #000;
+  border: 3px solid var(--dark);
   padding: 10px;
   text-decoration: none;
-  color: #bbb;
+  color: var(--whiteb);
   border-radius: 16px;
   transition: .43s;
   overflow: hidden;
@@ -192,8 +192,8 @@ footer.stx-footer-ready {
 }
 
 .redes-sociales:hover {
-  box-shadow: 0  5px 5px #000;
-  color: #0ff;
+  box-shadow: 0  5px 5px var(--dark);
+  color: var(--white);
 }
 
 .red-social-icon {
@@ -201,8 +201,8 @@ footer.stx-footer-ready {
   height: 58px;
   min-width: 58px;
   border-radius: 14px;
-  border: 1px solid #1c2727;
-  background: #0f1314;
+  border: 1px solid var(--whiteb);
+  background: var(--dark);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -217,10 +217,10 @@ footer.stx-footer-ready {
 
 .btn-a-info-web {
   width: 90%;
-  border: 3px solid #00ffff;
+  border: 3px solid var(--white);
   padding: 10px;
   text-decoration: none;
-  color: #00ffff;
+  color: var(--whiteb);
   border-radius: 16px;
   overflow: hidden;
 }
@@ -233,7 +233,7 @@ footer.stx-footer-ready {
   width: 80px;
   height: 100vh;
   min-height: 100vh;
-  background-color: #000000;
+  background-color: var(--dark);
   position: fixed;
   transition: width 0.45s cubic-bezier(0.4,0,0.2,1);
   border-top-right-radius: 36px;
@@ -249,7 +249,7 @@ footer.stx-footer-ready {
   justify-content: center;
   width: 100%;
   height: 40px;
-  background-color: #000000;
+  background-color: var(--dark);
   border-top-right-radius: 16px;
 }
 
@@ -257,7 +257,7 @@ footer.stx-footer-ready {
   display: flex;
   flex-direction: column;
   width: 100%;
-  background-color: #333333;
+  background-color: var(--gray3);
   height:  100%;
   padding-top: 10px;              
   align-items: center;
@@ -269,11 +269,11 @@ footer.stx-footer-ready {
 
 .contenedor-de-iconos::-webkit-scrollbar {
   width: 0px;
-  background-color: #777777;
+  background-color: var(--gray7);
 }
 
 .contenedor-de-iconos::-webkit-scrollbar-thumb {
-  background: #00ffff;
+  background: var(--whiteb);
   border-radius: 10px;
 }
 
@@ -285,7 +285,7 @@ footer.stx-footer-ready {
   border-radius: 12px;
   align-items: center;
   text-decoration: none;
-  color: #777777;
+  color: var(--gray7);
   background-color: transparent;
   font-family: tahoma;
   font-size: 20px;
@@ -296,14 +296,14 @@ footer.stx-footer-ready {
 }
 
 .item:hover{
-  background-color: #222;
-  color: #ffffff;
+  background-color: var(--dark2);
+  color: var(--white);
 }
 
 .item.active {
-  background-color: #000;
-  color: #ffffff;
-  filter: drop-shadow(0 0 4px #000)
+  background-color: var(--dark);
+  color: var(--white);
+  filter: drop-shadow(0 0 4px var(--dark))
 }
 
 .iconos-de-navegacion {
@@ -314,7 +314,7 @@ footer.stx-footer-ready {
 }
 
 .item.active .iconos-de-navegacion {
-  filter: drop-shadow(0 0 6px #ffffff);
+  filter: drop-shadow(0 0 6px var(--white));
 }
 
 .logo {
@@ -337,13 +337,13 @@ footer.stx-footer-ready {
   flex-shrink: 0;
   width: 40px;
   height: 40px;
-  background-color: #333333;
+  background-color: var(--gray3);
   border-radius: 50%;
-  border: 3px solid #33a3a3;
+  border: 3px solid var(--gray3);
 }
 
 .boton-de-ensanche-de-barra-de-navegacion:hover {
-  border: 3px solid #00ffff;
+  border: 3px solid var(--whiteb);
 }
 
 .icono-de-boton-de-ensanche-de-barra-de-navegacion {
@@ -363,7 +363,7 @@ footer.stx-footer-ready {
   background-color: transparent;
   height: 100%;            
   align-items: center;
-  border-top: 3px solid #777777;
+  border-top: 3px solid var(--gray3);
   padding-top: 12px;
 }
 
@@ -377,7 +377,7 @@ footer.stx-footer-ready {
 .contenedor-de-imagen-de-fondo {
   display: flex;
   height: 40%;
-  background-color: #000000;
+  background-color: var(--dark);
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -410,11 +410,11 @@ footer.stx-footer-ready {
 }
 
 .ojos {
-  stroke: #00ffff;
+  stroke: var(--white);
   stroke-width: 4;
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
-  filter: drop-shadow(0 0 0px #00ffff);
+  filter: drop-shadow(0 0 0px var(--white));
   animation: statux-entrada-ojos 2.5s ease-out 1.5s forwards,
              statux-vibrar-ojos 0.2s ease-in-out 2.8s 2;
 }
@@ -429,11 +429,11 @@ footer.stx-footer-ready {
 }
 
 @keyframes statux-entrada-ojos {
-  0% { stroke-dashoffset: 1000; filter: drop-shadow(0 0 0px #00ffff); }
-  70% { stroke-dashoffset: 0; filter: drop-shadow(0 0 20px #00ffff); }
+  0% { stroke-dashoffset: 1000; filter: drop-shadow(0 0 0px var(--white)); }
+  70% { stroke-dashoffset: 0; filter: drop-shadow(0 0 20px var(--white)); }
   80% { opacity: 0.5; }
-  90% { opacity: 1; filter: drop-shadow(0 0 12px #00ffff); }
-  100% { stroke-dashoffset: 0; opacity: 1; filter: drop-shadow(0 0 10px #00ffff); }
+  90% { opacity: 1; filter: drop-shadow(0 0 12px var(--white)); }
+  100% { stroke-dashoffset: 0; opacity: 1; filter: drop-shadow(0 0 10px var(--white)); }
 }
 
 @keyframes statux-vibrar-ojos {
