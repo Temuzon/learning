@@ -399,7 +399,7 @@ footer.stx-footer-ready {
 }
 
 .cuerpo {
-  stroke: #ffffff;
+  stroke: var(--white);
   stroke-width: 5;
   stroke-dasharray: 2500;
   stroke-dashoffset: 2500;
@@ -407,7 +407,7 @@ footer.stx-footer-ready {
 }
 
 .ojos {
-  stroke: var(--white);
+  stroke: var(--dark2);
   stroke-width: 4;
   stroke-dasharray: 1000;
   stroke-dashoffset: 1000;
@@ -919,10 +919,10 @@ footer.stx-footer-ready {
   width: 100%;
   min-height: 220px;
   background: #000;
-  border: 2px solid #777;
+  border: 2px solid var(--gray7);
   border-radius: 16px;
   padding: 16px;
-  color: #0ff;
+  color: var(--white);
   font-size: 16px;
   line-height: 1.6;
   resize: vertical;
@@ -1085,12 +1085,11 @@ footer.stx-footer-ready {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  background: #bbb;
   width: 360px;
   padding: 16px;
   margin: 20px;
   border-radius: 36px;
-  background: linear-gradient(150deg, #000000, #333, #000000);
+  background: linear-gradient(150deg, var(--dark), var(--gray3), var(--dark));
 }
 
 .header-tracktux-cards {
