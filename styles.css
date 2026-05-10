@@ -201,7 +201,7 @@ footer.stx-footer-ready {
   height: 58px;
   min-width: 58px;
   border-radius: 14px;
-  border: 1px solid var(--whiteb);
+  border: 1px solid var(--dark);
   background: var(--dark);
   display: inline-flex;
   align-items: center;
@@ -339,11 +339,8 @@ footer.stx-footer-ready {
   height: 40px;
   background-color: var(--gray3);
   border-radius: 50%;
-  border: 3px solid var(--gray3);
-}
-
-.boton-de-ensanche-de-barra-de-navegacion:hover {
-  border: 3px solid var(--whiteb);
+  border: none; 
+  cursor: pointer;
 }
 
 .icono-de-boton-de-ensanche-de-barra-de-navegacion {
@@ -447,7 +444,7 @@ footer.stx-footer-ready {
 .info-web {
   display: flex;
   flex-direction: column;
-  color: #bbbbbb;
+  color: var(--whiteb);
   text-align: center;
   font-size: 24px;
   margin-left: 80px;
@@ -465,9 +462,9 @@ footer.stx-footer-ready {
   width: 100%;
   padding: 12px 16px;
   border-radius: 16px;
-  border: 3px solid #777;
-  background: #000;
-  color: #0ff;
+  border: 3px solid var(--gray7);
+  background: var(--dark);
+  color: var(--white);
   font-size: 18px;
   font-family: 'ubuntu';
   outline: none;
@@ -476,16 +473,16 @@ footer.stx-footer-ready {
 }
 
 .buscador-seccion::placeholder {
-  color: #bbb;
+  color: var(--whiteb);
 }
 
 .buscador-seccion:focus {
-  box-shadow: 0 0 10px #000;
+  box-shadow: 0 0 10px var(--dark);
 }
 
 .mensaje-vacio {
   text-align: center;
-  color: #bbb;
+  color: var(--whiteb);
   font-size: 20px;
   margin-top: 40px;
 }
@@ -506,9 +503,9 @@ footer.stx-footer-ready {
   display: flex;
   flex-direction: column;
   text-align: center;
-  border-bottom: 5px solid #333333;
+  border-bottom: 5px solid var(--gray3);
   padding: 20px;
-  color: #0ff;
+  color: var(--white);
   font-size: 29px;
 }
 
@@ -527,13 +524,13 @@ footer.stx-footer-ready {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  background: #bbb;
+  background: var(--whiteb);
   width: 360px;
   height: 500px;
   padding: 16px;
   margin: 20px;
   border-radius: 36px;
-  background: linear-gradient(150deg, #000000, #333, #000000);
+  background: linear-gradient(150deg, #000000, #333, var(--dark));
 }
 
 .header-ebootux-cards {
@@ -546,8 +543,8 @@ footer.stx-footer-ready {
   border-radius: 36px;
   overflow: hidden;
   font-size: 24px;
-  color: #0ff;
-  box-shadow: 0 0 30px #000;
+  color: var(--white);
+  box-shadow: 0 0 30px var(--dark);
 }
 
 .header-ebootux-cards img {
@@ -563,7 +560,7 @@ footer.stx-footer-ready {
   width: 100%;
   gap: 10px;
   margin: 12px 0;
-  color: #0ff;
+  color: var(--white);
 }
 
 .input-codigo-ebootux {
@@ -571,8 +568,8 @@ footer.stx-footer-ready {
   padding: 10px;
   border-radius: 16px;
   border: none;
-  background: #000;
-  color: #bbb;
+  background: var(--dark);
+  color: var(--whiteb);
   font-size: 17px;
   font-family: 'ubuntu';
   outline: none; 
@@ -580,11 +577,11 @@ footer.stx-footer-ready {
 }
 
 .input-codigo-ebootux::placeholder {
-  color: #555;
+  color: var(--gray3);
 }
 
 .input-codigo-ebootux:focus {
-  box-shadow: 0 0 8px #000;
+  box-shadow: 0 0 8px var(--dark);
 }
 
 .btn-acceder-ebootux {
@@ -594,8 +591,8 @@ footer.stx-footer-ready {
   padding: 10px 16px;
   border-radius: 16px;
   border: none;
-  background: #000;
-  color: #777;
+  background: var(--dark);
+  color: var(--gray7);
   font-size: 17px;
   font-family: 'ubuntu';
   cursor: pointer;
@@ -603,8 +600,8 @@ footer.stx-footer-ready {
 }
 
 .btn-acceder-ebootux:hover {
-  box-shadow: 0px 0px 10px #000;
-  color: #0ff;
+  box-shadow: 0px 0px 10px var(--dark);
+  color: var(--white);
 }
 
 .contenedor-de-btn-de-compra {
@@ -629,16 +626,16 @@ footer.stx-footer-ready {
   align-items: center;
   justify-content: space-between;
   padding: 10px;
-  border: 3px solid #777;
+  border: 3px solid var(--gray7);
   text-decoration: none;
-  color: #777;
+  color: var(--gray7);
   border-radius: 24px;
   font-size: 32px;
   transition: 0.55s;
 }
 
 .btn-de-compra:hover {
-  box-shadow: 0px 0px 10px #000;
+  box-shadow: 0px 0px 10px var(--dark);
 }
 
 .btn-de-vista-previa {
@@ -647,7 +644,7 @@ footer.stx-footer-ready {
   align-items: center;
   justify-content: space-between;
   padding: 10px;
-  background-color: #000;
+  background-color: var(--dark);
   border: none;
   text-decoration: none;
   border-radius: 16px;
@@ -656,7 +653,7 @@ footer.stx-footer-ready {
 }
 
 .btn-de-vista-previa:hover {
-  box-shadow: 0px 0px 10px #000;
+  box-shadow: 0px 0px 10px var(--dark);
 }
 
 
@@ -671,9 +668,9 @@ footer.stx-footer-ready {
   display: flex;
   flex-direction: column;
   text-align: center;
-  border-bottom: 5px solid #333333;
+  border-bottom: 5px solid var(--gray3);
   padding: 20px;
-  color: #0ff;
+  color: var(--white);
   font-size: 29px;
 }
 
@@ -692,7 +689,7 @@ footer.stx-footer-ready {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(150deg, #000000, #333, #000000);
+  background: linear-gradient(150deg, var(--dark), var(--gray3), var(--dark));
   width: 360px;
   height: 500px;
   padding: 16px;
@@ -710,7 +707,7 @@ footer.stx-footer-ready {
   border-radius: 36px;
   overflow: hidden;
   font-size: 24px;
-  color: #0ff;
+  color: var(--white);
 }
 
 .header-plantitux-cards img {
@@ -727,7 +724,7 @@ footer.stx-footer-ready {
   width: 100%;
   gap: 10px;
   margin: 12px 0;
-  color: #0ff;
+  color: var(--white);
 }
 
 .input-codigo-plantitux {
@@ -735,15 +732,15 @@ footer.stx-footer-ready {
   padding: 10px;
   border-radius: 16px;
   border: none;
-  background: #000;
-  color: #bbb;
+  background: var(--dark);
+  color: var(--whiteb);
   font-size: 17px;
   outline: none; 
   transition: .30s;
 }
 
 .input-codigo-plantitux::placeholder {
-  color: #555;
+  color: var(--gray3);
 }
 
 .input-codigo-plantitux:focus {
