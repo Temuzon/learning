@@ -224,4 +224,8 @@ async function loadHomeSection() {
 document.addEventListener('DOMContentLoaded', () => {
   setFooterReadyState(false);
   loadHomeSection();
+
+  if (localStorage.getItem('stx_dashboard_active') === 'true') {
+    loadDashboardSection();
+  }
 });

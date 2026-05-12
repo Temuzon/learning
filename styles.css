@@ -3770,3 +3770,22 @@ body.focus-mode footer {
 .stx-onboarding-btn:hover {
   opacity: 0.88;
 }
+
+
+/* ===== SECCIÓN DASHBOARD EN SPA ===== */
+.section-dashboard {
+  margin-left: 80px;
+  min-height: 100vh;
+  background: #000;
+}
+
+.section-dashboard .dashboard {
+  height: 100vh;
+}
+
+@media (max-width: 900px) {
+  .section-dashboard {
+    margin-left: 0;
+    margin-bottom: 64px;
+  }
+}
