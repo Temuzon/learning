@@ -24,6 +24,14 @@
         <img src="Statux-logo(SVG).svg" class="logo" alt="Logo de Statux"/>
       </div>
       <nav class="contenedor-de-iconos">
+        <a href="#Dashboard"
+           class="item item-dashboard"
+           id="navDashboardItem"
+           aria-label="Dashboard"
+           style="display:none;">
+          <img src="usuario.svg" class="iconos-de-navegacion" alt="Dashboard">
+          <span class="contenitux">Dashboard</span>
+        </a>
         <button class="boton-de-ensanche-de-barra-de-navegacion" aria-label="Expandir barra de navegación">
           <img src="icono-de-boton-de-ensanche-de-barra-de-navegacion.svg" class="icono-de-boton-de-ensanche-de-barra-de-navegacion"/>
         </button>
@@ -44,6 +52,11 @@
     </header>
     
     <main>
+      <!-- Sección Dashboard -->
+      <section id="Dashboard" class="app-section section-dashboard">
+        <div id="dashboard-root"></div>
+      </section>
+      <!-- End Sección Dashboard -->
       <!-- Seccion Home -->
       <section id="Home" class="app-section section-home active-section" data-home-section>
         <div id="home-section-root" data-home-root>
@@ -643,6 +656,7 @@
 </section>
 
     <script src="https://gumroad.com/js/gumroad.js"></script>
+    <script src="dashboard-loader.js" defer></script>
     <script src="home.js" defer></script>
     <script src="script.js" defer></script>
     <script type="module">
@@ -760,5 +774,22 @@ function showToast(text, isError = false) {
 }
 </script>
 
-  </body>
+  <div class="stx-onboarding-overlay" id="stxOnboardingModal" aria-hidden="true">
+  <div class="stx-onboarding-box" role="dialog" aria-modal="true">
+    <p class="stx-onboarding-lead">Antes de entrar, necesitamos saber cómo llamarte.</p>
+    <input
+      type="text"
+      class="stx-onboarding-input"
+      id="stxOnboardingInput"
+      placeholder="Tu nombre..."
+      maxlength="32"
+      autocomplete="off"
+    >
+    <button class="stx-onboarding-btn" id="stxOnboardingConfirm" type="button">
+      Crear mi Dashboard
+    </button>
+  </div>
+</div>
+
+</body>
 </html>
