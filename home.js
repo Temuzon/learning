@@ -175,6 +175,28 @@ async function loadHomeNovedades() {
   }
 }
 
+
+function setupDashboardCta() {
+  const cta = document.getElementById('stxDashboardCta');
+  const btn = document.getElementById('stxActivateDashboardBtn');
+  if (!cta || !btn) return;
+
+  if (localStorage.getItem('stx_dashboard_active') === 'true') {
+    cta.style.display = 'none';
+    return;
+  }
+
+  btn.addEventListener('click', () => {
+    const modal = document.getElementById('stxOnboardingModal');
+    if (!modal) return;
+    modal.classList.add('stx-onboarding-active');
+    modal.setAttribute('aria-hidden', 'false');
+    setTimeout(() => {
+      document.getElementById('stxOnboardingInput')?.focus();
+    }, 100);
+  });
+}
+
 async function loadHomeSection() {
   const target = document.querySelector('[data-home-root]');
   if (!target) return;
@@ -190,6 +212,7 @@ async function loadHomeSection() {
     await loadHomeNovedades();
     setupExploreWindow();
     setupFloatingLines();
+    setupDashboardCta();
     setFooterReadyState(true);
   } catch (error) {
     target.innerHTML = '<p class="home-loading-error">No se pudo cargar la sección Home.</p>';
