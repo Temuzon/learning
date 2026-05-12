@@ -760,5 +760,22 @@ function showToast(text, isError = false) {
 }
 </script>
 
-  </body>
+  <div class="stx-onboarding-overlay" id="stxOnboardingModal" aria-hidden="true">
+  <div class="stx-onboarding-box" role="dialog" aria-modal="true">
+    <p class="stx-onboarding-lead">Antes de entrar, necesitamos saber cómo llamarte.</p>
+    <input
+      type="text"
+      class="stx-onboarding-input"
+      id="stxOnboardingInput"
+      placeholder="Tu nombre..."
+      maxlength="32"
+      autocomplete="off"
+    >
+    <button class="stx-onboarding-btn" id="stxOnboardingConfirm" type="button">
+      Crear mi Dashboard
+    </button>
+  </div>
+</div>
+
+</body>
 </html>

@@ -3691,3 +3691,82 @@ body.focus-mode footer {
 }
 
 #systux-frame { width: 100%; height: 100%; border: 0; background: #0a0a0a; }
+
+
+/* ===== ONBOARDING MODAL ===== */
+.stx-onboarding-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 4000;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.stx-onboarding-overlay.stx-onboarding-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.stx-onboarding-box {
+  width: min(420px, calc(100vw - 32px));
+  background: #0d0d0d;
+  border: 1px solid #222;
+  border-radius: 24px;
+  padding: 36px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  text-align: center;
+  animation: stx-modal-in 0.38s cubic-bezier(.77,1.5,.79,1) backwards;
+}
+
+.stx-onboarding-lead {
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.stx-onboarding-input {
+  width: 100%;
+  background: #000;
+  border: 1px solid #333;
+  border-radius: 14px;
+  padding: 14px 18px;
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.25s ease;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.stx-onboarding-input:focus {
+  border-color: var(--home-accent, #00f2ff);
+}
+
+.stx-onboarding-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 999px;
+  border: none;
+  background: #fff;
+  color: #000;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: opacity 0.2s ease;
+}
+
+.stx-onboarding-btn:hover {
+  opacity: 0.88;
+}

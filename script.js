@@ -99,6 +99,14 @@ function showSection(id, options = {}) {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
+function stxDashboardIsActive() {
+  return localStorage.getItem("stx_dashboard_active") === "true";
+}
+
+function stxDashboardGetName() {
+  return localStorage.getItem("stx_dashboard_name") || "";
+}
+
 function slugify(value) {
   return String(value || "")
     .normalize("NFD")
@@ -176,8 +184,11 @@ function syncSectionFromLocation() {
   syncingSectionFromHistory = false;
 }
 
-const initialSection = (window.location.hash || "#Home").replace("#", "") || "Home";
-showSection(initialSection, { updateUrl: false });
+const initialSection = (window.location.hash && window.location.hash !== "#")
+  ? window.location.hash.replace("#", "")
+  : (stxDashboardIsActive() ? "Dashboard" : "Home");
+const initialSectionEl = document.getElementById(initialSection);
+showSection(initialSectionEl ? initialSection : "Home", { updateUrl: false });
 window.addEventListener("popstate", syncSectionFromLocation);
 window.addEventListener("hashchange", syncSectionFromLocation);
 
@@ -1644,7 +1655,9 @@ const stxRuntime = (() => {
     hover: "stx_hover",
     focus: "stx_focus",
     font: "stx_font",
-    reduceMotion: "stx_reduce_motion"
+    reduceMotion: "stx_reduce_motion",
+    dashboardActive: "stx_dashboard_active",
+    dashboardName: "stx_dashboard_name"
   };
 
   const stxUi = {
@@ -2077,5 +2090,43 @@ const stxRuntime = (() => {
     saveUnlockedCodeFromCard
   };
 })();
+
+function stxInitOnboarding() {
+  const modal = document.getElementById('stxOnboardingModal');
+  const input = document.getElementById('stxOnboardingInput');
+  const confirmBtn = document.getElementById('stxOnboardingConfirm');
+  if (!modal || !input || !confirmBtn) return;
+
+  const closeModal = () => {
+    modal.classList.remove('stx-onboarding-active');
+    modal.setAttribute('aria-hidden', 'true');
+  };
+
+  const confirm = () => {
+    const name = input.value.trim();
+    if (!name) {
+      input.focus();
+      return;
+    }
+    localStorage.setItem('stx_dashboard_active', 'true');
+    localStorage.setItem('stx_dashboard_name', name);
+    closeModal();
+    const cta = document.getElementById('stxDashboardCta');
+    if (cta) cta.style.display = 'none';
+    if (typeof mostrarModal === 'function') {
+      mostrarModal('¡Dashboard activado!', `Bienvenido, ${name}. Tu dashboard estará listo pronto.`);
+    }
+  };
+
+  confirmBtn.addEventListener('click', confirm);
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') confirm();
+  });
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+}
+
+stxInitOnboarding();
 
 stxRuntime.init();
