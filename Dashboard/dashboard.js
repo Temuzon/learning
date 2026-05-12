@@ -224,3 +224,25 @@
             console.log('   Secciones: Empty-state | Actividad | Carrusel');
             console.log('   Atajos: tecla 1 = Actividad | tecla 2 = Carrusel | Esc = Inicio');
         })();
+
+
+// Exponer función global para re-inicializar el carrusel
+window.stxReinitCarousel = function() {
+  const track = document.getElementById('track');
+  if (!track) return;
+
+  const newCards = document.querySelectorAll('#track .card');
+
+  newCards.forEach(card => {
+    card.addEventListener('click', (e) => {
+      if (e.target.tagName === 'BUTTON' || e.target.closest('button')) return;
+      card.scrollIntoView({
+        behavior: 'smooth',
+        inline: 'center',
+        block: 'nearest'
+      });
+    });
+  });
+
+  updateActiveCard();
+};

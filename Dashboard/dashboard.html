@@ -71,6 +71,10 @@
                 <!-- SECCIÓN CARRUSEL -->
                 <div id="carrusel" class="carrusel section-hidden">
                     <div class="title-content">Explorar Systux</div>
+                    <div class="carrusel-empty" id="carruselEmpty">
+                        <p>Aún no has desbloqueado ningún contenido.</p>
+                        <span>Desbloquea cards en Ebootux, Plantitux o Movitux para verlas aquí.</span>
+                    </div>
                     <div class="carrusel-wrapper">
                         <!-- Botón izquierdo -->
                         <button class="carousel-btn left" id="carouselLeft" aria-label="Anterior">
@@ -79,36 +83,7 @@
                         </button>
                         <!-- Track del carrusel -->
                         <div class="carrusel-track" id="track">
-                            <div class="card">
-                                <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&h=250&fit=crop" alt="Finance">
-                                <h3>Finanzas</h3>
-                                <p>Controla tus gastos e inversiones</p>
-                                <button onclick="alert('Explorando Finanzas...')">Explorar</button>
-                            </div>
-                            <div class="card">
-                                <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=250&fit=crop" alt="Fitness">
-                                <h3>Fitness</h3>
-                                <p>Seguimiento de entrenamientos</p>
-                                <button onclick="alert('Explorando Fitness...')">Explorar</button>
-                            </div>
-                            <div class="card">
-                                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=250&fit=crop" alt="Tech">
-                                <h3>Tecnología</h3>
-                                <p>Automatiza tu stack digital</p>
-                                <button onclick="alert('Explorando Tecnología...')">Explorar</button>
-                            </div>
-                            <div class="card">
-                                <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=400&h=250&fit=crop" alt="Estudio">
-                                <h3>Estudio</h3>
-                                <p>Organiza tu plan de aprendizaje</p>
-                                <button onclick="alert('Explorando Estudio...')">Explorar</button>
-                            </div>
-                            <div class="card">
-                                <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=400&h=250&fit=crop" alt="Nutrición">
-                                <h3>Nutrición</h3>
-                                <p>Planifica tus comidas semanales</p>
-                                <button onclick="alert('Explorando Nutrición...')">Explorar</button>
-                            </div>
+                            <!-- Las cards se generan dinámicamente desde localStorage -->
                         </div>
                         <!-- Botón derecho -->
                         <button class="carousel-btn right" id="carouselRight" aria-label="Siguiente">
