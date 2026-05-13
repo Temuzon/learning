@@ -3774,18 +3774,24 @@ body.focus-mode footer {
 
 /* ===== SECCIÓN DASHBOARD EN SPA ===== */
 .section-dashboard {
-  margin-left: 80px;
-  min-height: 100vh;
-  background: #000;
+    margin-left: 80px;
+    min-height: 100vh;
+    background: #000;
+    /* NO poner overflow:hidden aquí */
 }
 
+/* El .dashboard interno maneja su propio layout */
 .section-dashboard .dashboard {
-  height: 100vh;
+    height: 100vh;
 }
 
 @media (max-width: 900px) {
-  .section-dashboard {
-    margin-left: 0;
-    margin-bottom: 64px;
-  }
+    .section-dashboard {
+        margin-left: 0;
+        margin-bottom: 64px;
+    }
+
+    .section-dashboard .dashboard {
+        height: calc(100vh - 64px);
+    }
 }
