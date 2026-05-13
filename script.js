@@ -97,6 +97,74 @@ function showSection(id, options = {}) {
     setUrlState({ section: id, keepCard: false, keepModal: false, replace: replaceUrl });
   }
   window.scrollTo({ top: 0, behavior: "smooth" });
+
+  if (id === "Dashboard" && typeof stxRenderDashboardCards === "function") {
+    stxRenderDashboardCards();
+  }
+}
+
+function stxDashboardIsActive() {
+  return localStorage.getItem("stx_dashboard_active") === "true";
+}
+
+function stxDashboardGetName() {
+  return localStorage.getItem("stx_dashboard_name") || "";
+}
+
+function stxSyncDashboardNav() {
+  const navItem = document.getElementById('navDashboardItem');
+  if (!navItem) return;
+
+  if (stxDashboardIsActive()) {
+    navItem.style.display = '';
+  } else {
+    navItem.style.display = 'none';
+  }
+}
+
+function stxSaveDashboardCard(card, type) {
+  const raw = localStorage.getItem('stx_dashboard_cards');
+  let cards = [];
+  try { cards = JSON.parse(raw) || []; } catch { cards = []; }
+
+  const typeStr = String(type || '').toLowerCase();
+  const isAsset = typeStr === 'plantitux' || typeStr === 'movitux';
+
+  const title = isAsset
+    ? (card.dataset.title || '')
+    : (card.dataset.ebootuxTitle || '');
+
+  const id = `${typeStr}::${title.toLowerCase().replace(/\s+/g, '-')}`;
+
+  if (cards.some(c => c.id === id)) return;
+
+  const image = isAsset
+    ? (card.dataset.previewImg || '')
+    : (card.querySelector('.header-ebootux-cards img')?.src || '');
+
+  const courseUrl = card.dataset.courseUrl || '';
+  const prompt = card.dataset.prompt || '';
+  const dataCode = card.dataset.code || '';
+
+  const dataAttrs = {};
+  Array.from(card.attributes).forEach(attr => {
+    if (attr.name.startsWith('data-')) {
+      dataAttrs[attr.name] = attr.value;
+    }
+  });
+
+  cards.push({
+    id,
+    title,
+    type: typeStr,
+    image,
+    courseUrl,
+    prompt,
+    code: dataCode,
+    dataAttrs
+  });
+
+  localStorage.setItem('stx_dashboard_cards', JSON.stringify(cards));
 }
 
 function slugify(value) {
@@ -176,8 +244,11 @@ function syncSectionFromLocation() {
   syncingSectionFromHistory = false;
 }
 
-const initialSection = (window.location.hash || "#Home").replace("#", "") || "Home";
-showSection(initialSection, { updateUrl: false });
+const initialSection = (window.location.hash && window.location.hash !== "#")
+  ? window.location.hash.replace("#", "")
+  : (stxDashboardIsActive() ? "Dashboard" : "Home");
+const initialSectionEl = document.getElementById(initialSection);
+showSection(initialSectionEl ? initialSection : "Home", { updateUrl: false });
 window.addEventListener("popstate", syncSectionFromLocation);
 window.addEventListener("hashchange", syncSectionFromLocation);
 
@@ -956,6 +1027,7 @@ document.addEventListener("click", async function (e) {
 
     if (codigoValido) {
       stxRuntime.saveUnlockedCodeFromCard(card, "ebootux", codigoCorrecto);
+      stxSaveDashboardCard(card, "ebootux");
       await playUnlockAnimation();
 
       const courseUrl = card.dataset.courseUrl || "";
@@ -993,6 +1065,7 @@ document.addEventListener("click", async function (e) {
 
     if (codigoValido) {
       stxRuntime.saveUnlockedCodeFromCard(card, "plantitux", codigoCorrecto);
+      stxSaveDashboardCard(card, "plantitux");
       abrirPromptDesdeCard(card);
     } else {
       mostrarModal("Código incorrecto ❌", "Verifica tu código e inténtalo de nuevo.");
@@ -1644,7 +1717,10 @@ const stxRuntime = (() => {
     hover: "stx_hover",
     focus: "stx_focus",
     font: "stx_font",
-    reduceMotion: "stx_reduce_motion"
+    reduceMotion: "stx_reduce_motion",
+    dashboardActive: "stx_dashboard_active",
+    dashboardName: "stx_dashboard_name",
+    dashboardCards: "stx_dashboard_cards"
   };
 
   const stxUi = {
@@ -2078,4 +2154,45 @@ const stxRuntime = (() => {
   };
 })();
 
+function stxInitOnboarding() {
+  const modal = document.getElementById('stxOnboardingModal');
+  const input = document.getElementById('stxOnboardingInput');
+  const confirmBtn = document.getElementById('stxOnboardingConfirm');
+  if (!modal || !input || !confirmBtn) return;
+
+  const closeModal = () => {
+    modal.classList.remove('stx-onboarding-active');
+    modal.setAttribute('aria-hidden', 'true');
+  };
+
+  const confirm = () => {
+    const name = input.value.trim();
+    if (!name) {
+      input.focus();
+      return;
+    }
+    localStorage.setItem('stx_dashboard_active', 'true');
+    localStorage.setItem('stx_dashboard_name', name);
+    stxSyncDashboardNav();
+    loadDashboardSection();
+    closeModal();
+    const cta = document.getElementById('stxDashboardCta');
+    if (cta) cta.style.display = 'none';
+    if (typeof mostrarModal === 'function') {
+      mostrarModal('¡Dashboard activado!', `Bienvenido, ${name}. Tu dashboard estará listo pronto.`);
+    }
+  };
+
+  confirmBtn.addEventListener('click', confirm);
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') confirm();
+  });
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+}
+
+stxInitOnboarding();
+
 stxRuntime.init();
+stxSyncDashboardNav();
