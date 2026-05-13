@@ -6,6 +6,7 @@
 :root {
     --dash-dark: #000;
     --dash-dark1: #111;
+    --dash-dark2: #222;
     --dash-gray7: #777;
     --dash-gray3: #333;
     --dash-white: #fff;
@@ -453,18 +454,18 @@
 .section-dashboard .stx-dashboard-enter-btn img {
     width: 18px;
     height: 18px;
-    filter: invert(1);
+    filter: invert(0);
     pointer-events: none;
 }
 
 .section-dashboard .stx-dashboard-enter-btn:hover {
-    background: #fff;
-    color: #000;
-    border-color: #fff;
+    background: var(--white);
+    color: var(--dash-dark);
+    border-color: var(--white);
 }
 
 .section-dashboard .stx-dashboard-enter-btn:hover img {
-    filter: invert(0);
+    filter: invert(1);
 }
 
 /* ========== ANIMACIONES ========== */
