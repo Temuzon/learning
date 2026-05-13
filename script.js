@@ -167,6 +167,25 @@ function stxSaveDashboardCard(card, type) {
   localStorage.setItem('stx_dashboard_cards', JSON.stringify(cards));
 }
 
+function stxDashboardIsActive() {
+  return localStorage.getItem("stx_dashboard_active") === "true";
+}
+
+function stxDashboardGetName() {
+  return localStorage.getItem("stx_dashboard_name") || "";
+}
+
+function stxSyncDashboardNav() {
+  const navItem = document.getElementById('navDashboardItem');
+  if (!navItem) return;
+
+  if (stxDashboardIsActive()) {
+    navItem.style.display = '';
+  } else {
+    navItem.style.display = 'none';
+  }
+}
+
 function slugify(value) {
   return String(value || "")
     .normalize("NFD")
