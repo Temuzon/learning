@@ -3795,3 +3795,20 @@ body.focus-mode footer {
         height: calc(100vh - 64px);
     }
 }
+
+
+/* ===== CERRAR DASHBOARD EN SETTINGS ===== */
+.stx-logout-dashboard-item {
+    color: #ff5a5a !important;
+    border-top: 1px solid #222;
+    margin-top: 4px;
+    padding-top: 14px !important;
+}
+
+.stx-logout-dashboard-item img {
+    filter: invert(40%) sepia(80%) saturate(500%) hue-rotate(310deg);
+}
+
+.stx-logout-dashboard-item:hover {
+    background-color: rgba(255, 90, 90, 0.08) !important;
+}

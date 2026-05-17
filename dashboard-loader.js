@@ -3,7 +3,8 @@ function stxTypeLabel(type) {
     ebootux: 'Ebootux · Curso',
     getux: 'Getux · Guía',
     plantitux: 'Plantitux · Plantilla',
-    movitux: 'Movitux · Prompt'
+    movitux: 'Movitux · Prompt',
+    custom: 'Mi enlace'
   };
   return labels[type] || 'Statux';
 }
@@ -40,7 +41,11 @@ function stxRenderDashboardCards() {
            onerror="this.src='Statux-logo(SVG).svg'">
       <h3>${cardData.title}</h3>
       <p>${stxTypeLabel(cardData.type)}</p>
-      <button class="stx-dashboard-enter-btn" type="button">
+      <button class="stx-dashboard-enter-btn" type="button"
+        data-card-type="${cardData.type}"
+        data-card-title="${cardData.title}"
+        data-course-url="${cardData.courseUrl || ''}"
+        data-prompt="${cardData.prompt || ''}">
         <img src="Login.svg" alt="Entrar"> Entrar
       </button>
     `;
@@ -56,40 +61,45 @@ function stxRenderDashboardCards() {
 function stxBindCarouselEnterButtons() {
   const track = document.getElementById('track');
   if (!track) return;
-  if (track.dataset.stxBindEnter === 'true') return;
-  track.dataset.stxBindEnter = 'true';
 
   track.addEventListener('click', (e) => {
     const btn = e.target.closest('.stx-dashboard-enter-btn');
     if (!btn) return;
 
-    const cardEl = btn.closest('.card');
-    if (!cardEl) return;
+    const type = btn.dataset.cardType || '';
+    const courseUrl = (btn.dataset.courseUrl || '').trim();
+    const title = (btn.dataset.cardTitle || '').trim();
 
-    const type = cardEl.dataset.ebootuxTitle
-      ? 'ebootux'
-      : (cardEl.dataset.prompt ? 'movitux' : 'plantitux');
+    if (type === 'custom') {
+      if (courseUrl) {
+        window.open(courseUrl, '_blank', 'noopener');
+      }
+      return;
+    }
 
     if (type === 'ebootux' || type === 'getux') {
-      const title = cardEl.dataset.ebootuxTitle || '';
-      const originalCard = document.querySelector(`.ebootux-cards[data-ebootux-title="${CSS.escape(title)}"]`);
+      const originalCard = document.querySelector(
+        `.ebootux-cards[data-ebootux-title="${CSS.escape(title)}"]`
+      );
       if (originalCard) {
         const enterBtn = originalCard.querySelector('.btn-acceder-ebootux');
-        if (enterBtn) enterBtn.click();
-        return;
+        if (enterBtn) { enterBtn.click(); return; }
       }
-      const courseUrl = cardEl.dataset.courseUrl || '';
       if (courseUrl) window.location.href = courseUrl;
-    } else {
-      const title = cardEl.dataset.title || '';
-      const originalCard = document.querySelector(`.plantitux-cards[data-title="${CSS.escape(title)}"], .movitux-cards[data-title="${CSS.escape(title)}"]`);
-      if (originalCard) {
-        const enterBtn = originalCard.querySelector('.btn-acceder-plantitux');
-        if (enterBtn) enterBtn.click();
-      }
+      return;
+    }
+
+    const originalCard = document.querySelector(
+      `.plantitux-cards[data-title="${CSS.escape(title)}"],
+       .movitux-cards[data-title="${CSS.escape(title)}"]`
+    );
+    if (originalCard) {
+      const enterBtn = originalCard.querySelector('.btn-acceder-plantitux');
+      if (enterBtn) enterBtn.click();
     }
   });
 }
+
 
 async function loadDashboardSection() {
   const root = document.getElementById('dashboard-root');

@@ -38,10 +38,15 @@
                     <span class="dash-pill-icon">⚡</span>
                     <span class="dash-pill-label">Actividad</span>
                 </button>
+                <button class="dash-pill dash-pill-create" id="dashCreateCardBtn" aria-label="Crear card">
+                    <span class="dash-pill-icon">＋</span>
+                    <span class="dash-pill-label">Nueva card</span>
+                </button>
             </div>
 
             <!-- EMPTY STATE (visible por defecto) -->
             <div id="emptyState" class="empty-state section-visible">
+                <span class="wave" style="font-size:2.5rem;">👋🏿</span>
                 <span>Selecciona una sección para comenzar</span>
             </div>
 
@@ -80,6 +85,43 @@
 
         </div>
     </div>
+
+
+<!-- MODAL CREAR CARD -->
+<div class="dash-create-overlay" id="dashCreateModal" aria-hidden="true">
+    <div class="dash-create-box" role="dialog" aria-modal="true">
+        <div class="dash-create-header">
+            <h3>Nueva card</h3>
+            <button class="dash-create-close" id="dashCreateClose" type="button" aria-label="Cerrar">✕</button>
+        </div>
+
+        <div class="dash-create-preview">
+            <img id="dashCreatePreviewImg" src="Statux-logo(SVG).svg" alt="Preview">
+        </div>
+
+        <div class="dash-create-fields">
+            <input
+                type="text"
+                id="dashCreateName"
+                class="dash-create-input"
+                placeholder="Nombre de la card..."
+                maxlength="40"
+                autocomplete="off"
+            >
+            <input
+                type="url"
+                id="dashCreateUrl"
+                class="dash-create-input"
+                placeholder="URL del enlace (https://...)"
+                autocomplete="off"
+            >
+        </div>
+
+        <button class="dash-create-confirm" id="dashCreateConfirm" type="button">
+            Crear card
+        </button>
+    </div>
+</div>
 
 </section>
 </body>

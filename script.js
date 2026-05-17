@@ -113,12 +113,40 @@ function stxDashboardGetName() {
 
 function stxSyncDashboardNav() {
   const navItem = document.getElementById('navDashboardItem');
-  if (!navItem) return;
+  const logoutBtn = document.getElementById('stxLogoutDashboardBtn');
+  const isActive = stxDashboardIsActive();
 
-  if (stxDashboardIsActive()) {
-    navItem.style.display = '';
-  } else {
-    navItem.style.display = 'none';
+  if (navItem) navItem.style.display = isActive ? '' : 'none';
+  if (logoutBtn) logoutBtn.style.display = isActive ? '' : 'none';
+}
+
+function stxLogoutDashboard() {
+  localStorage.removeItem('stx_dashboard_active');
+  localStorage.removeItem('stx_dashboard_name');
+
+  stxSyncDashboardNav();
+
+  const logoutBtn = document.getElementById('stxLogoutDashboardBtn');
+  if (logoutBtn) logoutBtn.style.display = 'none';
+
+  if (typeof stxRuntime !== 'undefined') {
+    const settingsOverlay = document.querySelector('.stx-settings-overlay');
+    if (settingsOverlay) {
+      settingsOverlay.classList.remove('active');
+      settingsOverlay.setAttribute('aria-hidden', 'true');
+      document.querySelector('.floating-container')?.classList.remove('active');
+    }
+  }
+
+  showSection('Home', { updateUrl: true });
+
+  setTimeout(() => {
+    const cta = document.getElementById('stxDashboardCta');
+    if (cta) cta.style.display = '';
+  }, 400);
+
+  if (typeof mostrarModal === 'function') {
+    mostrarModal('Dashboard cerrado', 'Puedes volver a activarlo cuando quieras.');
   }
 }
 
@@ -165,25 +193,6 @@ function stxSaveDashboardCard(card, type) {
   });
 
   localStorage.setItem('stx_dashboard_cards', JSON.stringify(cards));
-}
-
-function stxDashboardIsActive() {
-  return localStorage.getItem("stx_dashboard_active") === "true";
-}
-
-function stxDashboardGetName() {
-  return localStorage.getItem("stx_dashboard_name") || "";
-}
-
-function stxSyncDashboardNav() {
-  const navItem = document.getElementById('navDashboardItem');
-  if (!navItem) return;
-
-  if (stxDashboardIsActive()) {
-    navItem.style.display = '';
-  } else {
-    navItem.style.display = 'none';
-  }
 }
 
 function slugify(value) {
@@ -2108,6 +2117,11 @@ const stxRuntime = (() => {
       if (action === "delete") {
         stxOpenDeleteConfirm(id);
       }
+    });
+
+    const logoutDashboardBtn = document.getElementById('stxLogoutDashboardBtn');
+    stxBindPseudoButton(logoutDashboardBtn, () => {
+      stxLogoutDashboard();
     });
 
     stxBindTabs();

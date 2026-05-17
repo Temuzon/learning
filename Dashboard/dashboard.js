@@ -232,3 +232,89 @@
 
     console.log('✅ Dashboard listo con pills de navegación.');
 })();
+
+
+// ──────────────────────────────────────
+// MODAL CREAR CARD
+// ──────────────────────────────────────
+(function() {
+    const createBtn = document.getElementById('dashCreateCardBtn');
+    const createModal = document.getElementById('dashCreateModal');
+    const createClose = document.getElementById('dashCreateClose');
+    const createConfirm = document.getElementById('dashCreateConfirm');
+    const createName = document.getElementById('dashCreateName');
+    const createUrl = document.getElementById('dashCreateUrl');
+    const previewImg = document.getElementById('dashCreatePreviewImg');
+
+    if (!createBtn || !createModal) return;
+
+    function openCreateModal() {
+        createModal.classList.add('dash-create-active');
+        createModal.setAttribute('aria-hidden', 'false');
+        setTimeout(() => createName?.focus(), 100);
+    }
+
+    function closeCreateModal() {
+        createModal.classList.remove('dash-create-active');
+        createModal.setAttribute('aria-hidden', 'true');
+        if (createName) createName.value = '';
+        if (createUrl) createUrl.value = '';
+        if (previewImg) previewImg.src = 'Statux-logo(SVG).svg';
+    }
+
+    function saveCustomCard() {
+        const name = (createName?.value || '').trim();
+        const url = (createUrl?.value || '').trim();
+
+        if (!name) {
+            createName?.focus();
+            return;
+        }
+
+        const id = `custom::${name.toLowerCase().replace(/\s+/g, '-')}::${Date.now()}`;
+
+        const cardData = {
+            id,
+            title: name,
+            type: 'custom',
+            image: 'Statux-logo(SVG).svg',
+            courseUrl: url,
+            prompt: '',
+            code: '',
+            dataAttrs: {
+                'data-title': name,
+                'data-course-url': url
+            }
+        };
+
+        const raw = localStorage.getItem('stx_dashboard_cards');
+        let cards = [];
+        try { cards = JSON.parse(raw) || []; } catch { cards = []; }
+        cards.push(cardData);
+        localStorage.setItem('stx_dashboard_cards', JSON.stringify(cards));
+
+        closeCreateModal();
+
+        if (typeof stxRenderDashboardCards === 'function') {
+            stxRenderDashboardCards();
+        }
+
+        const carruselPill = document.querySelector('.dash-pill[data-section="carrusel"]');
+        if (carruselPill) carruselPill.click();
+    }
+
+    createBtn.addEventListener('click', openCreateModal);
+    createClose?.addEventListener('click', closeCreateModal);
+    createModal.addEventListener('click', (e) => {
+        if (e.target === createModal) closeCreateModal();
+    });
+    createConfirm?.addEventListener('click', saveCustomCard);
+
+    createName?.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') createUrl?.focus();
+    });
+
+    createUrl?.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') saveCustomCard();
+    });
+})();
