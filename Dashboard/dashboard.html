@@ -7,133 +7,125 @@
     <title>Dashboard · Systux</title>
 </head>
 <body>
+<section class="dashboard">
 
-    <!-- ==================== DASHBOARD ÚNICO ==================== -->
-    <section class="dashboard">
-
-        <!-- NAVBAR SUPERIOR -->
-        <div class="navbar-dashboard">
-            <div class="user-data">
+    <!-- NAVBAR SUPERIOR -->
+    <div class="navbar-dashboard">
+        <div class="user-data">
+            <div class="user-data-text">
                 <div class="welcome-text">
-                    <span>Bienvenido, </span>
-                    <span class="user-name">Luzyfor</span>
+                    <span class="welcome-label">Bienvenido,</span>
+                    <span class="user-name">Usuario</span>
                 </div>
-                <div class="cont-user-profile-picture">
-                    <img src="https://statux.netlify.app/Statux-logo(SVG).svg"
-                    alt="Avatar"
-                    loading="eager">
-                </div>
+                <span class="welcome-subtitle">Tu centro de control personal</span>
+            </div>
+            <div class="cont-user-profile-picture">
+                <img src="https://statux.netlify.app/Statux-logo(SVG).svg"
+                alt="Avatar"
+                loading="eager">
             </div>
         </div>
+    </div>
 
-        <!-- MAIN LAYOUT: contenido + sidebar -->
-        <div class="main-layout">
+    <!-- MAIN LAYOUT: solo contenido, sin sidebar -->
+    <div class="main-layout">
+        <div class="dashboard-content">
 
-            <!-- CONTENIDO CENTRAL -->
-            <div class="dashboard-content">
+            <!-- BLOQUES DE NAVEGACIÓN (reemplazan al sidebar) -->
+            <div class="dashboard-nav-pills">
+                <button class="dash-pill" data-section="carrusel" aria-label="Mis Systux">
+                    <span class="dash-pill-icon">📦</span>
+                    <span class="dash-pill-label">Mis Systux</span>
+                </button>
+                <button class="dash-pill" data-section="actividad" aria-label="Actividad">
+                    <span class="dash-pill-icon">⚡</span>
+                    <span class="dash-pill-label">Actividad</span>
+                </button>
+                <button class="dash-pill dash-pill-create" id="dashCreateCardBtn" aria-label="Crear card">
+                    <span class="dash-pill-icon">＋</span>
+                    <span class="dash-pill-label">Nueva card</span>
+                </button>
+            </div>
 
-                <!-- EMPTY STATE (visible por defecto) -->
-                <div id="emptyState" class="empty-state section-visible">
-                    <span>Bienvenido, <strong>Luzyfor</strong></span>
-                    <span style="font-size:1.2rem;color:var(--gray7);">Selecciona una sección para comenzar</span>
-                    <span class="wave" style="font-size:2.5rem;">👋🏿</span>
-                </div>
+            <!-- EMPTY STATE (visible por defecto) -->
+            <div id="emptyState" class="empty-state section-visible">
+                <span class="wave" style="font-size:2.5rem;">👋🏿</span>
+                <span>Selecciona una sección para comenzar</span>
+            </div>
 
-                <!-- SECCIÓN ACTIVIDAD -->
-                <div id="actividad" class="actividad section-hidden">
-                    <div class="title-content">Actividad</div>
-                    <div class="content-actividad">
-                        <!-- Card: Última actividad -->
-                        <div class="activity-card last">
-                            <div class="card-info">
-                                <img src="https://statux.netlify.app/Statux-logo(SVG).svg" alt="Systux Hábitos">
-                                <div class="text">
-                                    <span class="label">Última actividad</span>
-                                    <span class="systux-name">Systux Hábitos</span>
-                                </div>
-                            </div>
-                            <button class="enteractividad" onclick="alert('Abriendo Systux Hábitos...')">Entrar</button>
-                        </div>
-                        <!-- Card: Racha en peligro -->
-                        <div class="activity-card warning">
-                            <div class="card-info">
-                                <img src="https://statux.netlify.app/Statux-logo(SVG).svg" alt="Disciplina 30D">
-                                <div class="text">
-                                    <span class="label danger">⚠ Racha en riesgo</span>
-                                    <span class="systux-name">Calistenia 2.0</span>
-                                </div>
-                            </div>
-                            <button class="enteractividad" onclick="alert('Continuando racha...')">Continuar</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SECCIÓN CARRUSEL -->
-                <div id="carrusel" class="carrusel section-hidden">
-                    <div class="title-content">Explorar Systux</div>
-                    <div class="carrusel-wrapper">
-                        <!-- Botón izquierdo -->
-                        <button class="carousel-btn left" id="carouselLeft" aria-label="Anterior">
-                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M8.12 9.29L12 13.17l3.88-3.88c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41l-4.59 4.59c-.39.39-1.02.39-1.41 0L6.7 10.7c-.39-.39-.39-1.02 0-1.41.39-.38 1.03-.39 1.42 0z'/%3E%3C/svg%3E"
-                            alt="‹">
-                        </button>
-                        <!-- Track del carrusel -->
-                        <div class="carrusel-track" id="track">
-                            <div class="card">
-                                <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&h=250&fit=crop" alt="Finance">
-                                <h3>Finanzas</h3>
-                                <p>Controla tus gastos e inversiones</p>
-                                <button onclick="alert('Explorando Finanzas...')">Explorar</button>
-                            </div>
-                            <div class="card">
-                                <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=250&fit=crop" alt="Fitness">
-                                <h3>Fitness</h3>
-                                <p>Seguimiento de entrenamientos</p>
-                                <button onclick="alert('Explorando Fitness...')">Explorar</button>
-                            </div>
-                            <div class="card">
-                                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=250&fit=crop" alt="Tech">
-                                <h3>Tecnología</h3>
-                                <p>Automatiza tu stack digital</p>
-                                <button onclick="alert('Explorando Tecnología...')">Explorar</button>
-                            </div>
-                            <div class="card">
-                                <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=400&h=250&fit=crop" alt="Estudio">
-                                <h3>Estudio</h3>
-                                <p>Organiza tu plan de aprendizaje</p>
-                                <button onclick="alert('Explorando Estudio...')">Explorar</button>
-                            </div>
-                            <div class="card">
-                                <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=400&h=250&fit=crop" alt="Nutrición">
-                                <h3>Nutrición</h3>
-                                <p>Planifica tus comidas semanales</p>
-                                <button onclick="alert('Explorando Nutrición...')">Explorar</button>
-                            </div>
-                        </div>
-                        <!-- Botón derecho -->
-                        <button class="carousel-btn right" id="carouselRight" aria-label="Siguiente">
-                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M8.12 9.29L12 13.17l3.88-3.88c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41l-4.59 4.59c-.39.39-1.02.39-1.41 0L6.7 10.7c-.39-.39-.39-1.02 0-1.41.39-.38 1.03-.39 1.42 0z'/%3E%3C/svg%3E"
-                            alt="›">
-                        </button>
+            <!-- SECCIÓN ACTIVIDAD -->
+            <div id="actividad" class="actividad section-hidden">
+                <div class="title-content">Actividad</div>
+                <div class="content-actividad" id="actividadContent">
+                    <!-- Se llenará dinámicamente en el futuro -->
+                    <div class="dashboard-empty-msg">
+                        <span>Aún no tienes actividad registrada.</span>
                     </div>
                 </div>
             </div>
 
-            <!-- SIDEBAR DERECHA -->
-            <div class="icontent">
-                <button class="icon-nav" data-section="actividad" aria-label="Actividad">
-                    <img src="https://statux.netlify.app/usuario.svg" alt="Actividad">
-                    <span class="tooltip">Actividad</span>
-                </button>
-                <button class="icon-nav" data-section="carrusel" aria-label="Carrusel">
-                    <img src="https://statux.netlify.app/usuario.svg" alt="Carrusel">
-                    <span class="tooltip">Carrusel</span>
-                </button>
+            <!-- SECCIÓN CARRUSEL -->
+            <div id="carrusel" class="carrusel section-hidden">
+                <div class="title-content">Mis Systux</div>
+                <div class="carrusel-wrapper">
+                    <button class="carousel-btn left" id="carouselLeft" aria-label="Anterior">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M8.12 9.29L12 13.17l3.88-3.88c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41l-4.59 4.59c-.39.39-1.02.39-1.41 0L6.7 10.7c-.39-.39-.39-1.02 0-1.41.39-.38 1.03-.39 1.42 0z'/%3E%3C/svg%3E"
+                        alt="‹">
+                    </button>
+                    <div class="carrusel-track" id="track">
+                        <!-- Cards dinámicas desde localStorage -->
+                    </div>
+                    <button class="carousel-btn right" id="carouselRight" aria-label="Siguiente">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M8.12 9.29L12 13.17l3.88-3.88c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41l-4.59 4.59c-.39.39-1.02.39-1.41 0L6.7 10.7c-.39-.39-.39-1.02 0-1.41.39-.38 1.03-.39 1.42 0z'/%3E%3C/svg%3E"
+                        alt="›">
+                    </button>
+                </div>
+                <div class="carrusel-empty" id="carruselEmpty" style="display:none;">
+                    <p>Aún no has desbloqueado ningún contenido.</p>
+                    <span>Desbloquea cards en Ebootux, Plantitux o Movitux para verlas aquí.</span>
+                </div>
             </div>
 
         </div>
-    </section>
+    </div>
 
-    
+
+<!-- MODAL CREAR CARD -->
+<div class="dash-create-overlay" id="dashCreateModal" aria-hidden="true">
+    <div class="dash-create-box" role="dialog" aria-modal="true">
+        <div class="dash-create-header">
+            <h3>Nueva card</h3>
+            <button class="dash-create-close" id="dashCreateClose" type="button" aria-label="Cerrar">✕</button>
+        </div>
+
+        <div class="dash-create-preview">
+            <img id="dashCreatePreviewImg" src="Statux-logo(SVG).svg" alt="Preview">
+        </div>
+
+        <div class="dash-create-fields">
+            <input
+                type="text"
+                id="dashCreateName"
+                class="dash-create-input"
+                placeholder="Nombre de la card..."
+                maxlength="40"
+                autocomplete="off"
+            >
+            <input
+                type="url"
+                id="dashCreateUrl"
+                class="dash-create-input"
+                placeholder="URL del enlace (https://...)"
+                autocomplete="off"
+            >
+        </div>
+
+        <button class="dash-create-confirm" id="dashCreateConfirm" type="button">
+            Crear card
+        </button>
+    </div>
+</div>
+
+</section>
 </body>
 </html>
