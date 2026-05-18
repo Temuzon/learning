@@ -763,7 +763,7 @@ footer.stx-footer-ready {
 
 .btn-acceder-plantitux:hover {
   box-shadow: 0px 0px 10px #000;
-  color: #0ff;
+  color: var(--white);
 }
 
 .icono-btn-entrar {
@@ -806,7 +806,7 @@ footer.stx-footer-ready {
 .btn-de-vista-previa-plantitux:hover,
 .btn-de-compra:hover {
   box-shadow: 0px 0px 10px #000;
-  color: #0ff;
+  color: var(--white);
 }
 
 /* ================= MODAL PREVIEW MULTIMEDIA ================= */
@@ -865,7 +865,7 @@ footer.stx-footer-ready {
   justify-content: space-between;
   align-items: center;
   font-size: 32px;
-  color: #0ff;
+  color: var(--white);
 }
 
 .head-box h2 {
@@ -930,8 +930,8 @@ footer.stx-footer-ready {
 }
 
 .prompt-textarea:focus {
-  border-color: #0ff;
-  box-shadow: 0 0 8px #0ff;
+  border-color: var(--white);
+  box-shadow: 0 0 8px var(--white);
 }
 
 /* Icon swap + animación para el botón de copiar prompt */
@@ -993,7 +993,7 @@ footer.stx-footer-ready {
 /* text style */
 /* state when copied: swap icons + visual feedback */
 .copy-prompt-btn.copied {
-  color: #00ffdd;
+  color: var(--white);
   border-color: #00ffdd;
   box-shadow: 0 6px 18px rgba(0,255,221,0.12);
 }
@@ -1038,7 +1038,7 @@ footer.stx-footer-ready {
   text-align: center;
   border-bottom: 5px solid #333333;
   padding: 20px;
-  color: #0ff;
+  color: var(--white);
   font-size: 29px;
 }
 
@@ -1066,7 +1066,7 @@ footer.stx-footer-ready {
   text-align: center;
   border-bottom: 5px solid #333333;
   padding: 20px;
-  color: #0ff;
+  color: var(--white);
   font-size: 29px;
 }
 
@@ -1102,7 +1102,7 @@ footer.stx-footer-ready {
   border-radius: 36px;
   overflow: hidden;
   font-size: 24px;
-  color: #0ff
+  color: var(--white);
 }
 
 .img-tracktux-cards {
@@ -1138,7 +1138,7 @@ footer.stx-footer-ready {
   text-align: center;
   border-bottom: 5px solid #333333;
   padding: 20px;
-  color: #0ff;
+  color: var(--white);
   font-size: 29px;
 }
 
@@ -1157,7 +1157,7 @@ footer.stx-footer-ready {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  background: #bbb;
+  background: var(--whiteb);
   width: 360px;
   padding: 16px;
   margin: 20px;
@@ -1175,7 +1175,7 @@ footer.stx-footer-ready {
   border-radius: 36px;
   overflow: hidden;
   font-size: 24px;
-  color: #0ff
+  color: var(--white);
 }
 
 .img-mindtux-cards {
@@ -1211,7 +1211,7 @@ footer.stx-footer-ready {
   text-align: center;
   border-bottom: 5px solid #333333;
   padding: 20px;
-  color: #0ff;
+  color: var(--whiteb);
   font-size: 29px;
 }
 
@@ -1230,7 +1230,7 @@ footer.stx-footer-ready {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  background: #bbb;
+  background: var(--whiteb);
   width: 360px;
   padding: 16px;
   margin: 20px;
@@ -1248,7 +1248,7 @@ footer.stx-footer-ready {
   border-radius: 36px;
   overflow: hidden;
   font-size: 24px;
-  color: #0ff
+  color: var(--white);
 }
 
 .img-soundtux-cards {
@@ -1284,7 +1284,7 @@ footer.stx-footer-ready {
   text-align: center;
   border-bottom: 5px solid #333333;
   padding: 20px;
-  color: #0ff;
+  color: var(--white);
   font-size: 29px;
 }
 
@@ -1312,7 +1312,7 @@ footer.stx-footer-ready {
   text-align: center;
   border-bottom: 5px solid #333333;
   padding: 20px;
-  color: #0ff;
+  color: var(--white);
   font-size: 29px;
 }
 
@@ -1331,7 +1331,7 @@ footer.stx-footer-ready {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  background: #bbb;
+  background: var(--whiteb);
   width: 360px;
   padding: 16px;
   margin: 20px;
@@ -1349,7 +1349,7 @@ footer.stx-footer-ready {
   border-radius: 36px;
   overflow: hidden;
   font-size: 24px;
-  color: #0ff
+  color: var(--white);
 }
 
 .img-marketux-cards {
@@ -1385,7 +1385,7 @@ footer.stx-footer-ready {
   text-align: center;
   border-bottom: 5px solid #333333;
   padding: 20px;
-  color: #0ff;
+  color: var(--white);
   font-size: 29px;
 }
 
@@ -1404,7 +1404,7 @@ footer.stx-footer-ready {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  background: #bbb;
+  background: var(--whiteb);
   width: 360px;
   padding: 16px;
   margin: 20px;
@@ -1422,7 +1422,7 @@ footer.stx-footer-ready {
   border-radius: 36px;
   overflow: hidden;
   font-size: 24px;
-  color: #0ff
+  color: var(--white);
 }
 
 .img-empaquetux-cards {
@@ -1458,7 +1458,7 @@ footer.stx-footer-ready {
   text-align: center;
   border-bottom: 5px solid #333333;
   padding: 20px;
-  color: #0ff;
+  color: var(--white);
   font-size: 29px;
 }
 
@@ -1481,7 +1481,7 @@ footer.stx-footer-ready {
   justify-content: space-between;
   text-align: center;
   padding: 20px;
-  color: #bbb;
+  color: var(--whiteb);
   font-size: 32px;
   border-radius: 36px;
 }
@@ -1553,7 +1553,7 @@ footer.stx-footer-ready {
   justify-content: space-between;
   align-items: center;
   font-size: 20px;
-  color: #0ff;
+  color: var(--white);
 }
 
 .preview-body {
@@ -1596,13 +1596,13 @@ footer.stx-footer-ready {
 }
 
 .preview-si {
-  color: #0ff;
+  color: #0f0;
   font-weight: 600;
   font-size: 22px;
 }
 
 .preview-no {
-  color: #0ff;
+  color: #f00;
   font-weight: 600;
   font-size: 22px;
 }
@@ -1755,7 +1755,7 @@ footer.stx-footer-ready {
 }
 
 .ebootux-float-toggle input {
-  accent-color: #00ffff;
+  accent-color: var(--white);
 }
 
 .ebootux-header-bar .ebootux-exit-btn {
@@ -1818,8 +1818,8 @@ footer.stx-footer-ready {
 }
 
 .ebootux-nav-btn.active {
-  border-color: #0ff;
-  color: #0ff;
+  border-color: var(--white);
+  color: var(--white);
 }
 
 .ebootux-progress-track {
@@ -1840,7 +1840,7 @@ footer.stx-footer-ready {
 .ebootux-progress-fill {
   height: 100%;
   width: 0%;
-  background: #00ffff;
+  background: var(--white);
   border-radius: 1px;
   transition: width 0.2s ease;
 }
@@ -1889,7 +1889,7 @@ footer.stx-footer-ready {
 
 .ebootux-range {
   flex: 1;
-  accent-color: #00ffff;
+  accent-color: var(--white);
   cursor: pointer;
 }
 
@@ -2050,7 +2050,7 @@ footer.stx-footer-ready {
 
 .ebootux-exit-btn {
   background: transparent;
-  border: 3px solid #0ff;
+  border: 3px solid var(--white);
   border-radius: 12px;
   padding: 6px;
   cursor: pointer;
@@ -2094,7 +2094,7 @@ footer.stx-footer-ready {
   max-width: 360px;
   width: 90%;
   text-align: center;
-  color: #0ff;
+  color: var(--white);
   animation: notificationFadeIn 0.35s cubic-bezier(.4,0,.2,1);
 }
 
@@ -2132,9 +2132,9 @@ footer.stx-footer-ready {
 }
 
 .btn-modal-ebootux:hover {
-  color: #0ff;
+  color: var(--white);
   border-color: #0ff;
-  box-shadow: 0 0 10px #0ff;
+  box-shadow: 0 0 10px var(--white);
 }
 
 
@@ -2320,7 +2320,7 @@ footer.stx-footer-ready {
   }
 
 .contenedor-de-iconos::-webkit-scrollbar-thumb {
-  background: #00ffff;
+  background: var(--white);
   border-radius: 10px;
   }
   
@@ -2393,8 +2393,8 @@ footer.stx-footer-ready {
   .ebootux-header-bar .ebootux-exit-btn:hover,
   .ebootux-header-bar .ebootux-cfg-btn:hover,
   .ebootux-nav-btn:hover {
-    border-color: #0ff;
-    color: #0ff;
+    border-color: var(--white);
+    color: var(--white);
   }
 }
   
@@ -2530,7 +2530,7 @@ footer.stx-footer-ready {
   border-bottom: 3px solid #333333;
   font-size: 2rem;
   font-weight: 600;
-  color: #00ffff;
+  color: var(--white);
 }
 
 .dwl-statux {
@@ -2545,7 +2545,7 @@ footer.stx-footer-ready {
   font-size: 2rem;
   font-weight: 600;
   font-family: 'ubuntu';
-  color: #0ff;
+  color: var(--white);
   background-color: #222;
   transition: .45s;
 }
@@ -2700,7 +2700,7 @@ body.in-ebootux .floating-container.ebootux-floating-visible {
 .modal-content {
   width: min(300px, calc(100vw - 32px));
   background: #111;
-  color: #fff;
+  color: var(--white);
   padding: 25px;
   border-radius: 15px;
   transform: scale(0.8);
@@ -2756,7 +2756,7 @@ body.in-ebootux .floating-container.ebootux-floating-visible {
   right: 15px;
   background: none;
   border: none;
-  color: #fff;
+  color: var(--white);
   cursor: pointer;
 }
 
@@ -2787,7 +2787,7 @@ body.stx-overlay-open {
   top: 16px;
   left: 50%;
   transform: translateX(-50%);
-  color: #fff;
+  color: var(--white);
   background: rgba(0, 0, 0, 0.65);
   border: 1px solid #333;
   border-radius: 12px;
@@ -2831,7 +2831,7 @@ body.stx-overlay-open {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  color: #fff;
+  color: var(--white);
 }
 
 .stx-access-header {
@@ -2843,7 +2843,7 @@ body.stx-overlay-open {
 .stx-access-title {
   font-size: 18px;
   font-weight: 600;
-  color: #fff;
+  color: var(--white);
   margin: 0;
 }
 
@@ -3728,7 +3728,7 @@ body.focus-mode footer {
 }
 
 .stx-onboarding-lead {
-  color: #fff;
+  color: var(--white);
   font-size: 1.2rem;
   font-weight: 500;
   margin: 0;
@@ -3741,7 +3741,7 @@ body.focus-mode footer {
   border: 1px solid #333;
   border-radius: 14px;
   padding: 14px 18px;
-  color: #fff;
+  color: var(--white);
   font-size: 1rem;
   outline: none;
   transition: border-color 0.25s ease;
@@ -3750,7 +3750,7 @@ body.focus-mode footer {
 }
 
 .stx-onboarding-input:focus {
-  border-color: var(--home-accent, #00f2ff);
+  border-color: var(--home-accent, var(--white));
 }
 
 .stx-onboarding-btn {
@@ -3758,7 +3758,7 @@ body.focus-mode footer {
   padding: 14px;
   border-radius: 999px;
   border: none;
-  background: #fff;
+  background: var(--white);
   color: #000;
   font-size: 1rem;
   font-weight: 600;

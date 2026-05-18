@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movitux Studio</title>
+    <link rel="stylesheet" href="/src/index.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-mark">M</div>
+          <h1>Movitux Studio</h1>
+          <span>Minimal tools. Maximum control.</span>
+        </div>
+
+        <div class="top-actions">
+          <button class="btn btn-ghost" type="button">Save Template</button>
+          <button class="btn btn-primary" type="button">Export Project</button>
+        </div>
+      </header>
+
+      <main class="main-layout">
+        <aside class="tool-sidebar" aria-label="Herramientas">
+          <button type="button" class="tool-btn is-active" data-tool="uploads">Uploads</button>
+          <button type="button" class="tool-btn" data-tool="text">Text</button>
+          <button type="button" class="tool-btn" data-tool="audio">Audio</button>
+          <button type="button" class="tool-btn" data-tool="effects">Effects</button>
+          <button type="button" class="tool-btn" data-tool="templates">Templates</button>
+          <button type="button" class="tool-btn" data-tool="assets">Assets</button>
+        </aside>
+
+        <section class="left-panel">
+          <article class="tool-panel" data-panel="uploads">
+            <h2>Uploads</h2>
+            <div class="card upload-card">
+              <p>Arrastra y suelta archivos aquí.</p>
+              <button class="btn btn-outline" type="button">Choose Files</button>
+            </div>
+            <div class="card">
+              <h3>Assets recientes</h3>
+              <ul>
+                <li>intro.mp4</li>
+                <li>logo.png</li>
+                <li>voiceover.wav</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="tool-panel is-hidden" data-panel="text">
+            <h2>Text Layers</h2>
+            <div class="card">
+              <label for="textContent">Contenido</label>
+              <textarea id="textContent" rows="5" placeholder="Escribe tu texto..."></textarea>
+              <div class="inline-controls">
+                <button class="btn btn-outline" type="button">Add Heading</button>
+                <button class="btn btn-outline" type="button">Add Subtitle</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="tool-panel is-hidden" data-panel="audio">
+            <h2>Audio</h2>
+            <div class="card"><p>Aquí podrás gestionar música y voz en off.</p></div>
+          </article>
+
+          <article class="tool-panel is-hidden" data-panel="effects">
+            <h2>Effects</h2>
+            <div class="card"><p>Espacio para transiciones y efectos visuales.</p></div>
+          </article>
+
+          <article class="tool-panel is-hidden" data-panel="templates">
+            <h2>Templates</h2>
+            <div class="card"><p>Catálogo de plantillas reutilizables.</p></div>
+          </article>
+
+          <article class="tool-panel is-hidden" data-panel="assets">
+            <h2>Assets</h2>
+            <div class="card"><p>Biblioteca general de recursos del proyecto.</p></div>
+          </article>
+        </section>
+
+        <section class="workspace">
+          <div class="preview-area">
+            <h2>Preview</h2>
+            <div class="preview-canvas">Canvas de vista previa</div>
+          </div>
+
+          <footer class="timeline">
+            <h2>Timeline</h2>
+            <div class="timeline-track">
+              <div class="clip">Clip 1</div>
+              <div class="clip">Clip 2</div>
+              <div class="clip">Text Layer</div>
+            </div>
+          </footer>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
