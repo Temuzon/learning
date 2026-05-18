@@ -3691,3 +3691,127 @@ body.focus-mode footer {
 }
 
 #systux-frame { width: 100%; height: 100%; border: 0; background: #0a0a0a; }
+
+
+/* ===== ONBOARDING MODAL ===== */
+.stx-onboarding-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 4000;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.stx-onboarding-overlay.stx-onboarding-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.stx-onboarding-box {
+  width: min(420px, calc(100vw - 32px));
+  background: #0d0d0d;
+  border: 1px solid #222;
+  border-radius: 24px;
+  padding: 36px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  text-align: center;
+  animation: stx-modal-in 0.38s cubic-bezier(.77,1.5,.79,1) backwards;
+}
+
+.stx-onboarding-lead {
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.stx-onboarding-input {
+  width: 100%;
+  background: #000;
+  border: 1px solid #333;
+  border-radius: 14px;
+  padding: 14px 18px;
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.25s ease;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.stx-onboarding-input:focus {
+  border-color: var(--home-accent, #00f2ff);
+}
+
+.stx-onboarding-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 999px;
+  border: none;
+  background: #fff;
+  color: #000;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: opacity 0.2s ease;
+}
+
+.stx-onboarding-btn:hover {
+  opacity: 0.88;
+}
+
+
+/* ===== SECCIÓN DASHBOARD EN SPA ===== */
+.section-dashboard {
+    margin-left: 80px;
+    min-height: 100vh;
+    background: #000;
+    /* NO poner overflow:hidden aquí */
+}
+
+/* El .dashboard interno maneja su propio layout */
+.section-dashboard .dashboard {
+    height: 100vh;
+}
+
+@media (max-width: 900px) {
+    /* Dashboard en mobile */
+    .section-dashboard {
+        margin-left: 0;
+        /* Sin margin-bottom aquí porque el dashboard
+           maneja su propio height con calc(100vh - 64px) */
+        margin-bottom: 0;
+    }
+
+    .section-dashboard .dashboard {
+        height: calc(100vh - 64px);
+    }
+}
+
+
+/* ===== CERRAR DASHBOARD EN SETTINGS ===== */
+.stx-logout-dashboard-item {
+    color: #ff5a5a !important;
+    border-top: 1px solid #222;
+    margin-top: 4px;
+    padding-top: 14px !important;
+}
+
+.stx-logout-dashboard-item img {
+    filter: invert(40%) sepia(80%) saturate(500%) hue-rotate(310deg);
+}
+
+.stx-logout-dashboard-item:hover {
+    background-color: rgba(255, 90, 90, 0.08) !important;
+}

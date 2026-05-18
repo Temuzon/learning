@@ -2,15 +2,16 @@
   const SELECTOR_BLOQUEADO = "[data-bloqueado]";
   const PREVIEW_ICON = "/visibility_24dp_777777_FILL0_wght400_GRAD0_opsz24.svg";
 
-  const isEmbeddedIframe = (() => {
-    try { return window.self !== window.top; } catch { return true; }
+  const isSystuxFrameEmbed = (() => {
+    try {
+      const frameId = window.frameElement?.id || "";
+      return frameId === "systux-frame";
+    } catch {
+      return false;
+    }
   })();
 
-  const isPreview = (() => {
-    try { return new URLSearchParams(window.location.search).has("stx_return"); } catch { return false; }
-  })();
-
-  if (isEmbeddedIframe || isPreview) {
+  if (isSystuxFrameEmbed) {
     document.addEventListener("click", (e) => {
       const el = e.target.closest(SELECTOR_BLOQUEADO);
       if (!el) return;
@@ -44,7 +45,7 @@
     }
   }
 
-  if (isEmbeddedIframe || isPreview) return;
+  if (isSystuxFrameEmbed) return;
 
   const previewModal = document.getElementById("preview-modal");
   if (!previewModal) return;
