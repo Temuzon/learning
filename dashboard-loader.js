@@ -126,8 +126,16 @@ async function loadDashboardSection() {
     root.appendChild(dashboardSection);
 
     const nameEl = root.querySelector('.user-name');
+    const storedName = localStorage.getItem('stx_dashboard_name') || 'Usuario';
     if (nameEl) {
-      nameEl.textContent = localStorage.getItem('stx_dashboard_name') || 'Usuario';
+      nameEl.textContent = storedName;
+    }
+
+    const welcomeLabel = root.querySelector('.welcome-label');
+    if (welcomeLabel) {
+      const hour = new Date().getHours();
+      const greeting = hour < 12 ? 'Buenos días,' : hour < 19 ? 'Buenas tardes,' : 'Buenas noches,';
+      welcomeLabel.textContent = greeting;
     }
 
     stxRenderDashboardCards();

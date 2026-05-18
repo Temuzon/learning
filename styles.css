@@ -3786,9 +3786,12 @@ body.focus-mode footer {
 }
 
 @media (max-width: 900px) {
+    /* Dashboard en mobile */
     .section-dashboard {
         margin-left: 0;
-        margin-bottom: 64px;
+        /* Sin margin-bottom aquí porque el dashboard
+           maneja su propio height con calc(100vh - 64px) */
+        margin-bottom: 0;
     }
 
     .section-dashboard .dashboard {
