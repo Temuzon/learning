@@ -1,0 +1,41 @@
+{
+  "name": "Task",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Task name"
+    },
+    "purpose": {
+      "type": "string",
+      "description": "Why this task matters \u2014 mandatory"
+    },
+    "due_date": {
+      "type": "string",
+      "format": "date",
+      "description": "When this task is due"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "critical",
+        "high",
+        "medium",
+        "low"
+      ],
+      "default": "medium"
+    },
+    "completed": {
+      "type": "boolean",
+      "default": false
+    },
+    "completed_date": {
+      "type": "string",
+      "format": "date"
+    }
+  },
+  "required": [
+    "name",
+    "purpose"
+  ]
+}
