@@ -1,177 +1,94 @@
-import { useState, useMemo } from 'react';
-import {
-  addMonths, subMonths, format, isToday, isBefore, isAfter, startOfDay,
-} from 'date-fns';
-import { es } from 'date-fns/locale';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { AnimatePresence } from 'framer-motion';
-
-import { useHabits, useTasks, useLogs } from '@/lib/useLocalData';
-import { calculateConsistency, getOperationalStatus, getTrend, getDateStr } from '@/lib/habitUtils';
-
-import CalendarGrid from '@/components/calandrier/CalendarGrid';
-import DayPanel from '@/components/calandrier/DayPanel';
-import HabitForm from '@/components/forms/HabitForm';
-import TaskForm from '@/components/forms/TaskForm';
+import { useState } from 'react';
 
 export default function Calandrier() {
-  const [currentMonth, setCurrentMonth] = useState(new Date());
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [showHabitForm, setShowHabitForm] = useState(false);
-  const [showTaskForm, setShowTaskForm] = useState(false);
-  const [editingHabit, setEditingHabit] = useState(null);
-  const [editingTask, setEditingTask] = useState(null);
+  const [currentDate, setCurrentDate] = useState(new Date());
 
-  const { habits, create: createHabit, update: updateHabit, remove: removeHabit } = useHabits();
-  const { tasks, create: createTask, update: updateTask, remove: removeTask, toggle: toggleTask } = useTasks();
-  const { logs, toggleHabit } = useLogs();
-
-  const consistency = useMemo(() => calculateConsistency(logs, habits, 7), [logs, habits]);
-  const status = useMemo(() => getOperationalStatus(consistency), [consistency]);
-  const trend = useMemo(() => getTrend(logs, habits), [logs, habits]);
-
-  const monthName = format(currentMonth, 'MMMM yyyy', { locale: es }).toUpperCase();
-  const prevMonthName = format(subMonths(currentMonth, 1), 'MMMM', { locale: es }).toUpperCase();
-  const nextMonthName = format(addMonths(currentMonth, 1), 'MMMM', { locale: es }).toUpperCase();
-
-  const activeCount = habits.filter(h => h.active).length;
-
-  const handleToggleHabit = (habitId) => {
-    if (!selectedDate) return;
-    const dateStr = getDateStr(selectedDate);
-    const isPast = isBefore(startOfDay(selectedDate), startOfDay(new Date()));
-    if (isPast) return; // blocked
-    toggleHabit(habitId, dateStr, activeCount);
+  const getDaysInMonth = (date) => {
+    return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
   };
 
-  const handleToggleTask = (task) => {
-    const dateStr = getDateStr(selectedDate || new Date());
-    const isPast = selectedDate && isBefore(startOfDay(selectedDate), startOfDay(new Date()));
-    if (isPast) return; // blocked
-    toggleTask(task, dateStr);
+  const getFirstDayOfMonth = (date) => {
+    return new Date(date.getFullYear(), date.getMonth(), 1).getDay();
   };
 
-  const handleSubmitHabit = (data) => {
-    if (editingHabit) {
-      updateHabit(editingHabit.id, data);
-      setEditingHabit(null);
-    } else {
-      createHabit({ ...data, active: true, order: habits.length });
-    }
-    setShowHabitForm(false);
+  const monthName = currentDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+  const daysInMonth = getDaysInMonth(currentDate);
+  const firstDay = getFirstDayOfMonth(currentDate);
+  const days = Array.from({ length: daysInMonth }, (_, i) => i + 1);
+  const emptyDays = Array.from({ length: firstDay }, (_, i) => i);
+
+  const handlePrevMonth = () => {
+    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1));
   };
 
-  const handleSubmitTask = (data) => {
-    if (editingTask) {
-      updateTask(editingTask.id, data);
-      setEditingTask(null);
-    } else {
-      createTask(data);
-    }
-    setShowTaskForm(false);
-  };
-
-  const handleEditHabit = (habit) => {
-    setEditingHabit(habit);
-    setShowHabitForm(true);
-  };
-
-  const handleEditTask = (task) => {
-    setEditingTask(task);
-    setShowTaskForm(true);
+  const handleNextMonth = () => {
+    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1));
   };
 
   return (
-    <div className="p-6 lg:p-8 max-w-5xl">
-      {/* Header */}
-      <div className="mb-6">
-        <h1 className="text-lg font-semibold tracking-wider uppercase">Calandrier</h1>
-        <p className="text-[11px] text-muted-foreground font-mono mt-0.5">
-          Bitácora Táctica — Registro Operativo
-        </p>
-      </div>
-
-      {/* Month Navigation */}
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center gap-4">
-          <button
-            onClick={() => setCurrentMonth(subMonths(currentMonth, 1))}
-            className="flex items-center gap-1 text-[11px] text-muted-foreground hover:text-foreground transition-colors"
-          >
-            <ChevronLeft className="w-3 h-3" />
-            {prevMonthName}
-          </button>
-          <h2 className="text-sm font-semibold tracking-widest">{monthName}</h2>
-          <button
-            onClick={() => setCurrentMonth(addMonths(currentMonth, 1))}
-            className="flex items-center gap-1 text-[11px] text-muted-foreground hover:text-foreground transition-colors"
-          >
-            {nextMonthName}
-            <ChevronRight className="w-3 h-3" />
-          </button>
+    <div className="min-h-screen bg-background p-8">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <div className="mb-8">
+          <h1 className="text-4xl font-bold text-foreground mb-2">Calendar</h1>
+          <p className="text-muted-foreground">Track your habits and tasks</p>
         </div>
 
-        <div className="flex items-center gap-4">
-          <div className="text-right">
-            <p className="text-[10px] tracking-wider text-muted-foreground uppercase">Consistencia</p>
-            <p className="text-xs font-mono font-medium">{consistency}%</p>
+        {/* Calendar */}
+        <div className="bg-card border border-border rounded-lg p-6 max-w-2xl">
+          {/* Month Navigation */}
+          <div className="flex items-center justify-between mb-6">
+            <button
+              onClick={handlePrevMonth}
+              className="px-4 py-2 hover:bg-secondary text-foreground rounded-lg transition-colors"
+            >
+              ← Previous
+            </button>
+            <h2 className="text-2xl font-bold text-foreground">{monthName}</h2>
+            <button
+              onClick={handleNextMonth}
+              className="px-4 py-2 hover:bg-secondary text-foreground rounded-lg transition-colors"
+            >
+              Next →
+            </button>
           </div>
-          <div className="text-right">
-            <p className="text-[10px] tracking-wider text-muted-foreground uppercase">Estado</p>
-            <p className="text-xs font-medium">{status.label}</p>
+
+          {/* Weekday Headers */}
+          <div className="grid grid-cols-7 gap-2 mb-4">
+            {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
+              <div key={day} className="text-center font-semibold text-muted-foreground text-sm">
+                {day}
+              </div>
+            ))}
           </div>
-          <div className="text-right">
-            <p className="text-[10px] tracking-wider text-muted-foreground uppercase">Tendencia</p>
-            <p className="text-xs font-mono">{trend.symbol}</p>
+
+          {/* Calendar Days */}
+          <div className="grid grid-cols-7 gap-2">
+            {emptyDays.map((_, i) => (
+              <div key={`empty-${i}`} className="aspect-square" />
+            ))}
+            {days.map((day) => {
+              const isToday =
+                day === new Date().getDate() &&
+                currentDate.getMonth() === new Date().getMonth() &&
+                currentDate.getFullYear() === new Date().getFullYear();
+
+              return (
+                <button
+                  key={day}
+                  className={`aspect-square rounded-lg font-medium transition-colors ${
+                    isToday
+                      ? 'bg-primary text-primary-foreground'
+                      : 'bg-secondary hover:bg-secondary/80 text-foreground'
+                  }`}
+                >
+                  {day}
+                </button>
+              );
+            })}
           </div>
         </div>
       </div>
-
-      <CalendarGrid
-        currentMonth={currentMonth}
-        habits={habits}
-        logs={logs}
-        tasks={tasks}
-        onDayClick={setSelectedDate}
-      />
-
-      <AnimatePresence>
-        {selectedDate && (
-          <DayPanel
-            date={selectedDate}
-            habits={habits}
-            logs={logs}
-            tasks={tasks}
-            onClose={() => setSelectedDate(null)}
-            onToggleHabit={handleToggleHabit}
-            onToggleTask={handleToggleTask}
-            onAddHabit={() => { setEditingHabit(null); setShowHabitForm(true); }}
-            onAddTask={() => { setEditingTask(null); setShowTaskForm(true); }}
-            onEditHabit={handleEditHabit}
-            onEditTask={handleEditTask}
-            onDeleteHabit={removeHabit}
-            onDeleteTask={removeTask}
-          />
-        )}
-      </AnimatePresence>
-
-      <AnimatePresence>
-        {showHabitForm && (
-          <HabitForm
-            habit={editingHabit}
-            onSubmit={handleSubmitHabit}
-            onClose={() => { setShowHabitForm(false); setEditingHabit(null); }}
-          />
-        )}
-        {showTaskForm && (
-          <TaskForm
-            task={editingTask}
-            onSubmit={handleSubmitTask}
-            onClose={() => { setShowTaskForm(false); setEditingTask(null); }}
-            defaultDate={selectedDate ? getDateStr(selectedDate) : undefined}
-          />
-        )}
-      </AnimatePresence>
     </div>
   );
 }

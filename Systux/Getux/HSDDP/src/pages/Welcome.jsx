@@ -1,85 +1,66 @@
 import { useState } from 'react';
 import { setUsername } from '@/lib/storage';
-import { motion } from 'framer-motion';
 
 export default function Welcome({ onComplete }) {
-  const [name, setName] = useState('');
-  const [focused, setFocused] = useState(false);
+  const [username, setUsernameValue] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!name.trim()) return;
-    setUsername(name.trim());
-    onComplete(name.trim());
+    
+    if (!username.trim()) {
+      setError('Please enter a username');
+      return;
+    }
+
+    if (username.trim().length < 2) {
+      setError('Username must be at least 2 characters');
+      return;
+    }
+
+    setUsername(username.trim());
+    onComplete(username.trim());
   };
 
   return (
-    <div className="fixed inset-0 bg-background flex items-center justify-center z-50">
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
-        className="w-full max-w-sm px-8"
-      >
-        {/* Logo / Brand */}
-        <div className="mb-12">
-          <p className="text-[10px] tracking-[0.3em] text-muted-foreground uppercase font-mono mb-1">
-            Sistema de Dominio Personal
-          </p>
-          <h1 className="text-2xl font-semibold tracking-wider uppercase text-foreground">
-            Hábitos
-          </h1>
-        </div>
-
-        {/* Prompt */}
-        <div className="mb-8">
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            Antes de comenzar, necesito conocerte.
-          </p>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary/20 via-background to-secondary/20">
+      <div className="w-full max-w-md p-8 space-y-8 bg-card rounded-lg border border-border shadow-lg">
+        <div className="space-y-2 text-center">
+          <h1 className="text-3xl font-bold text-foreground">Welcome to Statux</h1>
+          <p className="text-muted-foreground">Your personal habit and task tracker</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label className="block text-[10px] tracking-[0.2em] uppercase text-muted-foreground mb-3">
-              Tu nombre
+          <div className="space-y-2">
+            <label htmlFor="username" className="block text-sm font-medium text-foreground">
+              What's your name?
             </label>
             <input
+              id="username"
               type="text"
-              value={name}
-              onChange={e => setName(e.target.value)}
-              onFocus={() => setFocused(true)}
-              onBlur={() => setFocused(false)}
-              placeholder="Escribe tu nombre"
-              autoFocus
-              className={`
-                w-full bg-transparent border-b text-foreground text-lg font-light
-                placeholder:text-muted-foreground/40 outline-none pb-2 transition-colors duration-200
-                ${focused ? 'border-foreground/60' : 'border-border'}
-              `}
+              placeholder="Enter your username"
+              value={username}
+              onChange={(e) => {
+                setUsernameValue(e.target.value);
+                setError('');
+              }}
+              className="w-full px-4 py-2 border border-input rounded-lg bg-background text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary"
             />
+            {error && <p className="text-sm text-destructive">{error}</p>}
           </div>
 
-          <motion.button
+          <button
             type="submit"
-            disabled={!name.trim()}
-            whileTap={{ scale: 0.97 }}
-            className={`
-              w-full py-3 text-sm tracking-[0.15em] uppercase font-medium transition-all duration-200
-              ${name.trim()
-                ? 'bg-foreground text-background hover:bg-foreground/90 cursor-pointer'
-                : 'bg-secondary text-muted-foreground cursor-not-allowed'
-              }
-              rounded-md
-            `}
+            className="w-full px-4 py-2 bg-primary text-primary-foreground font-medium rounded-lg hover:opacity-90 transition-opacity"
           >
-            Iniciar Sistema
-          </motion.button>
+            Get Started
+          </button>
         </form>
 
-        <p className="mt-8 text-[10px] text-muted-foreground/40 text-center tracking-wider">
-          Todo se guarda localmente. Sin cuentas. Sin servidores.
+        <p className="text-center text-xs text-muted-foreground">
+          Your data is stored locally in your browser
         </p>
-      </motion.div>
+      </div>
     </div>
   );
 }
