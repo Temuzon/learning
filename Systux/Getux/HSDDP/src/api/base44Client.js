@@ -1,14 +1,6 @@
-import { createClient } from '@base44/sdk';
-import { appParams } from '@/lib/app-params';
+/**
+ * Backward-compatible re-export for modules that may still import
+ * from `@/api/base44Client`.
+ */
 
-const { appId, token, functionsVersion, appBaseUrl } = appParams;
-
-//Create a client with authentication required
-export const base44 = createClient({
-  appId,
-  token,
-  functionsVersion,
-  serverUrl: '',
-  requiresAuth: false,
-  appBaseUrl
-});
+export { base44 as default, base44 } from '@/lib/base44Client';

@@ -1,14 +1,11 @@
-import { createClient } from '@base44/sdk';
-import { appParams } from '@/lib/app-params';
+/**
+ * Compat shim kept for legacy imports from older Base44 exports.
+ * This project runs fully local (no backend SDK).
+ */
 
-const { appId, token, functionsVersion, appBaseUrl } = appParams;
+export const base44 = {
+  isAvailable: false,
+  reason: 'Base44 SDK removed for local-only mode',
+};
 
-//Create a client with authentication required
-export const base44 = createClient({
-  appId,
-  token,
-  functionsVersion,
-  serverUrl: '',
-  requiresAuth: false,
-  appBaseUrl
-});
+export default base44;
