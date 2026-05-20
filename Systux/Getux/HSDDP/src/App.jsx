@@ -8,7 +8,7 @@ import Welcome from '@/pages/Welcome';
 import AppLayout from '@/components/layout/AppLayout';
 import Dashboard from '@/pages/Dashboard';
 import Calandrier from '@/pages/Calandrier';
-import PageNotFound from './lib/PageNotFound';
+import PageNotFound from '@/pages/PageNotFound';
 
 function App() {
   const [username, setUsernameState] = useState(null);
