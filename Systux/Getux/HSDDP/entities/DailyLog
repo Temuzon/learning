@@ -1,0 +1,29 @@
+{
+  "name": "DailyLog",
+  "type": "object",
+  "properties": {
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "The date of this log entry (YYYY-MM-DD)"
+    },
+    "completed_habits": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Array of habit IDs completed this day"
+    },
+    "total_habits": {
+      "type": "number",
+      "description": "Total habits due this day"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Optional day notes"
+    }
+  },
+  "required": [
+    "date"
+  ]
+}
