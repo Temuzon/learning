@@ -65,4 +65,45 @@ function startApp(username) {
 
   // Init router (which renders current page)
   Router.init();
+
+  // Mobile sidebar toggle
+  initMobileSidebarToggle();
+}
+
+
+function initMobileSidebarToggle() {
+  const btn = el('mobile-sidebar-toggle');
+  const screenApp = el('screen-app');
+  if (!btn || !screenApp) return;
+
+  const setExpanded = (expanded) => {
+    btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+    btn.setAttribute('aria-label', expanded ? 'Ocultar menú' : 'Mostrar menú');
+    btn.textContent = expanded ? '✕' : '☰';
+  };
+
+  btn.addEventListener('click', () => {
+    const expanded = screenApp.classList.toggle('sidebar-open');
+    setExpanded(expanded);
+  });
+
+  // Close sidebar on nav click in mobile
+  document.addEventListener('click', (e) => {
+    const navLink = e.target.closest('.nav-link');
+    if (!navLink) return;
+    if (window.innerWidth <= 768) {
+      screenApp.classList.remove('sidebar-open');
+      setExpanded(false);
+    }
+  });
+
+  // Reset on desktop
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+      screenApp.classList.remove('sidebar-open');
+      setExpanded(false);
+    }
+  });
+
+  setExpanded(false);
 }
