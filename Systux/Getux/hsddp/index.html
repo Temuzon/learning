@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hábitos — Sistema de Dominio Personal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- Welcome Screen -->
+    <div id="screen-welcome" class="screen active">
+      <div class="welcome-container">
+        <div class="welcome-brand">
+          <div class="welcome-dot"></div>
+          <span class="welcome-title">HÁBITOS</span>
+        </div>
+        <p class="welcome-subtitle">Sistema de Dominio Personal</p>
+        <div class="welcome-form">
+          <label class="form-label">¿Cómo te llamas?</label>
+          <input type="text" id="welcome-name-input" class="form-input" placeholder="Tu nombre" autocomplete="off" />
+          <p class="welcome-hint">Este nombre se usará para personalizar tu experiencia.</p>
+          <button id="welcome-submit" class="btn btn-primary" disabled>Iniciar Sistema</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="screen-app" class="screen">
+      <!-- Sidebar -->
+      <aside id="sidebar">
+        <div class="sidebar-brand">
+          <div class="sidebar-dot"></div>
+          <span class="sidebar-title">HÁBITOS</span>
+        </div>
+        <nav class="sidebar-nav">
+          <a href="#dashboard" class="nav-link active" data-page="dashboard">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+            Dashboard
+          </a>
+          <a href="#habitos" class="nav-link" data-page="habitos">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"/></svg>
+            Hábitos
+          </a>
+          <a href="#calandrier" class="nav-link" data-page="calandrier">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+            Calandrier
+          </a>
+        </nav>
+        <div class="sidebar-footer">
+          <div class="sidebar-user">
+            <div class="sidebar-user-dot"></div>
+            <span id="sidebar-username" class="sidebar-user-name">—</span>
+          </div>
+          <div class="sidebar-status" id="sidebar-status-text">SISTEMA ACTIVO</div>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main id="main-content">
+        <!-- DASHBOARD PAGE -->
+        <div id="page-dashboard" class="page active">
+          <div class="page-header">
+            <div>
+              <h1 class="page-title">Dashboard</h1>
+              <p class="page-subtitle" id="dashboard-subtitle">—</p>
+            </div>
+          </div>
+
+          <div id="dashboard-empty" class="empty-state hidden">
+            <p class="empty-text">El sistema aún no posee historial operativo.</p>
+            <p class="empty-hint">Ve a la sección <a href="#habitos" class="link-inline">Hábitos</a> para comenzar.</p>
+          </div>
+
+          <div id="dashboard-content">
+            <!-- Metrics Row 1 -->
+            <div class="grid-4 mb-3">
+              <div class="metric-card" id="mc-status">
+                <p class="metric-label">ESTADO OPERATIVO</p>
+                <p class="metric-value" id="mc-status-val">—</p>
+              </div>
+              <div class="metric-card">
+                <p class="metric-label">CONSISTENCIA</p>
+                <p class="metric-value" id="mc-consistency">—</p>
+                <p class="metric-sub">Últimos 7 días</p>
+              </div>
+              <div class="metric-card">
+                <p class="metric-label">RACHA ACTUAL</p>
+                <p class="metric-value" id="mc-streak">—</p>
+                <p class="metric-sub" id="mc-streak-sub">días</p>
+              </div>
+              <div class="metric-card">
+                <p class="metric-label">TENDENCIA</p>
+                <p class="metric-value" id="mc-trend">—</p>
+                <p class="metric-sub" id="mc-trend-sub">Estable</p>
+              </div>
+            </div>
+
+            <!-- Metrics Row 2 -->
+            <div class="grid-3 mb-3">
+              <div class="metric-card">
+                <p class="metric-label">NIVEL DE DOMINIO</p>
+                <p class="metric-value" id="mc-domain">—</p>
+                <p class="metric-sub" id="mc-domain-sub">Nivel 0/5</p>
+              </div>
+              <div class="metric-card">
+                <p class="metric-label">MÁS CONSISTENTE</p>
+                <p class="metric-value metric-value-sm" id="mc-best">—</p>
+                <p class="metric-sub" id="mc-best-sub">—</p>
+              </div>
+              <div class="metric-card">
+                <p class="metric-label">MÁS ABANDONADO</p>
+                <p class="metric-value metric-value-sm" id="mc-worst">—</p>
+                <p class="metric-sub" id="mc-worst-sub">—</p>
+              </div>
+            </div>
+
+            <!-- Charts + Alerts -->
+            <div class="grid-2 mb-3">
+              <div class="card">
+                <p class="card-label">CONSISTENCIA SEMANAL</p>
+                <div id="weekly-chart" class="weekly-chart"></div>
+              </div>
+              <div class="card" id="alerts-card">
+                <p class="card-label">ALERTAS DE DETECCIÓN</p>
+                <div id="alerts-list" class="alerts-list">
+                  <p class="no-alerts">Sin alertas activas.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Weekly Identity Report -->
+            <div id="identity-report-block" class="card mb-3 hidden">
+              <p class="card-label">INFORME SEMANAL DE IDENTIDAD</p>
+              <p id="identity-report-text" class="identity-report-text"></p>
+            </div>
+
+            <!-- Today -->
+            <div class="grid-2 mb-3">
+              <div class="card">
+                <p class="card-label">RUTINAS DE HOY</p>
+                <div id="today-habits" class="today-list"></div>
+              </div>
+              <div class="card">
+                <p class="card-label">TAREAS DE HOY</p>
+                <div id="today-tasks" class="today-list"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- HABITOS PAGE -->
+        <div id="page-habitos" class="page">
+          <div class="page-header">
+            <div>
+              <h1 class="page-title">Hábitos</h1>
+              <p class="page-subtitle">Gestión de Rutinas y Tareas</p>
+            </div>
+            <div class="header-actions">
+              <button class="btn btn-outline btn-sm" id="btn-new-task">+ Tarea</button>
+              <button class="btn btn-primary btn-sm" id="btn-new-habit">+ Rutina</button>
+            </div>
+          </div>
+
+          <!-- Identity Panel Block -->
+          <div class="identity-panel-block mb-3" id="identity-panel-block">
+            <div class="identity-panel-header" id="identity-panel-toggle">
+              <div class="identity-panel-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+              </div>
+              <div>
+                <p class="identity-panel-title">Panel de Identidad</p>
+                <p class="identity-panel-hint">Define quién eres y quién quieres ser</p>
+              </div>
+              <svg id="identity-chevron" class="identity-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+            <div id="identity-panel-content" class="identity-panel-content hidden">
+              <div class="identity-columns">
+                <div class="identity-col">
+                  <p class="identity-col-label">SOY ACTUALMENTE</p>
+                  <div id="current-identity-tags" class="identity-tags"></div>
+                  <div class="identity-add-row">
+                    <input type="text" id="new-current-tag" class="form-input form-input-sm" placeholder="Ej: Tímido, Sedentario..." />
+                    <button class="btn btn-outline btn-xs" id="btn-add-current-tag">+</button>
+                  </div>
+                </div>
+                <div class="identity-col identity-col-center">
+                  <div id="identity-node-viz" class="identity-node-viz">
+                    <svg id="identity-svg" width="100%" height="100%"></svg>
+                  </div>
+                </div>
+                <div class="identity-col">
+                  <p class="identity-col-label">QUIERO SER</p>
+                  <div id="target-identity-tags" class="identity-tags"></div>
+                  <div class="identity-add-row">
+                    <input type="text" id="new-target-tag" class="form-input form-input-sm" placeholder="Ej: Seguro, Atleta..." />
+                    <button class="btn btn-outline btn-xs" id="btn-add-target-tag">+</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Habits List -->
+          <div class="card mb-3">
+            <p class="card-label">RUTINAS ACTIVAS</p>
+            <div id="habits-list" class="items-list"></div>
+          </div>
+
+          <!-- Tasks List -->
+          <div class="card">
+            <p class="card-label">TAREAS</p>
+            <div id="tasks-list" class="items-list"></div>
+          </div>
+        </div>
+
+        <!-- CALANDRIER PAGE -->
+        <div id="page-calandrier" class="page">
+          <div class="page-header">
+            <div>
+              <h1 class="page-title">Calandrier</h1>
+              <p class="page-subtitle">Bitácora Táctica — Registro Operativo</p>
+            </div>
+            <div class="cal-nav">
+              <button class="btn btn-ghost btn-sm" id="cal-prev">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><path d="M15 18l-6-6 6-6"/></svg>
+                <span id="cal-prev-name">—</span>
+              </button>
+              <span class="cal-month-name" id="cal-month-name">—</span>
+              <button class="btn btn-ghost btn-sm" id="cal-next">
+                <span id="cal-next-name">—</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="cal-stats mb-3">
+            <div class="cal-stat">
+              <p class="cal-stat-label">CONSISTENCIA</p>
+              <p class="cal-stat-val" id="cal-consistency">—</p>
+            </div>
+            <div class="cal-stat">
+              <p class="cal-stat-label">ESTADO</p>
+              <p class="cal-stat-val" id="cal-status">—</p>
+            </div>
+            <div class="cal-stat">
+              <p class="cal-stat-label">TENDENCIA</p>
+              <p class="cal-stat-val" id="cal-trend">—</p>
+            </div>
+          </div>
+
+          <div class="calendar-grid-wrapper card">
+            <div class="calendar-weekdays">
+              <span>Dom</span><span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span>
+            </div>
+            <div id="calendar-grid" class="calendar-grid"></div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- MODALS -->
+
+  <!-- Habit Form Modal -->
+  <div id="modal-habit" class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 class="modal-title" id="modal-habit-title">Nueva Rutina</h2>
+        <button class="modal-close" data-close="modal-habit">✕</button>
+      </div>
+      <form id="form-habit" class="modal-body">
+        <input type="hidden" id="habit-edit-id" />
+        <div class="form-group">
+          <label class="form-label">Nombre</label>
+          <input type="text" id="habit-name" class="form-input" placeholder="Ej: Leer documentación" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Propósito <span class="required">*</span></label>
+          <textarea id="habit-purpose" class="form-input form-textarea" placeholder="¿Por qué este hábito es importante?"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Beneficio</label>
+          <input type="text" id="habit-benefit" class="form-input" placeholder="¿Qué obtienes al cumplirlo?" />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Frecuencia</label>
+            <select id="habit-frequency" class="form-input form-select">
+              <option value="daily">Diario</option>
+              <option value="weekdays">Lun–Vie</option>
+              <option value="weekends">Sáb–Dom</option>
+              <option value="custom">Personalizado</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Prioridad</label>
+            <select id="habit-priority" class="form-input form-select">
+              <option value="critical">Crítica</option>
+              <option value="high">Alta</option>
+              <option value="medium" selected>Media</option>
+              <option value="low">Baja</option>
+            </select>
+          </div>
+        </div>
+        <div id="custom-days-group" class="form-group hidden">
+          <label class="form-label">Días</label>
+          <div class="day-picker" id="day-picker">
+            <button type="button" class="day-btn" data-day="0">Dom</button>
+            <button type="button" class="day-btn" data-day="1">Lun</button>
+            <button type="button" class="day-btn" data-day="2">Mar</button>
+            <button type="button" class="day-btn" data-day="3">Mié</button>
+            <button type="button" class="day-btn" data-day="4">Jue</button>
+            <button type="button" class="day-btn" data-day="5">Vie</button>
+            <button type="button" class="day-btn" data-day="6">Sáb</button>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Dificultad</label>
+            <select id="habit-difficulty" class="form-input form-select">
+              <option value="trivial">Trivial</option>
+              <option value="easy">Fácil</option>
+              <option value="moderate" selected>Moderada</option>
+              <option value="hard">Difícil</option>
+              <option value="extreme">Extrema</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Horario</label>
+            <input type="time" id="habit-time" class="form-input" />
+          </div>
+        </div>
+        <!-- Identity Connection -->
+        <div class="form-group" id="identity-connect-group">
+          <label class="form-label">Conectar con identidad</label>
+          <div id="identity-connect-tags" class="identity-connect-tags"></div>
+        </div>
+        <p class="form-error hidden" id="habit-error"></p>
+      </form>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" data-close="modal-habit">Cancelar</button>
+        <button class="btn btn-outline" id="btn-save-habit">Crear Rutina</button>
+        <button class="btn btn-primary" id="btn-save-connect-habit">Crear y Conectar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Task Form Modal -->
+  <div id="modal-task" class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 class="modal-title" id="modal-task-title">Nueva Tarea</h2>
+        <button class="modal-close" data-close="modal-task">✕</button>
+      </div>
+      <form id="form-task" class="modal-body">
+        <input type="hidden" id="task-edit-id" />
+        <div class="form-group">
+          <label class="form-label">Nombre</label>
+          <input type="text" id="task-name" class="form-input" placeholder="Ej: Terminar proyecto" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Propósito <span class="required">*</span></label>
+          <textarea id="task-purpose" class="form-input form-textarea" placeholder="¿Por qué esta tarea es importante?"></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Fecha</label>
+            <input type="date" id="task-date" class="form-input" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Prioridad</label>
+            <select id="task-priority" class="form-input form-select">
+              <option value="critical">Crítica</option>
+              <option value="high">Alta</option>
+              <option value="medium" selected>Media</option>
+              <option value="low">Baja</option>
+            </select>
+          </div>
+        </div>
+        <p class="form-error hidden" id="task-error"></p>
+      </form>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" data-close="modal-task">Cancelar</button>
+        <button class="btn btn-primary" id="btn-save-task">Guardar Tarea</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day Panel (Calandrier) -->
+  <div id="modal-day" class="modal-overlay hidden">
+    <div class="modal modal-wide">
+      <div class="modal-header">
+        <h2 class="modal-title" id="day-panel-title">—</h2>
+        <button class="modal-close" data-close="modal-day">✕</button>
+      </div>
+      <div class="modal-body" id="day-panel-body"></div>
+    </div>
+  </div>
+
+  <!-- Identity Node Modal (Connect Habit) -->
+  <div id="modal-identity-node" class="modal-overlay hidden">
+    <div class="modal modal-wide">
+      <div class="modal-header">
+        <h2 class="modal-title">Conectar Hábito a Identidad</h2>
+        <button class="modal-close" data-close="modal-identity-node">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="node-modal-hint">Selecciona qué identidades conecta este hábito:</p>
+        <div id="node-modal-habit-name" class="node-habit-name"></div>
+        <div class="node-modal-columns">
+          <div>
+            <p class="form-label">Debilita (identidad actual)</p>
+            <div id="node-current-list" class="node-tag-list"></div>
+          </div>
+          <div>
+            <p class="form-label">Fortalece (identidad objetivo)</p>
+            <div id="node-target-list" class="node-tag-list"></div>
+          </div>
+        </div>
+        <div id="node-preview" class="node-preview">
+          <svg id="node-preview-svg" width="100%" height="180"></svg>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" data-close="modal-identity-node">Cancelar</button>
+        <button class="btn btn-primary" id="btn-save-node">Guardar Conexión</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirm Delete Modal -->
+  <div id="modal-confirm" class="modal-overlay hidden">
+    <div class="modal modal-sm">
+      <div class="modal-header">
+        <h2 class="modal-title">Confirmar Eliminación</h2>
+        <button class="modal-close" data-close="modal-confirm">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="confirm-text" id="confirm-text">¿Estás seguro?</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" data-close="modal-confirm">Cancelar</button>
+        <button class="btn btn-destructive" id="btn-confirm-delete">Eliminar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/router.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/habitos.js"></script>
+  <script src="js/calandrier.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
