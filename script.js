@@ -232,9 +232,11 @@ function getModalRouteInfo(pathname) {
 
 function findPreviewButtonByRoute(routeInfo) {
   if (!routeInfo?.slug) return null;
+  const sectionId = getSectionRouteMap()[String(routeInfo.module || "").toLowerCase()];
+  if (!sectionId) return null;
   const selectors = [
-    `.app-section#${routeInfo.module.charAt(0).toUpperCase() + routeInfo.module.slice(1)} .btn-de-vista-previa`,
-    `.app-section#${routeInfo.module.charAt(0).toUpperCase() + routeInfo.module.slice(1)} .btn-de-vista-previa-plantitux`
+    `.app-section#${sectionId} .btn-de-vista-previa`,
+    `.app-section#${sectionId} .btn-de-vista-previa-plantitux`
   ];
 
   for (const selector of selectors) {
@@ -335,15 +337,12 @@ function handleRoute() {
 
   const routeInfo = getModalRouteInfo(window.location.pathname);
   if (!routeInfo) {
-    previewModal?.classList.remove("active");
-    plantituxPreviewModal?.classList.remove("active");
+    closePreviewModals({ updateUrl: false });
     return;
   }
 
   const btn = findPreviewButtonByRoute(routeInfo);
   if (!btn) {
-    previewModal?.classList.remove("active");
-    plantituxPreviewModal?.classList.remove("active");
     return;
   }
 
@@ -719,6 +718,7 @@ async function fetchAndRenderCards() {
       const products = normalizarProductsDesdeJSON(json);
       if (!Array.isArray(products) || products.length === 0) throw new Error("invalid-json");
       renderProducts(products);
+      handleRoute();
       hideLoaders();
       return;
     } catch (err) {
@@ -789,11 +789,18 @@ function getRoutePathForPreview(sourceEl, slug) {
   return slug ? `${sectionPath}/${slug}` : sectionPath;
 }
 
+function closePreviewModals({ sourceEl = null, updateUrl = true } = {}) {
+  previewModal?.classList.remove("active");
+  plantituxPreviewModal?.classList.remove("active");
+  if (updateUrl) {
+    window.history.pushState({}, "", getRoutePathForPreview(sourceEl, ""));
+  }
+}
+
 if (previewModal) {
   const closeBtn = previewModal.querySelector(".logout-btn");
   if (closeBtn) closeBtn.addEventListener("click", () => {
-    previewModal.classList.remove("active");
-    window.history.pushState({}, "", getRoutePathForPreview(previewSourceCard || closeBtn, ""));
+    closePreviewModals({ sourceEl: previewSourceCard || closeBtn, updateUrl: true });
   });
 }
 
@@ -925,8 +932,7 @@ const plantituxPreviewBuyWrap = plantituxPreviewBuy?.closest(".box-preview-btn-b
 const plantituxPreviewClose = $("#plantitux-preview-close");
 if (plantituxPreviewClose && plantituxPreviewModal) {
   plantituxPreviewClose.addEventListener("click", () => {
-    plantituxPreviewModal.classList.remove("active");
-    window.history.pushState({}, "", "/plantitux");
+    closePreviewModals({ sourceEl: plantituxPreviewClose, updateUrl: true });
   });
 }
 
