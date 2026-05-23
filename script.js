@@ -204,9 +204,57 @@ function slugify(value) {
     .replace(/^-+|-+$/g, "");
 }
 
+
+
+function getSectionRouteMap() {
+  return sections.reduce((acc, section) => {
+    const id = String(section.id || "").trim();
+    if (!id) return acc;
+    acc[id.toLowerCase()] = id;
+    return acc;
+  }, {});
+}
+
+function getSectionFromPathname(pathname) {
+  const clean = String(pathname || "").replace(/^\/+|\/+$/g, "").toLowerCase();
+  if (!clean) return null;
+  const [module] = clean.split("/");
+  const map = getSectionRouteMap();
+  return map[module] || null;
+}
+
+function getModalRouteInfo(pathname) {
+  const clean = String(pathname || "").replace(/^\/+|\/+$/g, "").toLowerCase();
+  const parts = clean ? clean.split("/") : [];
+  if (parts.length < 2) return null;
+  return { module: parts[0], slug: parts.slice(1).join("/") };
+}
+
+function findPreviewButtonByRoute(routeInfo) {
+  if (!routeInfo?.slug) return null;
+  const selectors = [
+    `.app-section#${routeInfo.module.charAt(0).toUpperCase() + routeInfo.module.slice(1)} .btn-de-vista-previa`,
+    `.app-section#${routeInfo.module.charAt(0).toUpperCase() + routeInfo.module.slice(1)} .btn-de-vista-previa-plantitux`
+  ];
+
+  for (const selector of selectors) {
+    const match = Array.from(document.querySelectorAll(selector)).find((btn) => {
+      const title = btn.dataset.title || btn.closest('.plantitux-cards')?.dataset.title || "";
+      return slugify(title) === routeInfo.slug;
+    });
+    if (match) return match;
+  }
+  return null;
+}
+
 function setUrlState({ section, modal, card, keepCard = true, keepModal = true, replace = false } = {}) {
   const nextUrl = new URL(window.location.href);
-  if (section) nextUrl.hash = `#${section}`;
+  if (section) {
+    const sectionLower = String(section).toLowerCase();
+    nextUrl.hash = `#${section}`;
+    const map = getSectionRouteMap();
+    if (map[sectionLower]) nextUrl.pathname = `/${sectionLower}`;
+  }
 
   const keepCardValue = keepCard ? nextUrl.searchParams.get("card") : null;
   const keepModalValue = keepModal ? nextUrl.searchParams.get("modal") : null;
@@ -260,7 +308,8 @@ document.addEventListener("click", (e) => {
 });
 
 function syncSectionFromLocation() {
-  const sectionFromHash = (window.location.hash || "#Home").replace("#", "") || "Home";
+  const sectionFromHash = (window.location.hash || "").replace("#", "");
+  if (!sectionFromHash) return;
   if (sectionFromHash === "ebootux-template") return;
   if (!document.getElementById(sectionFromHash)) return;
   if (document.body.classList.contains("in-ebootux")) {
@@ -272,13 +321,42 @@ function syncSectionFromLocation() {
   syncingSectionFromHistory = false;
 }
 
-const initialSection = (window.location.hash && window.location.hash !== "#")
-  ? window.location.hash.replace("#", "")
-  : (stxDashboardIsActive() ? "Dashboard" : "Home");
-const initialSectionEl = document.getElementById(initialSection);
-showSection(initialSectionEl ? initialSection : "Home", { updateUrl: false });
-window.addEventListener("popstate", syncSectionFromLocation);
-window.addEventListener("hashchange", syncSectionFromLocation);
+function handleRoute() {
+  const sectionFromPath = getSectionFromPathname(window.location.pathname);
+  const sectionFromHash = (window.location.hash || "").replace("#", "");
+  const fallbackSection = stxDashboardIsActive() ? "Dashboard" : "Home";
+  const targetSection = sectionFromPath || sectionFromHash || fallbackSection;
+  const targetEl = document.getElementById(targetSection);
+  if (targetEl) {
+    syncingSectionFromHistory = true;
+    showSection(targetSection, { updateUrl: false });
+    syncingSectionFromHistory = false;
+  }
+
+  const routeInfo = getModalRouteInfo(window.location.pathname);
+  if (!routeInfo) {
+    previewModal?.classList.remove("active");
+    plantituxPreviewModal?.classList.remove("active");
+    return;
+  }
+
+  const btn = findPreviewButtonByRoute(routeInfo);
+  if (!btn) {
+    previewModal?.classList.remove("active");
+    plantituxPreviewModal?.classList.remove("active");
+    return;
+  }
+
+  if (btn.classList.contains("btn-de-vista-previa-plantitux")) {
+    openPlantituxPreviewFromButton(btn, { updateUrl: false });
+  } else {
+    openPreviewModalFromButton(btn, { updateUrl: false });
+  }
+}
+
+window.addEventListener("DOMContentLoaded", handleRoute);
+window.addEventListener("popstate", handleRoute);
+window.addEventListener("hashchange", handleRoute);
 
 // ============================
 // RENDER DINÁMICO DESDE JSON
@@ -704,19 +782,23 @@ function activarBloqueosEnIframe(iframeEl) {
 }
 
 
+
+function getRoutePathForPreview(sourceEl, slug) {
+  const sectionId = sourceEl?.closest?.('.app-section')?.id || document.querySelector('.app-section.active-section')?.id || 'Home';
+  const sectionPath = `/${String(sectionId).toLowerCase()}`;
+  return slug ? `${sectionPath}/${slug}` : sectionPath;
+}
+
 if (previewModal) {
   const closeBtn = previewModal.querySelector(".logout-btn");
   if (closeBtn) closeBtn.addEventListener("click", () => {
     previewModal.classList.remove("active");
-    setUrlState({ modal: null, keepCard: false, replace: true });
+    window.history.pushState({}, "", getRoutePathForPreview(previewSourceCard || closeBtn, ""));
   });
 }
 
-document.addEventListener("click", (e) => {
-  const btn = e.target.closest(".btn-de-vista-previa");
-  if (!btn) return;
-  e.preventDefault();
-  if (!previewModal) return;
+function openPreviewModalFromButton(btn, { updateUrl = true } = {}) {
+  if (!btn || !previewModal) return false;
 
   const title = btn.dataset.title || "";
   const price = btn.dataset.price || "";
@@ -780,7 +862,15 @@ document.addEventListener("click", (e) => {
   }
 
   previewModal.classList.add("active");
-  setUrlState({ modal: "preview", card: currentCardSlug, replace: false });
+  if (updateUrl) window.history.pushState({}, "", getRoutePathForPreview(btn, currentCardSlug));
+  return true;
+}
+
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest(".btn-de-vista-previa");
+  if (!btn) return;
+  e.preventDefault();
+  openPreviewModalFromButton(btn);
 });
 
 if (previewBuyBtn) {
@@ -792,7 +882,7 @@ if (previewBuyBtn) {
 
     e.preventDefault();
     previewModal?.classList.remove("active");
-    setUrlState({ modal: null, keepCard: false, replace: true });
+    window.history.pushState({}, "", getRoutePathForPreview(card, ""));
     const enterBtn = card.querySelector(".btn-acceder-ebootux");
     if (enterBtn) enterBtn.click();
   });
@@ -836,17 +926,13 @@ const plantituxPreviewClose = $("#plantitux-preview-close");
 if (plantituxPreviewClose && plantituxPreviewModal) {
   plantituxPreviewClose.addEventListener("click", () => {
     plantituxPreviewModal.classList.remove("active");
-    setUrlState({ modal: null, keepCard: false, replace: true });
+    window.history.pushState({}, "", "/plantitux");
   });
 }
 
-document.addEventListener("click", (e) => {
-  const btn = e.target.closest(".btn-de-vista-previa-plantitux");
-  if (!btn) return;
-  e.preventDefault();
-
-  const card = btn.closest(".plantitux-cards");
-  if (!card || !plantituxPreviewModal) return;
+function openPlantituxPreviewFromButton(btn, { updateUrl = true } = {}) {
+  const card = btn?.closest(".plantitux-cards");
+  if (!card || !plantituxPreviewModal) return false;
 
   const img = card.dataset.previewImg || "";
   const video = card.dataset.previewVideo || "";
@@ -890,7 +976,15 @@ document.addEventListener("click", (e) => {
   }
 
   plantituxPreviewModal.classList.add("active");
-  setUrlState({ modal: "asset-preview", card: currentCardSlug, replace: false });
+  if (updateUrl) window.history.pushState({}, "", getRoutePathForPreview(btn, currentCardSlug));
+  return true;
+}
+
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest(".btn-de-vista-previa-plantitux");
+  if (!btn) return;
+  e.preventDefault();
+  openPlantituxPreviewFromButton(btn);
 });
 
 // ============================
