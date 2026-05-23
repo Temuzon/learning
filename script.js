@@ -204,9 +204,38 @@ function slugify(value) {
     .replace(/^-+|-+$/g, "");
 }
 
+
+
+const MODULE_ROUTE_MAP = {
+  ebootux: "Ebootux",
+  getux: "Getux",
+  plantitux: "Plantitux",
+  movitux: "Movitux"
+};
+
+function getSectionFromPathname(pathname) {
+  const clean = String(pathname || "").replace(/^\/+|\/+$/g, "").toLowerCase();
+  if (!clean) return null;
+  const [module] = clean.split("/");
+  return MODULE_ROUTE_MAP[module] || null;
+}
+
+function getModalRouteInfo(pathname) {
+  const clean = String(pathname || "").replace(/^\/+|\/+$/g, "").toLowerCase();
+  const parts = clean ? clean.split("/") : [];
+  if (parts.length < 2) return null;
+  return { module: parts[0], slug: parts.slice(1).join("/") };
+}
+
 function setUrlState({ section, modal, card, keepCard = true, keepModal = true, replace = false } = {}) {
   const nextUrl = new URL(window.location.href);
-  if (section) nextUrl.hash = `#${section}`;
+  if (section) {
+    const sectionLower = String(section).toLowerCase();
+    nextUrl.hash = `#${section}`;
+    if (MODULE_ROUTE_MAP[sectionLower]) {
+      nextUrl.pathname = `/${sectionLower}`;
+    }
+  }
 
   const keepCardValue = keepCard ? nextUrl.searchParams.get("card") : null;
   const keepModalValue = keepModal ? nextUrl.searchParams.get("modal") : null;
@@ -260,7 +289,8 @@ document.addEventListener("click", (e) => {
 });
 
 function syncSectionFromLocation() {
-  const sectionFromHash = (window.location.hash || "#Home").replace("#", "") || "Home";
+  const sectionFromHash = (window.location.hash || "").replace("#", "");
+  if (!sectionFromHash) return;
   if (sectionFromHash === "ebootux-template") return;
   if (!document.getElementById(sectionFromHash)) return;
   if (document.body.classList.contains("in-ebootux")) {
@@ -272,13 +302,38 @@ function syncSectionFromLocation() {
   syncingSectionFromHistory = false;
 }
 
-const initialSection = (window.location.hash && window.location.hash !== "#")
-  ? window.location.hash.replace("#", "")
-  : (stxDashboardIsActive() ? "Dashboard" : "Home");
-const initialSectionEl = document.getElementById(initialSection);
-showSection(initialSectionEl ? initialSection : "Home", { updateUrl: false });
-window.addEventListener("popstate", syncSectionFromLocation);
-window.addEventListener("hashchange", syncSectionFromLocation);
+function handleRoute() {
+  const sectionFromPath = getSectionFromPathname(window.location.pathname);
+  const sectionFromHash = (window.location.hash || "").replace("#", "");
+  const fallbackSection = stxDashboardIsActive() ? "Dashboard" : "Home";
+  const targetSection = sectionFromPath || sectionFromHash || fallbackSection;
+  const targetEl = document.getElementById(targetSection);
+  if (targetEl) {
+    syncingSectionFromHistory = true;
+    showSection(targetSection, { updateUrl: false });
+    syncingSectionFromHistory = false;
+  }
+
+  syncSectionFromLocation();
+
+  const routeInfo = getModalRouteInfo(window.location.pathname);
+  if (!routeInfo || routeInfo.module !== "getux") {
+    if (previewModal?.classList.contains("active")) previewModal.classList.remove("active");
+    return;
+  }
+
+  const button = document.querySelector(`.app-section#Getux .btn-de-vista-previa[data-title]`)
+    ? Array.from(document.querySelectorAll('.app-section#Getux .btn-de-vista-previa')).find((btn) => slugify(btn.dataset.title || "") === routeInfo.slug)
+    : null;
+
+  if (button) {
+    openPreviewModalFromButton(button, { updateUrl: false });
+  }
+}
+
+window.addEventListener("DOMContentLoaded", handleRoute);
+window.addEventListener("popstate", handleRoute);
+window.addEventListener("hashchange", handleRoute);
 
 // ============================
 // RENDER DINÁMICO DESDE JSON
@@ -708,15 +763,12 @@ if (previewModal) {
   const closeBtn = previewModal.querySelector(".logout-btn");
   if (closeBtn) closeBtn.addEventListener("click", () => {
     previewModal.classList.remove("active");
-    setUrlState({ modal: null, keepCard: false, replace: true });
+    window.history.pushState({}, "", "/getux");
   });
 }
 
-document.addEventListener("click", (e) => {
-  const btn = e.target.closest(".btn-de-vista-previa");
-  if (!btn) return;
-  e.preventDefault();
-  if (!previewModal) return;
+function openPreviewModalFromButton(btn, { updateUrl = true } = {}) {
+  if (!btn || !previewModal) return false;
 
   const title = btn.dataset.title || "";
   const price = btn.dataset.price || "";
@@ -780,7 +832,15 @@ document.addEventListener("click", (e) => {
   }
 
   previewModal.classList.add("active");
-  setUrlState({ modal: "preview", card: currentCardSlug, replace: false });
+  if (updateUrl) window.history.pushState({}, "", `/getux/${currentCardSlug}`);
+  return true;
+}
+
+document.addEventListener("click", (e) => {
+  const btn = e.target.closest(".btn-de-vista-previa");
+  if (!btn) return;
+  e.preventDefault();
+  openPreviewModalFromButton(btn);
 });
 
 if (previewBuyBtn) {
@@ -792,7 +852,7 @@ if (previewBuyBtn) {
 
     e.preventDefault();
     previewModal?.classList.remove("active");
-    setUrlState({ modal: null, keepCard: false, replace: true });
+    window.history.pushState({}, "", "/getux");
     const enterBtn = card.querySelector(".btn-acceder-ebootux");
     if (enterBtn) enterBtn.click();
   });
