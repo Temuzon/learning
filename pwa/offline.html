@@ -1,33 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Offline</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-            color: #333;
-            text-align: center;
-        }
-        h1 {
-            font-size: 2em;
-        }
-        p {
-            font-size: 1.2em;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sin conexión · Statux</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #000;
+      color: #fff;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      gap: 20px;
+      text-align: center;
+      padding: 24px;
+    }
+    .offline-icon { font-size: 4rem; animation: pulse 2s ease-in-out infinite; }
+    h1 { font-size: 1.5rem; font-weight: 600; }
+    p { font-size: 0.95rem; color: #777; max-width: 320px; line-height: 1.6; }
+    button {
+      margin-top: 8px;
+      padding: 12px 32px;
+      border-radius: 999px;
+      border: 1px solid #333;
+      background: #000;
+      color: #fff;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: border-color 0.3s ease;
+    }
+    button:hover { border-color: #00f2ff; }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+  </style>
 </head>
 <body>
-    <div>
-        <h1>You're Offline</h1>
-        <p>Please check your internet connection.</p>
-    </div>
+  <span class="offline-icon">📡</span>
+  <h1>Sin conexión</h1>
+  <p>No hay conexión a internet. Si descargaste Statux, abre la app instalada para acceder sin conexión.</p>
+  <button onclick="window.location.reload()">Intentar de nuevo</button>
 </body>
 </html>
