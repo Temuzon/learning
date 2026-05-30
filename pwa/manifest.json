@@ -1,20 +1,35 @@
 {
   "name": "Statux",
   "short_name": "Statux",
+  "description": "Ecosistema de productos digitales premium",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#000000",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "es",
   "icons": [
     {
-      "src": "/Statux-App-Icon.png",
-      "sizes": "192x192",
-      "type": "image/png"
+      "src": "/Statux-logo(SVG).svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "screenshots": [],
+  "categories": ["education", "productivity"],
+  "shortcuts": [
+    {
+      "name": "Dashboard",
+      "short_name": "Dashboard",
+      "description": "Ir al dashboard",
+      "url": "/#Dashboard"
     },
     {
-      "src": "/Statux-App-Icon.png",
-      "sizes": "512x512",
-      "type": "image/png"
+      "name": "Ebootux",
+      "short_name": "Ebootux",
+      "description": "Ver cursos",
+      "url": "/#Ebootux"
     }
   ]
 }

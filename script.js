@@ -2329,3 +2329,81 @@ stxInitOnboarding();
 
 stxRuntime.init();
 stxSyncDashboardNav();
+
+// ════════════════════════════════════════════
+// PWA UTILITIES
+// ════════════════════════════════════════════
+const stxPWA = (() => {
+
+  function sendToSW(message) {
+    if (!navigator.serviceWorker?.controller) return Promise.resolve(null);
+    return new Promise((resolve) => {
+      const channel = new MessageChannel();
+      channel.port1.onmessage = (e) => resolve(e.data);
+      navigator.serviceWorker.controller.postMessage(message, [channel.port2]);
+    });
+  }
+
+  async function getSWVersion() {
+    const response = await sendToSW({ type: 'GET_VERSION' });
+    return response?.version || null;
+  }
+
+  async function getCacheInfo() {
+    const response = await sendToSW({ type: 'GET_CACHE_INFO' });
+    return response?.caches || [];
+  }
+
+  async function clearCache(cacheName) {
+    return sendToSW({ type: 'CLEAR_CACHE', payload: { cacheName } });
+  }
+
+  function isInstalled() {
+    return window.matchMedia('(display-mode: standalone)').matches ||
+           window.navigator.standalone === true;
+  }
+
+  function isOffline() {
+    return !navigator.onLine;
+  }
+
+  function onConnectivityChange(callback) {
+    window.addEventListener('online', () => callback(true));
+    window.addEventListener('offline', () => callback(false));
+  }
+
+  function watchForUpdates() {
+    if (!('serviceWorker' in navigator)) return;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (typeof mostrarModal === 'function') {
+        mostrarModal(
+          'Statux actualizado',
+          'Hay una nueva versión disponible. Recarga la página para aplicarla.'
+        );
+      }
+    });
+  }
+
+  function init() {
+    watchForUpdates();
+    if (isOffline()) console.warn('[Statux PWA] Sin conexión al cargar.');
+    onConnectivityChange((online) => {
+      if (!online) console.warn('[Statux PWA] Conexión perdida.');
+      else console.log('[Statux PWA] Conexión restaurada.');
+    });
+  }
+
+  return {
+    sendToSW,
+    getSWVersion,
+    getCacheInfo,
+    clearCache,
+    isInstalled,
+    isOffline,
+    onConnectivityChange,
+    init
+  };
+})();
+
+stxPWA.init();
+window.stxPWA = stxPWA;
